@@ -8,6 +8,7 @@ var Vue = require('vue');
 var Browser = require('./browser');
 var layer = require('./layer');
 var next = require('./next');
+var domReady = require('domready');
 var EventEmitter = require('events').EventEmitter;
 var slice = Array.prototype.slice;
 var tostr = Object.prototype.toString;
@@ -141,8 +142,11 @@ Soyie.prototype.use = function(path, browserify){
  * 监听soyie事件队列
  */
 Soyie.prototype.listen = function(){
-    this.init();
-    this.match(this.req.path);
+    var that = this;
+    domReady(function(){
+        that.init();
+        that.match(that.req.path);
+    });
 }
 
 /**
