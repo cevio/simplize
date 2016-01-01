@@ -5,6 +5,7 @@ var animationend = require('animationend');
 var addClass = Vue.util.addClass;
 var removeClass = Vue.util.removeClass;
 var htmlElement = document.querySelector('html');
+var ajax = require('./ajax');
 module.exports = ServerResponse;
 
 var store = function(res){
@@ -65,6 +66,8 @@ function ServerResponse(){
     this.defineFreeze('cookie', cookies(this));
     this.defineFreeze('store', store(this));
     this.defineFreeze('session', session(this));
+    this.ajax = ajax;
+    this.title = setTitle;
 }
 
 ServerResponse.prototype.render = function(name){
@@ -354,4 +357,18 @@ function whenAnimateNavbarOut(node, navbar){
 
 function query(node, exp){
     return node.querySelector(exp);
+}
+
+function setTitle(title){
+    var $body = document.body;
+    document.title = title;
+    // hack在微信等webview中无法修改document.title的情况
+    var $iframe = document.createElement('iframe');
+    $iframe.src = '/favicon.ico';
+    $iframe.onload = function(){
+        setTimeout(function() {
+            $iframe.parentNode.removeChild($iframe);
+        }, 0);
+    };
+    $body.appendChild($iframe);
 }

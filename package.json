@@ -13,6 +13,7 @@
     "es6-promise": "^3.0.2",
     "events": "^1.1.0",
     "path-to-regexp": "^1.2.1",
+    "type-of": "^2.0.1",
     "vue": "^1.0.13"
   },
   "devDependencies": {},
