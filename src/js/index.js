@@ -1,5 +1,8 @@
 var context = require('./main');
 context.ready(function(){
+
+    //context.setViewPort(640);
+
     var soyie = new context('#webapp');
 
 

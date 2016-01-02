@@ -93,7 +93,7 @@ ServerResponse.prototype.render = function(name){
                 oldWebview,
                 newWebview,
                 browser,
-                whenAnimateDone(browser, webview)
+                whenAnimateDone(browser, webview, name)
             );
         }
     }
@@ -242,7 +242,7 @@ function findActivedWebview(browser){
     }
 }
 
-function whenAnimateDone(browser, webview){
+function whenAnimateDone(browser, webview, name){
     return function(){
         browser.current = webview;
         setTimeout(function(){
@@ -254,6 +254,7 @@ function whenAnimateDone(browser, webview){
                 browser.$header = null;
                 browser.$navgation = null
             }
+            htmlElement.setAttribute('class', 'webview-' + name);
         });
     }
 }

@@ -57,6 +57,24 @@ function Soyie(el){
 // use soyie.Vue
 Soyie.Vue = Vue;
 Soyie.ready = domReady;
+Soyie.setViewPort = function(base, scalable){
+    var view = document.querySelector('meta[name=viewport]');
+    var bodyWidth = document.body.clientWidth;
+    var percent = (bodyWidth / base).toFixed(2);
+    var string = 'width=device-width, ' +
+                'initial-scale=' + percent + ', ' +
+                'maximum-scale=' + percent + ', ' +
+                'minimum-scale=' + percent + ', ' +
+                'user-scalable=' + (scalable ? 'yes': 'no');
+
+    if ( !view ){
+        view = document.createElement('meta');
+        document.querySelector('head').appendChild(view);
+        view.setAttribute('name', 'viewport');
+    }
+    
+    view.setAttribute('content', string);
+}
 
 // 为soyie绑定事件机制
 // 使用nodejs原型事件机制
