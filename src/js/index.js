@@ -1,5 +1,5 @@
 var context = require('./main');
-window.onload = function(){
+context.ready(function(){
     var soyie = new context('#webapp');
 
 
@@ -117,4 +117,4 @@ window.onload = function(){
     //console.log(soyie)
     soyie.listen();
     console.log(soyie)
-}
+});

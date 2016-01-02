@@ -56,6 +56,7 @@ function Soyie(el){
 // bind Vue on soyie
 // use soyie.Vue
 Soyie.Vue = Vue;
+Soyie.ready = domReady;
 
 // 为soyie绑定事件机制
 // 使用nodejs原型事件机制
@@ -142,11 +143,8 @@ Soyie.prototype.use = function(path, browserify){
  * 监听soyie事件队列
  */
 Soyie.prototype.listen = function(){
-    var that = this;
-    domReady(function(){
-        that.init();
-        that.match(that.req.path);
-    });
+    this.init();
+    this.match(this.req.path);
 }
 
 /**
