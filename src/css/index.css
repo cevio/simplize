@@ -20,6 +20,19 @@ html,body{
     overflow: hidden;
 }
 
+body,
+body .webapp,
+body .webapp .browser,
+body .webapp .browser .webviews,
+body .webapp .browser .webviews .webview{
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.soe-full-screen body .webapp .browser .webviews{
+    border-bottom:0;
+}
+
 .browser,.webview{
     display: none;
     background-color: #fff;
