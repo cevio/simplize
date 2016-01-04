@@ -30,7 +30,7 @@ body .webapp .browser .webviews .webview{
 }
 
 .soe-full-screen body .webapp .browser .webviews{
-    border-bottom:0;
+    border-bottom:0!important;
 }
 
 .browser,.webview{
