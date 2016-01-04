@@ -247,14 +247,21 @@ function whenAnimateDone(browser, webview, name){
         browser.current = webview;
         setTimeout(function(){
             var header = browser.$el.querySelector('header');
-            if ( header ){
+
+            if ( header )
+            {
                 browser.$header = header;
                 browser.$navgation = cloneHeaderElement(header.querySelector('.soe-navbar'));
-            }else{
+            }
+            else
+            {
                 browser.$header = null;
                 browser.$navgation = null
             }
-            htmlElement.setAttribute('class', 'webview-' + name);
+
+            var classes = Array.prototype.slice.call(_.osClasses);
+            classes.push('webview-' + name);
+            htmlElement.setAttribute('class', classes.join(' '));
         });
     }
 }

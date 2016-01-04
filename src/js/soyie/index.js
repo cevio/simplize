@@ -56,7 +56,11 @@ function Soyie(el){
 // bind Vue on soyie
 // use soyie.Vue
 Soyie.Vue = Vue;
-Soyie.ready = domReady;
+Soyie.ready = function(fn){
+    _.osClasses = _.osClass();
+    document.querySelector('html').setAttribute('class', _.osClasses.join(' '));
+    domReady(fn);
+};
 Soyie.setViewPort = function(base, scalable){
     var view = document.querySelector('meta[name=viewport]');
     var bodyWidth = document.body.clientWidth;
@@ -72,7 +76,7 @@ Soyie.setViewPort = function(base, scalable){
         document.querySelector('head').appendChild(view);
         view.setAttribute('name', 'viewport');
     }
-    
+
     view.setAttribute('content', string);
 }
 
