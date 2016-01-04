@@ -53,7 +53,7 @@ Browser.prototype.init = function(){
     options.directives = Vue.util.extend(options.directives || {}, directives);
     if ( !options.computed ) options.computed = {};
     options.computed.monitorStatus = function(){
-        var a = 'webviewShowHead', b = 'webviewHideToolbar', c = [];
+        var a = 'webviewShowHead', b = 'webviewShowToolbar', c = [];
         !that.$head.hide && c.push(a);
         !that._soyie.hideToolbar && c.push(b);
         return c.join(' ');
