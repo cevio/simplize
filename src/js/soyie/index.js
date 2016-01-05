@@ -41,6 +41,7 @@ function Soyie(el){
     this.strict = { sensitive: this.caseSensitive, strict: true, end: true };
     this.next = new next(function(){ that.emit('end'); });
     this.current = null;
+    this.oldBrowser = null;
     this.unactived = [];
     this.isReffer = false;
     defineSoyieDebugModel(this);

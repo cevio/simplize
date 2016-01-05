@@ -73,6 +73,7 @@ function ServerResponse(){
 ServerResponse.prototype.render = function(name){
     var browser = this.app.$current; // 当前浏览器
     var useAnimate = true;
+    if ( this.app.oldBrowser ) this.app.oldBrowser.emit('leave');
     if ( browser ){
         var actived = browser.actived;
         if ( !actived ){
@@ -82,6 +83,7 @@ ServerResponse.prototype.render = function(name){
                 br.actived = false;
             });
         }
+        browser.emit('enter');
         var webview = browser.webviews[name];
         if ( webview ){
             var oldWebview = browser.current;
@@ -262,6 +264,7 @@ function whenAnimateDone(browser, webview, name){
             var classes = Array.prototype.slice.call(_.osClasses);
             classes.push('webview-' + name);
             htmlElement.setAttribute('class', classes.join(' '));
+            browser._soyie.oldBrowser = browser;
         });
     }
 }
