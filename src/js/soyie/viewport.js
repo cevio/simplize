@@ -1,5 +1,5 @@
 
-var view, width, percent, baseWidth, offset = 100, resized = false;
+var view, width, percent, baseWidth, offset = 100;
 var isAndroid = window.navigator.userAgent.toLowerCase().indexOf('android') > 0;
 var strap = 0;
 
@@ -51,11 +51,6 @@ module.exports = function(base){
         view = document.createElement('meta');
         document.querySelector('head').appendChild(view);
         view.setAttribute('name', 'viewport');
-    }
-
-    if ( !resized ) {
-        window.addEventListener('resize', resize);
-        resized = true;
     }
 
     resize();
