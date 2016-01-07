@@ -1,4 +1,4 @@
-
+var _ = require('../utils');
 var view, width, percent, baseWidth, offset = 100;
 var isAndroid = window.navigator.userAgent.toLowerCase().indexOf('android') > 0;
 var strap = 0;
@@ -45,7 +45,9 @@ function resize(){
     keeper.push('user-scalable=no');
 
     view.setAttribute('content', keeper.join(', '));
-    document.querySelector('html').classList.add('viewport-' + baseWidth);
+    if ( _.htmlClassList.indexOf('viewport-' + baseWidth) == -1 ){
+        _.htmlClassList.push('viewport-' + baseWidth);
+    }
 }
 
 module.exports = function(base){

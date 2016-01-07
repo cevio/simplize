@@ -1,7 +1,7 @@
 {
   "name": "simplize",
   "description": "simplize project",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "keywords": [],
   "main": "build/index.js",
   "repository": {

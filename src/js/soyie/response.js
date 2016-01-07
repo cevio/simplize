@@ -83,6 +83,9 @@ ServerResponse.prototype.render = function(name){
                 br.actived = false;
             });
         }
+        if ( useAnimate && browser.stopAnimate ){
+            useAnimate = false;
+        }
         browser.emit('enter');
         var webview = browser.webviews[name];
         if ( webview ){
@@ -258,11 +261,12 @@ function whenAnimateDone(browser, webview, name){
             else
             {
                 browser.$header = null;
-                browser.$navgation = null
+                browser.$navgation = null;
             }
 
             var classes = Array.prototype.slice.call(_.osClasses);
             classes.push('webview-' + name);
+            classes = classes.concat(_.htmlClassList);
             htmlElement.setAttribute('class', classes.join(' '));
             browser._soyie.oldBrowser = browser;
         });

@@ -61,7 +61,6 @@ Soyie.Vue = Vue;
 Soyie.viewPort = viewport;
 Soyie.ready = function(fn){
     _.osClasses = _.osClass();
-    document.querySelector('html').setAttribute('class', _.osClasses.join(' '));
     domReady(fn);
 };
 

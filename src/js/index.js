@@ -1,7 +1,7 @@
 var context = require('./main');
 context.ready(function(){
 
-    context.viewPort(640);
+    //context.viewPort(640);
 
     var soyie = new context('#webapp');
 
@@ -20,6 +20,7 @@ context.ready(function(){
         icon: '<i class="fa fa-home"></i>',
         url: '/'
     });
+    //indexBrowser.stopAnimate = true;
 
     indexBrowser.webview("template[name='index']");
     indexBrowser.webview("template[name='list']");

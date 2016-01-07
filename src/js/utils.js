@@ -98,3 +98,5 @@ exports.osClass = function(){
     }
     return classes;
 }
+
+exports.htmlClassList = [];
