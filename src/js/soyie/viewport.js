@@ -34,7 +34,7 @@ function resize(){
         computedViewPortPercent();
     }
 
-    keeper.push('width=device-width');
+    keeper.push('width=' + (width > baseWidth ? baseWidth : 'device-width'));
     isAndroid && keeper.push('target-densitydpi=high-dpi');
     keeper.push('initial-scale=' + percent);
     keeper.push('maximum-scale=' + percent);
