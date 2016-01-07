@@ -45,6 +45,7 @@ function resize(){
     keeper.push('user-scalable=no');
 
     view.setAttribute('content', keeper.join(', '));
+    document.querySelector('html').classList.add('viewport-' + baseWidth);
 }
 
 module.exports = function(base){
