@@ -10,6 +10,9 @@ function getViewPortWidth(){
 
 function computedViewPortPercent(){
     percent = (width / baseWidth).toFixed(4);
+    // if ( isAndroid && width > baseWidth ){
+    //     percent = 1;
+    // }
 }
 
 function computedRetinaPercent(){
@@ -35,7 +38,7 @@ function resize(){
     }
 
     keeper.push('width=' + (width > baseWidth ? baseWidth : 'device-width'));
-    isAndroid && keeper.push('target-densitydpi=high-dpi');
+    //isAndroid && keeper.push('target-densitydpi=high-dpi');
     keeper.push('initial-scale=' + percent);
     keeper.push('maximum-scale=' + percent);
     keeper.push('minimum-scale=' + percent);
