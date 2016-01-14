@@ -52,7 +52,17 @@ function Soyie(el){
     this.req.init(true);
     Object.defineProperty(this, 'hideToolbar', {
         get: function(){ return this.data.hide; },
-        set: function(value){ this.data.hide = !!value; }
+        set: function(value){
+            this.data.hide = !!value; //webviewShowToolbar
+            var webviews = slice.call(this.el.querySelectorAll('.webviews'));
+            webviews.forEach(function(web){
+                if ( !!value ){
+                    web.classList.remove('webviewShowToolbar');
+                }else{
+                    web.classList.add('webviewShowToolbar');
+                }
+            });
+        }
     });
 }
 
