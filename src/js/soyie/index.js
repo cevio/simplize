@@ -16,6 +16,7 @@ var request = require('./request');
 var response = require('./response');
 var componentToolbar = require('../components/toolbar');
 var viewport = require('./viewport');
+var animationend = require('animationend');
 
 // module exports
 // return soyie context
@@ -58,6 +59,7 @@ function Soyie(el){
 // bind Vue on soyie
 // use soyie.Vue
 Soyie.Vue = Vue;
+Soyie.animationend = animationend;
 Soyie.viewPort = viewport;
 Soyie.ready = function(fn){
     _.osClasses = _.osClass();
