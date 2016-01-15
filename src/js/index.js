@@ -31,6 +31,7 @@ context.ready(function(){
         req.$head.left.value = '设置';
         req.$head.cls = "nav-index";
         req.app.hideToolbar = false;
+        req.$head.hide = false;
         req.$head.left.fn = function(){
             res.redirect('/setting/mo');
         }
@@ -50,6 +51,7 @@ context.ready(function(){
         req.$head.left.value = '返回';
         req.$head.cls = "nav-list";
         req.app.hideToolbar = true;
+        req.$head.hide = true;
         req.$head.left.fn = function(){
             res.redirect('/');
         }
