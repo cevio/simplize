@@ -82,16 +82,23 @@ exports.os = function(){
 		iPad: u.indexOf('iPad') > -1, //是否iPad
 		webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
 		weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
-		qq: u.match(/\sQQ/i) == " qq" //是否QQ
+		qq: u.match(/\sQQ/i) == " qq", //是否QQ
+        wp: u.indexOf('Windows Phone 8.') > -1, // wp
+        wp8: u.indexOf('Windows Phone 8.') > -1, // wp8
+        enniu: u.indexOf('EnNiu') > -1 || u.indexOf('Enniu') > -1, // enniu
+        weibo: u.match(/\sWeiBo/i) == " weibo" // weibo
 	}
 }
 
-exports.osClass = function(){
+exports.osClass = function(soyie){
     var os = this.os();
     var keys = Object.keys(os);
     var i = keys.length;
     var classes = [];
     while (i--){
+        if ( soyie ){
+            soyie['is' + keys[i]] = os[keys[i]];
+        }
         if ( os[keys[i]] ){
             classes.push(keys[i]);
         }

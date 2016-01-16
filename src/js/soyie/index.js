@@ -66,16 +66,13 @@ function Soyie(el){
     });
 }
 
+_.osClasses = _.osClass(Soyie);
 // bind Vue on soyie
 // use soyie.Vue
 Soyie.Vue = Vue;
 Soyie.animationend = animationend;
 Soyie.viewPort = viewport;
-Soyie.ready = function(fn){
-    _.osClasses = _.osClass();
-    domReady(fn);
-};
-
+Soyie.ready = domReady;
 // 为soyie绑定事件机制
 // 使用nodejs原型事件机制
 Soyie.prototype = Object.create(EventEmitter.prototype);
