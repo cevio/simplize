@@ -21,6 +21,10 @@ context.ready(function(){
     });
     //indexBrowser.stopAnimate = true;
 
+    indexBrowser.component("test", {
+        template: "<div><slot></slot></div>"
+    });
+
     indexBrowser.webview("template[name='index']");
     indexBrowser.webview("template[name='list']");
 
@@ -50,7 +54,6 @@ context.ready(function(){
         req.$head.left.value = '返回';
         req.$head.cls = "nav-list";
         req.app.hideToolbar = true;
-        req.$head.hide = true;
         req.$head.left.fn = function(){
             res.redirect('/');
         }
