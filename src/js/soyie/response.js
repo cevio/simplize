@@ -86,21 +86,27 @@ ServerResponse.prototype.render = function(name){
         if ( useAnimate && browser.stopAnimate ){
             useAnimate = false;
         }
-        browser.emit('enter');
+        browser.emit('enter', this.req, this);
         var webview = browser.webviews[name];
-        if ( webview ){
-            var oldWebview = browser.current;
-            var newWebview = webview;
-            var AnimateFn = !useAnimate ? animate : slideAnimate;
+        var oldWebview = browser.current;
+        var newWebview = webview;
 
-            AnimateFn.call(
-                this.req,
-                oldWebview,
-                newWebview,
-                browser,
-                whenAnimateDone(browser, webview, name)
-            );
+        var AnimateFn = !useAnimate ? animate : slideAnimate;
+
+        if ( oldWebview && oldWebview !== newWebview ){
+            oldWebview.emit('beforeLeave', this.req, this);
         }
+
+        newWebview.emit('beforeEnter', this.req, this);
+
+        AnimateFn(
+            this.req,
+            this,
+            oldWebview,
+            newWebview,
+            browser,
+            whenAnimateDone(this.req, this, browser, webview, name, oldWebview)
+        );
     }
 }
 
@@ -144,21 +150,25 @@ ServerResponse.prototype.redirect = function(url){
     }
 }
 
-function animate(olds, news, browser, exchange){
-    if ( olds ){
+function animate(req, res, olds, news, browser, exchange){
+    if ( olds && olds !== news ){
         removeClass(olds.node, 'active');
+        olds.emit('leave', req, res);
     }
     addClass(news.node, 'active');
+    news.emit('enter', req, res);
     exchange();
 }
 
-function slideAnimate(olds, news, browser, exchange){
-    var method = this.history.method;
+function slideAnimate(req, res, olds, news, browser, exchange){
+    var method = req.history.method;
     if ( olds ){
         var currentElement = olds.node;
         var targetElement = news.node;
         var animEnd = null;
         animationend(targetElement).then(function(){
+            olds !== news && olds.emit('leave', req, res);
+            news.emit('enter', req, res);
             animEnd && animEnd();
             exchange();
         });
@@ -247,7 +257,7 @@ function findActivedWebview(browser){
     }
 }
 
-function whenAnimateDone(browser, webview, name){
+function whenAnimateDone(req, res, browser, webview, name, oldWebview){
     return function(){
         browser.current = webview;
         setTimeout(function(){
@@ -269,6 +279,8 @@ function whenAnimateDone(browser, webview, name){
             classes = classes.concat(_.htmlClassList);
             htmlElement.setAttribute('class', classes.join(' '));
             browser._soyie.oldBrowser = browser;
+            oldWebview && oldWebview !== webview && oldWebview.emit('afterLeave', req, res);
+            webview.emit('afterEnter',req, res);
         });
     }
 }

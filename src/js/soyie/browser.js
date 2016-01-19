@@ -6,6 +6,7 @@ var EventEmitter = require('events').EventEmitter;
 var componentWebview = require('../components/webview');
 var componentNavgation = require('../components/navgation');
 var directiveHref = require('../directives/href');
+var ownWebview = require('./webview');
 var addClass = Vue.util.addClass;
 var removeClass = Vue.util.removeClass;
 var _uid = 0;
@@ -132,29 +133,22 @@ Browser.prototype.createWebviews = function(){
     return out.join('');
 }
 
-Browser.prototype.webview = function(el, webname){
+Browser.prototype.webview = function(el){
     el = _.query(el);
-    var name;
-    if ( !webname ){
-        name = el.getAttribute('name');
-    }else{
-        name = webname;
+    var name = el.getAttribute('name');
+    var attributes = el.attributes;
+    var i = attributes.length
+    var params = {};
+    while (i--) {
+        var attr = attributes[i];
+        params[attr.nodeName] = attr.nodeValue;
     }
-    if ( name ){
-        var attributes = el.attributes;
-        var i = attributes.length
-        var params = {};
-        while (i--) {
-            var attr = attributes[i];
-            params[attr.nodeName] = attr.nodeValue;
-        }
-        if ( params.name ) delete params.name;
-        this.webviews[name] = {
-            template: el.innerHTML,
-            params: params
-        };
-        el.parentNode.removeChild(el);
-    }
+    if ( params.name ) delete params.name;
+    this.webviews[name] = new ownWebview();
+    this.webviews[name].template = el.innerHTML;
+    this.webviews[name].params = params;
+    el.parentNode.removeChild(el);
+    return this.webviews[name];
 }
 
 Browser.prototype.component = function(name, value){

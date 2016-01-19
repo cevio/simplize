@@ -25,8 +25,56 @@ context.ready(function(){
         template: "<div><slot></slot></div>"
     });
 
-    indexBrowser.webview("template[name='index']");
-    indexBrowser.webview("template[name='list']");
+    var a = indexBrowser.webview("template[name='index']");
+    var b = indexBrowser.webview("template[name='list']");
+
+    a.on('beforeLeave', function(){
+        console.log('index beforeLeave');
+    })
+
+    a.on('leave', function(){
+        console.log('index leave');
+    })
+
+    a.on('afterLeave', function(){
+        console.log('index afterLeave');
+    })
+
+    a.on('beforeEnter', function(){
+        console.log('index beforeEnter');
+    })
+
+    a.on('enter', function(){
+        console.log('index enter');
+    })
+
+    a.on('afterEnter', function(){
+        console.log('index afterEnter');
+    })
+
+    b.on('beforeLeave', function(){
+        console.log('list beforeLeave');
+    })
+
+    b.on('leave', function(){
+        console.log('list leave');
+    })
+
+    b.on('afterLeave', function(){
+        console.log('list afterLeave');
+    })
+
+    b.on('beforeEnter', function(){
+        console.log('list beforeEnter');
+    })
+
+    b.on('enter', function(){
+        console.log('list enter');
+    })
+
+    b.on('afterEnter', function(){
+        console.log('list afterEnter');
+    })
 
     indexBrowser.use(function(req, res, next){
         req.$head.center.value = '首页';
@@ -124,5 +172,5 @@ context.ready(function(){
 
     //console.log(soyie)
     soyie.listen();
-    console.log(soyie)
+    //console.log(soyie)
 });
