@@ -106,7 +106,9 @@ function makeStorages(type){
     var object = window[type + 'Storage'], objs = {};
     if ( object ){
         for ( var i in object ){
-            objs[i] = JSON.parse(object.getItem(i));
+            try{
+                objs[i] = JSON.parse(object.getItem(i));
+            }catch(e){}
         }
     }
     return objs;
