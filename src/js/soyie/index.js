@@ -70,9 +70,17 @@ _.osClasses = _.osClass(Soyie);
 // bind Vue on soyie
 // use soyie.Vue
 Soyie.Vue = Vue;
+Soyie.windowTouchMoveDisabled = false;
 Soyie.animationend = animationend;
 Soyie.viewPort = viewport;
-Soyie.ready = domReady;
+Soyie.ready = function(fn){
+    Vue.util.on(window, 'touchmove', function(e){
+    	if ( Soyie.windowTouchMoveDisabled ){
+    		e.preventDefault();
+    	}
+    });
+    domReady(fn);
+};
 // 为soyie绑定事件机制
 // 使用nodejs原型事件机制
 Soyie.prototype = Object.create(EventEmitter.prototype);
