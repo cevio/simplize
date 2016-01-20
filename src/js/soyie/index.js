@@ -27,9 +27,9 @@ module.exports = Soyie;
  * new soyie(element)
  * [soyie].caseSensitive 是否区分大小写 default false
  */
-function Soyie(el){
+function Soyie(el, options){
     var that = this;
-    this.data = { browsers: [], hide: false, actived: 'actived', unactived: '' };
+    this.data = Vue.util.extend({ browsers: [], hide: false, actived: 'actived', unactived: '' }, options || {});
     this.url = null;
     this.el = _.query(el);
     this.caseSensitive = false;
@@ -38,7 +38,7 @@ function Soyie(el){
     this.req.res = this.res;
     this.res.req = this.req;
     this.req.app = this.res.app = this;
-    this.browsers = {};
+    this.browsers = [];
     this.looser = { sensitive: this.caseSensitive, strict: false, end: false };
     this.strict = { sensitive: this.caseSensitive, strict: true, end: true };
     this.next = new next(function(){ that.emit('end'); });
@@ -48,22 +48,9 @@ function Soyie(el){
     this.isReffer = false;
     defineSoyieDebugModel(this);
     defineCurrentBrowser(this);
+    defineToolbarStatus(this);
     Vue.util.addClass(this.el, 'webapp');
     this.req.init(true);
-    Object.defineProperty(this, 'hideToolbar', {
-        get: function(){ return this.data.hide; },
-        set: function(value){
-            this.data.hide = !!value; //webviewShowToolbar
-            var webviews = slice.call(this.el.querySelectorAll('.webviews'));
-            webviews.forEach(function(web){
-                if ( !!value ){
-                    web.classList.remove('webviewShowToolbar');
-                }else{
-                    web.classList.add('webviewShowToolbar');
-                }
-            });
-        }
-    });
 }
 
 _.osClasses = _.osClass(Soyie);
@@ -157,7 +144,7 @@ Soyie.prototype.use = function(path, browserify){
         this.looser,
         browserify.watch.bind(browserify)
     );
-    this.browsers[browserify.uid] = browserify;
+    this.browsers.push(browserify);
     return this;
 }
 
@@ -176,18 +163,12 @@ Soyie.prototype.listen = function(){
  */
 Soyie.prototype.createBrowsers = function(){
     var that = this;
-    var browsers = this.browsers;
-    var keys = Object.keys(browsers);
-    var i = keys.length;
-    while (i--) {
-        var el = _.wrapBrowser(
-            browsers[keys[i]].$name,
-            browsers[keys[i]].createWebviews()
-        );
-        this.el.appendChild(el);
-        this.browsers[keys[i]].$el = el;
-        this.browsers[keys[i]].init();
-    }
+    this.browsers.forEach(function(browser){
+        var el = _.wrapBrowser( browser.$name, browser.createWebviews() );
+        that.el.appendChild(el);
+        browser.$el = el;
+        browser.init();
+    });
 
     // toolbar config
     var toolbar = document.createElement('toolbar');
@@ -246,16 +227,32 @@ function defineCurrentBrowser(soyie){
     Object.defineProperty(soyie, '$current', {
         get: function(){ return this.current; },
         set: function(br){
-            this.current = br;
-            var keys = Object.keys(this.browsers);
-            var i = keys.length;
             var lefts = [];
-            while (i--){
-                if ( this.browsers[keys[i]] !== br ){
-                    lefts.push(this.browsers[keys[i]]);
+            this.current = br;
+            this.browsers.forEach(function(browser){
+                if ( browser !== br ){
+                    lefts.push(browser);
                 }
-            }
+            });
             this.unactived = lefts;
+        }
+    });
+}
+
+
+function defineToolbarStatus(soyie){
+    Object.defineProperty(soyie, 'hideToolbar', {
+        get: function(){ return this.data.hide; },
+        set: function(value){
+            this.data.hide = !!value; //webviewShowToolbar
+            this.browsers.forEach(function(browser){
+                var webviews = browser.webviews;
+                var keys = Object.keys(webviews);
+                var i = keys.length;
+                while ( i-- ) {
+                    webviews[keys[i]].vm.toobarShow = !value;
+                }
+            });
         }
     });
 }

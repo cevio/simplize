@@ -15,8 +15,8 @@ NextMiddleWare.prototype.run = function(){
     var i = 0;
     _next(true);
     function _next(first){
-        !first && i++;
-        if ( !that._stacks[i] ){ that._done && that._done(); }
+        (first === false || first === undefined || first === null) && i++;
+        if ( !that._stacks[i] || first === 'router' ){ that._done && that._done(); }
         else{ that._stacks[i](_next); }
     }
 }

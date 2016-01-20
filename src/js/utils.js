@@ -30,7 +30,7 @@ exports.query = function(el){
 
 exports.wrapBrowser = function(name, html){
     var browser = document.createElement('div');
-    browser.innerHTML = '<navgation></navgation><div class="webviews" :class="monitorStatus">' + html + '</div>';
+    browser.innerHTML = '<navgation></navgation><div class="webviews">' + html + '</div>';
     browser.setAttribute('class', 'browser');
     browser.setAttribute('name', name);
     return browser;
@@ -44,7 +44,7 @@ exports.wrapWebview = function(name, web){
     while (i--) {
         attrs.push(keys[i] + '="' + params[keys[i]] + '"');
     }
-    return '<webview ' + attrs.join(' ') + '><div class="webview" name="' + name + '">' + web.template + '</div></webview>';
+    return '<webview ' + attrs.join(' ') + ' v-ref:' + name + '>' + web.template + '</webview>';
 }
 exports.headData = function(){
     return {
@@ -63,7 +63,7 @@ exports.headData = function(){
             fn: function(){}
         },
         cls: '',
-        hide: false,
+        _hide: false,
         css: ''
     }
 }

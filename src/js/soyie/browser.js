@@ -52,13 +52,6 @@ Browser.prototype.init = function(){
     options.data = this.$data;
     options.components = Vue.util.extend(options.components || {}, components);
     options.directives = Vue.util.extend(options.directives || {}, directives);
-    if ( !options.computed ) options.computed = {};
-    options.computed.monitorStatus = function(){
-        var a = 'webviewShowHead', b = 'webviewShowToolbar', c = [];
-        !that.$head.hide && c.push(a);
-        !that._soyie.hideToolbar && c.push(b);
-        return c.join(' ');
-    };
     this.Vue = new Vue(options);
 }
 
