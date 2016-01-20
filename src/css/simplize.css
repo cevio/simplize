@@ -491,6 +491,12 @@ fieldset[disabled] input {
   vertical-align: middle;
   width: 9999px;
 }
+.browser header .soe-navbar .soe-navbar-left-area {
+  left: 1rem;
+}
+.browser header .soe-navbar .soe-navbar-right-area {
+  right: 1rem;
+}
 .browser header .soe-navbar-template {
   height: inherit;
 }
@@ -510,12 +516,6 @@ fieldset[disabled] input {
   width: 50%;
   position: absolute;
   top: 0;
-}
-.browser header .soe-navbar-left-area {
-  left: 1rem;
-}
-.browser header .soe-navbar-right-area {
-  right: 1rem;
 }
 .soe-navbar-center-area {
   display: table;
