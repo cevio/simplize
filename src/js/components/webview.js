@@ -1,5 +1,4 @@
 module.exports = function(browser){
-    console.log(browser)
     return {
         name: 'webview',
         props: {
