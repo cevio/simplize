@@ -1,9 +1,8 @@
 var context = require('./main');
 context.ready(function(){
-    //context.viewPort(640);
+    context.viewPort('retina');
 
     var soyie = new context('#webapp');
-
 
 
 
@@ -77,7 +76,7 @@ context.ready(function(){
     })
 
     indexBrowser.use(function(req, res, next){
-        req.$head.center.value = '首页';
+        req.$head.center.value = '<div class="f16">首页</div><div class="f7">安全支付</div>';
         req.$head.left.icon = '<i class="fa fa-tablet"></i>';
         req.$head.left.value = '设置';
         req.$head.cls = "nav-index";
@@ -100,6 +99,8 @@ context.ready(function(){
         req.$head.center.value = '首页 - 列表';
         req.$head.left.icon = '<i class="fa fa-arrow-left"></i>';
         req.$head.left.value = '返回';
+        req.$head.right.icon = '<i class="fa fa-arrow-left"></i>';
+        req.$head.right.value = '返回';
         req.$head.cls = "nav-list";
         req.app.hideToolbar = true;
         req.$head.left.fn = function(){

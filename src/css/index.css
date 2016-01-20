@@ -9,16 +9,16 @@ html,body{
     font-family: 'Lantinghei SC', 'Open Sans', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', STHeiti, 'WenQuanYi Micro Hei', SimSun, Helvetica, sans-serif;
 }
 
-.soe-full-screen,
-.soe-full-screen body,
-.soe-full-screen body .webapp,
-.soe-full-screen body .webapp .browser,
-.soe-full-screen body .webapp .browser .webviews,
-.soe-full-screen body .webapp .browser .webviews .webview{
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
+/*.soe-full-screen,*/
+/*.soe-full-screen body,*/
+/*.soe-full-screen body .webapp,*/
+/*.soe-full-screen body .webapp .browser,*/
+/*.soe-full-screen body .webapp .browser .webviews,*/
+/*.soe-full-screen body .webapp .browser .webviews .webview{*/
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*overflow: hidden;*/
+/*}*/
 
 body,
 body .webapp,
@@ -29,25 +29,15 @@ body .webapp .browser .webviews .webview{
     overflow-x: hidden;
 }
 
-.soe-full-screen body .webapp .browser .webviews{
-    border-bottom:0!important;
-}
+/*.soe-full-screen body .webapp .browser .webviews{*/
+    /*border-bottom:0!important;*/
+/*}*/
 
 .browser,.webview{
     display: none;
     background-color: #fff;
 }
 
-.webviews{
-    position: relative;
-}
-
-.webviewShowHead{
-    border-top:44px solid rgba(0,0,0,0);
-}
-.webviewShowToolbar{
-    border-bottom: 58px solid rgba(0,0,0,0);
-}
 
 .active{
     display: block;
@@ -77,11 +67,6 @@ body .webapp .browser .webviews .webview{
 }
 .browser header{
     height:44px;
-    line-height: 44px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
     z-index: 9999;
 }
 .browser header .soe-navbar{
@@ -91,14 +76,16 @@ body .webapp .browser .webviews .webview{
     position: absolute;
     top: 0;
     left: 10px;
-    height:44px;
     width: 50%;
 }
+.browser header .soe-navbar .soe-navbar-icon i{
+    line-height: inherit ;
+}
+
 .browser header .soe-navbar .soe-navbar-right-area{
     position: absolute;
     top: 0;
     right: 10px;
-    height:44px;
 }
 .browser header .soe-navbar .soe-navbar-center-area{
     text-align: center;
@@ -111,9 +98,7 @@ body .webapp .browser .webviews .webview{
     position: absolute;
     top: 0;
     left: 0;
-    height:44px;
     width: 100%;
-    line-height: 44px;
     z-index: 999;
 }
 
@@ -189,37 +174,6 @@ body .webapp .browser .webviews .webview{
     animation: navbarFadeIn 400ms forwards;
 }
 
-
-
-
-.toolbar{
-    position: fixed;
-    height: 58px;
-    bottom: 0;
-    left: 0;
-    right:0;
-    background-color: #fff;
-    border-top: 1px solid #eee;
-    z-index: 9999;
-}
-
-.toolbar-enter {
-    -webkit-animation: toolbarIn 400ms forwards;
-    animation: toolbarIn 400ms forwards;
-}
-.toolbar-leave {
-    -webkit-animation: toolbarOut 400ms forwards;
-    animation: toolbarOut 400ms forwards;
-}
-
-.headbar-enter {
-    -webkit-animation: headbarIn 400ms forwards;
-    animation: headbarIn 400ms forwards;
-}
-.headbar-leave {
-    -webkit-animation: headbarOut 400ms forwards;
-    animation: headbarOut 400ms forwards;
-}
 
 
 
@@ -484,88 +438,7 @@ body .webapp .browser .webviews .webview{
     transform: translate3d(0, 0, 0);
   }
 }
-@-webkit-keyframes toolbarIn {
-  from {
-    opacity: 0.5;
-    -webkit-transform: translate3d(0, 100%, 0);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes toolbarIn {
-  from {
-      opacity: 0.5;
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@-webkit-keyframes toolbarOut {
-  from {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-  }
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-  }
-}
-@keyframes toolbarOut {
-    from {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 0, 0);
-    }
-    to {
-      opacity: 0;
-      -webkit-transform: translate3d(0, 100%, 0);
-    }
-}
 
 
 
-@-webkit-keyframes headbarIn {
-  from {
-    opacity: 0.5;
-    -webkit-transform: translate3d(0, -100%, 0);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes headbarIn {
-  from {
-      opacity: 0.5;
-    transform: translate3d(0, -100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
 
-@-webkit-keyframes headbarOut {
-  from {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-  }
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-  }
-}
-@keyframes headbarOut {
-    from {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 0, 0);
-    }
-    to {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-    }
-}
