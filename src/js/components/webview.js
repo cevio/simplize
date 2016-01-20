@@ -1,4 +1,5 @@
 module.exports = function(browser){
+    console.log(browser)
     return {
         name: 'webview',
         props: {
@@ -9,8 +10,8 @@ module.exports = function(browser){
         },
         data: function(){
             return {
-                headShow: true,
-                toobarShow: true
+                headShow: !browser.$head._hide,
+                toobarShow: !browser._soyie.data.hide
             }
         },
         template:
