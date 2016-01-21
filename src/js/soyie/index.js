@@ -57,15 +57,21 @@ _.osClasses = _.osClass(Soyie);
 // bind Vue on soyie
 // use soyie.Vue
 Soyie.Vue = Vue;
-Soyie.windowTouchMoveDisabled = false;
 Soyie.animationend = animationend;
 Soyie.viewPort = viewport;
 Soyie.ready = function(fn){
-    Vue.util.on(window, 'touchmove', function(e){
-    	if ( Soyie.windowTouchMoveDisabled ){
-    		e.preventDefault();
-    	}
+    var _windowTouchMoveDisabled;
+    Object.defineProperty(Soyie, 'windowTouchMoveDisabled', {
+        get: function(){ return _windowTouchMoveDisabled; },
+        set: function(value){
+            _windowTouchMoveDisabled = !!value;
+            try{ Vue.util.off(window, 'touchmove', windowTouchMoveDisabled); }catch(e){}
+            if ( _windowTouchMoveDisabled ){
+                Vue.util.on(window, 'touchmove', windowTouchMoveDisabled);
+            }
+        }
     });
+    Soyie.windowTouchMoveDisabled = false;
     domReady(fn);
 };
 // 为soyie绑定事件机制
@@ -255,4 +261,8 @@ function defineToolbarStatus(soyie){
             });
         }
     });
+}
+
+function windowTouchMoveDisabled(e){
+    e.preventDefault();
 }
