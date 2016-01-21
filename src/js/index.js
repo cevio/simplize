@@ -93,7 +93,12 @@ context.ready(function(){
         req.$scope.$set('click', function(){
             res.redirect('/list');
         });
-        res.render('index');
+        res.render('index', function(){
+            this.$watch('a', function(){
+                return 1;
+            }, {deep:true})
+            console.log(this)
+        });
     });
     indexBrowser.active('/list', function(req, res){
         req.$head.center.value = '首页 - 列表';
@@ -102,6 +107,7 @@ context.ready(function(){
         req.$head.right.icon = '<i class="fa fa-arrow-left"></i>';
         req.$head.right.value = '返回';
         req.$head.cls = "nav-list";
+        //req.$head.hide = true;
         req.app.hideToolbar = true;
         req.$head.left.fn = function(){
             res.redirect('/');

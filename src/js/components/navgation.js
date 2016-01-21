@@ -4,7 +4,7 @@ module.exports = function(browser){
         data: function(){
             return browser.$head;
         },
-        template:   '<header v-if="!_hide" class="soe-clearfix" transition="headbar">' +
+        template:   '<header v-if="!hide" class="soe-clearfix" transition="headbar">' +
                         '<div class="soe-navbar" :class="cls" :style="css">' +
                             '<div class="soe-navbar-left-area  soe-clearflash tl" @click="left.fn">' +
                                 '<div class="soe-navbar-icon " v-html="left.icon"></div>' +
@@ -22,16 +22,14 @@ module.exports = function(browser){
         ready: function(){
             browser.navgation = this;
         },
-        computed: {
-            hide: {
-                get: function(){ return this._hide; },
-                set: function(val){
-                    this._hide = !!val;
+        watch: {
+            "hide": function(newValue, oldValue){
+                if ( newValue != oldValue ){
                     var webviews = browser.webviews;
                     var keys = Object.keys(webviews);
                     var i = keys.length;
                     while ( i-- ) {
-                        webviews[keys[i]].headShow = !val;
+                        webviews[keys[i]].vm.headShow = !newValue;
                     }
                 }
             }

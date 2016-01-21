@@ -70,9 +70,10 @@ function ServerResponse(){
     this.title = setTitle;
 }
 
-ServerResponse.prototype.render = function(name){
+ServerResponse.prototype.render = function(name, fn){
     var browser = this.app.$current; // 当前浏览器
     var useAnimate = true;
+    var that = this;
     if ( this.app.oldBrowser ) this.app.oldBrowser.emit('leave');
     if ( browser ){
         var actived = browser.actived;
@@ -98,15 +99,16 @@ ServerResponse.prototype.render = function(name){
         }
 
         newWebview.emit('beforeEnter', this.req, this);
-
-        AnimateFn(
-            this.req,
-            this,
-            oldWebview,
-            newWebview,
-            browser,
-            whenAnimateDone(this.req, this, browser, webview, name, oldWebview)
-        );
+        Vue.util.nextTick(function(){
+            AnimateFn(
+                that.req,
+                that,
+                oldWebview,
+                newWebview,
+                browser,
+                whenAnimateDone(that.req, that, browser, webview, name, oldWebview, fn)
+            );
+        });
     }
 }
 
@@ -257,10 +259,10 @@ function findActivedWebview(browser){
     }
 }
 
-function whenAnimateDone(req, res, browser, webview, name, oldWebview){
+function whenAnimateDone(req, res, browser, webview, name, oldWebview, callback){
     return function(){
         browser.current = webview;
-        setTimeout(function(){
+        Vue.util.nextTick(function(){
             var header = browser.$el.querySelector('header');
 
             if ( header )
@@ -281,6 +283,7 @@ function whenAnimateDone(req, res, browser, webview, name, oldWebview){
             browser._soyie.oldBrowser = browser;
             oldWebview && oldWebview !== webview && oldWebview.emit('afterLeave', req, res);
             webview.emit('afterEnter',req, res);
+            typeof callback === 'function' && callback.call(webview.vm);
         });
     }
 }

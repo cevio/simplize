@@ -198,6 +198,18 @@ Soyie.prototype.createBrowsers = function(){
 
     this.el.appendChild(toolbar);
     this.$toolbar = new Vue(toolbarComponentExtendtions);
+    this.$toolbar.$watch('hide', function(newValue, oldValue){
+        if ( newValue != oldValue ){
+            that.browsers.forEach(function(browser){
+                var webviews = browser.webviews;
+                var keys = Object.keys(webviews);
+                var i = keys.length;
+                while ( i-- ) {
+                    webviews[keys[i]].vm.toobarShow = !newValue;
+                }
+            });
+        }
+    });
 }
 
 /**
@@ -254,14 +266,6 @@ function defineToolbarStatus(soyie){
         get: function(){ return this.data.hide; },
         set: function(value){
             this.data.hide = !!value; //webviewShowToolbar
-            this.browsers.forEach(function(browser){
-                var webviews = browser.webviews;
-                var keys = Object.keys(webviews);
-                var i = keys.length;
-                while ( i-- ) {
-                    webviews[keys[i]].vm.toobarShow = !value;
-                }
-            });
         }
     });
 }

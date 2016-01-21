@@ -277,3 +277,120 @@ body .webapp .browser .webviews .webview{
 
 
 
+
+
+
+
+
+
+
+
+
+/*box 阴影*/
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+}
+
+.pageheadbar-enter {
+  -webkit-animation: pageheadbarIn 400ms forwards;
+  animation: pageheadbarIn 400ms forwards;
+}
+.pageheadbar-leave {
+  -webkit-animation: pageheadbarOut 400ms forwards;
+  animation: pageheadbarOut 400ms forwards;
+}
+
+@-webkit-keyframes pageheadbarIn {
+  from {
+    height:0;
+    opacity: 0;
+  }
+  to {
+    height: 132px;
+    opacity: 1;
+  }
+}
+@keyframes pageheadbarIn {
+    from {
+      height:0;
+      opacity: 0;
+    }
+    to {
+      height: 132px;
+      opacity: 1;
+    }
+}
+
+@-webkit-keyframes pageheadbarOut {
+  from {
+    height:132px;
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+@keyframes pageheadbarOut {
+    from {
+      height:132px;
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+}
+
+
+.pagetoolbar-enter {
+  -webkit-animation: pagetoolbarIn 400ms forwards;
+  animation: pagetoolbarIn 400ms forwards;
+}
+.pagetoolbar-leave {
+  -webkit-animation: pagetoolbarOut 400ms forwards;
+  animation: pagetoolbarOut 400ms forwards;
+}
+
+@-webkit-keyframes pagetoolbarIn {
+  from {
+    height:0;
+    opacity: 0;
+  }
+  to {
+    height: 174px;
+    opacity: 1;
+  }
+}
+@keyframes pagetoolbarIn {
+    from {
+      height:0;
+      opacity: 0;
+    }
+    to {
+      height: 174px;
+      opacity: 1;
+    }
+}
+
+@-webkit-keyframes pagetoolbarOut {
+  from {
+    height:174px;
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+@keyframes pagetoolbarOut {
+    from {
+      height:174px;
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+}

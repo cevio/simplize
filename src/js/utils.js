@@ -63,7 +63,7 @@ exports.headData = function(){
             fn: function(){}
         },
         cls: '',
-        _hide: false,
+        hide: false,
         css: ''
     }
 }
