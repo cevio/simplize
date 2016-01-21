@@ -64,10 +64,13 @@ Soyie.ready = function(fn){
     Object.defineProperty(Soyie, 'windowTouchMoveDisabled', {
         get: function(){ return _windowTouchMoveDisabled; },
         set: function(value){
-            _windowTouchMoveDisabled = !!value;
-            try{ Vue.util.off(window, 'touchmove', windowTouchMoveDisabled); }catch(e){}
-            if ( _windowTouchMoveDisabled ){
-                Vue.util.on(window, 'touchmove', windowTouchMoveDisabled);
+            if ( _windowTouchMoveDisabled != value ){
+                _windowTouchMoveDisabled = !!value;
+                if ( _windowTouchMoveDisabled ){
+                    Vue.util.on(window, 'touchmove', windowTouchMoveDisabled);
+                }else{
+                    try{ Vue.util.off(window, 'touchmove', windowTouchMoveDisabled); }catch(e){}
+                }
             }
         }
     });
