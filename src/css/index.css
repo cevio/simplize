@@ -155,26 +155,18 @@ body .webapp .browser .webviews .webview{
 
 @-webkit-keyframes pageFromRightToCenter {
   from {
-      opacity: 0.9;
       -webkit-transform: translate3d(100%, 0, 0);
-      box-shadow: 0px 0px 3px rgba(0,0,0,.1);
   }
   to {
-      opacity: 1;
       -webkit-transform: translate3d(0, 0, 0);
-      box-shadow: 0px 0px 30px rgba(0,0,0,.5);
   }
 }
 @keyframes pageFromRightToCenter {
   from {
-      opacity: 0.9;
     transform: translate3d(100%, 0, 0);
-    box-shadow: 0px 0px 3px rgba(0,0,0,.1);
   }
   to {
-      opacity: 1;
     transform: translate3d(0, 0, 0);
-    box-shadow: 0px 0px 30px rgba(0,0,0,.5);
   }
 }
 @-webkit-keyframes pageFromRightToCenterShadow {
@@ -195,26 +187,18 @@ body .webapp .browser .webviews .webview{
 }
 @-webkit-keyframes pageFromCenterToRight {
   from {
-      opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
-    box-shadow: 0px 0px 30px rgba(0,0,0,.5);
   }
   to {
-      opacity: 0.9;
     -webkit-transform: translate3d(100%, 0, 0);
-    box-shadow: 0px 0px 3px rgba(0,0,0,.1);
   }
 }
 @keyframes pageFromCenterToRight {
   from {
-      opacity: 1;
     transform: translate3d(0, 0, 0);
-    box-shadow: 0px 0px 30px rgba(0,0,0,.5);
   }
   to {
-      opacity: 0.9;
     transform: translate3d(100%, 0, 0);
-    box-shadow: 0px 0px 3px rgba(0,0,0,.1);
   }
 }
 @-webkit-keyframes pageFromCenterToRightShadow {
@@ -235,41 +219,33 @@ body .webapp .browser .webviews .webview{
 }
 @-webkit-keyframes pageFromCenterToLeft {
   from {
-    opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
   }
   to {
-    opacity: 0.9;
     -webkit-transform: translate3d(-20%, 0, 0);
   }
 }
 @keyframes pageFromCenterToLeft {
   from {
-      opacity: 1;
     transform: translate3d(0, 0, 0);
   }
   to {
-    opacity: 0.9;
     transform: translate3d(-20%, 0, 0);
   }
 }
 @-webkit-keyframes pageFromLeftToCenter {
   from {
-    opacity: 0.9;
     -webkit-transform: translate3d(-20%, 0, 0);
   }
   to {
-    opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
   }
 }
 @keyframes pageFromLeftToCenter {
   from {
-      opacity: 0.9;
     transform: translate3d(-20%, 0, 0);
   }
   to {
-    opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 }
@@ -286,7 +262,19 @@ body .webapp .browser .webviews .webview{
 
 
 
-/*box 阴影*/
+.soe-animate-right-to-center:before,
+.soe-animate-center-to-right:before {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  width: 16px;
+  height: 100%;
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.2) 100%);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.2) 100%);
+  z-index: 100;
+  content: '';
+}
+
 * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
