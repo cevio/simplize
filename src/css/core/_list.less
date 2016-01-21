@@ -1,0 +1,36 @@
+.ul-handleable{
+  position: relative;
+  overflow-x: hidden;
+  moz-user-select: -moz-none;
+  -moz-user-select: none;
+  -o-user-select:none;
+  -khtml-user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+.li-content{
+  background: #fff;
+  z-index: 2;
+  position: relative;
+  &.translating,&.open{
+    transition: all 0.5s ease ;
+  }
+}
+.li-handler{
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 1;
+}
+.li-handler-btn{
+  height: 100%;
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  padding: 0 .8em;
+  float: left;
+  line-height: 4em;
+}

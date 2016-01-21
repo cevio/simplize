@@ -1,0 +1,61 @@
+//  左右选择按钮
+//原生选择radio
+.cp-boolean {
+  position: relative;
+  width: 3.2em;
+  height: 2em;
+  border-radius: 200px;
+  display: inline-block;
+  border: 2px solid #e7e7e7;
+  box-sizing: content-box;
+  background: #e7e7e7;
+  transition: all .1s ease;
+
+  &,& * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+  }
+  &[status='active'] {
+    border: 2px solid #48d15f;
+    background: #48d15f;
+
+    &:before {
+      transform: scale(0);
+    }
+    &:after {
+      left: 1.2em;
+
+    }
+
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3.2em;
+    height: 2em;
+    border-radius: 200px;
+    background: #fff;
+    z-index: 1;
+    transform: scale(1);
+    transform-origin: center center;
+    transition: all .3s ease-in;
+  }
+  &:after {
+    content: "";
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 4px 10px #888;
+    box-sizing: border-box;
+    z-index: 2;
+    transition: left .3s cubic-bezier(.46, -0.31, .64, 1.35);
+  }
+}

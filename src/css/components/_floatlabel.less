@@ -1,0 +1,66 @@
+.cp-floatlabel{
+  position: relative;
+  padding: 0.5em 0;
+
+  .cp-floatlabel-placeholder{
+    position:absolute;
+    top: 0;
+    left: 0;
+    font-size: 0.8em;
+    z-index: 998;
+  }
+
+  &.focus{
+    .cp-floatlabel-placeholder{
+      color: rgb(0, 122, 255);
+    }
+  }
+
+  .cp-floatlabel-placeholder{
+    color: #555;
+  }
+
+
+  .cp-floatlabel-input{
+    padding-top: 1.5em;
+    z-index: 999;
+    position: relative;
+    input{
+    }
+
+  }
+
+
+
+}
+
+.floatlabel-transition{
+
+}
+.floatlabel-enter{
+  animation: floatlabelEnter 200ms ease ;
+}
+.floatlabel-leave{
+  animation: floatlabelLeave 200ms ease;
+}
+@keyframes floatlabelEnter {
+  from{
+    opacity: 0.7;
+    transform: translate3d(0,100%,0);
+  }
+  to{
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+}
+
+@keyframes floatlabelLeave {
+  from{
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+  to{
+    opacity: 0;
+    transform: translate3d(0,100%,0);
+  }
+}

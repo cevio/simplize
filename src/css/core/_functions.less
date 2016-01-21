@@ -1,0 +1,112 @@
+/* 常用的一些 类 */
+
+//输出外边距  m5,m10,...  em 为单位  m5表示 margin 0.5em
+.func_margin(@n,@i:@margin-func-start) when ( @i =< @n){
+  .m@{i}
+  {
+    margin: @i*0.1em;
+  }
+  .mt@{i}
+  {
+    margin-top: @i*0.1em;
+  }
+  .mb@{i}
+  {
+    margin-bottom: @i*0.1em;
+  }
+  .ml@{i}
+  {
+    margin-left: @i*0.1em;
+  }
+  .mr@{i}
+  {
+    margin-right: @i*0.1em;
+  }
+  .func_margin(@n, (@i + @margin-func-step))
+}
+
+
+//输出内边距   p5,p10,p15...
+.func_padding(@n,@i:5) when ( @i =< @n){
+  .p@{i}
+  {
+    padding: @i*0.1em;
+  }
+  .pt@{i}
+  {
+    padding-top: @i*0.1em;
+  }
+  .pb@{i}
+  {
+   padding-bottom: @i*0.1em;
+  }
+  .pl@{i}
+  {
+    padding-left: @i*0.1em;
+  }
+  .pr@{i}
+  {
+    padding-right: @i*0.1em;
+  }
+  .func_padding(@n, (@i + 5))
+}
+
+
+//输出字体大小  f5,f6,f7,f8--,f19,f20
+.func-fontSize(@n, @i: @font-func-start) when (@i =< @n) {
+  .f@{i} {
+    font-size: @i*0.1rem;
+  }
+  .func-fontSize(@n, (@i + @font-func-step));
+}
+
+
+//输出 字体颜色 c1,c2,c3,c4....c16   #111 ~  #FFF
+.func-color(@n,@i:1) when (@i =< @n){
+  .c@{i}{
+    color: @i*#111;
+  }
+  .func-color(@n,(@i+1));
+}
+
+
+//创建方法调用
+.func_margin(@margin-func-end);
+.func_padding(@padding-func-end);
+.func-fontSize(@font-func-end);
+.func-color(16);
+
+
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+
+.tc{
+  text-align: center;
+}
+.tl{
+  text-align: left;
+}
+.tr{
+  text-align: right;
+}
+.ib{
+  display: inline-block;
+}
+.middle-out{
+  display: table;
+  height: 100%;
+}
+.middle-in{
+  display: table-cell;
+  vertical-align: middle;
+  width: 1px;
+}
+.wd100 {
+  width: 100%;
+}
+
+

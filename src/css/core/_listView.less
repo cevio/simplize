@@ -1,0 +1,64 @@
+
+
+.listView{
+  margin: 2em 0;
+  padding-left: 15px;
+  background-color: #fff;
+
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+
+  .item{
+    overflow: auto;
+    display: table;
+    width: 100%;
+
+    &.linked  .content{
+      padding-right: 2em;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2060%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'm60%2061.5-38.25%2038.25-9.75-9.75%2029.25-28.5-29.25-28.5%209.75-9.75z'%20fill%3D'%23c7c7cc'%2F%3E%3C%2Fsvg%3E");
+      background-size: 0.5em;
+      background-repeat: no-repeat;
+      background-position: 97% center;
+
+    }
+
+    &:not(:last-child){
+      .content{
+        border-bottom: @default-border;
+      }
+    }
+
+    .icons,.content{
+      height: 2em;
+      line-height: 2em;
+      padding: 1em 0;
+      box-sizing: content-box;
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .content{
+      padding-right: 1em;
+    }
+
+    .icons{
+      padding-left: 0;
+      padding-right: 15px;
+      width: 1px;
+      text-align: center;
+      img{
+        height: 2em;
+      }
+      i{
+        width: 1.4em;
+        font-size: 1.4em;
+        color: #666666;
+      }
+    }
+
+    .after{
+      .fr
+    }
+
+  }
+}
