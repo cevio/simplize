@@ -76,7 +76,7 @@ body .webapp .browser .webviews .webview{
     position: absolute;
     top: 0;
     left: 10px;
-    width: 50%;
+    /*width: 50%;*/
 }
 .browser header .soe-navbar .soe-navbar-icon i{
     line-height: inherit ;
