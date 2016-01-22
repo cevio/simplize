@@ -263,7 +263,7 @@ function whenAnimateDone(req, res, browser, webview, name, oldWebview, callback)
     return function(){
         browser.current = webview;
         Vue.util.nextTick(function(){
-            var header = browser.$el.querySelector('header');
+            var header = browser.$el.querySelector('.header');
 
             if ( header )
             {
