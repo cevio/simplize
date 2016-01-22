@@ -15,9 +15,11 @@ module.exports = function(browser){
         },
         template:
             '<div class="webview" :name="name">' +
-                '<div v-if="headShow" transition="pageheadbar" class="soe-headbar-place-exist"></div>' +
-                '<slot></slot>' +
-                '<div v-if="toobarShow" transition="pagetoolbar" class="soe-toolbar-place-exist"></div>' +
+                '<div class="webview-content">' +
+                    '<div v-if="headShow" transition="pageheadbar" class="soe-headbar-place-exist"></div>' +
+                    '<slot></slot>' +
+                    '<div v-if="toobarShow" transition="pagetoolbar" class="soe-toolbar-place-exist"></div>' +
+                '</div>'+
             '</div>',
         ready: function(){
             this.$node = this.$el;

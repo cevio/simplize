@@ -109,42 +109,18 @@ body .webapp .browser .webviews .webview{
     z-index: 100;
 }
 .soe-animate-right-to-center{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
     -webkit-animation: pageFromRightToCenter 400ms forwards;
     animation: pageFromRightToCenter 400ms forwards;
 }
 .soe-animate-center-to-left{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
     -webkit-animation: pageFromCenterToLeft 400ms forwards;
     animation: pageFromCenterToLeft 400ms forwards;
 }
 .soe-animate-center-to-right{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
     -webkit-animation: pageFromCenterToRight 400ms forwards;
     animation: pageFromCenterToRight 400ms forwards;
 }
 .soe-animate-left-to-center{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
     -webkit-animation: pageFromLeftToCenter 400ms forwards;
     animation: pageFromLeftToCenter 400ms forwards;
 }
