@@ -6,6 +6,7 @@ var EventEmitter = require('events').EventEmitter;
 var componentWebview = require('../components/webview');
 var componentNavgation = require('../components/navgation');
 var directiveHref = require('../directives/href');
+var uiMiddle = require('../components/uiMiddle');
 var ownWebview = require('./webview');
 var addClass = Vue.util.addClass;
 var removeClass = Vue.util.removeClass;
@@ -41,7 +42,8 @@ Browser.prototype.init = function(){
     var that = this;
     var components = Vue.util.extend({
         "webview": componentWebview(this),
-        "navgation": componentNavgation(this)
+        "navgation": componentNavgation(this),
+        "middle": uiMiddle
     }, this.components);
     var directives = Vue.util.extend({
         "href": directiveHref(this)
