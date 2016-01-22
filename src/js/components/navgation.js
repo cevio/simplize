@@ -4,7 +4,7 @@ module.exports = function(browser){
         data: function(){
             return browser.$head;
         },
-        template:   '<div class="header soe-clearfix" v-if="!hide" transition="headbar">' +
+        template:   '<div class="header" v-if="!hide" transition="headbar">' +
                         '<div class="soe-navbar" :class="cls" :style="css">' +
                             '<div class="soe-navbar-left-area  soe-clearflash tl" @click="left.fn">' +
                                 '<div class="soe-navbar-icon " v-html="left.icon"></div>' +
