@@ -7,52 +7,47 @@ html,body{
   font-size: 10px;
 }
 
-@media screen and (min-width: 374px) {
+@media screen and (min-width: (@IP5 - 1px)) {
 
 }
-@media screen and (min-width: 413px) {
+@media screen and (min-width: (@IP6S - 1px)) {
+
 
 }
-@media screen and (min-width: 639px) {
+@media screen and (min-width: (@IP4 * 2)) {
   html,body{
     font-size: 20px;
   }
-  .browser header{
-    height: 88px;
+  .browser header,.soe-headbar-place-exist{
+    height: @header-height * 2;
   }
-  .toolbar{
-    height: 116px;
+  .toolbar,.soe-toolbar-place-exist{
+    height: @toolbar-height * 2;
   }
-  .soe-headbar-place-exist{
-    height:88px;
+  .soe-animate-right-to-center:before,
+  .soe-animate-center-to-right:before{
+    width: 32px
   }
-  .soe-toolbar-place-exist{
-    height: 116px;
-  }
-
-
 }
-@media screen and (min-width: 749px) {
+@media screen and (min-width: ( @IP5 * 2 )) {
   html,body{
     font-size: 23px;
   }
 
 }
-@media screen and (min-width: 1241px) {
+@media screen and (min-width: ( @IP6S * 3 )){
   html,body{
     font-size: 38px;
   }
-  .browser header{
-    height: 132px;
+  .browser header,.soe-headbar-place-exist{
+    height: @header-height * 3;
   }
-  .toolbar{
-    height: 174px;
+  .toolbar,.soe-toolbar-place-exist{
+    height: @toolbar-height * 3;
   }
-  .soe-headbar-place-exist{
-    height:132px;
-  }
-  .soe-toolbar-place-exist{
-    height: 174px;
+  .soe-animate-right-to-center:before,
+  .soe-animate-center-to-right:before{
+    width: 48px
   }
 }
 

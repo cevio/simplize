@@ -1,6 +1,6 @@
 .toolbar{
   position: absolute;
-  height: 58px;
+  height: @toolbar-height;
   bottom: 0;
   left: 0;
   right: 0;
@@ -30,7 +30,7 @@
 }
 
 .soe-toolbar-place-exist{
-  height: 58px;
+  height: @toolbar-height;
 }
 
 @-webkit-keyframes toolbarIn {
@@ -73,4 +73,37 @@
     opacity: 0;
     -webkit-transform: translate3d(0, 100%, 0);
   }
+}
+
+
+
+.pagetoolbar-enter {
+  -webkit-animation: pagetoolbarIn 400ms forwards;
+  animation: pagetoolbarIn 400ms forwards;
+}
+.pagetoolbar-leave {
+  -webkit-animation: pagetoolbarOut 400ms forwards;
+  animation: pagetoolbarOut 400ms forwards;
+}
+
+@-webkit-keyframes pagetoolbarIn {
+  from {
+    height:0;
+  }
+}
+@keyframes pagetoolbarIn {
+    from {
+      height:0;
+    }
+}
+
+@-webkit-keyframes pagetoolbarOut {
+  to {
+    height: 0;
+  }
+}
+@keyframes pagetoolbarOut {
+    to {
+      height: 0;
+    }
 }

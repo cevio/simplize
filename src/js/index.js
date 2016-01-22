@@ -1,4 +1,9 @@
 var context = require('./main');
+var pg = require('./pg');
+
+pg.setWebViewScrollLock(true);
+pg.hideNavbar();
+
 context.ready(function(){
     context.viewPort('retina');
 

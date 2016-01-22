@@ -4,47 +4,61 @@
   left: 0;
   display: table;
   width: 100%;
-  height: 44px;
+  height: @header-height;
+  z-index: 9999;
   .soe-navbar{
+    .tc;
+
+    position: relative;
     display: table-cell;
     height: inherit;
     vertical-align: middle;
     width: 9999px;
+    .soe-navbar-left-area,.soe-navbar-right-area{
+      display: table;
+      height: inherit;
+      position: absolute;
+      top: 0;
+    }
     .soe-navbar-left-area{
       left: 1rem;
     }
     .soe-navbar-right-area{
       right: 1rem;
     }
+    .soe-navbar-center-area{
+      .tc;
+      display: table;
+      width: 100%;
+    }
+    .soe-navbar-icon{
+      width: 1px;
+      padding: 0 5px;
+      white-space: nowrap;
+      line-height: inherit ;
+    }
   }
   .soe-navbar-template{
     height: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
   }
-  .soe-navbar-icon{
-    width: 1px;
-    white-space: nowrap;
-  }
+
   .soe-navbar-icon,.soe-navbar-text{
     display: table-cell;
     vertical-align: middle;
   }
-  .soe-navbar-left-area,.soe-navbar-right-area{
-    display: table;
-    height: inherit;
-    //width: 50%;
-    position: absolute;
-    top: 0;
-    
-  }
 
 }
 
-.soe-navbar-center-area{
-  display: table;
-  width: 100%;
+.soe-zindex-lower{
+    z-index: 99;
 }
-.soe-navbar-text{
-  display: table-cell;
+.soe-zindex-higher{
+    z-index: 100;
 }
 
 
@@ -273,4 +287,35 @@
   to {
     opacity: 1;
   }
+}
+
+.pageheadbar-enter {
+  -webkit-animation: pageheadbarIn 400ms forwards;
+  animation: pageheadbarIn 400ms forwards;
+}
+.pageheadbar-leave {
+  -webkit-animation: pageheadbarOut 400ms forwards;
+  animation: pageheadbarOut 400ms forwards;
+}
+
+@-webkit-keyframes pageheadbarIn {
+  from {
+    height:0;
+  }
+}
+@keyframes pageheadbarIn {
+    from {
+      height:0;
+    }
+}
+
+@-webkit-keyframes pageheadbarOut {
+  to {
+    height: 0;
+  }
+}
+@keyframes pageheadbarOut {
+    to {
+      height: 0;
+    }
 }
