@@ -178,6 +178,19 @@ td,
 th {
   padding: 0;
 }
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lantinghei SC', 'Open Sans', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', STHeiti, 'WenQuanYi Micro Hei', SimSun, Helvetica, sans-serif;
+}
 /* === Grid === */
 .row {
   display: -webkit-box;
@@ -1061,6 +1074,50 @@ body .webapp .browser .webviews {
 .soe-animate-center-to-right:before {
   -webkit-animation: fadeOut 400ms ease ;
           animation: fadeOut 400ms ease ;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.tc {
+  text-align: center;
+}
+.tl {
+  text-align: left;
+}
+.tr {
+  text-align: right;
+}
+.ib {
+  display: inline-block;
+}
+.wd100 {
+  width: 100%;
+}
+.soe-pull-left {
+  float: left;
+}
+.soe-pull-right {
+  float: right;
+}
+.soe-clearflash {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+.soe-clearfix {
+  *zoom: 1;
+}
+.soe-clearfix:before,
+.soe-clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.soe-clearfix:after {
+  clear: both;
 }
 @-webkit-keyframes fadeIn {
   from {
