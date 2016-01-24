@@ -21,8 +21,8 @@ function Browser(context, options){
     this._soyie = context;
     this.url =
     this.cb = null;
-    this.$data = {};
-    this.$head = Vue.util.extend(_.headData(), options.$head || {});
+    this.$data = Vue.util.extend({}, this._options.data || {});
+    this.$head = Vue.util.extend(_.headData(), this._options.$head || {});
     this.webviews = {};
     this.components = {};
     this.directives = {};
