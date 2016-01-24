@@ -9,7 +9,9 @@ context.ready(function(){
 
     var soyie = new context('#webapp');
 
-
+    soyie.on('browserchange', function(){
+    console.log('change', arguments)
+    });
 
 // index
     var scope = {

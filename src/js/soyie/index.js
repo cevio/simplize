@@ -210,6 +210,15 @@ Soyie.prototype.createBrowsers = function(){
             });
         }
     });
+    this.data.browsers.forEach(function(browser, index){
+        that.$toolbar.$watch('browsers[' + index + '].actived', function(newValue, oldVlaue){
+            that.changeToolbar(browser, index, newValue, oldVlaue);
+        });
+    });
+}
+
+Soyie.prototype.changeToolbar = function(browser, index, newValue, oldVlaue){
+    this.emit('browserchange', browser, index, newValue, oldVlaue);
 }
 
 /**
