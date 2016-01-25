@@ -17,6 +17,8 @@ var response = require('./response');
 var componentToolbar = require('../components/toolbar');
 var viewport = require('./viewport');
 var animationend = require('animationend');
+var ajax = require('./ajax');
+var cookie = require('./cookie');
 
 // module exports
 // return soyie context
@@ -59,6 +61,8 @@ _.osClasses = _.osClass(Soyie);
 Soyie.Vue = Vue;
 Soyie.animationend = animationend;
 Soyie.viewPort = viewport;
+Soyie.ajax = ajax;
+Soyie.cookie = cookie;
 Soyie.ready = function(fn){
     var _windowTouchMoveDisabled;
     Object.defineProperty(Soyie, 'windowTouchMoveDisabled', {
