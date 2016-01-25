@@ -19,6 +19,9 @@ var viewport = require('./viewport');
 var animationend = require('animationend');
 var ajax = require('./ajax');
 var cookie = require('./cookie');
+var Promise = require('es6-promise').Promise;
+var querystring = require('querystrings');
+var PathToRegExp = require('path-to-regexp');
 
 // module exports
 // return soyie context
@@ -63,6 +66,13 @@ Soyie.animationend = animationend;
 Soyie.viewPort = viewport;
 Soyie.ajax = ajax;
 Soyie.cookie = cookie;
+Soyie.Promise = Promise;
+Soyie.EventEmitter = EventEmitter;
+Soyie.querystring = querystring;
+Soyie.PathToRegExp = PathToRegExp;
+Soyie.next = next;
+Soyie.viewport = viewport;
+Soyie.Layer = layer;
 Soyie.ready = function(fn){
     var _windowTouchMoveDisabled;
     Object.defineProperty(Soyie, 'windowTouchMoveDisabled', {
