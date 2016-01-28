@@ -26,6 +26,11 @@ function Browser(context, options){
     this.webviews = {};
     this.components = {};
     this.directives = {};
+    this.filters = {};
+    this.Aevents = {};
+    this.computeds = {};
+    this.methods = {};
+    this.watches = {};
     this.current = null;
     this.next = new next(function(){
         typeof that.cb === 'function' &&
@@ -39,21 +44,31 @@ function Browser(context, options){
 Browser.prototype = Object.create(EventEmitter.prototype);
 
 Browser.prototype.init = function(){
-    var that = this;
     var components = Vue.util.extend({
         "webview": componentWebview(this),
         "navgation": componentNavgation(this),
         "middle": uiMiddle
     }, this.components);
+
+
     var directives = Vue.util.extend({
         "href": directiveHref(this)
     }, this.directives);
+
+
     var options = this._options;
+
     options.el = this.$el;
     options.name = options.browserName || 'browser';
     options.data = this.$data;
     options.components = Vue.util.extend(options.components || {}, components);
     options.directives = Vue.util.extend(options.directives || {}, directives);
+    options.filters = Vue.util.extend(options.filters || {}, this.filters);
+    options.events = Vue.util.extend(options.events || {}, this.Aevents);
+    options.computed = Vue.util.extend(options.computed || {}, this.computeds);
+    options.methods = Vue.util.extend(options.methods || {}, this.methods);
+    options.watch = Vue.util.extend(options.watch || {}, this.watches);
+
     this.Vue = new Vue(options);
 }
 
@@ -146,11 +161,28 @@ Browser.prototype.webview = function(el){
     return this.webviews[name];
 }
 
-Browser.prototype.component = function(name, value){
+Browser.prototype.component =
+Browser.prototype.$component = function(name, value){
     this.components[name] = value;
 }
-Browser.prototype.directive = function(name, value){
+Browser.prototype.directive =
+Browser.prototype.$directive = function(name, value){
     this.directives[name] = value;
+}
+Browser.prototype.$filter = function(name, value){
+    this.filters[name] = value;
+}
+Browser.prototype.$event = function(name, value){
+    this.Aevents[name] = value;
+}
+Browser.prototype.$watch = function(name, value){
+    this.watches[name] = value;
+}
+Browser.prototype.$computed = function(name, value){
+    this.computeds[name] = value;
+}
+Browser.prototype.$method = function(name, value){
+    this.methods[name] = value;
 }
 
 function defineGetBrowserName(browser){
