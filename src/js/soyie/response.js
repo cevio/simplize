@@ -178,7 +178,7 @@ function slideAnimate(req, res, olds, news, browser, direction, exchange){
         var currentElement = olds.node;
         var targetElement = news.node;
         var animEnd = null;
-        
+
         animationend(targetElement).then(function(){
             olds !== news && olds.emit('leave', req, res);
             news.emit('enter', req, res);
@@ -212,13 +212,7 @@ function slideAnimate(req, res, olds, news, browser, direction, exchange){
 function animateIn(currentElement, targetElement, browser){
     if ( currentElement === targetElement ) return;
 
-    var NabarAnimateEnd = null;
-    if ( browser.$header && browser.$navgation ){
-        var navbar = query(browser.$header, '.soe-navbar');
-        browser.$header.appendChild(browser.$navgation);
-        NabarAnimateEnd = whenAnimateNavbarIn(browser.$navgation, navbar);
-    }
-
+    var NabarAnimateEnd = browser.navgation.animateIn();
 
     addClass(htmlElement, 'soe-full-screen');
     addClass(targetElement, 'active');
@@ -243,12 +237,7 @@ function animateIn(currentElement, targetElement, browser){
 function animateOut(currentElement, targetElement, browser){
     if ( currentElement === targetElement ) return;
 
-    var NabarAnimateEnd = null;
-    if ( browser.$header && browser.$navgation ){
-        var navbar = query(browser.$header, '.soe-navbar');
-        browser.$header.appendChild(browser.$navgation);
-        NabarAnimateEnd = whenAnimateNavbarOut(browser.$navgation, navbar);
-    }
+    var NabarAnimateEnd = browser.navgation.animateOut();
 
     addClass(htmlElement, 'soe-full-screen');
     addClass(targetElement, 'active');
@@ -318,98 +307,7 @@ function cloneHeaderElement(node){
     return div;
 }
 
-function whenAnimateNavbarIn(node, navbar){
-    if ( node ){
-        // 副本层的对象
-        var lefticon = query(node, '.soe-navbar-left-area .soe-navbar-icon');
-        var lefttext = query(node, '.soe-navbar-left-area .soe-navbar-text');
-        var righticon = query(node, '.soe-navbar-right-area .soe-navbar-icon');
-        var righttext = query(node, '.soe-navbar-right-area .soe-navbar-text');
-        var title = query(node, '.soe-navbar-center-area .soe-navbar-text');
 
-        // 操作副本层
-        addClass(lefttext, 'soe-navbar-center-to-left');
-        addClass(righttext, 'soe-navbar-center-to-left');
-        addClass(title, 'soe-navbar-center-to-left');
-        addClass(lefticon, 'soe-navbar-fadeout');
-        addClass(righticon, 'soe-navbar-fadeout');
-        addClass(node, 'soe-navbar-fadeout');
-    }
-
-    if ( navbar ){
-        // 原始层对象
-        var _lefticon = query(navbar, '.soe-navbar-left-area .soe-navbar-icon');
-        var _lefttext = query(navbar, '.soe-navbar-left-area .soe-navbar-text');
-        var _righticon = query(navbar, '.soe-navbar-right-area .soe-navbar-icon');
-        var _righttext = query(navbar, '.soe-navbar-right-area .soe-navbar-text');
-        var _title = query(navbar, '.soe-navbar-center-area .soe-navbar-text');
-        // 操作原始层
-        addClass(_lefttext, 'soe-navbar-right-to-center');
-        addClass(_righttext, 'soe-navbar-right-to-center');
-        addClass(_title, 'soe-navbar-right-to-center');
-        addClass(_lefticon, 'soe-navbar-fadein');
-        addClass(_righticon, 'soe-navbar-fadein');
-        addClass(navbar, 'soe-navbar-fadein');
-    }
-
-    return function(){
-        if ( !navbar ) return;
-        removeClass(_lefttext, 'soe-navbar-right-to-center');
-        removeClass(_righttext, 'soe-navbar-right-to-center');
-        removeClass(_title, 'soe-navbar-right-to-center');
-        removeClass(_lefticon, 'soe-navbar-fadein');
-        removeClass(_righticon, 'soe-navbar-fadein');
-        removeClass(navbar, 'soe-navbar-fadein');
-    }
-}
-
-function whenAnimateNavbarOut(node, navbar){
-    if ( node ){
-        // 副本层的对象
-        var lefticon = query(node, '.soe-navbar-left-area .soe-navbar-icon');
-        var lefttext = query(node, '.soe-navbar-left-area .soe-navbar-text');
-        var righticon = query(node, '.soe-navbar-right-area .soe-navbar-icon');
-        var righttext = query(node, '.soe-navbar-right-area .soe-navbar-text');
-        var title = query(node, '.soe-navbar-center-area .soe-navbar-text');
-        // 操作副本层
-        addClass(lefttext, 'soe-navbar-center-to-right');
-        addClass(righttext, 'soe-navbar-center-to-right');
-        addClass(title, 'soe-navbar-center-to-right');
-        addClass(lefticon, 'soe-navbar-fadeout');
-        addClass(righticon, 'soe-navbar-fadeout');
-        addClass(node, 'soe-navbar-fadeout');
-    }
-
-    if ( navbar ){
-        // 原始层对象
-        var _lefticon = query(navbar, '.soe-navbar-left-area .soe-navbar-icon');
-        var _lefttext = query(navbar, '.soe-navbar-left-area .soe-navbar-text');
-        var _righticon = query(navbar, '.soe-navbar-right-area .soe-navbar-icon');
-        var _righttext = query(navbar, '.soe-navbar-right-area .soe-navbar-text');
-        var _title = query(navbar, '.soe-navbar-center-area .soe-navbar-text');
-        // 操作原始层
-        addClass(_lefttext, 'soe-navbar-left-to-center');
-        addClass(_righttext, 'soe-navbar-left-to-center');
-        addClass(_title, 'soe-navbar-left-to-center');
-        addClass(_lefticon, 'soe-navbar-fadein');
-        addClass(_righticon, 'soe-navbar-fadein');
-        addClass(navbar, 'soe-navbar-fadein');
-    }
-
-    return function(){
-        if ( !navbar ) return;
-        removeClass(_lefttext, 'soe-navbar-left-to-center');
-        removeClass(_righttext, 'soe-navbar-left-to-center');
-        removeClass(_title, 'soe-navbar-left-to-center');
-        removeClass(_lefticon, 'soe-navbar-fadein');
-        removeClass(_righticon, 'soe-navbar-fadein');
-        removeClass(navbar, 'soe-navbar-fadein');
-    }
-}
-
-function query(node, exp){
-    return node.querySelector(exp);
-}
 
 function setTitle(title){
     var $body = document.body;

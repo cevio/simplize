@@ -30,7 +30,7 @@ exports.query = function(el){
 
 exports.wrapBrowser = function(name, html){
     var browser = document.createElement('div');
-    browser.innerHTML = '<navgation></navgation><div class="webviews">' + html + '</div>';
+    browser.innerHTML = '<navgation v-ref:nav></navgation><div class="webviews">' + html + '</div>';
     browser.setAttribute('class', 'browser');
     browser.setAttribute('name', name);
     return browser;

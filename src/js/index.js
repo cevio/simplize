@@ -97,6 +97,8 @@ context.ready(function(){
     });
 
     indexBrowser.active(function(req, res){
+        req.$head.right.icon = '';
+        req.$head.right.value = '';
         req.$scope.$set('click', function(){
             res.redirect('/list');
         });
@@ -111,7 +113,7 @@ context.ready(function(){
         req.$head.center.value = '首页 - 列表';
         req.$head.left.icon = '<i class="fa fa-arrow-left"></i>';
         req.$head.left.value = '返回';
-        req.$head.right.icon = '<i class="fa fa-arrow-left"></i>';
+        req.$head.right.icon = '<i class="fa fa-arrow-right"></i>';
         req.$head.right.value = '返回';
         req.$head.cls = "nav-list";
         //req.$head.hide = true;

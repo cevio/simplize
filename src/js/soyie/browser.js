@@ -19,10 +19,11 @@ function Browser(context, options){
     this._options = options || {};
     this.uid = _uid++;
     this._soyie = context;
+    this._navcomponent =
     this.url =
     this.cb = null;
     this.$data = Vue.util.extend({}, this._options.data || {});
-    this.$head = Vue.util.extend(_.headData(), this._options.$head || {});
+    this.$head = {};
     this.webviews = {};
     this.components = {};
     this.directives = {};
@@ -39,6 +40,7 @@ function Browser(context, options){
     defineGetBrowserName(this);
     defineBrowserActiveStatus(this);
     defineToolbar(this);
+    this.$nav(componentNavgation);
 }
 
 Browser.prototype = Object.create(EventEmitter.prototype);
@@ -46,10 +48,9 @@ Browser.prototype = Object.create(EventEmitter.prototype);
 Browser.prototype.init = function(){
     var components = Vue.util.extend({
         "webview": componentWebview(this),
-        "navgation": componentNavgation(this),
+        "navgation": this._navcomponent,
         "middle": uiMiddle
     }, this.components);
-
 
     var directives = Vue.util.extend({
         "href": directiveHref(this)
@@ -70,6 +71,20 @@ Browser.prototype.init = function(){
     options.watch = Vue.util.extend(options.watch || {}, this.watches);
 
     this.Vue = new Vue(options);
+}
+
+Browser.prototype.$nav = function(modules){
+    var result = modules.call(this, changeWebviewEvent(this)),
+        that = this,
+        ready = result.ready;
+
+    if ( !result.name ){ result.name = 'navgation'; }
+    result.data = function(){ return that.$head; }
+    result.ready = function(){
+        that.navgation = this;
+        ready && ready.call(this);
+    }
+    this._navcomponent = result;
 }
 
 Browser.prototype.watch = function(url, req, res, done){
@@ -234,6 +249,19 @@ function defineToolbar(browser){
                 url: browser._options.url,
                 actived: false
             });
+        }
+    }
+}
+
+function changeWebviewEvent(browser){
+    return function(newValue, oldValue){
+        if ( newValue != oldValue ){
+            var webviews = browser.webviews;
+            var keys = Object.keys(webviews);
+            var i = keys.length;
+            while ( i-- ) {
+                webviews[keys[i]].vm.headShow = !newValue;
+            }
         }
     }
 }
