@@ -50,7 +50,7 @@ function nav(browser, fn){
                     return whenAnimateNavbarOut(browser.$navgation, navbar);
                 }
             },
-            cloned: function(){
+            clone: function(){
                 var header = browser.$el.querySelector('.header');
 
                 if ( header )
@@ -63,6 +63,19 @@ function nav(browser, fn){
                     browser.$header = null;
                     browser.$navgation = null;
                 }
+            },
+            reset: function(){
+                this.left.icon =
+                this.right.icon =
+                this.left.value =
+                this.right.value =
+                this.center.value =
+                this.cls =
+                this.css = '';
+                this.left.fn =
+                this.right.fn =
+                this.center.fn = noop;
+                this.hide = false;
             }
         },
         watch: { hide: fn }

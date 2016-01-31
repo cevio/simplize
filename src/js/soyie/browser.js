@@ -106,7 +106,7 @@ Browser.prototype.push = function(method, path, opts, fn){
             if ( Layer.method === 'active' ) done = undefined;
             Vue.util.extend(that.req.params, Layer.params || {});
             that.req.$scope = that.Vue;
-            that.req.$head = that.$head;
+            that.req.$head = that.navgation;
             that._soyie.$current = that;
             that.toolbarDigest();
             return Layer.handle(that.req, that.res, done);

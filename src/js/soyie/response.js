@@ -274,7 +274,7 @@ function whenAnimateDone(req, res, browser, webview, name, oldWebview, callback)
     return function(){
         browser.current = webview;
         Vue.util.nextTick(function(){
-            browser.navgation.cloned();
+            browser.navgation.clone();
             var classes = Array.prototype.slice.call(_.osClasses);
             classes.push('webview-' + name);
             classes = classes.concat(_.htmlClassList);
@@ -286,10 +286,6 @@ function whenAnimateDone(req, res, browser, webview, name, oldWebview, callback)
         });
     }
 }
-
-
-
-
 
 function setTitle(title){
     var $body = document.body;
