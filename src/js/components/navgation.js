@@ -49,6 +49,20 @@ function nav(browser, fn){
                     browser.$header.appendChild(browser.$navgation);
                     return whenAnimateNavbarOut(browser.$navgation, navbar);
                 }
+            },
+            cloned: function(){
+                var header = browser.$el.querySelector('.header');
+
+                if ( header )
+                {
+                    browser.$header = header;
+                    browser.$navgation = cloneHeaderElement(header.querySelector('.soe-navbar'));
+                }
+                else
+                {
+                    browser.$header = null;
+                    browser.$navgation = null;
+                }
             }
         },
         watch: { hide: fn }
@@ -146,4 +160,12 @@ function whenAnimateNavbarOut(node, navbar){
 
 function query(node, exp){
     return node.querySelector(exp);
+}
+
+function cloneHeaderElement(node){
+    if ( !node ) return null;
+    var div = document.createElement('div');
+    div.appendChild(node.cloneNode(true));
+    addClass(div, 'soe-navbar-template');
+    return div;
 }

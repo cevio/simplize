@@ -274,19 +274,7 @@ function whenAnimateDone(req, res, browser, webview, name, oldWebview, callback)
     return function(){
         browser.current = webview;
         Vue.util.nextTick(function(){
-            var header = browser.$el.querySelector('.header');
-
-            if ( header )
-            {
-                browser.$header = header;
-                browser.$navgation = cloneHeaderElement(header.querySelector('.soe-navbar'));
-            }
-            else
-            {
-                browser.$header = null;
-                browser.$navgation = null;
-            }
-
+            browser.navgation.cloned();
             var classes = Array.prototype.slice.call(_.osClasses);
             classes.push('webview-' + name);
             classes = classes.concat(_.htmlClassList);
@@ -299,13 +287,7 @@ function whenAnimateDone(req, res, browser, webview, name, oldWebview, callback)
     }
 }
 
-function cloneHeaderElement(node){
-    if ( !node ) return null;
-    var div = document.createElement('div');
-    div.appendChild(node.cloneNode(true));
-    addClass(div, 'soe-navbar-template');
-    return div;
-}
+
 
 
 
