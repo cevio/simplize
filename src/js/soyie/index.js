@@ -38,6 +38,7 @@ function Soyie(el, options){
     this.url = null;
     this.el = _.query(el);
     this.caseSensitive = false;
+    this.constructor = Soyie;
     this.req = new request();
     this.res = new response();
     this.req.res = this.res;
@@ -73,6 +74,8 @@ Soyie.PathToRegExp = PathToRegExp;
 Soyie.next = next;
 Soyie.viewport = viewport;
 Soyie.Layer = layer;
+Soyie.util = _;
+
 Soyie.ready = function(fn){
     var _windowTouchMoveDisabled;
     Object.defineProperty(Soyie, 'windowTouchMoveDisabled', {
@@ -91,6 +94,7 @@ Soyie.ready = function(fn){
     Soyie.windowTouchMoveDisabled = false;
     domReady(fn);
 };
+
 // 为soyie绑定事件机制
 // 使用nodejs原型事件机制
 Soyie.prototype = Object.create(EventEmitter.prototype);

@@ -185,6 +185,16 @@ Browser.prototype.$method = function(name, value){
     this.methods[name] = value;
 }
 
+Browser.prototype.plugin = function(plugin){
+    if ( typeof plugin === 'function' ){
+        plugin.call(this, this._soyie, this._soyie.constructor);
+    }
+    else{
+        this._options = Vue.util.extend(this._options, plugin || {});
+    }
+    return this;
+}
+
 function defineGetBrowserName(browser){
     Object.defineProperty(browser, '$name', {
         get: function(){

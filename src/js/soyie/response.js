@@ -70,10 +70,19 @@ function ServerResponse(){
     this.title = setTitle;
 }
 
-ServerResponse.prototype.render = function(name, fn){
+ServerResponse.prototype.render = function(name, direction, fn){
     var browser = this.app.$current; // 当前浏览器
     var useAnimate = true;
     var that = this;
+
+    if ( typeof direction === 'function' ){
+        fn = direction;
+        direction = 'none';
+    }
+    if ( !direction ){
+        direction = 'none';
+    }
+
     if ( this.app.oldBrowser ) this.app.oldBrowser.emit('leave');
     if ( browser ){
         var actived = browser.actived;
@@ -106,6 +115,7 @@ ServerResponse.prototype.render = function(name, fn){
                 oldWebview,
                 newWebview,
                 browser,
+                direction,
                 whenAnimateDone(that.req, that, browser, webview, name, oldWebview, fn)
             );
         });
@@ -152,7 +162,7 @@ ServerResponse.prototype.redirect = function(url){
     }
 }
 
-function animate(req, res, olds, news, browser, exchange){
+function animate(req, res, olds, news, browser, direction, exchange){
     if ( olds && olds !== news ){
         removeClass(olds.node, 'active');
         olds.emit('leave', req, res);
@@ -162,27 +172,39 @@ function animate(req, res, olds, news, browser, exchange){
     exchange();
 }
 
-function slideAnimate(req, res, olds, news, browser, exchange){
+function slideAnimate(req, res, olds, news, browser, direction, exchange){
     var method = req.history.method;
     if ( olds ){
         var currentElement = olds.node;
         var targetElement = news.node;
         var animEnd = null;
+        
         animationend(targetElement).then(function(){
             olds !== news && olds.emit('leave', req, res);
             news.emit('enter', req, res);
             animEnd && animEnd();
             exchange();
         });
-        switch (method) {
-            case 'goNew':
-            case 'goAhead':
-                animEnd = animateIn(currentElement, targetElement, browser);
-                break;
-            case 'goBack':
-                animEnd = animateOut(currentElement, targetElement, browser);
-                break;
 
+        if ( direction === 'left' ) {
+            animEnd = animateOut(currentElement, targetElement, browser);
+        }
+
+        else if ( direction === 'right' ) {
+            animEnd = animateIn(currentElement, targetElement, browser);
+        }
+
+        else {
+            switch (method) {
+                case 'goNew':
+                case 'goAhead':
+                    animEnd = animateIn(currentElement, targetElement, browser);
+                    break;
+                case 'goBack':
+                    animEnd = animateOut(currentElement, targetElement, browser);
+                    break;
+
+            }
         }
     }
 }
