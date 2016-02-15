@@ -257,7 +257,7 @@ Browser.prototype.openWebView = function(title, url){
             function(){
                 that.$frame.refresh();
             },
-            '',
+            'nav-webframe',
             '',
             false
         );
