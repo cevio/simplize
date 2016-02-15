@@ -21,3 +21,30 @@ html,body{
    white-space: nowrap;
    width: 1px;
  }
+
+.webview[name=simplize-browser-web-frame] iframe{
+    width: 100%;
+    height: 100%;
+    margin-top: -@header-height;
+    padding-top: @header-height;
+    border: none;
+    outline: none;
+}
+.webview-simplize-browser-web-frame .soe-navbar{
+  border-bottom: @default-border;
+}
+
+.soe-navbar .icon{
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.icon-refresh{
+  background-image: url('../img/icons/icon-refresh.png');
+}
+.icon-back{
+  background-image: url('../img/icons/icon-back.png');
+}

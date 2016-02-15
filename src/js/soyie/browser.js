@@ -7,6 +7,7 @@ var componentWebview = require('../components/webview');
 var componentNavgation = require('../components/navgation');
 var directiveHref = require('../directives/href');
 var uiMiddle = require('../components/uiMiddle');
+var webFrame = require('../components/webframe');
 var ownWebview = require('./webview');
 var addClass = Vue.util.addClass;
 var removeClass = Vue.util.removeClass;
@@ -19,13 +20,19 @@ function Browser(context, options){
     this._options = options || {};
     this.uid = _uid++;
     this._soyie = context;
+    this._navcomponent =
     this.url =
     this.cb = null;
     this.$data = Vue.util.extend({}, this._options.data || {});
-    this.$head = Vue.util.extend(_.headData(), this._options.$head || {});
+    this.$head = {};
     this.webviews = {};
     this.components = {};
     this.directives = {};
+    this.filters = {};
+    this.Aevents = {};
+    this.computeds = {};
+    this.methods = {};
+    this.watches = {};
     this.current = null;
     this.next = new next(function(){
         typeof that.cb === 'function' &&
@@ -34,27 +41,55 @@ function Browser(context, options){
     defineGetBrowserName(this);
     defineBrowserActiveStatus(this);
     defineToolbar(this);
+    this.$nav(componentNavgation);
 }
 
 Browser.prototype = Object.create(EventEmitter.prototype);
 
 Browser.prototype.init = function(){
-    var that = this;
     var components = Vue.util.extend({
         "webview": componentWebview(this),
-        "navgation": componentNavgation(this),
-        "middle": uiMiddle
+        "navgation": this._navcomponent,
+        "middle": uiMiddle,
+        "webframe": webFrame(this)
     }, this.components);
+
     var directives = Vue.util.extend({
         "href": directiveHref(this)
     }, this.directives);
+
+
     var options = this._options;
+
     options.el = this.$el;
     options.name = options.browserName || 'browser';
     options.data = this.$data;
     options.components = Vue.util.extend(options.components || {}, components);
     options.directives = Vue.util.extend(options.directives || {}, directives);
+    options.filters = Vue.util.extend(options.filters || {}, this.filters);
+    options.events = Vue.util.extend(options.events || {}, this.Aevents);
+    options.computed = Vue.util.extend(options.computed || {}, this.computeds);
+    options.methods = Vue.util.extend(options.methods || {}, this.methods);
+    options.watch = Vue.util.extend(options.watch || {}, this.watches);
+
+    // web frame
+    this.webviews['simplize-browser-web-frame'] = new ownWebview();
+
     this.Vue = new Vue(options);
+}
+
+Browser.prototype.$nav = function(modules){
+    var result = modules.call(this, changeWebviewEvent(this)),
+        that = this,
+        ready = result.ready;
+
+    if ( !result.name ){ result.name = 'navgation'; }
+    result.data = function(){ return that.$head; }
+    result.ready = function(){
+        that.navgation = this;
+        ready && ready.call(this);
+    }
+    this._navcomponent = result;
 }
 
 Browser.prototype.watch = function(url, req, res, done){
@@ -76,7 +111,7 @@ Browser.prototype.push = function(method, path, opts, fn){
             if ( Layer.method === 'active' ) done = undefined;
             Vue.util.extend(that.req.params, Layer.params || {});
             that.req.$scope = that.Vue;
-            that.req.$head = that.$head;
+            that.req.$head = that.navgation;
             that._soyie.$current = that;
             that.toolbarDigest();
             return Layer.handle(that.req, that.res, done);
@@ -125,6 +160,9 @@ Browser.prototype.createWebviews = function(){
     while (i--) {
         out.push(_.wrapWebview(keys[i], webviews[keys[i]]));
     }
+
+    // create web frame
+    out.push('<webframe v-ref:simplize-browser-web-frame></webframe>');
     return out.join('');
 }
 
@@ -146,11 +184,83 @@ Browser.prototype.webview = function(el){
     return this.webviews[name];
 }
 
-Browser.prototype.component = function(name, value){
+Browser.prototype.component =
+Browser.prototype.$component = function(name, value){
     this.components[name] = value;
 }
-Browser.prototype.directive = function(name, value){
+Browser.prototype.directive =
+Browser.prototype.$directive = function(name, value){
     this.directives[name] = value;
+}
+Browser.prototype.$filter = function(name, value){
+    this.filters[name] = value;
+}
+Browser.prototype.$event = function(name, value){
+    this.Aevents[name] = value;
+}
+Browser.prototype.$watch = function(name, value){
+    this.watches[name] = value;
+}
+Browser.prototype.$computed = function(name, value){
+    this.computeds[name] = value;
+}
+Browser.prototype.$method = function(name, value){
+    this.methods[name] = value;
+}
+
+Browser.prototype.plugin = function(plugin){
+    if ( typeof plugin === 'function' ){
+        plugin.call(this, this._soyie, this._soyie.constructor);
+    }
+    else{
+        this._options = Vue.util.extend(this._options, plugin || {});
+    }
+    return this;
+}
+
+function extend(a, b){
+    for ( var i in b ){
+        if ( !a[i] ) a[i] = {};
+        if ( typeof b[i] === 'object' ){
+            for ( var j in b[i] ){
+                a[i][j] = b[i][j];
+            }
+        }else{
+            a[i] = b[i];
+        }
+    }
+    return a;
+}
+
+Browser.prototype.openWebView = function(title, url){
+    var that = this;
+    this.$frame.status = true;
+    this.$frame.src = url;
+    this.$frame.reffer = this.$activeWebviewName;
+    console.log(extend({}, this.$head));
+    extend(this.$frame.refferHead, this.$head);
+
+    Vue.util.nextTick(function(){
+        that.navgation.setFrame(
+            title,
+            '<i class="icon icon-back"></i>',
+            '返回',
+            function(){
+                that.$frame.back();
+            },
+            '<i class="icon icon-refresh"></i>',
+            '',
+            function(){
+                that.$frame.refresh();
+            },
+            '',
+            '',
+            false
+        );
+        that._soyie.res.render('simplize-browser-web-frame', 'right', function(){
+            console.log(that._soyie.req)
+        });
+    });
 }
 
 function defineGetBrowserName(browser){
@@ -192,6 +302,19 @@ function defineToolbar(browser){
                 url: browser._options.url,
                 actived: false
             });
+        }
+    }
+}
+
+function changeWebviewEvent(browser){
+    return function(newValue, oldValue){
+        if ( newValue != oldValue ){
+            var webviews = browser.webviews;
+            var keys = Object.keys(webviews);
+            var i = keys.length;
+            while ( i-- ) {
+                webviews[keys[i]].vm.headShow = !newValue;
+            }
         }
     }
 }

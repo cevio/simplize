@@ -80,7 +80,11 @@ context.ready(function(){
 
     b.on('afterEnter', function(){
         console.log('list afterEnter');
-    })
+    });
+
+    indexBrowser.$method('openit', function(){
+        indexBrowser.openWebView('baidu.org', 'http://nap.webkits.cn');
+    });
 
     indexBrowser.use(function(req, res, next){
         req.$head.center.value = '<div class="f16">首页</div><div class="f7">安全支付</div>';
@@ -97,6 +101,8 @@ context.ready(function(){
     });
 
     indexBrowser.active(function(req, res){
+        req.$head.right.icon = '';
+        req.$head.right.value = '';
         req.$scope.$set('click', function(){
             res.redirect('/list');
         });
@@ -111,7 +117,7 @@ context.ready(function(){
         req.$head.center.value = '首页 - 列表';
         req.$head.left.icon = '<i class="fa fa-arrow-left"></i>';
         req.$head.left.value = '返回';
-        req.$head.right.icon = '<i class="fa fa-arrow-left"></i>';
+        req.$head.right.icon = '<i class="fa fa-arrow-right"></i>';
         req.$head.right.value = '返回';
         req.$head.cls = "nav-list";
         //req.$head.hide = true;

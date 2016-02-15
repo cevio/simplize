@@ -70,10 +70,19 @@ function ServerResponse(){
     this.title = setTitle;
 }
 
-ServerResponse.prototype.render = function(name, fn){
+ServerResponse.prototype.render = function(name, direction, fn){
     var browser = this.app.$current; // 当前浏览器
     var useAnimate = true;
     var that = this;
+
+    if ( typeof direction === 'function' ){
+        fn = direction;
+        direction = 'none';
+    }
+    if ( !direction ){
+        direction = 'none';
+    }
+
     if ( this.app.oldBrowser ) this.app.oldBrowser.emit('leave');
     if ( browser ){
         var actived = browser.actived;
@@ -97,7 +106,7 @@ ServerResponse.prototype.render = function(name, fn){
         if ( oldWebview && oldWebview !== newWebview ){
             oldWebview.emit('beforeLeave', this.req, this);
         }
-
+        console.log(name)
         newWebview.emit('beforeEnter', this.req, this);
         Vue.util.nextTick(function(){
             AnimateFn(
@@ -106,6 +115,7 @@ ServerResponse.prototype.render = function(name, fn){
                 oldWebview,
                 newWebview,
                 browser,
+                direction,
                 whenAnimateDone(that.req, that, browser, webview, name, oldWebview, fn)
             );
         });
@@ -152,7 +162,7 @@ ServerResponse.prototype.redirect = function(url){
     }
 }
 
-function animate(req, res, olds, news, browser, exchange){
+function animate(req, res, olds, news, browser, direction, exchange){
     if ( olds && olds !== news ){
         removeClass(olds.node, 'active');
         olds.emit('leave', req, res);
@@ -162,27 +172,39 @@ function animate(req, res, olds, news, browser, exchange){
     exchange();
 }
 
-function slideAnimate(req, res, olds, news, browser, exchange){
+function slideAnimate(req, res, olds, news, browser, direction, exchange){
     var method = req.history.method;
     if ( olds ){
         var currentElement = olds.node;
         var targetElement = news.node;
         var animEnd = null;
+
         animationend(targetElement).then(function(){
             olds !== news && olds.emit('leave', req, res);
             news.emit('enter', req, res);
             animEnd && animEnd();
             exchange();
         });
-        switch (method) {
-            case 'goNew':
-            case 'goAhead':
-                animEnd = animateIn(currentElement, targetElement, browser);
-                break;
-            case 'goBack':
-                animEnd = animateOut(currentElement, targetElement, browser);
-                break;
 
+        if ( direction === 'left' ) {
+            animEnd = animateOut(currentElement, targetElement, browser);
+        }
+
+        else if ( direction === 'right' ) {
+            animEnd = animateIn(currentElement, targetElement, browser);
+        }
+
+        else {
+            switch (method) {
+                case 'goNew':
+                case 'goAhead':
+                    animEnd = animateIn(currentElement, targetElement, browser);
+                    break;
+                case 'goBack':
+                    animEnd = animateOut(currentElement, targetElement, browser);
+                    break;
+
+            }
         }
     }
 }
@@ -190,13 +212,7 @@ function slideAnimate(req, res, olds, news, browser, exchange){
 function animateIn(currentElement, targetElement, browser){
     if ( currentElement === targetElement ) return;
 
-    var NabarAnimateEnd = null;
-    if ( browser.$header && browser.$navgation ){
-        var navbar = query(browser.$header, '.soe-navbar');
-        browser.$header.appendChild(browser.$navgation);
-        NabarAnimateEnd = whenAnimateNavbarIn(browser.$navgation, navbar);
-    }
-
+    var NabarAnimateEnd = browser.navgation.animateIn();
 
     addClass(htmlElement, 'soe-full-screen');
     addClass(targetElement, 'active');
@@ -221,12 +237,7 @@ function animateIn(currentElement, targetElement, browser){
 function animateOut(currentElement, targetElement, browser){
     if ( currentElement === targetElement ) return;
 
-    var NabarAnimateEnd = null;
-    if ( browser.$header && browser.$navgation ){
-        var navbar = query(browser.$header, '.soe-navbar');
-        browser.$header.appendChild(browser.$navgation);
-        NabarAnimateEnd = whenAnimateNavbarOut(browser.$navgation, navbar);
-    }
+    var NabarAnimateEnd = browser.navgation.animateOut();
 
     addClass(htmlElement, 'soe-full-screen');
     addClass(targetElement, 'active');
@@ -263,19 +274,7 @@ function whenAnimateDone(req, res, browser, webview, name, oldWebview, callback)
     return function(){
         browser.current = webview;
         Vue.util.nextTick(function(){
-            var header = browser.$el.querySelector('.header');
-
-            if ( header )
-            {
-                browser.$header = header;
-                browser.$navgation = cloneHeaderElement(header.querySelector('.soe-navbar'));
-            }
-            else
-            {
-                browser.$header = null;
-                browser.$navgation = null;
-            }
-
+            browser.navgation.clone();
             var classes = Array.prototype.slice.call(_.osClasses);
             classes.push('webview-' + name);
             classes = classes.concat(_.htmlClassList);
@@ -284,109 +283,9 @@ function whenAnimateDone(req, res, browser, webview, name, oldWebview, callback)
             oldWebview && oldWebview !== webview && oldWebview.emit('afterLeave', req, res);
             webview.emit('afterEnter',req, res);
             typeof callback === 'function' && callback.call(webview.vm);
+            browser.$activeWebviewName = name;
         });
     }
-}
-
-function cloneHeaderElement(node){
-    if ( !node ) return null;
-    var div = document.createElement('div');
-    div.appendChild(node.cloneNode(true));
-    addClass(div, 'soe-navbar-template');
-    return div;
-}
-
-function whenAnimateNavbarIn(node, navbar){
-    if ( node ){
-        // 副本层的对象
-        var lefticon = query(node, '.soe-navbar-left-area .soe-navbar-icon');
-        var lefttext = query(node, '.soe-navbar-left-area .soe-navbar-text');
-        var righticon = query(node, '.soe-navbar-right-area .soe-navbar-icon');
-        var righttext = query(node, '.soe-navbar-right-area .soe-navbar-text');
-        var title = query(node, '.soe-navbar-center-area .soe-navbar-text');
-
-        // 操作副本层
-        addClass(lefttext, 'soe-navbar-center-to-left');
-        addClass(righttext, 'soe-navbar-center-to-left');
-        addClass(title, 'soe-navbar-center-to-left');
-        addClass(lefticon, 'soe-navbar-fadeout');
-        addClass(righticon, 'soe-navbar-fadeout');
-        addClass(node, 'soe-navbar-fadeout');
-    }
-
-    if ( navbar ){
-        // 原始层对象
-        var _lefticon = query(navbar, '.soe-navbar-left-area .soe-navbar-icon');
-        var _lefttext = query(navbar, '.soe-navbar-left-area .soe-navbar-text');
-        var _righticon = query(navbar, '.soe-navbar-right-area .soe-navbar-icon');
-        var _righttext = query(navbar, '.soe-navbar-right-area .soe-navbar-text');
-        var _title = query(navbar, '.soe-navbar-center-area .soe-navbar-text');
-        // 操作原始层
-        addClass(_lefttext, 'soe-navbar-right-to-center');
-        addClass(_righttext, 'soe-navbar-right-to-center');
-        addClass(_title, 'soe-navbar-right-to-center');
-        addClass(_lefticon, 'soe-navbar-fadein');
-        addClass(_righticon, 'soe-navbar-fadein');
-        addClass(navbar, 'soe-navbar-fadein');
-    }
-
-    return function(){
-        if ( !navbar ) return;
-        removeClass(_lefttext, 'soe-navbar-right-to-center');
-        removeClass(_righttext, 'soe-navbar-right-to-center');
-        removeClass(_title, 'soe-navbar-right-to-center');
-        removeClass(_lefticon, 'soe-navbar-fadein');
-        removeClass(_righticon, 'soe-navbar-fadein');
-        removeClass(navbar, 'soe-navbar-fadein');
-    }
-}
-
-function whenAnimateNavbarOut(node, navbar){
-    if ( node ){
-        // 副本层的对象
-        var lefticon = query(node, '.soe-navbar-left-area .soe-navbar-icon');
-        var lefttext = query(node, '.soe-navbar-left-area .soe-navbar-text');
-        var righticon = query(node, '.soe-navbar-right-area .soe-navbar-icon');
-        var righttext = query(node, '.soe-navbar-right-area .soe-navbar-text');
-        var title = query(node, '.soe-navbar-center-area .soe-navbar-text');
-        // 操作副本层
-        addClass(lefttext, 'soe-navbar-center-to-right');
-        addClass(righttext, 'soe-navbar-center-to-right');
-        addClass(title, 'soe-navbar-center-to-right');
-        addClass(lefticon, 'soe-navbar-fadeout');
-        addClass(righticon, 'soe-navbar-fadeout');
-        addClass(node, 'soe-navbar-fadeout');
-    }
-
-    if ( navbar ){
-        // 原始层对象
-        var _lefticon = query(navbar, '.soe-navbar-left-area .soe-navbar-icon');
-        var _lefttext = query(navbar, '.soe-navbar-left-area .soe-navbar-text');
-        var _righticon = query(navbar, '.soe-navbar-right-area .soe-navbar-icon');
-        var _righttext = query(navbar, '.soe-navbar-right-area .soe-navbar-text');
-        var _title = query(navbar, '.soe-navbar-center-area .soe-navbar-text');
-        // 操作原始层
-        addClass(_lefttext, 'soe-navbar-left-to-center');
-        addClass(_righttext, 'soe-navbar-left-to-center');
-        addClass(_title, 'soe-navbar-left-to-center');
-        addClass(_lefticon, 'soe-navbar-fadein');
-        addClass(_righticon, 'soe-navbar-fadein');
-        addClass(navbar, 'soe-navbar-fadein');
-    }
-
-    return function(){
-        if ( !navbar ) return;
-        removeClass(_lefttext, 'soe-navbar-left-to-center');
-        removeClass(_righttext, 'soe-navbar-left-to-center');
-        removeClass(_title, 'soe-navbar-left-to-center');
-        removeClass(_lefticon, 'soe-navbar-fadein');
-        removeClass(_righticon, 'soe-navbar-fadein');
-        removeClass(navbar, 'soe-navbar-fadein');
-    }
-}
-
-function query(node, exp){
-    return node.querySelector(exp);
 }
 
 function setTitle(title){
