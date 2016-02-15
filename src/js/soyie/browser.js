@@ -239,7 +239,6 @@ function extend(a, b){
 Browser.prototype.openWebView = function(title, url){
     var that = this;
     this.$frame.status = true;
-    this.$frame.src = url;
     this.$frame.reffer = this.$activeWebviewName;
     this.$frame.toolbar = this._soyie.hideToolbar;
     extend(this.$frame.refferHead, this.$head);
@@ -262,7 +261,9 @@ Browser.prototype.openWebView = function(title, url){
             false
         );
         that._soyie.hideToolbar = true;
-        that._soyie.res.render('simplize-browser-web-frame', 'right');
+        that._soyie.res.render('simplize-browser-web-frame', 'right', function(){
+            that.$frame.src = url;
+        });
     });
 }
 
