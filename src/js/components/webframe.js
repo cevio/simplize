@@ -15,6 +15,7 @@ module.exports = function(browser){
                 refferHead: {},
                 status: false,
                 src: '_blank',
+                toolbar: false,
                 headShow: !browser.$head._hide,
                 toobarShow: !browser._soyie.data.hide
             }
@@ -36,6 +37,7 @@ module.exports = function(browser){
                 extend(browser.$head, this.refferHead);
                 browser._soyie.res.render(this.reffer, 'left', function(){
                     that.status = false;
+                    browser._soyie.hideToolbar = that.toolbar;
                 });
             }
         }

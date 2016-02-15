@@ -241,7 +241,7 @@ Browser.prototype.openWebView = function(title, url){
     this.$frame.status = true;
     this.$frame.src = url;
     this.$frame.reffer = this.$activeWebviewName;
-    console.log(extend({}, this.$head));
+    this.$frame.toolbar = this._soyie.hideToolbar;
     extend(this.$frame.refferHead, this.$head);
 
     Vue.util.nextTick(function(){
@@ -261,9 +261,8 @@ Browser.prototype.openWebView = function(title, url){
             '',
             false
         );
-        that._soyie.res.render('simplize-browser-web-frame', 'right', function(){
-            console.log(that._soyie.req)
-        });
+        that._soyie.hideToolbar = true;
+        that._soyie.res.render('simplize-browser-web-frame', 'right');
     });
 }
 
