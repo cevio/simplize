@@ -7,6 +7,7 @@ var componentWebview = require('../components/webview');
 var componentNavgation = require('../components/navgation');
 var directiveHref = require('../directives/href');
 var uiMiddle = require('../components/uiMiddle');
+var webFrame = require('../components/webframe');
 var ownWebview = require('./webview');
 var addClass = Vue.util.addClass;
 var removeClass = Vue.util.removeClass;
@@ -49,7 +50,8 @@ Browser.prototype.init = function(){
     var components = Vue.util.extend({
         "webview": componentWebview(this),
         "navgation": this._navcomponent,
-        "middle": uiMiddle
+        "middle": uiMiddle,
+        "webframe": webFrame(this)
     }, this.components);
 
     var directives = Vue.util.extend({
@@ -69,6 +71,9 @@ Browser.prototype.init = function(){
     options.computed = Vue.util.extend(options.computed || {}, this.computeds);
     options.methods = Vue.util.extend(options.methods || {}, this.methods);
     options.watch = Vue.util.extend(options.watch || {}, this.watches);
+
+    // web frame
+    this.webviews['simplize-browser-web-frame'] = new ownWebview();
 
     this.Vue = new Vue(options);
 }
@@ -155,6 +160,9 @@ Browser.prototype.createWebviews = function(){
     while (i--) {
         out.push(_.wrapWebview(keys[i], webviews[keys[i]]));
     }
+
+    // create web frame
+    out.push('<webframe v-ref:simplize-browser-web-frame></webframe>');
     return out.join('');
 }
 
@@ -208,6 +216,51 @@ Browser.prototype.plugin = function(plugin){
         this._options = Vue.util.extend(this._options, plugin || {});
     }
     return this;
+}
+
+function extend(a, b){
+    for ( var i in b ){
+        if ( !a[i] ) a[i] = {};
+        if ( typeof b[i] === 'object' ){
+            for ( var j in b[i] ){
+                a[i][j] = b[i][j];
+            }
+        }else{
+            a[i] = b[i];
+        }
+    }
+    return a;
+}
+
+Browser.prototype.openWebView = function(title, url){
+    var that = this;
+    this.$frame.status = true;
+    this.$frame.src = url;
+    this.$frame.reffer = this.$activeWebviewName;
+    console.log(extend({}, this.$head));
+    extend(this.$frame.refferHead, this.$head);
+
+    Vue.util.nextTick(function(){
+        that.navgation.setFrame(
+            title,
+            '<i class="fa fa-angle-left"></i>',
+            'Back',
+            function(){
+                that.$frame.back();
+            },
+            '<i class="fa fa-cog"></i>',
+            '刷新',
+            function(){
+                that.$frame.refresh();
+            },
+            '',
+            '',
+            false
+        );
+        that._soyie.res.render('simplize-browser-web-frame', 'right', function(){
+            console.log(that._soyie.req)
+        });
+    });
 }
 
 function defineGetBrowserName(browser){

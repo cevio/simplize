@@ -76,6 +76,19 @@ function nav(browser, fn){
                 this.right.fn =
                 this.center.fn = noop;
                 this.hide = false;
+            },
+            setFrame: function(title, reffer_icon, reffer_value, reffer_fn, refresh_icon, refresh_value, refresh_fn, cls, css, hide){
+                this.left.icon = reffer_icon;
+                this.right.icon = refresh_icon;
+                this.left.value = reffer_value;
+                this.right.value = refresh_value;
+                this.center.value = title;
+                this.cls = cls || '';
+                this.css = css || '';
+                this.left.fn = reffer_fn;
+                this.right.fn = refresh_fn;
+                this.center.fn = noop;
+                this.hide = !!hide;
             }
         },
         watch: { hide: fn }

@@ -106,7 +106,7 @@ ServerResponse.prototype.render = function(name, direction, fn){
         if ( oldWebview && oldWebview !== newWebview ){
             oldWebview.emit('beforeLeave', this.req, this);
         }
-
+        console.log(name)
         newWebview.emit('beforeEnter', this.req, this);
         Vue.util.nextTick(function(){
             AnimateFn(
@@ -283,6 +283,7 @@ function whenAnimateDone(req, res, browser, webview, name, oldWebview, callback)
             oldWebview && oldWebview !== webview && oldWebview.emit('afterLeave', req, res);
             webview.emit('afterEnter',req, res);
             typeof callback === 'function' && callback.call(webview.vm);
+            browser.$activeWebviewName = name;
         });
     }
 }

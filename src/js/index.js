@@ -80,7 +80,11 @@ context.ready(function(){
 
     b.on('afterEnter', function(){
         console.log('list afterEnter');
-    })
+    });
+
+    indexBrowser.$method('openit', function(){
+        indexBrowser.openWebView('baidu.org', 'http://nap.webkits.cn');
+    });
 
     indexBrowser.use(function(req, res, next){
         req.$head.center.value = '<div class="f16">首页</div><div class="f7">安全支付</div>';
