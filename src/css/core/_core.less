@@ -25,6 +25,27 @@ html,body{
 .webview[name=simplize-browser-web-frame] iframe{
     width: 100%;
     height: 100%;
+    margin-top: -@header-height;
+    padding-top: @header-height;
     border: none;
     outline: none;
+}
+.nav-webframe{
+  background-color: #fff;
+  border-bottom: @default-border;
+}
+
+.soe-navbar .icon{
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.icon-refresh{
+  background-image: url('../img/icons/icon-refresh.png');
+}
+.icon-back{
+  background-image: url('../img/icons/icon-back.png');
 }

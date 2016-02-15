@@ -247,13 +247,13 @@ Browser.prototype.openWebView = function(title, url){
     Vue.util.nextTick(function(){
         that.navgation.setFrame(
             title,
-            '<i class="fa fa-angle-left"></i>',
-            'Back',
+            '<i class="icon icon-back"></i>',
+            '返回',
             function(){
                 that.$frame.back();
             },
-            '<i class="fa fa-cog"></i>',
-            '刷新',
+            '<i class="icon icon-refresh"></i>',
+            '',
             function(){
                 that.$frame.refresh();
             },

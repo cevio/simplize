@@ -28,6 +28,11 @@ html,body{
   .soe-animate-center-to-right:before{
     width: 32px
   }
+
+  .webview[name=simplize-browser-web-frame] iframe{
+      margin-top: -@header-height * 2;
+      padding-top: @header-height * 2;
+  }
 }
 @media screen and (min-width: ( @IP5 * 2 - 1px )) {
   html,body{
@@ -44,6 +49,11 @@ html,body{
   }
   .toolbar,.soe-toolbar-place-exist{
     height: @toolbar-height * 3;
+  }
+
+  .webview[name=simplize-browser-web-frame] iframe{
+      margin-top: -@header-height * 3;
+      padding-top: @header-height * 3;
   }
   .soe-animate-right-to-center:before,
   .soe-animate-center-to-right:before{
