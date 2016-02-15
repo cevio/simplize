@@ -6,6 +6,7 @@ var EventEmitter = require('events').EventEmitter;
 var componentWebview = require('../components/webview');
 var componentNavgation = require('../components/navgation');
 var directiveHref = require('../directives/href');
+var directiveURL = require('../directives/url');
 var uiMiddle = require('../components/uiMiddle');
 var webFrame = require('../components/webframe');
 var ownWebview = require('./webview');
@@ -55,7 +56,8 @@ Browser.prototype.init = function(){
     }, this.components);
 
     var directives = Vue.util.extend({
-        "href": directiveHref(this)
+        "href": directiveHref(this),
+        "url": directiveURL(this)
     }, this.directives);
 
 
@@ -71,6 +73,8 @@ Browser.prototype.init = function(){
     options.computed = Vue.util.extend(options.computed || {}, this.computeds);
     options.methods = Vue.util.extend(options.methods || {}, this.methods);
     options.watch = Vue.util.extend(options.watch || {}, this.watches);
+
+    options.filters.webTitle = directiveURL.webTitle;
 
     // web frame
     this.webviews['simplize-browser-web-frame'] = new ownWebview();
