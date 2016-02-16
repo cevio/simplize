@@ -37,15 +37,35 @@ html,body{
   background-image: url('../img/icons/icon-back.png');
 }
 
+
+.webframe-enter:after{
+  -webkit-animation: pageFromRightToCenterShadow 400ms forwards;
+  animation: pageFromRightToCenterShadow 400ms forwards;
+}
+.webframe-leave:after{
+  -webkit-animation: pageFromCenterToRightShadow 400ms forwards;
+  animation: pageFromCenterToRightShadow 400ms forwards;
+}
 .webframe-wrap{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
     z-index: 10000;
     background-color: #fff;
+    &:after{
+      content: '';
+      position: absolute;
+      display: block;
+      height: 100%;
+      width: 2rem;
+      left: -2rem;
+      top: 0;
+      background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.2) 100%);
+      background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.2) 100%);
+    }
     .header{
         position: static!important;
         border-bottom: @default-border;
