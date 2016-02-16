@@ -11,8 +11,9 @@ html,body{
 
 }
 @media screen and (min-width: (@IP6S - 1px)) {
-
-
+  html,body{
+    font-size: 10px * 414 / 320;
+  }
 }
 @media screen and (min-width: (@IP4 * 2 - 1px)) {
   html,body{
@@ -32,13 +33,24 @@ html,body{
 }
 @media screen and (min-width: ( @IP5 * 2 - 1px )) {
   html,body{
-    font-size: 23px;
+    font-size: 23.4375px;
   }
-
 }
+@media screen and (min-width: ( 960px - 1px )) {
+  html,body{
+    font-size: 30px;
+  }
+}
+@media screen and (min-width: ( 1080px - 1px )) {
+  html,body{
+    font-size: 33.75px;
+  }
+}
+
+
 @media screen and (min-width: ( @IP6S * 3 - 1px)){
   html,body{
-    font-size: 38px;
+    font-size: 38.8125px;
   }
   .browser .header,.soe-headbar-place-exist,
   .webframe-wrap .header,.soe-headbar-place-exist{
