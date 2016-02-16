@@ -215,20 +215,6 @@ Browser.prototype.plugin = function(plugin){
     return this;
 }
 
-function extend(a, b){
-    for ( var i in b ){
-        if ( !a[i] ) a[i] = {};
-        if ( typeof b[i] === 'object' ){
-            for ( var j in b[i] ){
-                a[i][j] = b[i][j];
-            }
-        }else{
-            a[i] = b[i];
-        }
-    }
-    return a;
-}
-
 function defineGetBrowserName(browser){
     Object.defineProperty(browser, '$name', {
         get: function(){
