@@ -18,7 +18,8 @@ html,body{
   html,body{
     font-size: 20px;
   }
-  .browser .header,.soe-headbar-place-exist{
+  .browser .header,.soe-headbar-place-exist,
+  .webframe-wrap .header,.soe-headbar-place-exist{
     height: @header-height * 2;
   }
   .toolbar,.soe-toolbar-place-exist{
@@ -27,11 +28,6 @@ html,body{
   .soe-animate-right-to-center:before,
   .soe-animate-center-to-right:before{
     width: 32px
-  }
-
-  .webview[name=simplize-browser-web-frame] iframe{
-      margin-top: -@header-height * 2;
-      padding-top: @header-height * 2;
   }
 }
 @media screen and (min-width: ( @IP5 * 2 - 1px )) {
@@ -44,16 +40,12 @@ html,body{
   html,body{
     font-size: 38px;
   }
-  .browser .header,.soe-headbar-place-exist{
+  .browser .header,.soe-headbar-place-exist,
+  .webframe-wrap .header,.soe-headbar-place-exist{
     height: @header-height * 3;
   }
   .toolbar,.soe-toolbar-place-exist{
     height: @toolbar-height * 3;
-  }
-
-  .webview[name=simplize-browser-web-frame] iframe{
-      margin-top: -@header-height * 3;
-      padding-top: @header-height * 3;
   }
   .soe-animate-right-to-center:before,
   .soe-animate-center-to-right:before{

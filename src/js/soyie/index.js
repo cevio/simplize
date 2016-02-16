@@ -233,6 +233,34 @@ Soyie.prototype.createBrowsers = function(){
             that.changeToolbar(browser, index, newValue, oldVlaue);
         });
     });
+
+    // web frame
+    var webframe = document.createElement('div');
+    var webframes = {};
+    this.el.appendChild(webframe);
+    Vue.util.addClass(webframe, 'webframe');
+    webframe.innerHTML = _.webframeHTML;
+    webframes.el = webframe;
+    webframes.methods = {
+        back: function(){
+            webframes.data.status = false;
+            webframes.data.left = { icon: '<i class="icon icon-back"></i>', value: '', fn: webframes.methods.back };
+            webframes.data.right = { icon: '<i class="icon icon-refresh"></i>', value: '', fn: webframes.methods.refresh };
+            webframes.data.center = { value: '新窗口', fn: _.noop };
+        },
+        refresh: function(){
+            webframe.querySelector('iframe').src = webframes.data.src;
+        }
+    }
+    webframes.data = {
+        status: false,
+        src: '',
+        left:   { icon: '<i class="icon icon-back"></i>', value: '', fn: webframes.methods.back },
+        right:  { icon: '<i class="icon icon-refresh"></i>', value: '', fn: webframes.methods.refresh },
+        center: { value: '新窗口', fn: _.noop }
+    }
+
+    this.$frame = new Vue(webframes);
 }
 
 Soyie.prototype.changeToolbar = function(browser, index, newValue, oldVlaue){
@@ -251,6 +279,15 @@ Soyie.prototype.hashChange = function(){
         that.req.init();
         that.match(that.req.path);
     });
+}
+
+Soyie.prototype.openWebView = function(url, title){
+    this.$frame.status = true;
+    this.$frame.src = url;
+    if ( title ){
+        this.$frame.center.value = title;
+    }
+    return this.$frame;
 }
 
 /**

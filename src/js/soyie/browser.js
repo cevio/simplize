@@ -8,7 +8,6 @@ var componentNavgation = require('../components/navgation');
 var directiveHref = require('../directives/href');
 var directiveURL = require('../directives/url');
 var uiMiddle = require('../components/uiMiddle');
-var webFrame = require('../components/webframe');
 var ownWebview = require('./webview');
 var addClass = Vue.util.addClass;
 var removeClass = Vue.util.removeClass;
@@ -51,8 +50,7 @@ Browser.prototype.init = function(){
     var components = Vue.util.extend({
         "webview": componentWebview(this),
         "navgation": this._navcomponent,
-        "middle": uiMiddle,
-        "webframe": webFrame(this)
+        "middle": uiMiddle
     }, this.components);
 
     var directives = Vue.util.extend({
@@ -75,9 +73,6 @@ Browser.prototype.init = function(){
     options.watch = Vue.util.extend(options.watch || {}, this.watches);
 
     options.filters.webTitle = directiveURL.webTitle;
-
-    // web frame
-    this.webviews['simplize-browser-web-frame'] = new ownWebview();
 
     this.Vue = new Vue(options);
 }
@@ -165,8 +160,6 @@ Browser.prototype.createWebviews = function(){
         out.push(_.wrapWebview(keys[i], webviews[keys[i]]));
     }
 
-    // create web frame
-    out.push('<webframe v-ref:simplize-browser-web-frame></webframe>');
     return out.join('');
 }
 
@@ -234,37 +227,6 @@ function extend(a, b){
         }
     }
     return a;
-}
-
-Browser.prototype.openWebView = function(title, url){
-    var that = this;
-    this.$frame.status = true;
-    this.$frame.reffer = this.$activeWebviewName;
-    this.$frame.toolbar = this._soyie.hideToolbar;
-    extend(this.$frame.refferHead, this.$head);
-
-    Vue.util.nextTick(function(){
-        that.navgation.setFrame(
-            title,
-            '<i class="icon icon-back"></i>',
-            '返回',
-            function(){
-                that.$frame.back();
-            },
-            '<i class="icon icon-refresh"></i>',
-            '',
-            function(){
-                that.$frame.refresh();
-            },
-            'nav-webframe',
-            '',
-            false
-        );
-        that._soyie.hideToolbar = true;
-        that._soyie.res.render('simplize-browser-web-frame', 'right', function(){
-            that.$frame.src = url;
-        });
-    });
 }
 
 function defineGetBrowserName(browser){

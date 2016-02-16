@@ -9,7 +9,9 @@ module.exports = function(browser){
         bind: function(){
             var that = this;
             this._cb = function(){
-                browser.openWebView(that._title, that._url);
+                browser._soyie.$frame.status = true;
+                browser._soyie.$frame.center.value = that._title;
+                browser._soyie.$frame.src = that._url;
             };
             Vue.util.on(this.el, 'click', this._cb);
         },
@@ -31,7 +33,6 @@ module.exports = function(browser){
 }
 
 module.exports.webTitle = function(url, title){
-    console.log('webtitle:', arguments)
     return {
         url: url,
         title: title
