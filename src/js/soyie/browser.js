@@ -37,7 +37,7 @@ function Browser(context, options){
     this.next = new next(function(){
         typeof that.cb === 'function' &&
         that.cb();
-    });
+    }, this);
     defineGetBrowserName(this);
     defineBrowserActiveStatus(this);
     defineToolbar(this);
@@ -75,6 +75,7 @@ Browser.prototype.init = function(){
     options.filters.webTitle = directiveURL.webTitle;
 
     this.Vue = new Vue(options);
+    this.Vue.$browser = this;
 }
 
 Browser.prototype.$nav = function(modules){

@@ -47,7 +47,7 @@ function Soyie(el, options){
     this.browsers = [];
     this.looser = { sensitive: this.caseSensitive, strict: false, end: false };
     this.strict = { sensitive: this.caseSensitive, strict: true, end: true };
-    this.next = new next(function(){ that.emit('end'); });
+    this.next = new next(function(){ that.emit('end'); }, this);
     this.current = null;
     this.oldBrowser = null;
     this.unactived = [];
