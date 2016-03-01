@@ -47,7 +47,7 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
             if ( !fixAnimation ){
                 var $direction = app.$history;
                 load($headbar, webview, after);
-                unload(oldwebview)
+                unload(oldwebview);
                 oldwebview.status = false;
                 webview.status = true;
 
@@ -57,16 +57,18 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
 
                 switch ($direction) {
                     case 'left':
-                        oldwebview.direction = webview.direction = 'left';
                         $headbar && $headbar.$emit('left');
+                        oldwebview.direction = webview.direction = 'left';
+
                         break;
                     case 'right':
-                        oldwebview.direction = webview.direction = 'right';
                         $headbar && $headbar.$emit('right');
+                        oldwebview.direction = webview.direction = 'right';
+
                         break;
                     default:
-                        oldwebview.direction = webview.direction = 'fade';
                         $headbar && $headbar.$emit('slient');
+                        oldwebview.direction = webview.direction = 'fade';
                 }
             }else{
                 typeof keep.temp === 'function' && keep.temp();
@@ -85,13 +87,13 @@ function load($headbar, webview, after){
         typeof keep.temp === 'function' && keep.temp();
         webview.$emit('load');
         typeof after === 'function' && after.call(webview);
-        webview.direction = '';
+        //webview.direction = '';
         $headbar && $headbar.$emit('after');
     });
 }
 function unload(webview){
     animationend(webview.$el).then(function(){
-        webview.direction = '';
+        //webview.direction = '';
         webview.$emit('unload');
     });
 }

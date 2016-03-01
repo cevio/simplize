@@ -128,13 +128,13 @@ exports.component = {
     ready: function(){
         this.$parent.$headbar = this;
         if ( this.status ){
-            this.height = this.$el.nextSibling.clientHeight;
+            this.height = this.$els.headOut.clientHeight;
         }
     },
     watch: {
         "status": function(value){
             if ( !!value ){
-                this.height = this.$el.nextSibling.clientHeight;
+                this.height = this.$els.headOut.clientHeight;
                 this.useItemAnimation = false;
             }else{
                 this.height = 0;

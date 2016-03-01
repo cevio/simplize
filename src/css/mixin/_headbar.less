@@ -60,34 +60,34 @@
 }
 
 .headbarFaded-enter{
-    animation: fadeIn @animate-pageChange-duration forwards;
+    animation: fadeIn @animate-headChange-duration forwards;
 }
 .headbarFaded-leave{
-    animation: fadeOut @animate-pageChange-duration forwards;
+    animation: fadeOut @animate-headChange-duration forwards;
 }
 
 .headbarChild-enter.left{
-    animation: headbarFromRightToCenter @animate-pageChange-duration linear forwards;
+    animation: headbarFromRightToCenter @animate-headChange-duration linear forwards;
     z-index: 1;
 }
 .headbarChild-leave.left{
-    animation: headbarFromCenterToLeft @animate-pageChange-duration linear forwards;
+    animation: headbarFromCenterToLeft @animate-headChange-duration linear forwards;
     z-index: 2;
 }
 .headbarChild-enter.right{
-    animation: headbarFromLeftToCenter @animate-pageChange-duration linear forwards;
+    animation: headbarFromLeftToCenter @animate-headChange-duration linear forwards;
     z-index: 2;
 }
 .headbarChild-leave.right{
-    animation: headbarFromCenterToRight @animate-pageChange-duration linear forwards;
+    animation: headbarFromCenterToRight @animate-headChange-duration linear forwards;
     z-index: 1;
 }
 
 .headbarTemp-enter{
-    animation: fadeOut @animate-pageChange-duration forwards;
+    animation: fadeOut @animate-headChange-duration forwards;
 }
 .headbarTemp-leave{
-    animation: fadeIn @animate-pageChange-duration forwards;
+    animation: fadeIn @animate-headChange-duration forwards;
 }
 
 

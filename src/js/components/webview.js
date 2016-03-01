@@ -75,11 +75,8 @@ module.exports = function(name, options, item){
      result.events = options.events || {};
      var events = {
          beforeload: function(){
-             var that = this;
-             utils.nextTick(function(){
-                 that.HeadbarHeight = that.$headbar.height;
-                 that.ToolbarHeight = that.$toolbar.height;
-             });
+             this.HeadbarHeight = this.$headbar.height;
+             this.ToolbarHeight = this.$toolbar.height;
          }
      }
      utils.$extend(result.events, events);
