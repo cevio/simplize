@@ -58,3 +58,103 @@
 .web-headbar{
     border-bottom: 1px solid #eee;
 }
+
+.headbarFaded-enter{
+    animation: fadeIn 350ms forwards;
+}
+.headbarFaded-leave{
+    animation: fadeOut 350ms forwards;
+}
+
+.headbarChild-enter.left{
+    animation: headbarFromRightToCenter 350ms ease-out forwards;
+    z-index: 1;
+}
+.headbarChild-leave.left{
+    animation: headbarFromCenterToLeft 350ms ease-in forwards;
+    z-index: 2;
+}
+.headbarChild-enter.right{
+    animation: headbarFromLeftToCenter 350ms ease-out forwards;
+    z-index: 2;
+}
+.headbarChild-leave.right{
+    animation: headbarFromCenterToRight 350ms ease-in forwards;
+    z-index: 1;
+}
+
+.headbarTemp-enter{
+    animation: fadeOut 350ms forwards;
+}
+.headbarTemp-leave{
+    animation: fadeIn 350ms forwards;
+}
+
+
+
+@keyframes headbarFromRightToCenter{
+    from {
+        transform: translate3d(100%,0,0);
+        opacity: 0.3;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+@keyframes headbarFromCenterToLeft{
+    from {
+        transform: translate3d(0,0,0);
+        opacity: 1;
+    }
+    to {
+        transform: translate3d(-100%, 0, 0);
+        opacity: 0;
+    }
+}
+
+@keyframes headbarFromLeftToCenter{
+    from {
+        transform: translate3d(-100%,0,0);
+        opacity: 0.3;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+@keyframes headbarFromCenterToRight{
+    from {
+        transform: translate3d(0,0,0);
+        opacity: 1;
+    }
+    to {
+        transform: translate3d(100%, 0, 0);
+        opacity: 0;
+    }
+}
+
+.head-enter{
+    animation: headIn 350ms forwards;
+}
+.head-leave{
+    animation: headOut 350ms forwards;
+}
+
+@keyframes headIn{
+    from{
+        transform: translate3d(0,-100%, 0);
+    }
+    to{
+        transform: translate3d(0,0,0);
+    }
+}
+
+@keyframes headOut{
+    from{
+        transform: translate3d(0,0, 0);
+    }
+    to{
+        transform: translate3d(0,-100%,0);
+    }
+}

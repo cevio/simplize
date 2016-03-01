@@ -1,21 +1,19 @@
-
 // 工具样式  不使用前缀
-
-.middle-outter{
+.middle-outter {
   display: table;
   width: 100%;
   height: inherit;
 }
-.middle-inner{
+.middle-inner {
   display: table-cell;
   vertical-align: middle;
   height: inherit;
 }
-.middle{
+.middle {
   height: inherit;
   display: inline-block;
   vertical-align: middle;
-  &:after{
+  &:after {
     content: '';
     display: inline-block;
     vertical-align: middle;
@@ -24,8 +22,6 @@
     height: 100%;
   }
 }
-
-
 .fl {
   float: left;
 }
@@ -44,10 +40,17 @@
 .ib {
   display: inline-block;
 }
-
+.show {
+  display: block !important;
+}
+.hidden {
+  display: none !important;
+}
+.invisible {
+  visibility: hidden;
+}
 .clearflash {
   -webkit-user-select: none;
-
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }
@@ -55,7 +58,7 @@
   *zoom: 1;
 }
 .clearflash {
-    -webkit-user-select: none;
+  -webkit-user-select: none;
 }
 .clearfix:before,
 .clearfix:after {
@@ -66,3 +69,78 @@
 .clearfix:after {
   clear: both;
 }
+//文本溢出 省略号
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+// margin
+.make_margin(@i) {
+  .m@{i} {
+    margin: @i*0.1em;
+  }
+  .mt@{i} {
+    margin-top: @i*0.1em;
+  }
+  .mb@{i} {
+    margin-bottom: @i*0.1em;
+  }
+  .ml@{i} {
+    margin-left: @i*0.1em;
+  }
+  .mr@{i} {
+    margin-right: @i*0.1em;
+  }
+}
+//padding
+.make_padding(@i) {
+  .p@{i} {
+    padding: @i*0.1em;
+  }
+  .pt@{i} {
+    padding-top: @i*0.1em;
+  }
+  .pb@{i} {
+    padding-bottom: @i*0.1em;
+  }
+  .pl@{i} {
+    padding-left: @i*0.1em;
+  }
+  .pr@{i} {
+    padding-right: @i*0.1em;
+  }
+}
+//font-size
+.f(@i:1rem) {
+  font-size: @i*1rem;
+}
+//输出外边距  m5,m10,...  em 为单位  m5表示 margin 0.5em
+.func_margin(@n, @i:@margin-func-start) when ( @i =< @n) {
+  .make_margin(@i);
+  .func_margin(@n, (@i + @margin-func-step));
+}
+//输出内边距   p5,p10,p15...
+.func_padding(@n, @i:5) when ( @i =< @n) {
+  .make_padding(@i);
+  .func_padding(@n, (@i + 5));
+}
+//输出字体大小  f5,f6,f7,f8--,f19,f20
+.func-fontSize(@n, @i: @font-func-start) when (@i =< @n) {
+  .f@{i} {
+    font-size: @i*0.1rem;
+  }
+  .func-fontSize(@n, (@i + @font-func-step));
+}
+//输出 字体颜色 c1,c2,c3,c4....c16   #111 ~  #FFF
+.func-color(@n, @i:1) when (@i =< @n) {
+  .c@{i} {
+    color: @i*#111;
+  }
+  .func-color(@n,(@i+1));
+}
+//创建方法调用
+.func_margin(@margin-func-end);
+.func_padding(@padding-func-end);
+.func-fontSize(@font-func-end);
+.func-color(15);

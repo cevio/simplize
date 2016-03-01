@@ -12,13 +12,36 @@
         margin: 0;
         padding: 0;
         list-style: none;
+        height: 100%;
     }
     li{
-        height: 174px;
         float: left;
         text-align: center;
         &.active{
             color:#ff0000;
         }
+    }
+}
+
+.toolbar-enter{
+    animation: toolbarIn 350ms forwards;
+}
+.toolbar-leave{
+    animation: toolbarOut 350ms forwards;
+}
+@keyframes toolbarIn{
+    from{
+        transform: translate3d(0,100%,0);
+    }
+    to{
+        transform: translate3d(0,0,0);
+    }
+}
+@keyframes toolbarOut{
+    from{
+        transform: translate3d(0,0,0);
+    }
+    to{
+        transform: translate3d(0,100%,0);
     }
 }

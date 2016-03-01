@@ -1,10 +1,97 @@
 .web-views,.web-view,.web-view-content{
   height: 100%;
   width: 100%;
+  -webkit-overflow-scrolling:touch;
 }
 .web-view-content{
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .web-views{
   background-color: #000;
+}
+
+
+.move-enter.fade{
+    animation: fadeIn 350ms forwards;
+}
+.move-leave.fade{
+    animation: fadeOut 350ms forwards;
+}
+.move-enter.left{
+    z-index: 2;
+    animation: leftIn 350ms forwards;
+}
+.move-leave.left{
+    z-index: 1;
+    animation: leftOut 350ms forwards;
+}
+.move-enter.right{
+    z-index: 1;
+    animation: rightIn 350ms forwards;
+}
+.move-leave.right{
+    position: relative;
+    z-index: 2;
+    animation: rightOut 350ms forwards;
+}
+
+.move-leave.right:after,.move-enter.left:after{
+    display: block;
+    position: absolute;
+    content: ' ';
+    left: -3rem;
+    top: 0;
+    height: 100%;
+    width: 3rem;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.2) 100%);
+}
+.move-enter.left:after{
+  animation:fadeIn 350ms forwards;
+
+}
+.move-leave.right:after{
+  animation:fadeOut 350ms forwards;
+}
+
+@keyframes leftIn{
+    from {
+
+        transform: translate3d(100%, 0, 0);
+    }
+    to{
+
+        transform: translate3d(0,0,0);
+    }
+}
+@keyframes leftOut{
+    from {
+      opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    to{
+      opacity: 0.93;
+        transform: translate3d(-20%,0,0);
+    }
+}
+
+@keyframes rightIn{
+    from {
+      opacity: 0.93;
+        transform: translate3d(-20%, 0, 0);
+    }
+    to{
+      opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+}
+@keyframes rightOut{
+    from {
+
+        transform: translate3d(0, 0, 0);
+    }
+    to{
+
+        transform: translate3d(100%,0,0);
+    }
 }
