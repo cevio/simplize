@@ -60,34 +60,34 @@
 }
 
 .headbarFaded-enter{
-    animation: fadeIn 350ms forwards;
+    animation: fadeIn @animate-pageChange-duration forwards;
 }
 .headbarFaded-leave{
-    animation: fadeOut 350ms forwards;
+    animation: fadeOut @animate-pageChange-duration forwards;
 }
 
 .headbarChild-enter.left{
-    animation: headbarFromRightToCenter 350ms ease-out forwards;
+    animation: headbarFromRightToCenter @animate-pageChange-duration linear forwards;
     z-index: 1;
 }
 .headbarChild-leave.left{
-    animation: headbarFromCenterToLeft 350ms ease-in forwards;
+    animation: headbarFromCenterToLeft @animate-pageChange-duration linear forwards;
     z-index: 2;
 }
 .headbarChild-enter.right{
-    animation: headbarFromLeftToCenter 350ms ease-out forwards;
+    animation: headbarFromLeftToCenter @animate-pageChange-duration linear forwards;
     z-index: 2;
 }
 .headbarChild-leave.right{
-    animation: headbarFromCenterToRight 350ms ease-in forwards;
+    animation: headbarFromCenterToRight @animate-pageChange-duration linear forwards;
     z-index: 1;
 }
 
 .headbarTemp-enter{
-    animation: fadeOut 350ms forwards;
+    animation: fadeOut @animate-pageChange-duration forwards;
 }
 .headbarTemp-leave{
-    animation: fadeIn 350ms forwards;
+    animation: fadeIn @animate-pageChange-duration forwards;
 }
 
 
@@ -135,10 +135,10 @@
 }
 
 .head-enter{
-    animation: headIn 350ms forwards;
+    animation: headIn @animate-pageChange-duration forwards;
 }
 .head-leave{
-    animation: headOut 350ms forwards;
+    animation: headOut @animate-pageChange-duration forwards;
 }
 
 @keyframes headIn{

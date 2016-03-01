@@ -13,27 +13,27 @@
 
 
 .move-enter.fade{
-    animation: fadeIn 350ms forwards;
+    animation: fadeIn @animate-pageChange-duration forwards;
 }
 .move-leave.fade{
-    animation: fadeOut 350ms forwards;
+    animation: fadeOut @animate-pageChange-duration forwards;
 }
 .move-enter.left{
     z-index: 2;
-    animation: leftIn 350ms forwards;
+    animation: leftIn @animate-pageChange-duration forwards;
 }
 .move-leave.left{
     z-index: 1;
-    animation: leftOut 350ms forwards;
+    animation: leftOut @animate-pageChange-duration forwards;
 }
 .move-enter.right{
     z-index: 1;
-    animation: rightIn 350ms forwards;
+    animation: rightIn @animate-pageChange-duration forwards;
 }
 .move-leave.right{
     position: relative;
     z-index: 2;
-    animation: rightOut 350ms forwards;
+    animation: rightOut @animate-pageChange-duration forwards;
 }
 
 .move-leave.right:after,.move-enter.left:after{
@@ -47,11 +47,11 @@
     background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.2) 100%);
 }
 .move-enter.left:after{
-  animation:fadeIn 350ms forwards;
+  animation:fadeIn @animate-pageChange-duration forwards;
 
 }
 .move-leave.right:after{
-  animation:fadeOut 350ms forwards;
+  animation:fadeOut @animate-pageChange-duration forwards;
 }
 
 @keyframes leftIn{

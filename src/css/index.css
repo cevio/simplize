@@ -32,11 +32,6 @@ pre{
     z-index: 1;
 }
 
-.nopadding{
-    -webkit-transition: all 350ms linear;
-    padding-top: 0!important;
-}
-
 
 
 .red{

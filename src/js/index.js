@@ -104,7 +104,7 @@ simplize.ready(function() {
         this.$render('b', {
             before: function(){
                 this.$toolbar.status = false;
-                this.$headbar.status = false;
+                this.$headbar.status = true;
                 this.$headbar.center.text = 'Simplize Blog Naps';
                 this.$headbar.left.icon='<i class="fa fa-angle-left"></i>';
                 this.$headbar.left.text="Back";
