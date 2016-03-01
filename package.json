@@ -1,11 +1,11 @@
 {
   "name": "simplize",
   "description": "simplize project",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/cevio/simplize"
   },
   "timestamp": 1456220103108,
   "dependencies": {

@@ -4,3 +4,4 @@ archive
 bower_components
 test
 test.html
+.DS_Store
