@@ -1,0 +1,282 @@
+/* your code here */
+*{ box-sizing: border-box; }
+html,body,.web-app,.web-browsers,.web-browser,.web-views{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+
+}
+.web-app,.web-browsers,.web-browser,.web-views,.web-view{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+}
+
+.web-view, pre{
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+.web-head{
+    z-index: 1;
+}
+
+
+
+.headbarFaded-enter{
+    animation: fadeIn 350ms forwards;
+}
+.headbarFaded-leave{
+    animation: fadeOut 350ms forwards;
+}
+
+.headbarChild-enter.left{
+    animation: headbarFromRightToCenter 350ms ease-out forwards;
+    z-index: 1;
+}
+.headbarChild-leave.left{
+    animation: headbarFromCenterToLeft 350ms ease-in forwards;
+    z-index: 2;
+}
+.headbarChild-enter.right{
+    animation: headbarFromLeftToCenter 350ms ease-out forwards;
+    z-index: 2;
+}
+.headbarChild-leave.right{
+    animation: headbarFromCenterToRight 350ms ease-in forwards;
+    z-index: 1;
+}
+
+.headbarTemp-enter{
+    animation: fadeOut 350ms forwards;
+}
+.headbarTemp-leave{
+    animation: fadeIn 350ms forwards;
+}
+
+
+
+@keyframes headbarFromRightToCenter{
+    from {
+        transform: translate3d(100%,0,0);
+        opacity: 0.3;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+@keyframes headbarFromCenterToLeft{
+    from {
+        transform: translate3d(0,0,0);
+        opacity: 1;
+    }
+    to {
+        transform: translate3d(-100%, 0, 0);
+        opacity: 0;
+    }
+}
+
+@keyframes headbarFromLeftToCenter{
+    from {
+        transform: translate3d(-100%,0,0);
+        opacity: 0.3;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+@keyframes headbarFromCenterToRight{
+    from {
+        transform: translate3d(0,0,0);
+        opacity: 1;
+    }
+    to {
+        transform: translate3d(100%, 0, 0);
+        opacity: 0;
+    }
+}
+
+
+
+
+
+.toolbar-enter{
+    animation: toolbarIn 350ms forwards;
+}
+.toolbar-leave{
+    animation: toolbarOut 350ms forwards;
+}
+@keyframes toolbarIn{
+    from{
+        transform: translate3d(0,100%,0);
+    }
+    to{
+        transform: translate3d(0,0,0);
+    }
+}
+@keyframes toolbarOut{
+    from{
+        transform: translate3d(0,0,0);
+    }
+    to{
+        transform: translate3d(0,100%,0);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.move-enter.fade{
+    animation: fadeIn 350ms forwards;
+}
+.move-leave.fade{
+    animation: fadeOut 350ms forwards;
+}
+.move-enter.left{
+    z-index: 2;
+    animation: leftIn 350ms forwards;
+}
+.move-leave.left{
+    z-index: 1;
+    animation: leftOut 350ms forwards;
+}
+.move-enter.right{
+    z-index: 1;
+    animation: rightIn 350ms forwards;
+}
+.move-leave.right{
+    position: relative;
+    z-index: 2;
+    animation: rightOut 350ms forwards;
+}
+
+.move-leave.right:after,.move-enter.left:after{
+    display: block;
+    position: absolute;
+    content: ' ';
+    left: -48px;
+    top: 0;
+    height: 100%;
+    width: 48px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.2) 100%);
+}
+.move-enter.left:after{
+  animation:fadeIn 350ms forwards;
+
+}
+.move-leave.right:after{
+  animation:fadeOut 350ms forwards;
+}
+
+
+
+
+/*@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}*/
+@keyframes leftIn{
+    from {
+
+        transform: translate3d(100%, 0, 0);
+    }
+    to{
+
+        transform: translate3d(0,0,0);
+    }
+}
+@keyframes leftOut{
+    from {
+      opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    to{
+      opacity: 0.9;
+        transform: translate3d(-20%,0,0);
+    }
+}
+
+@keyframes rightIn{
+    from {
+      opacity: 0.9;
+        transform: translate3d(-20%, 0, 0);
+    }
+    to{
+      opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+}
+@keyframes rightOut{
+    from {
+
+        transform: translate3d(0, 0, 0);
+    }
+    to{
+
+        transform: translate3d(100%,0,0);
+    }
+}
+
+
+
+
+
+.nopadding{
+    -webkit-transition: all 350ms linear;
+    padding-top: 0!important;
+}
+
+.head-enter{
+    animation: headIn 350ms forwards;
+}
+.head-leave{
+    animation: headOut 350ms forwards;
+}
+
+@keyframes headIn{
+    from{
+        transform: translate3d(0,-100%, 0);
+    }
+    to{
+        transform: translate3d(0,0,0);
+    }
+}
+
+@keyframes headOut{
+    from{
+        transform: translate3d(0,0, 0);
+    }
+    to{
+        transform: translate3d(0,-100%,0);
+    }
+}
+
+
+.red{
+    background-color: red;
+}
+.green{
+    background-color: green;
+}
+
+.white{
+    background-color: #fff;
+}

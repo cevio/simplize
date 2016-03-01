@@ -1,0 +1,68 @@
+
+// 工具样式  不使用前缀
+
+.middle-outter{
+  display: table;
+  width: 100%;
+  height: inherit;
+}
+.middle-inner{
+  display: table-cell;
+  vertical-align: middle;
+  height: inherit;
+}
+.middle{
+  height: inherit;
+  display: inline-block;
+  vertical-align: middle;
+  &:after{
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    overflow: hidden;
+    height: 100%;
+  }
+}
+
+
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.tc {
+  text-align: center;
+}
+.tl {
+  text-align: left;
+}
+.tr {
+  text-align: right;
+}
+.ib {
+  display: inline-block;
+}
+
+.clearflash {
+  -webkit-user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearflash {
+    -webkit-user-select: none;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: " ";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}

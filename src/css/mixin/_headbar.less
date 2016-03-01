@@ -1,0 +1,60 @@
+.web-headbar{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  z-index: 3;
+}
+.web-head{
+  height: @headbar-height;
+  display: table;
+  width: 100%;
+  text-align: center;
+}
+.web-head-temp{
+  position: absolute;
+  top: 0;
+}
+
+.web-headbar-left,.web-headbar-right{
+  position: absolute;
+  height: inherit;;
+  top: 0;
+  display: table;
+  z-index: 10;
+  .icon-content,.text-content{
+    display: table-cell;
+    vertical-align: middle
+  }
+}
+.web-headbar-center{
+  display:table-cell;
+  text-align: center;
+  padding: 0 @default-gunnter;
+  vertical-align: middle;
+  position: relative;
+  z-index: 9;
+  .web-headbar-center-text{
+      display: inline-block;
+      position: relative;
+      z-index: 10;
+      min-width: 30%;
+  }
+}
+.web-headbar-left{
+  left: @default-gunnter;
+  i{
+      margin-right: .5em;
+  }
+}
+.web-headbar-right{
+  right: @default-gunnter;
+  i{
+      margin-left: .5em;
+  }
+}
+
+.web-headbar{
+    border-bottom: 1px solid #eee;
+}

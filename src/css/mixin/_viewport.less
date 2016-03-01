@@ -1,0 +1,76 @@
+
+/*  媒体查询  开始  */
+
+// 默认 320px 下
+
+html,body{
+  font-size: 10px;
+}
+
+@media screen and (min-width: (@IP5 - 1px)) {
+
+}
+@media screen and (min-width: (@IP6S - 1px)) {
+  html,body{
+    font-size: 10px * 414 / 320;
+  }
+}
+@media screen and (min-width: (@IP4 * 2 - 1px)) {
+  html,body{
+    font-size: 20px;
+  }
+  .web-head{
+    height: @headbar-height * 2;
+  }
+  .toolbar,.soe-toolbar-place-exist{
+    height: @footbar-height * 2;
+  }
+  .soe-animate-right-to-center:before,
+  .soe-animate-center-to-right:before{
+    width: 32px
+  }
+
+  input[type='checkbox'],
+  input[type='radio']{
+    zoom:2;
+  }
+}
+@media screen and (min-width: ( @IP5 * 2 - 1px )) {
+  html,body{
+    font-size: 23.4375px;
+  }
+}
+@media screen and (min-width: ( 960px - 1px )) {
+  html,body{
+    font-size: 30px;
+  }
+}
+@media screen and (min-width: ( 1080px - 1px )) {
+  html,body{
+    font-size: 33.75px;
+  }
+}
+
+
+@media screen and (min-width: ( @IP6S * 3 - 1px)){
+  html,body{
+    font-size: 38.8125px;
+  }
+  .web-head{
+    height: @headbar-height * 3;
+  }
+  .toolbar,.soe-toolbar-place-exist{
+    height: @footbar-height * 3;
+  }
+  .soe-animate-right-to-center:before,
+  .soe-animate-center-to-right:before{
+    width: 48px
+  }
+  input[type='checkbox'],
+  input[type='radio']{
+    zoom:3;
+  }
+}
+
+
+/* 媒体查询 结束*/
