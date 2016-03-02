@@ -11,6 +11,7 @@
   display: table;
   width: 100%;
   text-align: center;
+  position: relative;
 }
 .web-head-temp{
   position: absolute;
@@ -59,38 +60,126 @@
     border-bottom: 1px solid #eee;
 }
 
-.headbarFaded-enter{
-    animation: fadeIn @animate-headChange-duration forwards;
-}
-.headbarFaded-leave{
-    animation: fadeOut @animate-headChange-duration forwards;
-}
-
-.headbarChild-enter.left{
-    animation: headbarFromRightToCenter @animate-headChange-duration linear forwards;
-    z-index: 1;
-}
-.headbarChild-leave.left{
-    animation: headbarFromCenterToLeft @animate-headChange-duration linear forwards;
-    z-index: 2;
-}
-.headbarChild-enter.right{
-    animation: headbarFromLeftToCenter @animate-headChange-duration linear forwards;
-    z-index: 2;
-}
-.headbarChild-leave.right{
-    animation: headbarFromCenterToRight @animate-headChange-duration linear forwards;
-    z-index: 1;
-}
-
-.headbarTemp-enter{
-    animation: fadeOut @animate-headChange-duration forwards;
-}
-.headbarTemp-leave{
-    animation: fadeIn @animate-headChange-duration forwards;
-}
 
 
+
+
+
+
+.headbar-leave .web-head{ z-index: 3; }
+.headbar-leave .web-head-temp{ z-index: 4; }
+.headbar-enter .web-head{ z-index: 4; }
+.headbar-enter .web-head-temp{ z-index: 3; }
+.headbar-transition.slient .web-head-temp{
+    display: none;
+}
+
+.headbar-enter.move{ animation: headIn @animate-pageChange-duration forwards; }
+.headbar-leave.move{ animation: headOut @animate-pageChange-duration forwards; }
+
+.headbar-transition.left{
+    .web-head-native{
+        z-index: 3;
+        .web-headbar-left{
+            .icon-content{
+                animation: fadeIn @animate-headChange-duration forwards;
+            }
+            .text-content{
+                animation: headbarFromRightToCenter @animate-headChange-duration linear forwards;
+            }
+        }
+        .web-headbar-center{
+            .web-headbar-center-text{
+                animation: headbarFromRightToCenter @animate-headChange-duration linear forwards;
+            }
+        }
+        .web-headbar-right{
+            .text-content{
+                animation: headbarFromRightToCenter @animate-headChange-duration linear forwards;
+            }
+            .icon-content{
+                animation: fadeIn @animate-headChange-duration forwards;
+            }
+        }
+    }
+    .web-head-temp{
+        animation: fadeOut @animate-headChange-duration forwards;
+        z-index: 4;
+        .web-headbar-left{
+            .icon-content{
+                animation: fadeOut @animate-headChange-duration forwards;
+            }
+            .text-content{
+                animation: headbarFromCenterToLeft @animate-headChange-duration linear forwards;
+            }
+        }
+        .web-headbar-center{
+            .web-headbar-center-text{
+                animation: headbarFromCenterToLeft @animate-headChange-duration linear forwards;
+            }
+        }
+        .web-headbar-right{
+            .text-content{
+                animation: headbarFromCenterToLeft @animate-headChange-duration linear forwards;
+            }
+            .icon-content{
+                animation: fadeOut @animate-headChange-duration forwards;
+            }
+        }
+    }
+}
+
+.headbar-transition.right{
+    .web-head-native{
+        z-index: 3;
+        .web-headbar-left{
+            .icon-content{
+                animation: fadeIn @animate-headChange-duration forwards;
+            }
+            .text-content{
+                animation: headbarFromLeftToCenter @animate-headChange-duration linear forwards;
+            }
+        }
+        .web-headbar-center{
+            .web-headbar-center-text{
+                animation: headbarFromLeftToCenter @animate-headChange-duration linear forwards;
+            }
+        }
+        .web-headbar-right{
+            .text-content{
+                animation: headbarFromLeftToCenter @animate-headChange-duration linear forwards;
+            }
+            .icon-content{
+                animation: fadeIn @animate-headChange-duration forwards;
+            }
+        }
+    }
+    .web-head-temp{
+        animation: fadeOut @animate-headChange-duration forwards;
+        z-index: 4;
+        .web-headbar-left{
+            .icon-content{
+                animation: fadeOut @animate-headChange-duration forwards;
+            }
+            .text-content{
+                animation: headbarFromCenterToRight @animate-headChange-duration linear forwards;
+            }
+        }
+        .web-headbar-center{
+            .web-headbar-center-text{
+                animation: headbarFromCenterToRight @animate-headChange-duration linear forwards;
+            }
+        }
+        .web-headbar-right{
+            .text-content{
+                animation: headbarFromCenterToRight @animate-headChange-duration linear forwards;
+            }
+            .icon-content{
+                animation: fadeOut @animate-headChange-duration forwards;
+            }
+        }
+    }
+}
 
 @keyframes headbarFromRightToCenter{
     from {
@@ -132,13 +221,6 @@
         transform: translate3d(100%, 0, 0);
         opacity: 0;
     }
-}
-
-.head-enter{
-    animation: headIn @animate-pageChange-duration forwards;
-}
-.head-leave{
-    animation: headOut @animate-pageChange-duration forwards;
 }
 
 @keyframes headIn{

@@ -2,7 +2,7 @@ var utils = require('../utils');
 var redirect = require('../application/redirect');
 module.exports = function(name, options, item){
     var result = {}, html;
-    var data = { status: false, direction: 'slient', HeadbarHeight: 0, ToolbarHeight: 0 };
+    var data = { status: false, direction: 'slient', HeadbarHeight: 0, ToolbarHeight: 0, name: name };
     var ignores = ['name', 'data', 'keepAlive', 'template', 'computed', 'watch', 'methods', 'events'];
 
     result.name= 'webviw';
@@ -22,13 +22,18 @@ module.exports = function(name, options, item){
      var template = utils.getTemplate(options.template || "template[name='" + item + "']");
      var mode = options.keepAlive ? 'v-show="status"' : 'v-if="status"';
      html = '<' + name + ' v-ref:' + name + '></' + name + '>';
-     result.template = '<div class="web-view" ' + mode + ' transition="move" :class="direction | fixAnimation" :style="{paddingTop: HeadbarHeight,paddingBottom:ToolbarHeight}"><div class="web-view-content">' + template + '</div></div>';
+     result.template =
+        '<div class="web-view" ' + mode + ' transition="move" :class="direction | fixAnimation" >' +
+            '<div class="web-view-content" :style="{paddingTop:HeadbarHeight,paddingBottom:ToolbarHeight}">' + template + '</div>' +
+        '</div>';
 
      /**
       *  extend computed objects
       */
      result.computed = options.computed || {};
      var computeds = {
+         $headbar: function(){ return this.$parent.$headbar; },
+         $toolbar: function(){ return this.$root.$toolbar; },
          req: {
              set: function(value){ this.$root.req = value; },
              get: function(){ return this.$root.req; }
@@ -36,12 +41,6 @@ module.exports = function(name, options, item){
          env: {
              set: function(value){ this.$root.env = value; },
              get: function(){ return this.$root.env; }
-         },
-         $headbar: function(){
-             return this.$parent.$headbar;
-         },
-         $toolbar: function(){
-             return this.$root.$toolbar;
          }
      }
      utils.$extend(result.computed, computeds);
@@ -77,6 +76,12 @@ module.exports = function(name, options, item){
          beforeload: function(){
              this.HeadbarHeight = this.$headbar.height;
              this.ToolbarHeight = this.$toolbar.height;
+         },
+         load: function(){
+             this.direction = '';
+         },
+         unload: function(){
+             this.direction = '';
          }
      }
      utils.$extend(result.events, events);
