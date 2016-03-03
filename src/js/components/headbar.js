@@ -44,7 +44,7 @@ var database = {
         class: '',
         style: ''
     },
-    direction: 'change'
+    direction: 'slient'
 }
 
 exports.component = function(){

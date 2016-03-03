@@ -120,7 +120,7 @@ simplize.ready(function() {
                 }
                 this.$headbar.right.icon='';
                 this.$headbar.right.text='';
-                this.$headbar.class = 'white';
+                this.$headbar.class = 'red';
             }
         })
     });
