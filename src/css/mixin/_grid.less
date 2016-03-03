@@ -1,10 +1,10 @@
 
 /*  grid */
-.web-container{
+.web-container,.container{
   padding: 0 @default-gunnter;
   font-size: 1.4rem;
 }
-.web-row{
+.web-row,.row{
 
   margin-left: -@default-gunnter;
   margin-right: -@default-gunnter;
@@ -19,12 +19,12 @@
   }
 }
 
-*[class^=web-col-]{
+*[class^=web-col-],*[class^=col-]{
   float: left;
 }
 
 @cols: @grid-cols;
-.web-row {
+.web-row,.row {
   .web-col-auto {
     width: 100%;
   }
@@ -33,7 +33,7 @@
   @className: `Math.floor(@{divider})`;
   @n: `100/parseFloat(@{divider})`;
   @n-1: @n - 1;
-  .web-col-@{className} {
+  .web-col-@{className},.col-@{className}{
     width: ~"@{divider}%";
     //width: ~"-webkit-calc((100% - 15px*@{n-1}) / @{n})";
     //width: ~"calc((100% - 15px*@{n-1}) / @{n})";
