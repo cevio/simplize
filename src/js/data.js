@@ -25,20 +25,20 @@ module.exports = {
                 },
                 events: {
                     load: function(){
-                        console.log('a is loaded')
+                        //console.log('a is loaded')
                     },
                     unload: function(){
-                        console.log('a is unloaded')
+                        //console.log('a is unloaded')
                     }
                 }
             },
             b: {
                 events: {
                     load: function() {
-                        console.log('b is loaded')
+                        //console.log('b is loaded')
                     },
                     unload: function() {
-                        console.log('b is unloaded')
+                        //console.log('b is unloaded')
                     }
                 }
             }

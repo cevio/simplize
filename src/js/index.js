@@ -9,19 +9,19 @@ simplize.ready(function() {
     //app.$toolbar.status = false;
 
     app.$on('ready', function(){
-        console.log('app is ready');
+        //console.log('app is ready');
     })
 
     app.$on('end', function() {
-        console.log('pass');
+        //console.log('pass');
     });
 
     app.$toolbar.$on('active', function(){
-        console.log('toolbar active');
+        //console.log('toolbar active');
     });
 
     app.$toolbar.$on('unactive', function(){
-        console.log('toolbar unactive');
+        //console.log('toolbar unactive');
     });
 
     var indexBrowser = app.$browser('index');
@@ -29,16 +29,16 @@ simplize.ready(function() {
     var d = app.$browser('bs');
 
     indexBrowser.$on('active', function(){
-        console.log('index browser active');
+        //console.log('index browser active');
     });
     indexBrowser.$on('unactive', function(){
-        console.log('index browser unactive');
+        //console.log('index browser unactive');
     })
     b.$on('active', function(){
-        console.log('b browser active');
+        //console.log('b browser active');
     });
     b.$on('unactive', function(){
-        console.log('b browser unactive');
+        //console.log('b browser unactive');
     });
 
 
@@ -127,5 +127,5 @@ simplize.ready(function() {
 
 
     app.$run();
-    console.log(app);
+    //console.log(app);
 });

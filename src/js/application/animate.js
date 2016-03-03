@@ -7,6 +7,7 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
 
     var fixAnimation = webview.env.disableAnimation;
     var app = newBrowser.$parent;
+    var $toolbar = app.$toolbar;
     var $headbar = newBrowser.$headbar;
     var $direction = app.$history;
     var before,
@@ -48,6 +49,7 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
     }
 
     $headbar && $headbar.$emit('before');
+    $toolbar && $toolbar.$emit('before');
 
     /**
      *  开始执行before方法
@@ -62,7 +64,22 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
      *  同时退出
      */
     if ( !exchangeWithAnimation ){
+        /**
+         *  如果headbar的初始值为false
+         *  那么直接销毁headbar
+         */
         !$headbar.status && $headbar.$emit('destroy');
+
+        /**
+         *  如果toolbar的初始值为false
+         *  那么直接销毁toolbar
+         */
+        !$toolbar.status && $toolbar.$emit('destroy');
+
+        /**
+         *  如果禁用动画
+         *  需要等待dom更新后触发显示方法
+         */
         if ( fixAnimation ){
             return utils.nextTick(function(){
                 normalExchange(webview, oldwebview, after);
@@ -72,12 +89,21 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
         }
     }
 
+    /**
+     *  在使用动画状态的时候
+     *  监听动画完成
+     *  然后触发方法
+     */
     utils.nextTick(function(){
         headbarExchange($headbar, $direction);
+        toolbarExchange($toolbar, $direction);
         webviewExchange(webview, oldwebview, $direction, after);
     });
 }
 
+/**
+ *  头部触发
+ */
 function headbarExchange($headbar, $direction){
     if ( $headbar ){
         $headbar.$emit($direction || 'slient');
@@ -85,6 +111,19 @@ function headbarExchange($headbar, $direction){
     }
 }
 
+/**
+ *  工具条触发
+ */
+function toolbarExchange($toolbar, $direction){
+    if ( $toolbar ){
+        $toolbar.$emit($direction || 'slient');
+        $toolbar.$emit('run');
+    }
+}
+
+/**
+ *  webview切换触发
+ */
 function webviewExchange(webview, oldwebview, $direction, after, fn){
     webview.$emit('beforeload');
     oldwebview && oldwebview.$emit('beforeunload');
@@ -95,6 +134,9 @@ function webviewExchange(webview, oldwebview, $direction, after, fn){
     oldwebview.direction = webview.direction = $direction;
 }
 
+/**
+ *  不使用动画触发方式
+ */
 function normalExchange(webview, oldwebview, after){
     webview.$emit('beforeload');
     oldwebview && oldwebview.$emit('beforeunload');
@@ -108,6 +150,9 @@ function normalExchange(webview, oldwebview, after){
     });
 }
 
+/**
+ *  监听webview进入动画
+ */
 function load(webview, after, fn){
     animationend(webview.$el).then(function(){
         typeof keep.temp === 'function' && keep.temp();
@@ -116,6 +161,10 @@ function load(webview, after, fn){
         typeof fn === 'function' && fn();
     });
 }
+
+/**
+ *  监听webview离开动画
+ */
 function unload(webview){
     animationend(webview.$el).then(function(){
         webview.$emit('unload');

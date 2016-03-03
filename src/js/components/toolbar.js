@@ -1,7 +1,7 @@
 var utils = require('../utils');
 var animationend = require('animationend');
 var template =
-    '<div class="web-toolbar" v-if="status" :transition="\'toolbar\' | fixAnimation" v-el:tool-bar>' +
+    '<div class="web-toolbar" v-show="state" transition="toolbar" :class="display" v-el:tool-bar>' +
         '<ul class="clearfix">' +
             '<li v-for="browser in browsers | orderBy \'order\'" :style="{width: width}" :class="active(browser)">' +
                 '<middle v-redirect="browser.url">' +
@@ -35,51 +35,36 @@ exports.component = {
     methods: {
         active: function(browser){
             return this.$parent.ActiveBrowser == browser ? 'active' : '';
+        },
+        listen: function(){
+            var that = this;
+            animationend(this.$els.toolBar).then(function(){
+                if ( that.status ){
+                    that.$emit('active');
+                }else{
+                    that.$emit('unactive');
+                }
+            });
         }
-    },
-    ready: function(){
-        this.$parent.$toolbar = this;
-        this.height = this.fixHeight = this.$els.toolBar.clientHeight;
     },
     data: function(){
-        var params = Object.keys(this.$parent.$refs);
-        var i = params.length;
-        var result = [];
-        while ( i-- ) {
-            var browser = this.$parent.$refs[params[i]];
-            if ( browser.$isBrowser ){
-                result.push(browser);
-            }
-        }
         return {
             status: true,
             height: 0,
-            browsers: result,
-            fixHeight: 0
+            browsers: this.database(),
+            fixHeight: 0,
+            state: true,
+            display: 'slient'
         }
     },
-    watch: {
-        status: function(value){
-            var that = this;
-            if ( !!value ){
-                this.height = this.fixHeight;
-                if ( this.$root.env.disableAnimation ){
-                    that.$emit('active');
-                }else{
-                    animationend(this.$els.toolBar).then(function(){
-                        that.$emit('active');
-                    });
-                }
-            }else{
-                this.height = 0;
-                if ( this.$root.env.disableAnimation ){
-                    that.$emit('active');
-                }else{
-                    animationend(this.$els.toolBar).then(function(){
-                        that.$emit('unactive');
-                    });
-                }
-            }
+    events: {
+        left: function(){
+            this.display = 'move';
+            this.listen();
+        },
+        right: function(){
+            this.display = 'move';
+            this.listen();
         }
     }
 }

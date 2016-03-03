@@ -12,21 +12,23 @@ module.exports = function(options){
         options.watch = {};
     }
 
-    options.watch.status = function(value){
-        var that = this;
-        if ( value ){
-            this.height = this.fixHeight;
-        }else{
-            that.height = 0;
-        }
-        if ( this.$root.env.disableAnimation ){
-            this.display = 'block';
-            this.$emit('run');
-        }else{
-            this.display = 'move';
+    if ( !options.watch.status ){
+        options.watch.status = function(value){
+            var that = this;
+            if ( value ){
+                this.height = this.fixHeight;
+            }else{
+                that.height = 0;
+            }
+            if ( this.$root.env.disableAnimation ){
+                this.display = 'slient';
+                this.$emit('run');
+            }else{
+                this.display = 'move';
+            }
         }
     }
-
+    
     if ( !options.ready ){
         options.ready = function(){
             this.$parent.$headbar = this;

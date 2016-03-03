@@ -24,6 +24,7 @@ var viewport = require('./application/viewport');
 var middlewares = require('./middlewares');
 var debug = require('./application/debug');
 var os = require('./application/os');
+var tollbarComponent = require('./application/toolbar');
 
 /**
  *  load vars.
@@ -49,7 +50,7 @@ function simplize(options){
     simplize.$toolbar = simplize.$toolbar || toolbar;
     simplize.init();
     var components = operators(simplize, options, simplize.$toolbar);
-    components.toolbar = simplize.$toolbar.component;
+    components.toolbar = tollbarComponent(simplize.$toolbar.component);
     return simplize.app = new Vue({
         el: simplize.$root,
         data: resource,
