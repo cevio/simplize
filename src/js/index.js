@@ -6,7 +6,7 @@ simplize.ready(function() {
     var app = simplize(database);
     app.env.debug = true;
 
-    app.$toolbar.status = false;
+    //app.$toolbar.status = false;
 
     app.$on('ready', function(){
         console.log('app is ready');
@@ -25,17 +25,30 @@ simplize.ready(function() {
     });
 
     var indexBrowser = app.$browser('index');
-    var aWebview = indexBrowser.$webview('a');
-    var headbar = indexBrowser.$headbar;
-
-
-
     var b = app.$browser('list');
+    var d = app.$browser('bs');
+
+    indexBrowser.$on('active', function(){
+        console.log('index browser active');
+    });
+    indexBrowser.$on('unactive', function(){
+        console.log('index browser unactive');
+    })
+    b.$on('active', function(){
+        console.log('b browser active');
+    });
+    b.$on('unactive', function(){
+        console.log('b browser unactive');
+    });
+
+
+
+
     app.$use('/c', b);
     b.$active(function(){
         this.$render('c', {
             before: function(){
-                this.$toolbar.status = true;
+                //this.$toolbar.status = true;
                 this.$headbar.status = true;
                 this.$headbar.left.icon='<i class="fa fa-angle-left"></i>';
                 this.$headbar.left.text="Home";
@@ -47,14 +60,9 @@ simplize.ready(function() {
         })
     });
 
-    b.$on('active', function(){
-        console.log('b browser active');
-    });
-    b.$on('unactive', function(){
-        console.log('b browser unactive');
-    });
 
-    var d = app.$browser('bs');
+
+
     app.$use('/d', d);
     d.$active(function(){
         this.$render('d', {
@@ -66,7 +74,7 @@ simplize.ready(function() {
                 this.$headbar.right.icon='';
                 this.$headbar.right.text='';
                 this.$headbar.class = 'green';
-                this.$toolbar.status = false;
+                //this.$toolbar.status = false;
             }
         })
     });
@@ -76,12 +84,7 @@ simplize.ready(function() {
 
     // /a/b/c/d
     app.$use(indexBrowser);
-    indexBrowser.$on('active', function(){
-        console.log('index browser active');
-    });
-    indexBrowser.$on('unactive', function(){
-        console.log('index browser unactive');
-    })
+
     // /indexBrowser.$route('a');
     indexBrowser.$use(simplize.localStorage());
     indexBrowser.$use(simplize.cookieStorage());
@@ -95,6 +98,9 @@ simplize.ready(function() {
                 this.$headbar.center.text = 'Simplize Demo Index';
                 this.$headbar.right.icon='<i class="fa fa-sliders"></i>';
                 this.$headbar.right.text='Set';
+                this.$headbar.right.fn = function(){
+                    alert(2)
+                }
                 this.$headbar.class = 'white';
             }
         });
@@ -109,6 +115,7 @@ simplize.ready(function() {
                 this.$headbar.left.icon='<i class="fa fa-angle-left"></i>';
                 this.$headbar.left.text="Back";
                 this.$headbar.left.fn=function(){
+                    alert(1)
                   history.back();
                 }
                 this.$headbar.right.icon='';

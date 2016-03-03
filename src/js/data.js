@@ -4,6 +4,9 @@ module.exports = {
         icon: '<i class="fa fa-home"></i>',
         url: '/',
         order: 1,
+        headdata: {
+            status: true
+        },
         webviews: {
             a: {
                 data: {
@@ -21,12 +24,12 @@ module.exports = {
                     }
                 },
                 events: {
-                    // load: function(){
-                    //     console.log('a is loaded')
-                    // },
-                    // unload: function(){
-                    //     console.log('a is unloaded')
-                    // }
+                    load: function(){
+                        console.log('a is loaded')
+                    },
+                    unload: function(){
+                        console.log('a is unloaded')
+                    }
                 }
             },
             b: {

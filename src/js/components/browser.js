@@ -2,6 +2,7 @@ var utils = require('../utils');
 var headbar = require('./headbar');
 var browser = require('../application/browser');
 var webview = require('../application/webviews');
+var HeadBar = require('../application/headbar');
 
 module.exports = function(name, options, toolbar){
     var result = {};
@@ -16,13 +17,19 @@ module.exports = function(name, options, toolbar){
     /**
      *  browser template maker
      */
-    result.template = '<div class="web-browser" ' + mode + ' :transition="\'fade\' | fixAnimation"><headbar v-ref:headbar></headbar><div class="web-views">' + webviewCreater.html + '</div></div>';
+    result.template =
+        '<div class="web-browser" ' + mode + ' :transition="\'fade\' | fixAnimation">' +
+            '<headbar v-ref:headbar></headbar>' +
+            '<div class="web-views">' + webviewCreater.html + '</div>' +
+        '</div>';
 
     /**
      *  browser component maker
      */
     result.components = options.components || {};
-    result.components.headbar = options.headbar || headbar.component; // headbar component
+    var HeadbarComponent = options.headbar || headbar.component();
+    HeadbarComponent = HeadBar(HeadbarComponent);
+    result.components.headbar = HeadbarComponent;
     utils.$extend(result.components, webviewCreater.result);
 
     /**
@@ -67,10 +74,14 @@ module.exports = function(name, options, toolbar){
     /**
      * extend event objects
      */
-    result.events = options.events || {};
+    options.events = options.events || {};
+    var _end = options.events.end;
+    if ( typeof _end === 'function' ) delete options.events.end
+    result.events = options.events;
     var events = {
         end: function(){
             this.$nextcb && this.$nextcb();
+            typeof _end === 'function' && _end.call(this);
         }
     }
     utils.$extend(result.events, events);

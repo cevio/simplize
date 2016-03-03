@@ -62,13 +62,17 @@ exports.render = function(name, direction, foo){
     });
 }
 
-exports.route = function(router, name){
+exports.route = function(router, name, options){
     if ( !name ){
         name = router;
         router = '/';
     }
     this.$active(router, function(){
-        this.$render(name);
+        this.$render(name, {
+            before: function(){
+                utils.$extend(this.$headbar, options || {});
+            }
+        });
     });
 }
 

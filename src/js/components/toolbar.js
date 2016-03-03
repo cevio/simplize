@@ -39,9 +39,7 @@ exports.component = {
     },
     ready: function(){
         this.$parent.$toolbar = this;
-        if ( this.status ){
-            this.height = this.$els.toolBar.clientHeight;
-        }
+        this.height = this.fixHeight = this.$els.toolBar.clientHeight;
     },
     data: function(){
         var params = Object.keys(this.$parent.$refs);
@@ -54,33 +52,32 @@ exports.component = {
             }
         }
         return {
-            status: false,
+            status: true,
             height: 0,
-            browsers: result
+            browsers: result,
+            fixHeight: 0
         }
     },
     watch: {
         status: function(value){
             var that = this;
             if ( !!value ){
-                if ( this.$root.disableAnimation ){
-                    this.height = this.$els.toolBar.clientHeight;
+                this.height = this.fixHeight;
+                if ( this.$root.env.disableAnimation ){
                     that.$emit('active');
                 }else{
                     animationend(this.$els.toolBar).then(function(){
                         that.$emit('active');
                     });
-                    this.height = this.$els.toolBar.clientHeight;
                 }
             }else{
-                if ( this.$root.disableAnimation ){
-                    this.height = 0;
+                this.height = 0;
+                if ( this.$root.env.disableAnimation ){
                     that.$emit('active');
                 }else{
                     animationend(this.$els.toolBar).then(function(){
                         that.$emit('unactive');
                     });
-                    this.height = 0;
                 }
             }
         }

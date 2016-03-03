@@ -62,7 +62,14 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
      *  同时退出
      */
     if ( !exchangeWithAnimation ){
-        return normalExchange(webview, oldwebview, after);
+        !$headbar.status && $headbar.$emit('destroy');
+        if ( fixAnimation ){
+            return utils.nextTick(function(){
+                normalExchange(webview, oldwebview, after);
+            });
+        }else{
+            return normalExchange(webview, oldwebview, after);
+        }
     }
 
     utils.nextTick(function(){
@@ -92,6 +99,7 @@ function normalExchange(webview, oldwebview, after){
     webview.$emit('beforeload');
     oldwebview && oldwebview.$emit('beforeunload');
     webview.status = true;
+    oldwebview && (oldwebview.status = false);
     utils.nextTick(function(){
         typeof keep.temp === 'function' && keep.temp();
         webview.$emit('load');
@@ -106,7 +114,6 @@ function load(webview, after, fn){
         webview.$emit('load');
         typeof after === 'function' && after.call(webview);
         typeof fn === 'function' && fn();
-        console.log('webview load')
     });
 }
 function unload(webview){
@@ -114,59 +121,3 @@ function unload(webview){
         webview.$emit('unload');
     });
 }
-
-/*
-if ( oldbrowser && oldbrowser == newBrowser ){
-    $headbar.$emit('before');
-}
-
-typeof before === 'function' && before.call(webview);
-
-webview.$emit('beforeload');
-oldwebview && oldwebview.$emit('beforeunload');
-
-if ( !oldbrowser || oldbrowser != newBrowser ){
-    webview.status = true;
-    if ( !oldbrowser ){
-        webview.$emit('load');
-        typeof after === 'function' && after.call(webview);
-    }else{
-        if ( oldwebview ){
-            oldwebview.$emit('unload');
-        }
-    }
-}else{
-    if ( !fixAnimation ){
-        var $direction = app.$history;
-        load($headbar, webview, after);
-        unload(oldwebview);
-        oldwebview.status = false;
-        webview.status = true;
-
-        if ( direction != 'history' && direction && $direction != direction ){
-            $direction = direction;
-        }
-
-        switch ($direction) {
-            case 'left':
-                $headbar && $headbar.$emit('left');
-                oldwebview.direction = webview.direction = 'left';
-                break;
-            case 'right':
-                $headbar && $headbar.$emit('right');
-                oldwebview.direction = webview.direction = 'right';
-                break;
-            default:
-                $headbar && $headbar.$emit('slient');
-                oldwebview.direction = webview.direction = 'fade';
-        }
-    }else{
-        typeof keep.temp === 'function' && keep.temp();
-        oldwebview.status = false;
-        webview.status = true;
-        $headbar && $headbar.$emit('after');
-        webview.$emit('load');
-        oldwebview.$emit('unload');
-    }
-}
-*/

@@ -71,17 +71,27 @@ module.exports = function(name, options, item){
      /**
       *  extend method objects
       */
-     result.events = options.events || {};
+     options.events = options.events || {}
+     var _beforeLoad = options.events.beforeload;
+     var _load = options.events.load;
+     var _unload = options.events.unload;
+     if ( typeof _beforeLoad === 'function' ) delete options.events.beforeload;
+     if ( typeof _load === 'function' ) delete options.events.load;
+     if ( typeof _unload === 'function' ) delete options.events.unload;
+     result.events = options.events;
      var events = {
          beforeload: function(){
              this.HeadbarHeight = this.$headbar.height;
              this.ToolbarHeight = this.$toolbar.height;
+             typeof _beforeLoad === 'function' && _beforeLoad.call(this);
          },
          load: function(){
              this.direction = '';
+             typeof _load === 'function' && _load.call(this);
          },
          unload: function(){
              this.direction = '';
+             typeof _unload === 'function' && _unload.call(this);
          }
      }
      utils.$extend(result.events, events);

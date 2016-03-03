@@ -20,12 +20,12 @@ exports.$copy = function(data){
     if ( type === 'object' ){
         result = {};
         for ( var i in data ){
-            result[i] = this.copy(data[i]);
+            result[i] = this.$copy(data[i]);
         }
     }else if ( type === 'array' ){
         result = [];
         for ( var j = 0 ; j < data.length ; j++ ){
-            result.push(this.copy(data[j]));
+            result.push(this.$copy(data[j]));
         }
     }else{
         result = data;
