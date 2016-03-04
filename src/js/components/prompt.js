@@ -1,11 +1,14 @@
-exports.name = 'ui-confirm';
+exports.name = 'ui-prompt';
 exports.template =
-    '<div class="ui-model-confirm" v-if="status" transition="dialog">' +
+    '<div class="ui-model-prompt" v-if="status" transition="dialog">' +
         '<ui-middle>' +
-            '<div class="ui-model-confirm-inner">' +
-                '<div class="ui-model-confirm-box dialog">' +
+            '<div class="ui-model-prompt-inner">' +
+                '<div class="ui-model-prompt-box dialog">' +
                     '<div class="title" v-html="title"></div>' +
-                    '<div class="content" v-html="content"></div>' +
+                    '<div class="content">' +
+                        '<div v-html="content"></div>' +
+                        '<input class="prompt-input" :type="type" :placeholder="placeholder" v-model="value" />' +
+                    '</div>' +
                     '<div class="buttons">' +
                         '<button class="clearflash" @click="cancel">{{cancelText}}</button>' +
                         '<button class="clearflash" @click="ok">{{okText}}</button>' +
@@ -20,8 +23,11 @@ exports.data = function(){
     return {
         title: '',
         content: '',
+        value: '',
+        placeholder: '',
+        type: 'text',
         okText: 'OK',
-        cancelText: 'Cancer'
+        cancelText: 'Cancel'
     }
 }
 
@@ -29,7 +35,7 @@ exports.methods = {
     ok: function(){
         this.$parent.type = 0;
         this.$parent.mask = false;
-        this.$emit('ok');
+        this.$emit('ok', this.value);
         this.$off('ok');
         this.$off('cancel');
     },

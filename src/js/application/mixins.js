@@ -47,5 +47,8 @@ exports.methods = {
     },
     $confirm: function(content, title){
         return this.$root.$refs.uiModel.$confirm(content, title);
+    },
+    $prompt: function(content, title){
+        return this.$root.$refs.uiModel.$prompt(content, title);
     }
 }

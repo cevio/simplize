@@ -6,7 +6,7 @@ exports.template =
             '<ui-layer :status.sync="mask" v-ref:layer></ui-layer>' +
             '<ui-alert :status="type==1" v-ref:alert></ui-alert>' +
             '<ui-confirm :status="type==2" v-ref:confirm></ui-confirm>' +
-            // '<ui-prompt v-ref:prompt></ui-prompt>' +
+            '<ui-prompt :status="type==3" v-ref:prompt></ui-prompt>' +
             // '<ui-sheet v-ref:sheet></ui-sheet>' +
             // '<ui-preloader v-ref:preloader></ui-preloader>' +
         '</div>' +
@@ -46,13 +46,27 @@ exports.methods = {
         Confirm.okText = 'OK';
         Confirm.cancelText = 'Cancel';
         return Confirm;
+    },
+    $prompt: function(content, title){
+        var Prompt = this.$refs.prompt;
+        this.type = 3;
+        this.mask = true;
+        Prompt.title = title || '';
+        Prompt.content = content || '';
+        Prompt.okText = 'OK';
+        Prompt.cancelText = 'Cancel';
+        Prompt.value = '';
+        Prompt.placeholder = '';
+        Prompt.type = 'text';
+        return Prompt;
     }
 }
 
 exports.components = {
     "ui-layer": require('./layer'),
     "ui-alert": require('./alert'),
-    "ui-confirm": require('./confirm')
+    "ui-confirm": require('./confirm'),
+    "ui-prompt": require('./prompt')
 }
 
 exports.events = {

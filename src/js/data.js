@@ -25,9 +25,9 @@ module.exports = {
                     },
                     dclick: function(){
                         var that = this;
-                        var a = this.$confirm('非法操作系统，将被停职！',' 警告');
-                        a.$on('ok', function(){
-                            that.$alert('ok clicked');
+                        var a = this.$prompt('非法操作系统，将被停职！',' 警告');
+                        a.$on('ok', function(value){
+                            that.$alert('ok clicked: ' + value);
                         });
                         a.$on('cancel', function(){
                             that.$alert('cancel clicked');
