@@ -4,9 +4,6 @@ module.exports = {
         icon: '<i class="fa fa-home"></i>',
         url: '/',
         order: 1,
-        headdata: {
-            status: true
-        },
         webviews: {
             a: {
                 data: {
@@ -25,13 +22,14 @@ module.exports = {
                     },
                     dclick: function(){
                         var that = this;
-                        var a = this.$prompt('非法操作系统，将被停职！',' 警告');
-                        a.$on('ok', function(value){
-                            that.$alert('ok clicked: ' + value);
+                        var a = this.$loader({
+                            mask: true,
+                            iswide: false,
+                            isblack: true
                         });
-                        a.$on('cancel', function(){
-                            that.$alert('cancel clicked');
-                        });
+                        setTimeout(function(){
+                            a.close();
+                        }, 3000);
                     }
                 },
                 components: {

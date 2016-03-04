@@ -50,5 +50,9 @@ exports.methods = {
     },
     $prompt: function(content, title){
         return this.$root.$refs.uiModel.$prompt(content, title);
+    },
+    $loader: function(){
+        var object = this.$root.$refs.uiModel.$loader;
+        return object.apply(object, arguments);
     }
 }

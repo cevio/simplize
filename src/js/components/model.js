@@ -8,7 +8,7 @@ exports.template =
             '<ui-confirm :status="type==2" v-ref:confirm></ui-confirm>' +
             '<ui-prompt :status="type==3" v-ref:prompt></ui-prompt>' +
             // '<ui-sheet v-ref:sheet></ui-sheet>' +
-            // '<ui-preloader v-ref:preloader></ui-preloader>' +
+            '<ui-loader :status="type==5" v-ref:loader></ui-loader>' +
         '</div>' +
     '</div>';
 
@@ -59,6 +59,40 @@ exports.methods = {
         Prompt.placeholder = '';
         Prompt.type = 'text';
         return Prompt;
+    },
+    $loader: function(){
+        var Loader = this.$refs.loader;
+        var content, options;
+
+        for ( var i = 0 ; i < arguments.length; i++ ){
+            if ( typeof arguments[i] === 'string' ){
+                content = arguments[i];
+            }else if ( typeof arguments[i] === 'object' ){
+                options = arguments[i];
+            }
+        }
+
+        this.type = 5;
+        if ( options ){
+
+            if ( !!options.mask ){ this.mask = true; }
+            else{ this.mask = false; }
+
+            if ( options.iswide != undefined ){ Loader.iswide = !!options.iswide; }
+            else { Loader.iswide = false; }
+
+            if ( options.isblack != undefined ){ Loader.isblack = !!options.isblack; }
+            else { Loader.isblack = true; }
+
+        }else{
+            this.mask = true;
+            Loader.iswide = false;
+            Loader.isblack = true;
+        }
+
+        Loader.content = content || '';
+
+        return Loader;
     }
 }
 
@@ -66,7 +100,8 @@ exports.components = {
     "ui-layer": require('./layer'),
     "ui-alert": require('./alert'),
     "ui-confirm": require('./confirm'),
-    "ui-prompt": require('./prompt')
+    "ui-prompt": require('./prompt'),
+    "ui-loader": require('./loader')
 }
 
 exports.events = {
