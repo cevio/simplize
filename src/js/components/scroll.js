@@ -132,6 +132,7 @@ exports.methods = {
             if ( that.moveY >= 0 ){
                 if ( that.moveY >= that.refreshTop * 2 ){
                     that.status = true;
+                    that.windowTouchMoveDisabled = true;
                     that.$emit('refreshstart');
                 }else{
                     that.status = false;
@@ -141,6 +142,7 @@ exports.methods = {
             }else{
                 if ( that.height <= that.$els.content.scrollTop + that.offset + that.rootHeight ){
                     that.status = true;
+                    that.windowTouchMoveDisabled = true;
                     that.$emit('morestart');
                 }else{
                     that.status = false;
