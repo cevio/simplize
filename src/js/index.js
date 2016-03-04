@@ -123,14 +123,14 @@ simplize.ready(function() {
                 this.$headbar.class = 'red';
             },
             after: function(){
-                this.$refs.scroll.$on('refresh', function(next){
+                this.$refs.scroll.onrefresh(function(next){
                     console.log('refreshing');
                     setTimeout(next, 3000);
                 });
-                this.$refs.scroll.$on('loadmore', function(next){
+                this.$refs.scroll.onloadmore(function(next){
                     console.log('loadmoring');
                     setTimeout(next, 3000);
-                })
+                });
             }
         })
     });

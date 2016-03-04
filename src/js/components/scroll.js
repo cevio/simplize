@@ -63,13 +63,18 @@ exports.events = {
     },
     refreshstart: function(){
         var that = this;
-        if ( this.moveY > this.refreshTop * 2 ){
-            that.refreshAnimate(this.refreshTop * 2, function(){
-                that.$emit('refresh', next);
-            });
+        if ( typeof that.refresh === 'function' ){
+            if ( this.moveY > this.refreshTop * 2 ){
+                that.refreshAnimate(this.refreshTop * 2, function(){
+                    that.refresh(next);
+                });
+            }else{
+                that.refresh(next);
+            }
         }else{
-            this.$emit('refresh', next);
+            next();
         }
+
         function next(){
             that.refreshAnimate(0, function(remove){
                 that.status = false;
@@ -88,9 +93,11 @@ exports.events = {
     },
     morestart: function(){
         var that = this;
-        that.moreAnimate(that.moreBottom * -1, function(){
-            that.$emit('loadmore', next);
-        });
+        if ( typeof that.loadmore === 'function' ){
+            that.moreAnimate(that.moreBottom * -1, function(){
+                that.loadmore(next);
+            });
+        }
         function next(){
             that.moreAnimate(0, function(remove){
                 that.status = false;
@@ -180,6 +187,12 @@ exports.methods = {
             that.$els.more.classList.remove('scrolled');
             that.$els.content.classList.remove('scrolled');
         }
+    },
+    onrefresh: function(fn){
+        this.refresh = fn;
+    },
+    onloadmore: function(fn){
+        this.loadmore = fn;
     }
 }
 
