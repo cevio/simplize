@@ -5,15 +5,15 @@ exports.template = '<div class="ui-switch" :class="{active:!!value}" v-el:switch
 exports.props = ['value', 'name'];
 exports.ready = function(){
     var that = this;
-    this.$els.switcher._cb = function(e){
+    this._cb = function(e){
         that.value = !!that.value ? 0 : 1;
     }
-    utils.on(this.$els.switcher, 'click', this.$els.switcher._cb);
+    utils.on(this.$els.switcher, 'click', this._cb);
 }
 exports.watch = {};
 exports.watch.value = function(newValue, oldValue){
     this.$on('change', newValue, oldValue);
 }
-exports.destroyed = function(){
-    this.$els.switcher._cb && utils.off(this.$els.switcher, 'click', this.$els.switcher._cb);
+exports.beforeDestroy = function(){
+    this._cb && utils.off(this.$els.switcher, 'click', this._cb);
 }
