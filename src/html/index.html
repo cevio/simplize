@@ -63,178 +63,64 @@
 <blockquote>
 <p>Compatibility Note: Simplize does not support IE8 and below.</p>
 </blockquote>
-<h2 id="standalone">Standalone</h2>
-<p><code>simplize</code>是一套移动端单页面应用框架。它没有复杂的api规范，但是有非常灵活的路由机制。它的切换效果几乎接近原生体验。它的头部和底部工具条都可以自定义，显然，它的内容都是完全自定义的。它是一套高度自定义并且灵活的移动端框架。</p>
-<p>我们并补推荐使用下载simplize源码的方式来创建app应用，但是我们也会提供下载地址</p>
-<h2 id="github">Github</h2>
-<p>我们将项目托管在<code>Github</code>，方便大家查看源码。 <a href="https://github.com/cevio/simplize">GitHub: project#simplize</a></p>
-<h2 id="simplize-cli">Simplize Cli</h2>
-<p>使用命令行工具创建项目，能提高开发效率，我们建议您安装<code>nodejs</code>来开发项目。我么的命令行工具是基于<code>nodejs</code>创建，所以您必须安装，而且版本必须<code>&gt;=4.0.0</code>。</p>
-<p>项目创建非常简单，让我们一步步学会如何创建吧！</p>
-<h4 id="nodejs">Nodejs</h4>
-<p>请前往 <a href="https://nodejs.org/en/">nodejs.org</a> 下载nodejs并且安装完毕。</p>
-<h4 id="npm">Npm</h4>
-<pre><code class="lang-shell">npm install -g simplize-cli
-</code></pre>
-<p>使用以上命令全局安装我们的工具。</p>
-<p><strong>注意:</strong> 可能等待时间比较长，因为我们使用了<code>kexec</code>组件，需要安装前编译。</p>
-<h4 id="create-project">Create Project</h4>
-<p>创建一个项目。</p>
-<pre><code class="lang-shell">spz create
-</code></pre>
-<p>请根据提示往下，等到结束。我们开启项目(如果我们的项目名为<code>demo</code>)。</p>
-<pre><code class="lang-shell">npm run dev
-</code></pre>
-<p>此时项目已启动，并且将项目的url地址自动复制到你的剪切板中了。你可以使用<code>ctrl + v</code>在浏览器地址栏中粘贴。</p>
-<h4 id="build-project">Build Project</h4>
-<p>编译我们的项目，生成最重的压缩项目文件。</p>
-<pre><code class="lang-shell">npm run build
-</code></pre>
-<p>等到提示结束，项目就自动编译完毕了。</p>
-<p>项目存放的位置(如果你的项目地址是<code>/a/b/c</code>)在 <code>/a/b/c/build</code>文件夹下，你可以复制下面的代码直接发布。</p>
-<h4 id="define-multi-project-file">define Multi Project File</h4>
-<p>默认在项目创建时候只有一套页面逻辑文件代码，但是如果我们又需要创建多套文件代码，那如何操作呢？没关系，你可以在项目根目录下找到<code>project.js</code>。这个文件就是用来创建多套项目或者自定义一些内容而存在了。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">属性</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">routes</td>
-<td style="text-align:left">路由资源数组，用来存放资源数据信息，启动服务时候将提取这里数据处理</td>
-</tr>
-<tr>
-<td style="text-align:left">projects</td>
-<td style="text-align:left">项目打包数据源，用来设置项目的输入与输出</td>
-</tr>
-</tbody>
-</table>
-<h5 id="routes-">routes 有以下这些属性:</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">属性</th>
-<th style="text-align:left">说明</th>
-<th style="text-align:center">script</th>
-<th style="text-align:center">css</th>
-<th style="text-align:center">html</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">name</td>
-<td style="text-align:left">用来标记资源名称</td>
-<td style="text-align:center">有效</td>
-<td style="text-align:center">有效</td>
-<td style="text-align:center">有效</td>
-</tr>
-<tr>
-<td style="text-align:left">type</td>
-<td style="text-align:left">用来标记服务输出资源时候的<code>content-type</code>类型。比如 <code>type=js</code> 那么，将输出<code>applicaiton/javascript</code>类型的文档</td>
-<td style="text-align:center">有效</td>
-<td style="text-align:center">有效</td>
-<td style="text-align:center">有效</td>
-</tr>
-<tr>
-<td style="text-align:left">rule</td>
-<td style="text-align:left">路由规则，可以参考<code>express</code>路由规则</td>
-<td style="text-align:center">有效</td>
-<td style="text-align:center">有效</td>
-<td style="text-align:center">有效</td>
-</tr>
-<tr>
-<td style="text-align:left">template</td>
-<td style="text-align:left">如果类型是<code>html</code>，这里指定模板文件地址,其他无效</td>
-<td style="text-align:center">无效</td>
-<td style="text-align:center">无效</td>
-<td style="text-align:center">有效</td>
-</tr>
-<tr>
-<td style="text-align:left">file</td>
-<td style="text-align:left">如果类型为 <code>js</code> file只能为字符串，指js文件地址。如果类型为<code>css</code>，file可以是字符串或者数组，指定css文件地址或者less文件地址或者scss文件地址。</td>
-<td style="text-align:center">有效</td>
-<td style="text-align:center">有效</td>
-<td style="text-align:center">无效</td>
-</tr>
-<tr>
-<td style="text-align:left">resource</td>
-<td style="text-align:left">只有当类型为<code>html</code>才有效，指在文档中加载的资源目标。分<code>js</code>和<code>css</code>，分别指定资源名称<code>name</code></td>
-<td style="text-align:center">无效</td>
-<td style="text-align:center">无效</td>
-<td style="text-align:center">有效</td>
-</tr>
-<tr>
-<td style="text-align:left">data</td>
-<td style="text-align:left">页面数据源，只有当类型为<code>html</code>时候有效</td>
-<td style="text-align:center">无效</td>
-<td style="text-align:center">无效</td>
-<td style="text-align:center">有效</td>
-</tr>
-</tbody>
-</table>
-<p>在默认实例中有如下代码</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-keyword">var</span> result = {};
-<span class="hljs-comment">// 写入路由规则</span>
-result.routes = [
-    {
-        name: <span class="hljs-string">'index-js'</span>,
-        type: <span class="hljs-string">'js'</span>,
-        rule: <span class="hljs-string">'/js/index'</span>, <span class="hljs-comment">// js 资源路由</span>
-        file: <span class="hljs-string">'./src/js/index.js'</span> <span class="hljs-comment">// 加载自定义的js文件逻辑</span>
-    },
-    {
-        name: <span class="hljs-string">'index-css'</span>,
-        type: <span class="hljs-string">'css'</span>,
-        rule: <span class="hljs-string">'/css/index'</span>, <span class="hljs-comment">// css 资源路由</span>
-        file: [
-            <span class="hljs-string">'./node_modules/simplize/build/index.css'</span>, <span class="hljs-comment">// 加载默认的 simplize 样式</span>
-            <span class="hljs-string">'./src/css/index.css'</span>, <span class="hljs-comment">// 加载自定义的css文件样式</span>
-            <span class="hljs-string">'./src/css/index.scss'</span> <span class="hljs-comment">// 加载自定义的scss文件样式</span>
-        ]
-    },
-    {
-        <span class="hljs-comment">// html 文档输出</span>
-        name: <span class="hljs-string">'index-html'</span>,
-        type: <span class="hljs-string">'html'</span>,
-        rule: <span class="hljs-string">'/'</span>, <span class="hljs-comment">// 输出地址如果是 http://127.0.0.1的时候匹配到</span>
-        template: <span class="hljs-string">'./src/index.html'</span>, <span class="hljs-comment">// 加载 模板文件</span>
-        resource: {
-            js: <span class="hljs-string">'index-js'</span>, <span class="hljs-comment">// html文档页面有 index-js 这个资源</span>
-            css: <span class="hljs-string">'index-css'</span> <span class="hljs-comment">// html 文档页面有 index-css 这个资源</span>
+<div class="insert">
+    <scroll v-ref:scroll>
+        <div slot="refresh">refresh</div>
+        <div slot="more">load more</div>
+<div>123456678890</di>
+        <h2 id="standalone">Standalone</h2>
+        <p><code>simplize</code>是一套移动端单页面应用框架。它没有复杂的api规范，但是有非常灵活的路由机制。它的切换效果几乎接近原生体验。它的头部和底部工具条都可以自定义，显然，它的内容都是完全自定义的。它是一套高度自定义并且灵活的移动端框架。</p>
+        <p>我们并补推荐使用下载simplize源码的方式来创建app应用，但是我们也会提供下载地址</p>
+        <h2 id="github">Github</h2>
+        <p>我们将项目托管在<code>Github</code>，方便大家查看源码。 <a href="https://github.com/cevio/simplize">GitHub: project#simplize</a></p>
+        <h2 id="simplize-cli">Simplize Cli</h2>
+        <p>使用命令行工具创建项目，能提高开发效率，我们建议您安装<code>nodejs</code>来开发项目。我么的命令行工具是基于<code>nodejs</code>创建，所以您必须安装，而且版本必须<code>&gt;=4.0.0</code>。</p>
+        <p>项目创建非常简单，让我们一步步学会如何创建吧！</p>
+        <h4 id="nodejs">Nodejs</h4>
+        <p>请前往 <a href="https://nodejs.org/en/">nodejs.org</a> 下载nodejs并且安装完毕。</p>
+        <h4 id="npm">Npm</h4>
+        <pre><code class="lang-shell">npm install -g simplize-cli
+        </code></pre>
+        <p>使用以上命令全局安装我们的工具。</p>
+        <p><strong>注意:</strong> 可能等待时间比较长，因为我们使用了<code>kexec</code>组件，需要安装前编译。</p>
+        <h4 id="create-project">Create Project</h4>
+        <p>创建一个项目。</p>
+        <pre><code class="lang-shell">spz create
+        </code></pre>
+        <p>请根据提示往下，等到结束。我们开启项目(如果我们的项目名为<code>demo</code>)。</p>
+        <pre><code class="lang-shell">npm run dev
+        </code></pre>
+        <p>此时项目已启动，并且将项目的url地址自动复制到你的剪切板中了。你可以使用<code>ctrl + v</code>在浏览器地址栏中粘贴。</p>
+        <h4 id="build-project">Build Project</h4>
+        <p>编译我们的项目，生成最重的压缩项目文件。</p>
+        <pre><code class="lang-shell">npm run build
+        </code></pre>
+        <p>等到提示结束，项目就自动编译完毕了。</p>
+        <p>项目存放的位置(如果你的项目地址是<code>/a/b/c</code>)在 <code>/a/b/c/build</code>文件夹下，你可以复制下面的代码直接发布。</p>
+        <h4 id="define-multi-project-file">define Multi Project File</h4>
+        <p>默认在项目创建时候只有一套页面逻辑文件代码，但是如果我们又需要创建多套文件代码，那如何操作呢？没关系，你可以在项目根目录下找到<code>project.js</code>。这个文件就是用来创建多套项目或者自定义一些内容而存在了。</p>
+        <p>在<code>project.js</code>中，你可以看到这样的代码格式</p>
+        <pre><code class="lang-javascript hljs"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config</span>)</span>{
+            <span class="hljs-comment">/**
+             *  指当前服务启动对象
+             *  是express编译对象
+             */</span>
+            <span class="hljs-keyword">var</span> app = config.app;
+            <span class="hljs-comment">/**
+             *  如果我们要设置 x-powered-by 属性
+             *  我么可以利用 app.set 方法
+             */</span>
+            app.set(<span class="hljs-string">'x-powered-by'</span>, <span class="hljs-string">'simplize'</span>);
+
+            <span class="hljs-comment">// more ...</span>
         }
-    }
-];
-<span class="hljs-comment">// 写入项目输入与输出</span>
-result.projects = {
-    <span class="hljs-string">"index-html"</span>: {
-        html: <span class="hljs-string">"./build/index.html"</span>,
-        js: <span class="hljs-string">"./build/js/index.js"</span>,
-        css: <span class="hljs-string">"./build/css/index.css"</span>
-    }
-}
+        </code></pre>
+        <p>其他<code>app</code>方法请参阅 <a href="http://www.expressjs.com.cn/4x/api.html">这里</a></p>
 
-<span class="hljs-keyword">return</span> result;
-</code></pre>
-<p>在<code>project.js</code>中，你可以看到这样的代码格式</p>
-<pre><code class="lang-javascript hljs"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config</span>)</span>{
-    <span class="hljs-comment">/**
-     *  指当前服务启动对象
-     *  是express编译对象
-     */</span>
-    <span class="hljs-keyword">var</span> app = config.app;
-    <span class="hljs-comment">/**
-     *  如果我们要设置 x-powered-by 属性
-     *  我么可以利用 app.set 方法
-     */</span>
-    app.set(<span class="hljs-string">'x-powered-by'</span>, <span class="hljs-string">'simplize'</span>);
 
-    <span class="hljs-comment">// more ...</span>
-}
-</code></pre>
-<p>其他<code>app</code>方法请参阅 <a href="http://www.expressjs.com.cn/4x/api.html">这里</a></p>
+
+    </scroll>
+</div>
 
 
 

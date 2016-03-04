@@ -121,6 +121,16 @@ simplize.ready(function() {
                 this.$headbar.right.icon='';
                 this.$headbar.right.text='';
                 this.$headbar.class = 'red';
+            },
+            after: function(){
+                this.$refs.scroll.$on('refresh', function(next){
+                    console.log('refreshing');
+                    setTimeout(next, 3000);
+                });
+                this.$refs.scroll.$on('loadmore', function(next){
+                    console.log('loadmoring');
+                    setTimeout(next, 3000);
+                })
             }
         })
     });
