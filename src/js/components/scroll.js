@@ -5,10 +5,18 @@ exports.template =
     '<div class="scroll-view" v-el:root>' +
         '<div class="scroll-refresh" :style="rereshTopPx" v-el:refresh><slot name="refresh"></slot></div>' +
         '<div class="scroll-view-content">' +
-            '<div class="scroll-view-content-overflow" v-el:content><div class="scroll-view-content-overflow-area" v-el:area><div>&nbsp;</div><slot></slot><div>&nbsp;</div></div></div>' +
+            '<div class="scroll-view-content-overflow" v-el:content>' +
+                '<div class="scroll-view-content-overflow-area" v-el:area>' +
+                    '<div>&nbsp;</div>' +
+                    '<slot></slot>' +
+                    '<div>&nbsp;</div>' +
+                '</div>' +
+            '</div>' +
         '</div>' +
         '<div class="scroll-more" :style="moreBottomPx" v-el:more><slot name="more"></slot></div>' +
     '</div>';
+
+exports.props = ['refresh', 'loadmore'];
 
 exports.data = function(){
     return {
@@ -31,9 +39,11 @@ exports.ready = function(){
         that.moreBottom = that.$els.more.clientHeight;
         that.height = that.$els.area.clientHeight;
         that.rootHeight = that.$els.root.clientHeight;
-        utils.on(that.$els.root, 'touchstart', that._touchStart = that.touchStart());
-        utils.on(that.$els.root, 'touchmove', that._touchMove = that.touchMove());
-        utils.on(that.$els.root, 'touchend', that._touchEnd = that.touchEnd());
+        if ( that.refresh == 'on' || that.loadmore == 'on' ){
+            utils.on(that.$els.root, 'touchstart', that._touchStart = that.touchStart());
+            utils.on(that.$els.root, 'touchmove', that._touchMove = that.touchMove());
+            utils.on(that.$els.root, 'touchend', that._touchEnd = that.touchEnd());
+        }
         that.$emit('ready');
     });
 }
@@ -63,16 +73,18 @@ exports.events = {
     },
     refreshstart: function(){
         var that = this;
-        if ( typeof that.refresh === 'function' ){
+        if ( typeof that.refreshfn === 'function' ){
             if ( this.moveY > this.refreshTop * 2 ){
-                that.refreshAnimate(this.refreshTop * 2, function(){
-                    that.refresh(next);
+                that.refreshAnimate(this.refreshTop, function(){
+                    that.refreshfn(next);
                 });
             }else{
-                that.refresh(next);
+                that.refreshfn(next);
             }
         }else{
             next();
+            that.status = false;
+            that.windowTouchMoveDisabled = false;
         }
 
         function next(){
@@ -88,15 +100,19 @@ exports.events = {
         var that = this;
         that.refreshAnimate(0, function(remove){
             that.status = false;
+            that.windowTouchMoveDisabled = false;
             remove();
         });
     },
     morestart: function(){
         var that = this;
-        if ( typeof that.loadmore === 'function' ){
+        if ( typeof that.loadmorefn === 'function' ){
             that.moreAnimate(that.moreBottom * -1, function(){
-                that.loadmore(next);
+                that.loadmorefn(next);
             });
+        }else{
+            that.status = false;
+            that.windowTouchMoveDisabled = false;
         }
         function next(){
             that.moreAnimate(0, function(remove){
@@ -113,19 +129,18 @@ exports.methods = {
     touchStart: function(){
         var that = this;
         return function(e){
-            if ( !that.status ){
-                that.startY = Y(e);
-                that.startTop = that.$els.content.scrollTop;
-            }
+            if ( that.status || (that.refresh != 'on' && that.loadmore != 'on') ) return;
+            that.startY = Y(e);
+            that.startTop = that.$els.content.scrollTop;
         }
     },
     touchMove: function(){
         var that = this;
         return function(e){
-            if ( that.status ) return;
+            if ( that.status || that.refresh != 'on' ) return;
             var y = Y(e);
             that.moveY = y - that.startY - that.startTop;
-            if ( that.moveY >= 0 ){
+            if ( that.moveY >= 0 && that.refresh == 'on' ){
                 utils.stop(e);
                 that.windowTouchMoveDisabled = true;
                 that.$emit('refreshprocess', that.moveY);
@@ -136,7 +151,7 @@ exports.methods = {
         var that = this;
         return function(){
             if ( that.status ) return;
-            if ( that.moveY >= 0 ){
+            if ( that.moveY >= 0 && that.refresh == 'on' ){
                 if ( that.moveY >= that.refreshTop * 2 ){
                     that.status = true;
                     that.windowTouchMoveDisabled = true;
@@ -146,7 +161,7 @@ exports.methods = {
                     that.windowTouchMoveDisabled = false;
                     that.$emit('refreshback');
                 }
-            }else{
+            }else if ( that.loadmore == 'on' ){
                 if ( that.height <= that.$els.content.scrollTop + that.offset + that.rootHeight ){
                     that.status = true;
                     that.windowTouchMoveDisabled = true;
@@ -158,6 +173,7 @@ exports.methods = {
             }
             that.startY = 0;
             that.moveY = 0;
+            that.startTop = 0;
         }
     },
     refreshAnimate: function(y, fn){
@@ -189,10 +205,10 @@ exports.methods = {
         }
     },
     onrefresh: function(fn){
-        this.refresh = fn;
+        this.refreshfn = fn;
     },
     onloadmore: function(fn){
-        this.loadmore = fn;
+        this.loadmorefn = fn;
     }
 }
 
