@@ -6,6 +6,6 @@ module.exports = function(simplize, options, toolbarComponent){
         innerHTML.push('<' + name + ' v-ref:' + name + '></' + name + '>');
         result[name] = browserComponent(name, options[i], toolbarComponent);
     }
-    simplize.$root.innerHTML = '<div class="web-browsers">' + innerHTML.join('') + '</div><toolbar v-ref:toolbar></toolbar>';
+    simplize.$root.innerHTML = '<ui-model v-ref:ui-model></ui-model><div class="web-browsers">' + innerHTML.join('') + '</div><toolbar v-ref:toolbar></toolbar>';
     return result;
 }

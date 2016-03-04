@@ -41,5 +41,11 @@ exports.computed = {
 exports.methods = {
     $Go: function(i){ history.go(i) },
     $Goback: function(){ history.back(); },
-    $GoForward: function(){ history.forward(); }
+    $GoForward: function(){ history.forward(); },
+    $alert: function(content, title){
+        return this.$root.$refs.uiModel.$alert(content, title);
+    },
+    $confirm: function(content, title){
+        return this.$root.$refs.uiModel.$confirm(content, title);
+    }
 }

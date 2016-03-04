@@ -11,10 +11,27 @@ module.exports = {
             a: {
                 data: {
                     test: [],
+                    a:{
+                        b:{
+                            c:{
+                                d: 1
+                            }
+                        }
+                    }
                 },
                 methods: {
                     click: function() {
                         window.location.href = "#/a/b/c/d";
+                    },
+                    dclick: function(){
+                        var that = this;
+                        var a = this.$confirm('非法操作系统，将被停职！',' 警告');
+                        a.$on('ok', function(){
+                            that.$alert('ok clicked');
+                        });
+                        a.$on('cancel', function(){
+                            that.$alert('cancel clicked');
+                        });
                     }
                 },
                 components: {

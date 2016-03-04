@@ -50,9 +50,11 @@
         <div class="col-70 tc">.col-70</div>
       </div>
     </div>
-
+    <p>{{a.b.c.d}}</p>
+    <ui-switch :value.sync="a.b.c.d"></ui-switch>
+    <button v-on:click="dclick">click</button>
     <div class="web-container">
-      <div style="height:300px; width:100%;" v-on:click="click"><middle style="text-align:center">test</middle></div>
+      <div style="height:300px; width:100%;" v-on:click="click"><ui-middle style="text-align:center">test</ui-middle></div>
     </div>
   </template>
   <template name="b">

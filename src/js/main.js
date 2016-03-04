@@ -43,7 +43,9 @@ Vue.config.convertAllProperties = false;
  */
 module.exports = simplize;
 
-Vue.component('middle', require('./components/middle'));
+Vue.component('ui-middle', require('./components/middle'));
+Vue.component('ui-switch', require('./components/switch'));
+Vue.component('ui-model', require('./components/model'));
 Vue.mixin(require('./application/mixins'));
 
 function simplize(options){
