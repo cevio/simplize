@@ -18,10 +18,6 @@ exports.data = function(){
     }
 }
 
-exports.ready = function(){
-    this.$emit('create');
-}
-
 exports.beforeDestroy = function(){
     this._touchStart && utils.off(this.$els.progress, 'touchstart', this._touchStart);
     this._touchMove && utils.off(this.$els.progress, 'touchmove', this._touchMove);
