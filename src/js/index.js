@@ -102,6 +102,11 @@ simplize.ready(function() {
                     alert(2)
                 }
                 this.$headbar.class = 'white';
+            },
+            after: function(){
+                this.$refs.slider.$emit('create', function(){
+                    
+                })
             }
         });
     });

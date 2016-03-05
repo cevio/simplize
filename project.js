@@ -1,3 +1,2 @@
-exports.css=["src/css/index.css"];
-
+exports.css=[];
 exports.less=["src/css/simplizer.less"];

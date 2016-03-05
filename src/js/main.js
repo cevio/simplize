@@ -48,6 +48,7 @@ Vue.component('switch', require('./components/switch'));
 Vue.component('checkbox', require('./components/checkbox'));
 Vue.component('ui-model', require('./components/model'));
 Vue.component('scroll', require('./components/scroll'));
+Vue.component('slider', require('./components/slider'));
 Vue.mixin(require('./application/mixins'));
 
 function simplize(options){

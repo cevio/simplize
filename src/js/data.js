@@ -14,7 +14,8 @@ module.exports = {
                                 d: 1
                             }
                         }
-                    }
+                    },
+                    g: 0.1
                 },
                 methods: {
                     click: function() {
