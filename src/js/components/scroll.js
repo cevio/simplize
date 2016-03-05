@@ -3,7 +3,7 @@ var animationend = require('animationend');
 exports.name = 'scroll';
 exports.template =
     '<div class="scroll-view" v-el:root>' +
-        '<div class="scroll-refresh" :style="rereshTopPx" v-el:refresh><slot name="refresh"></slot></div>' +
+        '<div class="scroll-refresh scroll-exist" :style="rereshTopPx" v-el:refresh><slot name="refresh"></slot></div>' +
         '<div class="scroll-view-content">' +
             '<div class="scroll-view-content-overflow" v-el:content>' +
                 '<div class="scroll-view-content-overflow-area" v-el:area>' +
@@ -11,7 +11,7 @@ exports.template =
                 '</div>' +
             '</div>' +
         '</div>' +
-        '<div class="scroll-more" :style="moreBottomPx" v-el:more><slot name="more"></slot></div>' +
+        '<div class="scroll-more scroll-exist" :style="moreBottomPx" v-el:more><slot name="more"></slot></div>' +
     '</div>';
 
 exports.props = ['refresh', 'loadmore'];
@@ -59,7 +59,7 @@ exports.computed = {
 }
 
 exports.events = {
-    create: function(){
+    create: function(fn){
         var that = this;
         if ( this.isCreated ) return;
         setTimeout(function(){
@@ -80,6 +80,11 @@ exports.events = {
                 utils.on(that.$els.root, 'touchend', that._touchEnd = that.touchEnd());
             }
             that.isCreated = true;
+
+            utils.removeClass(that.$els.refresh, 'scroll-exist');
+            utils.removeClass(that.$els.more, 'scroll-exist');
+            
+            typeof fn === 'function' && fn.call(that);
         });
     },
     refreshprocess: function(y){

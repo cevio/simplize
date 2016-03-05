@@ -48,6 +48,13 @@ module.exports = {
                 }
             },
             b: {
+                data: {
+                    scroll: {
+                        icon: '<i class="fa fa-long-arrow-down"></i>',
+                        text: '下载刷新',
+                        status: 0
+                    }
+                },
                 events: {
                     load: function() {
                         //console.log('b is loaded')

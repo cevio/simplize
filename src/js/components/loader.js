@@ -30,13 +30,12 @@ exports.data = function(){
 
 exports.methods = {
     close: function(){
-        this.$emit('close', true);
-        this.$off('close');
+        this.$emit('close');
     }
 }
 
 exports.events = {
-    close: function(lazy){
+    close: function(){
         this.$parent.type = 0;
         if ( this.$parent.mask ){
             this.$parent.mask = false;
@@ -46,9 +45,6 @@ exports.events = {
                 that.$parent.$emit('destroy');
             });
             this.status = false;
-        }
-        if ( !lazy ){
-            this.$off('close');
         }
     }
 }

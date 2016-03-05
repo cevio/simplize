@@ -122,17 +122,33 @@ simplize.ready(function() {
                 this.$headbar.class = 'red';
             },
             after: function(){
-                if ( !this.$refs.scroll.isCreated ){
-                    this.$refs.scroll.$on('refresh', function(next){
-                        console.log('refreshing');
+                var that = this;
+                this.$refs.scroll.$emit('create', function(){
+                    this.$on('refreshmove', function(y, _y){
+                        if ( y > _y * 2 ){
+                            that.scroll.status = 1;
+                            that.scroll.text = '松开进行刷新'
+                        }else if ( y > _y ){
+                            that.scroll.status = 0;
+                            that.scroll.text = '继续下拉准备刷新';
+                        }else{
+                            that.scroll.status = 0;
+                            that.scroll.text = '下拉刷新';
+                        }
+                    });
+                    this.$on('refreshend', function(){
+                        that.scroll.status = 0;
+                        that.scroll.text = '下拉刷新';
+                    });
+                    this.$on('refresh', function(next){
+                        that.scroll.text = '正在刷新数据';
                         setTimeout(next, 3000);
                     });
-                    this.$refs.scroll.$on('loadmore', function(next){
+                    this.$on('loadmore', function(next){
                         console.log('loadmoring');
                         setTimeout(next, 3000);
                     });
-                    this.$refs.scroll.$emit('create');
-                }
+                });
             }
         })
     });
