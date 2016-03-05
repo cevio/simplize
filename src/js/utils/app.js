@@ -36,3 +36,25 @@ exports.stop = EventStop;
 function EventStop(e){
     e.preventDefault();
 }
+exports.windowTouchMoveDisabledStatus = false;
+exports.windowTouchMoveDisabledListenner = null
+exports.windowTouchMoveDisabled = function(value){
+    this.windowTouchMoveDisabledStatus = !!value;
+    if ( !!value ){
+        if ( typeof this.windowTouchMoveDisabledListenner != 'function' ){
+            this.windowTouchMoveDisabledListenner = EventStop;
+            this.on(window, 'touchmove', this.windowTouchMoveDisabledListenner);
+        }
+    }else{
+        if ( typeof this.windowTouchMoveDisabledListenner !== 'function' ) return;
+        this.off(window, 'touchmove', this.windowTouchMoveDisabledListenner);
+        this.windowTouchMoveDisabledListenner = null;
+    }
+}
+exports.style = getStyle;
+function getStyle(obj, attr){
+    if( obj.currentStyle ){ return obj.currentStyle[attr]; }
+    else{
+        return document.defaultView.getComputedStyle(obj, null)[attr];
+    }
+}

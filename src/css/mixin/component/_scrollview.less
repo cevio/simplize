@@ -1,0 +1,39 @@
+.scroll-view{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .active{
+        -webkit-transition: all 300ms linear;
+    }
+    .scroll-refresh{
+        position: absolute;
+        left:0;
+        top:-10000px;
+        width: 100%;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+    }
+
+    .scroll-more{
+        position: absolute;
+        left:0;
+        bottom:-10000px;
+        width: 100%;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+    }
+    .scroll-view-content{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        .scroll-view-content-overflow{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+    }
+}

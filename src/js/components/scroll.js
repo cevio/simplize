@@ -7,9 +7,7 @@ exports.template =
         '<div class="scroll-view-content">' +
             '<div class="scroll-view-content-overflow" v-el:content>' +
                 '<div class="scroll-view-content-overflow-area" v-el:area>' +
-                    '<div>&nbsp;</div>' +
                     '<slot></slot>' +
-                    '<div>&nbsp;</div>' +
                 '</div>' +
             '</div>' +
         '</div>' +
@@ -20,6 +18,7 @@ exports.props = ['refresh', 'loadmore'];
 
 exports.data = function(){
     return {
+        isCreated: false,
         refreshTop: 0,
         moreBottom: 0,
         height: 0,
@@ -28,30 +27,26 @@ exports.data = function(){
         startTop: 0,
         moveY: 0,
         offset: 5,
-        status: false
+        status: false,
+        marginTop: 0,
+        marginBottom: 0
     }
 }
 
 exports.ready = function(){
-    var that = this;
-    setTimeout(function(){
-        that.refreshTop = that.$els.refresh.clientHeight;
-        that.moreBottom = that.$els.more.clientHeight;
-        that.height = that.$els.area.clientHeight;
-        that.rootHeight = that.$els.root.clientHeight;
-        if ( that.refresh == 'on' || that.loadmore == 'on' ){
-            utils.on(that.$els.root, 'touchstart', that._touchStart = that.touchStart());
-            utils.on(that.$els.root, 'touchmove', that._touchMove = that.touchMove());
-            utils.on(that.$els.root, 'touchend', that._touchEnd = that.touchEnd());
-        }
-        that.$emit('ready');
-    });
+
 }
 
 exports.beforeDestroy = function(){
     this._touchStart && utils.off(this.$els.root, 'touchstart', this._touchStart);
     this._touchMove && utils.off(this.$els.root, 'touchmove', this._touchMove);
     this._touchEnd && utils.off(this.$els.root, 'touchend', this._touchEnd);
+    this.$off('refresh');
+    this.$off('loadmore');
+    this.$off('refreshmove');
+    this.$off('refreshend');
+    this.$off('loadmoreend');
+    this.isCreated = false;
 }
 
 exports.computed = {
@@ -64,6 +59,29 @@ exports.computed = {
 }
 
 exports.events = {
+    create: function(){
+        var that = this;
+        if ( this.isCreated ) return;
+        setTimeout(function(){
+
+            if ( that.loadmore == 'on' ){
+                resolveTagMarginTop(that.$els.area.firstChild, that);
+                resolveTagMarginBottom(that.$els.area.lastChild, that);
+            }
+
+            that.refreshTop = that.$els.refresh.clientHeight;
+            that.moreBottom = that.$els.more.clientHeight;
+            that.height = that.$els.area.clientHeight;
+            that.rootHeight = that.$els.root.clientHeight;
+
+            if ( that.refresh == 'on' || that.loadmore == 'on' ){
+                utils.on(that.$els.root, 'touchstart', that._touchStart = that.touchStart());
+                utils.on(that.$els.root, 'touchmove', that._touchMove = that.touchMove());
+                utils.on(that.$els.root, 'touchend', that._touchEnd = that.touchEnd());
+            }
+            that.isCreated = true;
+        });
+    },
     refreshprocess: function(y){
         if ( y <= this.refreshTop * 3 ){
             move(this.$els.refresh, y);
@@ -73,24 +91,24 @@ exports.events = {
     },
     refreshstart: function(){
         var that = this;
-        if ( typeof that.refreshfn === 'function' ){
+        if ( that._events.refresh && that._events.refresh.length ){
             if ( this.moveY > this.refreshTop * 2 ){
                 that.refreshAnimate(this.refreshTop, function(){
-                    that.refreshfn(next);
+                    that.$emit('refresh', next);
                 });
             }else{
-                that.refreshfn(next);
+                that.$emit('refresh', next);
             }
         }else{
             next();
             that.status = false;
-            that.windowTouchMoveDisabled = false;
+            utils.windowTouchMoveDisabled(false);
         }
 
         function next(){
             that.refreshAnimate(0, function(remove){
                 that.status = false;
-                that.windowTouchMoveDisabled = false;
+                utils.windowTouchMoveDisabled(false);
                 remove();
                 that.$emit('refreshend');
             });
@@ -100,24 +118,24 @@ exports.events = {
         var that = this;
         that.refreshAnimate(0, function(remove){
             that.status = false;
-            that.windowTouchMoveDisabled = false;
+            utils.windowTouchMoveDisabled(false);
             remove();
         });
     },
     morestart: function(){
         var that = this;
-        if ( typeof that.loadmorefn === 'function' ){
+        if ( that._events.loadmore && that._events.loadmore.length ){
             that.moreAnimate(that.moreBottom * -1, function(){
-                that.loadmorefn(next);
+                that.$emit('loadmore', next);
             });
         }else{
             that.status = false;
-            that.windowTouchMoveDisabled = false;
+            utils.windowTouchMoveDisabled(false);
         }
         function next(){
             that.moreAnimate(0, function(remove){
                 that.status = false;
-                that.windowTouchMoveDisabled = false;
+                utils.windowTouchMoveDisabled(false);
                 remove();
                 that.$emit('loadmoreend');
             });
@@ -142,8 +160,14 @@ exports.methods = {
             that.moveY = y - that.startY - that.startTop;
             if ( that.moveY >= 0 && that.refresh == 'on' ){
                 utils.stop(e);
-                that.windowTouchMoveDisabled = true;
+                if ( !utils.windowTouchMoveDisabledStatus ){
+                    utils.windowTouchMoveDisabled(true);
+                }
                 that.$emit('refreshprocess', that.moveY);
+            }else{
+                if ( utils.windowTouchMoveDisabledStatus ){
+                    utils.windowTouchMoveDisabled(false);
+                }
             }
         }
     },
@@ -151,24 +175,24 @@ exports.methods = {
         var that = this;
         return function(){
             if ( that.status ) return;
-            if ( that.moveY >= 0 && that.refresh == 'on' ){
+            if ( that.moveY > 0 && that.refresh == 'on' ){
                 if ( that.moveY >= that.refreshTop * 2 ){
                     that.status = true;
-                    that.windowTouchMoveDisabled = true;
+                    utils.windowTouchMoveDisabled(true);
                     that.$emit('refreshstart');
                 }else{
                     that.status = false;
-                    that.windowTouchMoveDisabled = false;
+                    utils.windowTouchMoveDisabled(false);
                     that.$emit('refreshback');
                 }
-            }else if ( that.loadmore == 'on' ){
-                if ( that.height <= that.$els.content.scrollTop + that.offset + that.rootHeight ){
+            }else if ( that.moveY < 0 && that.loadmore == 'on' ){
+                if ( that.height + that.marginTop + that.marginBottom <= that.$els.content.scrollTop + that.offset + that.rootHeight ){
                     that.status = true;
-                    that.windowTouchMoveDisabled = true;
+                    utils.windowTouchMoveDisabled(true);
                     that.$emit('morestart');
                 }else{
                     that.status = false;
-                    that.windowTouchMoveDisabled = false;
+                    utils.windowTouchMoveDisabled(false);
                 }
             }
             that.startY = 0;
@@ -181,13 +205,13 @@ exports.methods = {
         animationend(that.$els.content).then(function(){
             fn(removeClass);
         });
-        that.$els.refresh.classList.add('scrolled');
-        that.$els.content.classList.add('scrolled');
+        that.$els.refresh.classList.add('active');
+        that.$els.content.classList.add('active');
         move(that.$els.refresh, y);
         move(that.$els.content, y);
         function removeClass(){
-            that.$els.refresh.classList.remove('scrolled');
-            that.$els.content.classList.remove('scrolled');
+            that.$els.refresh.classList.remove('active');
+            that.$els.content.classList.remove('active');
         }
     },
     moreAnimate: function(y, fn){
@@ -195,20 +219,14 @@ exports.methods = {
         animationend(that.$els.content).then(function(){
             fn(removeClass);
         });
-        that.$els.more.classList.add('scrolled');
-        that.$els.content.classList.add('scrolled');
+        that.$els.more.classList.add('active');
+        that.$els.content.classList.add('active');
         move(that.$els.more, y);
         move(that.$els.content, y);
         function removeClass(){
-            that.$els.more.classList.remove('scrolled');
-            that.$els.content.classList.remove('scrolled');
+            that.$els.more.classList.remove('active');
+            that.$els.content.classList.remove('active');
         }
-    },
-    onrefresh: function(fn){
-        this.refreshfn = fn;
-    },
-    onloadmore: function(fn){
-        this.loadmorefn = fn;
     }
 }
 
@@ -218,4 +236,32 @@ function Y(e){
 
 function move(el, px){
     el.style.webkitTransform = 'translate3d(0,' + px + 'px,0)';
+}
+
+function resolveTagMarginTop(el, that){
+    if ( !el ) return;
+    var type = el.nodeType;
+    if ( type == 3 ){
+        resolveTagMarginTop(el.nextSibling, that);
+    }else if ( type === 1 ){
+        var marginTop = Number(utils.style(el, 'marginTop').replace('px', ''));
+        if ( marginTop > that.marginTop ){
+            that.marginTop = marginTop;
+        }
+        resolveTagMarginTop(el.firstChild, that);
+    }
+}
+
+function resolveTagMarginBottom(el, that){
+    if ( !el ) return;
+    var type = el.nodeType;
+    if ( type == 3 ){
+        resolveTagMarginBottom(el.previousSibling, that);
+    }else if ( type === 1 ){
+        var marginTop = Number(utils.style(el, 'marginBottom').replace('px', ''));
+        if ( marginTop > that.marginBottom ){
+            that.marginBottom = marginTop;
+        }
+        resolveTagMarginBottom(el.lastChild,that);
+    }
 }

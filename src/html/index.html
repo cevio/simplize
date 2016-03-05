@@ -58,16 +58,15 @@
     </div>
   </template>
   <template name="b">
-      <div class="doc" v-on:click="$Goback">
+      <div class="doc">
             <h1 id="installation">Installation</h1>
 <blockquote>
 <p>Compatibility Note: Simplize does not support IE8 and below.</p>
 </blockquote>
 <div class="insert">
-    <scroll v-ref:scroll refresh='on'>
+    <scroll v-ref:scroll refresh="on" loadmore="on">
         <div slot="refresh">refresh</div>
         <div slot="more">load more</div>
-<div>123456678890</di>
         <h2 id="standalone">Standalone</h2>
         <p><code>simplize</code>是一套移动端单页面应用框架。它没有复杂的api规范，但是有非常灵活的路由机制。它的切换效果几乎接近原生体验。它的头部和底部工具条都可以自定义，显然，它的内容都是完全自定义的。它是一套高度自定义并且灵活的移动端框架。</p>
         <p>我们并补推荐使用下载simplize源码的方式来创建app应用，但是我们也会提供下载地址</p>
@@ -115,7 +114,11 @@
             <span class="hljs-comment">// more ...</span>
         }
         </code></pre>
-        <p>其他<code>app</code>方法请参阅 <a href="http://www.expressjs.com.cn/4x/api.html">这里</a></p>
+        <h1>
+            其他<code>app</code>
+            方法请参阅 <a href="http://www.expressjs.com.cn/4x/api.html">这里</a>
+            <div style="margin-bottom:100px;">daf</div>
+        </h1>
 
 
 

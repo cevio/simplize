@@ -115,22 +115,24 @@ simplize.ready(function() {
                 this.$headbar.left.icon='<i class="fa fa-angle-left"></i>';
                 this.$headbar.left.text="Back";
                 this.$headbar.left.fn=function(){
-                    alert(1)
-                  history.back();
+                    history.back();
                 }
                 this.$headbar.right.icon='';
                 this.$headbar.right.text='';
                 this.$headbar.class = 'red';
             },
             after: function(){
-                this.$refs.scroll.onrefresh(function(next){
-                    console.log('refreshing');
-                    setTimeout(next, 3000);
-                });
-                this.$refs.scroll.onloadmore(function(next){
-                    console.log('loadmoring');
-                    setTimeout(next, 3000);
-                });
+                if ( !this.$refs.scroll.isCreated ){
+                    this.$refs.scroll.$on('refresh', function(next){
+                        console.log('refreshing');
+                        setTimeout(next, 3000);
+                    });
+                    this.$refs.scroll.$on('loadmore', function(next){
+                        console.log('loadmoring');
+                        setTimeout(next, 3000);
+                    });
+                    this.$refs.scroll.$emit('create');
+                }
             }
         })
     });
