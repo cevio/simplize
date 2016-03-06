@@ -83,7 +83,7 @@ exports.events = {
 
             utils.removeClass(that.$els.refresh, 'scroll-exist');
             utils.removeClass(that.$els.more, 'scroll-exist');
-            
+
             typeof fn === 'function' && fn.call(that);
         });
     },
@@ -191,7 +191,7 @@ exports.methods = {
                     that.$emit('refreshback');
                 }
             }else if ( that.moveY < 0 && that.loadmore == 'on' ){
-                if ( that.height + that.marginTop + that.marginBottom <= that.$els.content.scrollTop + that.offset + that.rootHeight ){
+                if ( that.height + that.marginTop + that.marginBottom <= that.$els.content.scrollTop + that.offset * that.$root.env.viewScale + that.rootHeight ){
                     that.status = true;
                     utils.windowTouchMoveDisabled(true);
                     that.$emit('morestart');
