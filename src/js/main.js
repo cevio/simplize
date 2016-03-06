@@ -45,7 +45,7 @@ Vue.config.convertAllProperties = false;
  */
 module.exports = simplize;
 
-Vue.component('ui-middle', require('./components/middle'));
+Vue.component('middle', require('./components/middle'));
 Vue.component('switch', require('./components/switch'));
 Vue.component('checkbox', require('./components/checkbox'));
 Vue.component('ui-model', require('./components/model'));

@@ -1,7 +1,7 @@
 exports.name = 'ui-prompt';
 exports.template =
     '<div class="ui-model-prompt" v-if="status" transition="dialog">' +
-        '<ui-middle>' +
+        '<middle>' +
             '<div class="ui-model-prompt-inner">' +
                 '<div class="ui-model-prompt-box dialog">' +
                     '<div class="title" v-html="title"></div>' +
@@ -15,7 +15,7 @@ exports.template =
                     '</div>' +
                 '</div>' +
             '</div>' +
-        '</ui-middle>' +
+        '</middle>' +
     '</div>';
 exports.props = ['status'];
 

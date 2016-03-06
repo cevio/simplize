@@ -1,7 +1,7 @@
 exports.name = 'ui-confirm';
 exports.template =
     '<div class="ui-model-confirm" v-if="status" transition="dialog">' +
-        '<ui-middle>' +
+        '<middle>' +
             '<div class="ui-model-confirm-inner">' +
                 '<div class="ui-model-confirm-box dialog">' +
                     '<div class="title" v-html="title"></div>' +
@@ -12,7 +12,7 @@ exports.template =
                     '</div>' +
                 '</div>' +
             '</div>' +
-        '</ui-middle>' +
+        '</middle>' +
     '</div>';
 exports.props = ['status'];
 

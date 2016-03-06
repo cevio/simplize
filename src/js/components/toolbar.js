@@ -4,10 +4,10 @@ var template =
     '<div class="web-toolbar" v-if="state" transition="toolbar" :class="display" v-el:tool-bar>' +
         '<ul class="clearfix">' +
             '<li v-for="browser in browsers | orderBy \'order\'" :style="{width: width}" :class="active(browser)">' +
-                '<ui-middle v-redirect="browser.url">' +
+                '<middle v-redirect="browser.url">' +
                     '<div class="web-toolbar-icon" v-html="browser.icon"></div>' +
                     '<div class="web-toolbar-text" v-html="browser.title"></div>' +
-                '</ui-middle>' +
+                '</middle>' +
             '</li>' +
         '</ul>' +
     '</div>';

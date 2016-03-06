@@ -1,7 +1,7 @@
 exports.name = 'ui-dialog';
 exports.template =
     '<div class="ui-model-alert" v-if="status" transition="dialog">' +
-        '<ui-middle>' +
+        '<middle>' +
             '<div class="ui-model-alert-inner">' +
                 '<div class="ui-model-alert-box dialog">' +
                     '<div class="title" v-html="title"></div>' +
@@ -9,7 +9,7 @@ exports.template =
                     '<button class="buttons clearflash" @click="ok">{{button}}</button>' +
                 '</div>' +
             '</div>' +
-        '</ui-middle>' +
+        '</middle>' +
     '</div>';
 exports.props = ['status'];
 

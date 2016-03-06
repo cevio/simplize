@@ -2,7 +2,7 @@ var animationend = require('animationend');
 exports.name = 'ui-loader';
 exports.template =
     '<div class="ui-model-loader" v-if="status" transition="fade" v-el:loader>' +
-        '<ui-middle>' +
+        '<middle>' +
             '<div class="ui-model-loader-inner">' +
                 '<div class="ui-model-loader-box" :class="{dark:isblack,wide:iswide}">' +
                     '<div v-if="iswide">' +
@@ -15,7 +15,7 @@ exports.template =
                     '</div>' +
                 '</div>' +
             '</div>' +
-        '</ui-middle>' +
+        '</middle>' +
     '</div>';
 
 exports.props = ['status'];
