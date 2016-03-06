@@ -35,7 +35,7 @@ exports.events = {
                 utils.on(that.$els.progress, 'touchstart', that._touchStart = that.touchStart());
                 utils.on(document.body, 'touchmove', that._touchMove = that.touchMove());
                 utils.on(document.body, 'touchend', that._touchEnd = that.touchEnd());
-                that.distence = (that.width - that.radius * 2) * Number(that.progress || 0) + that.radius;
+                that.distence = (that.width - that.radius * 2) * Number(that.progress || 0);
                 if ( that.distence > 0 ){
                     animationend(that.$els.progress).then(function(){
                         utils.removeClass(that.$els.progress, 'active');
