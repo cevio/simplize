@@ -54,6 +54,7 @@
 
     <slider :progress.sync="g" v-ref:slider></slider>
     <p><ago :time="s"></ago> ago</p>
+    <p>{{s|ago}}</p>
     <p style="text-align:center">{{g|fixProgress}}</p>
     <p>{{a.b.c.d}}</p>
     <switch :value.sync="a.b.c.d"></switch>

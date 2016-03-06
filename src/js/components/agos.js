@@ -12,31 +12,36 @@ var second = 1e3
   }
 exports.formats = formats;
 exports.computed = function (timestamp, stramp) {
-  if (timestamp instanceof Date) {
-    timestamp = +timestamp
-  }
-
-  if (typeof timestamp === 'string') {
-    timestamp = +new Date(timestamp)
-  }
-
-  var diff = Math.abs(timestamp - stramp)
-    , num = null
-
-  if (diff <= second) {
-    return '1s'
-  } else if (diff < minute) {
-    return Math.floor(diff / 1000) + formats.seconds
-  } else if (diff < hour) {
-    return Math.floor(diff / 1000 / 60) + formats.minutes
-  } else if (diff < day) {
-    return Math.floor(diff / 1000 / 3600) + formats.hours
-  } else {
-    if (diff < week) {
-      return Math.floor(diff / 1000 / 86400) + formats.days
-    } else {
-      var d = new Date(timestamp)
-      return (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear()
+    if (timestamp instanceof Date){
+        timestamp = +timestamp;
     }
-  }
+
+    if (typeof timestamp === 'string'){
+        timestamp = +new Date(timestamp);
+    }
+
+    var diff = Math.abs(timestamp - stramp);
+    var num = null;
+
+    if ( diff <= second ){
+        return '1' + formats.seconds;
+    }
+    else if ( diff < minute ){
+        return Math.floor(diff / 1000) + formats.seconds;
+    }
+    else if ( diff < hour ){
+        return Math.floor(diff / 1000 / 60) + formats.minutes;
+    }
+    else if ( diff < day ){
+        return Math.floor(diff / 1000 / 3600) + formats.hours;
+    }
+    else{
+        if ( diff < week ) {
+            return Math.floor(diff / 1000 / 86400) + formats.days;
+        }
+        else{
+            var d = new Date(timestamp);
+            return (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
+        }
+    }
 }

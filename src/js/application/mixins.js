@@ -2,6 +2,7 @@ var directiveRedirect = require('../directives/redirect');
 var resource = require('../resource');
 var utils = require('../utils');
 var next = require('../next');
+var ago = require('../components/agos').computed;
 
 exports.created = function(){
     this.$next = new next(function(){
@@ -15,6 +16,9 @@ exports.filters = {
     fixAnimation: function(cls){
         if ( resource.env.disableAnimation ){ return ''; }
         else{ return cls; }
+    },
+    ago: function(value, diff){
+        return ago(value, diff || this.$root.timestamp);
     }
 }
 exports.methods = {
