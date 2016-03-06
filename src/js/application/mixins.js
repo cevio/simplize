@@ -3,6 +3,7 @@ var resource = require('../resource');
 var utils = require('../utils');
 var next = require('../next');
 var ago = require('../components/agos').computed;
+var ajax = require('./ajax');
 
 exports.created = function(){
     this.$next = new next(function(){
@@ -22,6 +23,11 @@ exports.filters = {
     }
 }
 exports.methods = {
+    $ajax: ajax,
+    $jsonp: ajax.JSONP,
+    $ajaxGet: ajax.get,
+    $ajaxPost: ajax.post,
+    $ajaxGetJSON: ajax.getJSON,
     $Go: function(i){ history.go(i) },
     $Goback: function(){ history.back(); },
     $GoForward: function(){ history.forward(); },

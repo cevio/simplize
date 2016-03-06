@@ -107,9 +107,11 @@ simplize.ready(function() {
                 this.$headbar.class = 'white';
             },
             after: function(){
-                this.$refs.slider.$emit('create', function(){
-
-                })
+                var that = this;
+                this.$refs.slider.$emit('create');
+                this.$ajaxGet('a.html', function(code){
+                    that.html = code;
+                });
             }
         });
     });

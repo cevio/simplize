@@ -16,7 +16,8 @@ module.exports = {
                         }
                     },
                     g: 0.8,
-                    s: new Date().getTime()
+                    s: new Date().getTime(),
+                    html: ''
                 },
                 methods: {
                     click: function() {
