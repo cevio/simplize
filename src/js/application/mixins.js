@@ -25,7 +25,7 @@ exports.methods = {
     $alert: function(content, title){ return this.$root.$refs.uiModel.$alert(content, title); },
     $confirm: function(content, title){ return this.$root.$refs.uiModel.$confirm(content, title); },
     $prompt: function(content, title){ return this.$root.$refs.uiModel.$prompt(content, title); },
-    $loader: function(){ return this.$root.$refs.uiModel.$loader.apply(object, arguments); }
+    $loader: function(){ return this.$root.$refs.uiModel.$loader.apply(this.$root.$refs.uiModel.$loader, arguments); }
 }
 
 exports.computed = {
