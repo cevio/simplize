@@ -5,3 +5,4 @@ bower_components
 test
 test.html
 .DS_Store
+npm-debug.log

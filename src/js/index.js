@@ -1,10 +1,13 @@
 var simplize = require('./main');
 var database = require('./data');
 
+simplize.ago.formats.seconds = '秒';
+
 simplize.ready(function() {
     simplize.viewport('retina');
     var app = simplize(database);
     app.env.debug = true;
+    app.env.timer = true;
 
     //app.$toolbar.status = false;
 
@@ -105,7 +108,7 @@ simplize.ready(function() {
             },
             after: function(){
                 this.$refs.slider.$emit('create', function(){
-                    
+
                 })
             }
         });

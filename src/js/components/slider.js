@@ -1,8 +1,9 @@
 var utils = require('../utils');
+var animationend = require('animationend');
 
 exports.name = 'ui-slider';
 exports.props = ['progress'];
-exports.template = '<div class="ui-slider" v-el:root><div class="progress" v-el:progress></div><div>';
+exports.template = '<div class="ui-slider" v-el:root><div class="progress active" v-el:progress></div><div>';
 
 exports.data = function(){
     return {
@@ -35,7 +36,14 @@ exports.events = {
                 utils.on(document.body, 'touchmove', that._touchMove = that.touchMove());
                 utils.on(document.body, 'touchend', that._touchEnd = that.touchEnd());
                 that.distence = (that.width - that.radius * 2) * Number(that.progress || 0) + that.radius;
-                move(that.$els.progress, that.distence);
+                if ( that.distence > 0 ){
+                    animationend(that.$els.progress).then(function(){
+                        utils.removeClass(that.$els.progress, 'active');
+                    });
+                    move(that.$els.progress, that.distence);
+                }else{
+                    utils.removeClass(that.$els.progress, 'active');
+                }
                 typeof fn === 'function' && fn.call(that);
                 that.isCreated = true;
             });

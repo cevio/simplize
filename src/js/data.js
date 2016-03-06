@@ -15,7 +15,8 @@ module.exports = {
                             }
                         }
                     },
-                    g: 0.1
+                    g: 0.8,
+                    s: new Date().getTime()
                 },
                 methods: {
                     click: function() {
@@ -45,6 +46,11 @@ module.exports = {
                     },
                     unload: function(){
                         //console.log('a is unloaded')
+                    }
+                },
+                filters: {
+                    fixProgress: function(value){
+                        return (value * 100).toFixed(2) + '%';
                     }
                 }
             },

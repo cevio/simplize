@@ -25,12 +25,14 @@ var middlewares = require('./middlewares');
 var debug = require('./application/debug');
 var os = require('./application/os');
 var tollbarComponent = require('./application/toolbar');
+var TimeAgos = require('./components/agos');
 
 /**
  *  load vars.
  */
 var sessions = keeper.pool;
 var first = true;
+var timer = null;
 
 /**
  * 默认模式， 关闭
@@ -49,6 +51,7 @@ Vue.component('checkbox', require('./components/checkbox'));
 Vue.component('ui-model', require('./components/model'));
 Vue.component('scroll', require('./components/scroll'));
 Vue.component('slider', require('./components/slider'));
+Vue.component('ago', require('./components/ago'));
 Vue.mixin(require('./application/mixins'));
 
 function simplize(options){
@@ -68,16 +71,30 @@ function simplize(options){
         },
         watch: {
             "req.href": simplize.run,
-            "env.debug": debug
+            "env.debug": debug,
+            "env.timer": function(value){
+                var that = this;
+                if ( value ){
+                    timer = setInterval(function(){
+                        that.env.time = new Date().getTime();
+                    }, 1000);
+                }else{
+                    clearInterval(timer);
+                }
+            }
         },
         events: {
             end: function(){
                 if ( keeper.temp ) keeper.temp = null;
             }
+        },
+        ready: function(){
+            this.env.time = new Date().getTime();
         }
     });
 }
 
+simplize.ago = TimeAgos;
 simplize.nextTick = utils.nextTick;
 simplize.Vue = Vue;
 simplize.stop = utils.stop;

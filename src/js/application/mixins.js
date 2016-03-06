@@ -35,3 +35,9 @@ exports.methods = {
         return object.apply(object, arguments);
     }
 }
+
+exports.computed = {
+    timestamp: function(){
+        return this.$root.env.time;
+    }
+}
