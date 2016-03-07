@@ -65,6 +65,10 @@ exports.component = {
         right: function(){
             this.display = 'move';
             this.listen();
+        },
+        normal: function(){
+            this.display = 'move';
+            this.listen();
         }
     }
 }

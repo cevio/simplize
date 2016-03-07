@@ -51,7 +51,7 @@ simplize.ready(function() {
     b.$active(function(){
         this.$render('c', {
             before: function(){
-                //this.$toolbar.status = true;
+                this.$toolbar.status = true;
                 this.$headbar.status = true;
                 this.$headbar.left.icon='<i class="fa fa-angle-left"></i>';
                 this.$headbar.left.text="Home";
@@ -77,7 +77,7 @@ simplize.ready(function() {
                 this.$headbar.right.icon='';
                 this.$headbar.right.text='';
                 this.$headbar.class = '';
-                //this.$toolbar.status = false;
+                this.$toolbar.status = false;
             }
         })
     });

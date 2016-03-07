@@ -82,10 +82,10 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
          */
         if ( fixAnimation ){
             return utils.nextTick(function(){
-                normalExchange(webview, oldwebview, after);
+                normalExchange(webview, oldwebview, $toolbar, after);
             });
         }else{
-            return normalExchange(webview, oldwebview, after);
+            return normalExchange(webview, oldwebview, $toolbar, after);
         }
     }
 
@@ -137,11 +137,12 @@ function webviewExchange(webview, oldwebview, $direction, after, fn){
 /**
  *  不使用动画触发方式
  */
-function normalExchange(webview, oldwebview, after){
+function normalExchange(webview, oldwebview, $toolbar, after){
     webview.$emit('beforeload');
     oldwebview && oldwebview.$emit('beforeunload');
     webview.status = true;
     oldwebview && (oldwebview.status = false);
+    toolbarExchange($toolbar, 'normal');
     utils.nextTick(function(){
         typeof keep.temp === 'function' && keep.temp();
         webview.$emit('load');
