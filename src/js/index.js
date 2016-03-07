@@ -58,7 +58,7 @@ simplize.ready(function() {
                 this.$headbar.center.text = 'Component C Page';
                 this.$headbar.right.icon='';
                 this.$headbar.right.text='';
-                this.$headbar.class = 'red';
+                this.$headbar.class = '';
             }
         })
     });
@@ -76,7 +76,7 @@ simplize.ready(function() {
                 this.$headbar.center.text = 'Component D Page';
                 this.$headbar.right.icon='';
                 this.$headbar.right.text='';
-                this.$headbar.class = 'green';
+                this.$headbar.class = '';
                 //this.$toolbar.status = false;
             }
         })
@@ -129,7 +129,7 @@ simplize.ready(function() {
                 }
                 this.$headbar.right.icon='';
                 this.$headbar.right.text='';
-                this.$headbar.class = 'red';
+                this.$headbar.class = '';
             },
             after: function(){
                 var that = this;
