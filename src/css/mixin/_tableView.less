@@ -1,0 +1,40 @@
+.tableView {
+  font-size: 1.4rem;
+  padding-left: 1em;
+  border-top: @default-border;
+  border-bottom: @default-border;
+  .cell {
+    position: relative;
+    padding: 1em 1em 1em 0;
+    display: table;
+    width: 100%;
+    .left,.center,.right{
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .left,.right{
+      width: 1px;
+      white-space: nowrap;
+    }
+
+    &:not(:last-child){
+      border-bottom: @default-border;
+    }
+    &.linked {
+      padding: 1em 2em 1em 0;
+      &:after {
+        position: absolute;
+        width: 0.5em;
+        height: 0.5em;
+        content: "";
+        border-width: 2px 2px 0 0;
+        border-style: solid;
+        border-color: #888;
+        transform: rotate(45deg);
+        right: 1.5rem;
+        top: 50%;
+        margin-top: -0.25em;
+      }
+    }
+  }
+}

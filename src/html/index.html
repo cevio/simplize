@@ -20,37 +20,59 @@
   <template name="a">
 
     <div class="container">
-      <div class="row">
-        <div class="col-5 tc">.col-5</div>
-        <div class="col-10 tc">.col-10</div>
-        <div class="col-15 tc">.col-15</div>
-        <div class="col-20 tc">.col-20</div>
-        <div class="col-25 tc">.col-25</div>
-        <div class="col-25 tc">.col-25</div>
+      <div class="row ">
+        <div class="col-5 tc border">.col-5</div>
+        <div class="col-10 tc border">.col-10</div>
+        <div class="col-15 tc border">.col-15</div>
+        <div class="col-20 tc border">.col-20</div>
+        <div class="col-25 tc border">.col-25</div>
+        <div class="col-25 tc border">.col-25</div>
       </div>
 
       <div class="row">
-        <div class="col-33 tc">.col-33</div>
-        <div class="col-33 tc">.col-33</div>
-        <div class="col-33 tc">.col-33</div>
+        <div class="col-33 tc border">.col-33</div>
+        <div class="col-33 tc border">.col-33</div>
+        <div class="col-33 tc border">.col-33</div>
       </div>
       <div class="row">
-        <div class="col-33 tc">.col-33</div>
-        <div class="col-66 tc">.col-66</div>
+        <div class="col-33 tc border">.col-33</div>
+        <div class="col-66 tc border">.col-66</div>
       </div>
       <div class="row">
-        <div class="col-50 tc">.col-50</div>
-        <div class="col-50 tc">.col-50</div>
+        <div class="col-50 tc border">.col-50</div>
+        <div class="col-50 tc border">.col-50</div>
       </div>
       <div class="row">
-        <div class="col-40 tc">.col-40</div>
-        <div class="col-60 tc">.col-60</div>
+        <div class="col-40 tc border">.col-40</div>
+        <div class="col-60 tc border">.col-60</div>
       </div>
       <div class="row">
-        <div class="col-30 tc">.col-30</div>
-        <div class="col-70 tc">.col-70</div>
+        <div class="col-30 tc border">.col-30</div>
+        <div class="col-70 tc border">.col-70</div>
       </div>
     </div>
+
+    <div class="tableView mt10 mb10">
+      <div class="cell linked">
+          <div class="left"><img width="100" height="100" src="" alt="图标"></div>
+          <div class="center">wwwwwwww</div>
+          <div class="right">asdamdadi</div>
+      </div>
+      <div class="cell">
+        <div class="left"><img width="100" height="100" src="" alt="图标"></div>
+        <div class="center">wwwwwwww</div>
+        <div class="right">asdamdadi</div>
+      </div>
+      <div class="cell">
+        <div class="left"><img width="100" height="100" src="" alt="图标"></div>
+        <div class="center">wwwwwwww</div>
+        <div class="right">asdamdadi</div>
+      </div>
+      <div class="cell">
+          wwww
+      </div>
+    </div>
+
     <div class="container m10">
       <slider :progress.sync="g" v-ref:slider0></slider>
     </div>
