@@ -1,22 +1,171 @@
-@checkbox-with: 2em;
-.ui-checkbox{
-    display: inline-block;
-    width: @checkbox-with;
-    height: @checkbox-with;
-    position: relative;
-    &.round{
-        background: #fcfff4;
-        background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-        background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-        background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-        -moz-border-radius: 50px;
-        -webkit-border-radius: 50px;
-        border-radius: 50px;
-        -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
-        -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
-        box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+@checkbox-with: 1em;
+@color-light:rgb(233,233,233);
+@color-green: rgb(100, 189, 99);
+@color-blue: rgb(65, 183, 241);
+@color-pink: rgb(255, 119, 145);
+@color-green2: rgb(60, 200, 173);
+@color-red: rgb(219, 85, 84);
+@color-yellow: rgb(254, 194, 0);
+.ui-checkbox {
+  display: inline-block;
+  width: @checkbox-with;
+  height: @checkbox-with;
+  position: relative;
+  vertical-align: middle;
+  font-size: @checkbox-with;
+  margin-top: -.1em;
+  &.green {
+    color: @color-green !important;
+    background-color: @color-green !important;
+  }
+  &.blue {
+    color: @color-blue !important;
+    background-color: @color-blue !important;
+  }
+  &.pink {
+    color: @color-pink !important;
+    background-color: @color-pink !important;
+  }
+  &.green2 {
+    color: @color-green2 !important;
+    background-color: @color-green2 !important;
+  }
+  &.red {
+    color: @color-red !important;
+    background-color: @color-red !important;
+  }
+  &.yellow {
+    color: @color-yellow !important;
+    background-color: @color-yellow !important;
+  }
+  label {
+    height: 100%;
+    width: 100%;
+    display: block;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 48%;
+      left: 13%;
+      width: 45%;
+      height: 30%;
+      border: 0.15em solid #333;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+      transform: rotate(-45deg);
     }
-    &.square{
+  }
+  &.round {
+    background: #fcfff4;
+    background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    -moz-box-shadow: inset 0 1px 1px white, 0 1px 3px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: inset 0 1px 1px white, 0 1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 1px 1px white, 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  &.square1 {
+    label {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #fcfff4;
+      background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+      border-radius: 0.3em;
+      box-shadow: inset 0 0.1em 0.1em white, 0 0.1em 0.2em rgba(0, 0, 0, 0.5);
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 14%;
+        width: 50%;
+        height: 30%;
+        border: 0.15em solid #333;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        opacity: 0;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+  &.default{
+    background: transparent !important;
+    border: .08em solid #e9e9e9;
+    label{
+      &:after{
+        border-color: inherit;
+      }
+    }
+  }
+  &.flat {
+    background-color: @color-light;
+    border-radius: 0.3em;
+    label:after {
+      border-color: #fff;
+    }
+  }
+  &.square {
+    background-color: @color-light;
+    label {
+      background-color: inherit;;
+      &::after {
+        border-color: #fff;
+      }
+      &::before {
+        height: 80%;
+        width: 80%;
+        content: " ";
+        display: block;
+        position: absolute;
+        left: 10%;
+        top: 10%;
+        background-color: #fff;
+        transform-origin: center center;
+        transform: scale(1);
+        transition: transform 300ms ease 0s;
+      }
+    }
+    &.active {
+      label {
+        &::before {
+          transform: scale(0);
+        }
+      }
+    }
+  }
 
+
+
+  &.active {
+    label::after {
+      opacity: 1;
+      transform-origin: left top;
+      animation: hookActive 200ms linear 0;
     }
+  }
+}
+@keyframes hookActive {
+  0% {
+    height: 0;
+    width: 0;
+  }
+  30% {
+    height: 30%;
+    width: 0;
+  }
+  100% {
+    height: 30%;
+    width: 50%;
+  }
 }

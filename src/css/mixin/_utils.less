@@ -128,7 +128,7 @@
 //输出字体大小  f5,f6,f7,f8--,f19,f20
 .func-fontSize(@n, @i: @font-func-start) when (@i =< @n) {
   .f@{i} {
-    font-size: @i*0.1rem;
+    font-size: @i*0.1rem !important;
   }
   .func-fontSize(@n, (@i + @font-func-step));
 }
