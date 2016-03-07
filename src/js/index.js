@@ -108,7 +108,9 @@ simplize.ready(function() {
             },
             after: function(){
                 var that = this;
-                this.$refs.slider.$emit('create');
+                for ( var i = 0 ; i < 7 ; i++ ){
+                    this.$refs['slider' + i].$emit('create');
+                }
                 this.$ajaxGet('a.html', function(code){
                     that.html = code;
                 });
