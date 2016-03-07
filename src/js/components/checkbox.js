@@ -2,7 +2,7 @@ var utils = require('../utils');
 exports.name = "ui-checkbox";
 exports.props = ['raw', 'value', 'disvalue'];
 exports.template =
-    '<div class="ui-checkbox" :class="{active:compute}" v-el:root>' +
+    '<div class="ui-checkbox clearflash" :class="{active:compute}" v-el:root>' +
         '<label></label>' +
     '</div>';
 

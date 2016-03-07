@@ -3,7 +3,7 @@ var animationend = require('animationend');
 
 exports.name = 'ui-slider';
 exports.props = ['progress'];
-exports.template = '<div class="ui-slider" v-el:root><div class="progress active" v-el:progress></div><div>';
+exports.template = '<div class="ui-slider clearflash" v-el:root><div class="progress active clearflash" v-el:progress></div><div>';
 
 exports.data = function(){
     return {

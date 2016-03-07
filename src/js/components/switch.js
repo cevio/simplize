@@ -1,7 +1,7 @@
 var utils = require('../utils');
 
 exports.name = 'ui-switch';
-exports.template = '<div class="ui-switch" :class="{active:value==1}" v-el:switcher><input type="hidden" name="{{name}}" value="{{value}}" v-if="name" /></div>';
+exports.template = '<div class="ui-switch clearflash" :class="{active:value==1}" v-el:switcher><input type="hidden" name="{{name}}" value="{{value}}" v-if="name" /></div>';
 exports.props = ['value', 'name'];
 exports.ready = function(){
     var that = this;
