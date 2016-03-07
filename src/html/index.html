@@ -52,7 +52,31 @@
       </div>
     </div>
     <div class="container m10">
-      <slider :progress.sync="g" v-ref:slider></slider>
+      <slider  :progress.sync="g" v-ref:slider></slider>
+    </div>
+
+    <div class="container m10">
+      <slider class="green" :progress.sync="g" v-ref:slider></slider>
+    </div>
+
+    <div class="container m10">
+      <slider class="blue" :progress.sync="g" v-ref:slider></slider>
+    </div>
+
+    <div class="container m10">
+      <slider class="red" :progress.sync="g" v-ref:slider></slider>
+    </div>
+
+    <div class="container m10">
+      <slider class="pink" :progress.sync="g" v-ref:slider></slider>
+    </div>
+
+    <div class="container m10">
+      <slider class="green2" :progress.sync="g" v-ref:slider></slider>
+    </div>
+
+    <div class="container m10">
+      <slider class="yellow" :progress.sync="g" v-ref:slider></slider>
     </div>
 
     <p><ago :time="s"></ago> ago</p>
