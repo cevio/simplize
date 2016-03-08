@@ -13,6 +13,7 @@
   <title>App name</title>
   <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
   <link href="../css/index.css" rel="stylesheet">
+  <!-- <link href="../../build/css/index.css" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -20,8 +21,8 @@
   <template name="a">
 
     <div class="row">
-      <div class="col-50">dadwadw</div>
-      <div class="col-50">dnaiwdnawuin</div>
+      <div class="col-50 red">dadwadw</div>
+      <div class="col-50 blue">dnaiwdnawuin</div>
     </div>
 
     <div class="container">
@@ -112,6 +113,12 @@
     <p>{{a.b.c.d}}</p>
     <div class="container m10">
       <switch :value.sync="a.b.c.d"></switch>
+      <switch class="green f20" :value.sync="a.b.c.d"></switch>
+      <switch class="blue f10" :value.sync="a.b.c.d"></switch>
+      <switch class="red f15" :value.sync="a.b.c.d"></switch>
+      <switch class="pink f25" :value.sync="a.b.c.d"></switch>
+      <switch class="green2 f35" :value.sync="a.b.c.d"></switch>
+      <switch class="yellow" :value.sync="a.b.c.d"></switch>
     </div>
 
 
@@ -121,7 +128,7 @@
     </div>
 
     <div class="container m10">
-        <checkbox class="flat  f30" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="flat  f35" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
         <checkbox class="flat green f30" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
         <checkbox class="flat blue f20" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox>  选中
         <checkbox class="flat red" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
@@ -141,13 +148,34 @@
     </div>
 
     <div class="container m10">
-        <checkbox class="default f30" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="default black f30" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
         <checkbox class="default green f30" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
         <checkbox class="default blue f20" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox>  选中
         <checkbox class="default red" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
         <checkbox class="default pink f10" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
         <checkbox class="default green2" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
         <checkbox class="default yellow" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+    </div>
+
+
+    <div class="container m10">
+        <checkbox class="radio black f30" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="radio green f30" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="radio blue f20" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox>  选中
+        <checkbox class="radio red" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="radio pink f10" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="radio green2" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="radio yellow" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+    </div>
+
+    <div class="container m10">
+        <checkbox class="radio full black f30" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="radio full green f30" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="radio full  blue f20" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox>  选中
+        <checkbox class="radio full red" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="radio full pink f10" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="radio full green2" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
+        <checkbox class="radio full yellow" :raw.sync="a.b.c.d" value="1" disvalue="0"></checkbox> 选中
     </div>
 
     <button v-on:click="dclick">click</button>

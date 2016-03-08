@@ -1,5 +1,4 @@
 @checkbox-with: 1em;
-
 .ui-checkbox {
   display: inline-block;
   width: @checkbox-with;
@@ -8,6 +7,7 @@
   vertical-align: middle;
   font-size: @checkbox-with;
   margin-top: -.1em;
+
   label {
     height: 100%;
     width: 100%;
@@ -27,6 +27,35 @@
       opacity: 0;
       transform: rotate(-45deg);
     }
+  }
+  &.black label:after {
+    color: #666 ;
+    background-color: #666 ;
+  }
+
+  &.green label:after {
+    color: @color-green ;
+    background-color: @color-green ;
+  }
+  &.blue label:after{
+    color: @color-blue !important;
+    background-color: @color-blue ;
+  }
+  &.pink label:after{
+    color: @color-pink !important;
+    background-color: @color-pink ;
+  }
+  &.green2 label:after{
+    color: @color-green2 !important;
+    background-color: @color-green2 ;
+  }
+  &.red label:after{
+    color: @color-red !important;
+    background-color: @color-red ;
+  }
+  &.yellow label:after{
+    color: @color-yellow ;
+    background-color: @color-yellow ;
   }
   &.square1 {
     label {
@@ -57,12 +86,13 @@
       }
     }
   }
-  &.default{
+  &.default {
     background: transparent !important;
-    border: .08em solid #e9e9e9;
-    label{
-      &:after{
+    border: 0.08em solid #e9e9e9;
+    label {
+      &:after {
         border-color: inherit;
+        background-color: transparent !important;
       }
     }
   }
@@ -76,11 +106,11 @@
   &.square {
     background-color: @color-light;
     label {
-      background-color: inherit;;
-      &::after {
+      background-color: inherit;
+      &:after {
         border-color: #fff;
       }
-      &::before {
+      &:before {
         height: 80%;
         width: 80%;
         content: " ";
@@ -96,18 +126,47 @@
     }
     &.active {
       label {
-        &::before {
+        &:before {
           transform: scale(0);
         }
       }
     }
   }
+  &.radio {
 
+    border-radius: 50%;
+    &:not(.full){
+      border: 0.05em solid #ccc;
+      background: transparent !important;
+    }
+    &.full{
+      border: .1em solid transparent;
+      label:after{
+        border-color: #fff;
+      }
+    }
 
+    &:not(.full) label:after{
+      height: .3em;
+      width: .3em;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -0.15em;
+      margin-top: -0.15em;
+      border-radius: 50%;
+      content: '';
+      opacity: 0;
+      border: none;
+      transform: none;
+      animation: none;
+      z-index: 999;
+    }
 
+  }
   &.active {
-    label::after {
-      opacity: 1;
+    label:after {
+      opacity: 1 !important;
       transform-origin: left top;
       animation: hookActive 200ms linear 0;
     }
@@ -121,6 +180,10 @@
   30% {
     height: 30%;
     width: 0;
+  }
+  90%{
+    height: 30%;
+    width: 60%;
   }
   100% {
     height: 30%;
