@@ -107,42 +107,42 @@
 // margin
 .make_margin(@i) {
   .m@{i} {
-    margin: @i*0.1em;
+    margin: @i*0.1em !important;
   }
   .mt@{i} {
-    margin-top: @i*0.1em;
+    margin-top: @i*0.1em !important;
   }
   .mb@{i} {
-    margin-bottom: @i*0.1em;
+    margin-bottom: @i*0.1em !important;
   }
   .ml@{i} {
-    margin-left: @i*0.1em;
+    margin-left: @i*0.1em !important;
   }
   .mr@{i} {
-    margin-right: @i*0.1em;
+    margin-right: @i*0.1em !important;
   }
 }
 //padding
 .make_padding(@i) {
   .p@{i} {
-    padding: @i*0.1em;
+    padding: @i*0.1em !important;
   }
   .pt@{i} {
-    padding-top: @i*0.1em;
+    padding-top: @i*0.1em !important;
   }
   .pb@{i} {
-    padding-bottom: @i*0.1em;
+    padding-bottom: @i*0.1em !important;
   }
   .pl@{i} {
-    padding-left: @i*0.1em;
+    padding-left: @i*0.1em !important;
   }
   .pr@{i} {
-    padding-right: @i*0.1em;
+    padding-right: @i*0.1em !important;
   }
 }
 //font-size
 .f(@i:1rem) {
-  font-size: @i*1rem;
+  font-size: @i*1rem !important;
 }
 //输出外边距  m5,m10,...  em 为单位  m5表示 margin 0.5em
 .func_margin(@n, @i:@margin-func-start) when ( @i =< @n) {
