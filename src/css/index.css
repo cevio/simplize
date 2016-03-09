@@ -23,3 +23,7 @@
 .d-icon.actived i{
     transform: rotate(180deg);
 }
+
+.white{
+    background-color: #fff;
+}

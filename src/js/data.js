@@ -43,8 +43,8 @@ module.exports = {
                 },
                 events: {
                     beforeload: function(){
-                        this.$toolbar.status = true;
-                        this.$headbar.status = true;
+                        this.$toolbar.status = false;
+                        this.$headbar.status = false;
                         this.$headbar.left.icon='';
                         this.$headbar.left.text="";
                         this.$headbar.center.text = 'Simplize Demo Index';
@@ -94,7 +94,7 @@ module.exports = {
                         }
                         this.$headbar.right.icon='';
                         this.$headbar.right.text='';
-                        this.$headbar.class = '';
+                        this.$headbar.class = 'white';
                     },
                     load: function() {
                         var that = this;
@@ -149,7 +149,7 @@ module.exports = {
                         this.$headbar.center.text = 'Component C Page';
                         this.$headbar.right.icon='';
                         this.$headbar.right.text='';
-                        this.$headbar.class = '';
+                        this.$headbar.class = 'white';
                     }
                 }
             }
@@ -170,7 +170,7 @@ module.exports = {
                         this.$headbar.center.text = 'Component D Page';
                         this.$headbar.right.icon='';
                         this.$headbar.right.text='';
-                        this.$headbar.class = '';
+                        this.$headbar.class = 'white';
                         this.$toolbar.status = false;
                     }
                 }

@@ -110,6 +110,7 @@ function toolbarExchange($toolbar, $direction){
  *  webview切换触发
  */
 function webviewExchange(webview, oldwebview, $direction){
+    webview.$emit('resize');
     load(webview);
     unload(oldwebview);
     oldwebview.status = false;
@@ -121,6 +122,7 @@ function webviewExchange(webview, oldwebview, $direction){
  *  不使用动画触发方式
  */
 function normalExchange(webview, oldwebview, $toolbar){
+    webview.$emit('resize');
     webview.status = true;
     oldwebview && (oldwebview.status = false);
     toolbarExchange($toolbar, 'normal');

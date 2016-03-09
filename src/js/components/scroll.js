@@ -46,6 +46,7 @@ exports.beforeDestroy = function(){
     this.$off('refreshmove');
     this.$off('refreshend');
     this.$off('loadmoreend');
+    this.status = false;
     this.isCreated = false;
 }
 

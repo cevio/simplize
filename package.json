@@ -1,8 +1,11 @@
 {
   "name": "simplize",
   "description": "simplize project",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "keywords": [],
+  "files": [
+      "!src"
+  ],
   "main": "build/index.js",
   "repository": {
     "type": "git",

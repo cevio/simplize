@@ -80,9 +80,11 @@ module.exports = function(name, options, item){
      if ( typeof _unload === 'function' ) delete options.events.unload;
      result.events = options.events;
      var events = {
-         beforeload: function(){
+         resize: function(){
              this.HeadbarHeight = this.$headbar.height;
              this.ToolbarHeight = this.$toolbar.height;
+         },
+         beforeload: function(){         
              typeof _beforeLoad === 'function' && _beforeLoad.call(this);
          },
          load: function(){
