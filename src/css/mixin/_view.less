@@ -11,6 +11,11 @@
   background-color: #000;
 }
 
+.move-enter,.move-leave{
+  .ui-checkbox.active label:after{
+    animation-delay: @animate-pageChange-duration;
+  }
+}
 
 .move-enter.fade{
     animation: fadeIn @animate-pageChange-duration forwards;
