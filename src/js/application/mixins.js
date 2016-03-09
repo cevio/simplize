@@ -11,7 +11,8 @@ exports.directives = {
 }
 exports.filters = {
     ago: function(value, diff){ return ago(value, diff || this.$root.timestamp); },
-    fixAnimation: function(cls){ if ( resource.env.disableAnimation ){ return ''; }else{ return cls; } }
+    fixAnimation: function(cls){ if ( resource.env.disableAnimation ){ return ''; }else{ return cls; } },
+    rem: function(value){ return value / this.$root.env.viewScale; }
 }
 exports.methods = {
     $ajax: ajax,
