@@ -42,8 +42,27 @@ module.exports = {
                     }
                 },
                 events: {
+                    beforeload: function(){
+                        this.$toolbar.status = true;
+                        this.$headbar.status = true;
+                        this.$headbar.left.icon='';
+                        this.$headbar.left.text="";
+                        this.$headbar.center.text = 'Simplize Demo Index';
+                        this.$headbar.right.icon='<i class="fa fa-sliders"></i>';
+                        this.$headbar.right.text='Set';
+                        this.$headbar.right.fn = function(){
+                            alert(2)
+                        }
+                        this.$headbar.class = 'white';
+                    },
                     load: function(){
-                        //console.log('a is loaded')
+                        var that = this;
+                        for ( var i = 0 ; i < 7 ; i++ ){
+                            this.$refs['slider' + i].$emit('create');
+                        }
+                        this.$ajaxGet('a.html', function(code){
+                            that.html = code;
+                        });
                     },
                     unload: function(){
                         //console.log('a is unloaded')
@@ -64,11 +83,51 @@ module.exports = {
                     }
                 },
                 events: {
+                    beforeload: function(){
+                        this.$toolbar.status = false;
+                        this.$headbar.status = true;
+                        this.$headbar.center.text = 'Simplize Blog Naps';
+                        this.$headbar.left.icon='<i class="fa fa-angle-left"></i>';
+                        this.$headbar.left.text="Back";
+                        this.$headbar.left.fn=function(){
+                            history.back();
+                        }
+                        this.$headbar.right.icon='';
+                        this.$headbar.right.text='';
+                        this.$headbar.class = '';
+                    },
                     load: function() {
-                        //console.log('b is loaded')
+                        var that = this;
+                            this.$refs.scroll.$on('refreshmove', function(y, _y){
+                                if ( y > _y * 2 ){
+                                    that.scroll.status = 1;
+                                    that.scroll.text = '松开进行刷新'
+                                }else if ( y > _y ){
+                                    that.scroll.status = 0;
+                                    that.scroll.text = '继续下拉准备刷新';
+                                }else{
+                                    that.scroll.status = 0;
+                                    that.scroll.text = '下拉刷新';
+                                }
+                            });
+                            this.$refs.scroll.$on('refreshend', function(){
+                                that.scroll.status = 0;
+                                that.scroll.text = '下拉刷新';
+                            });
+                            this.$refs.scroll.$on('refresh', function(next){
+                                that.scroll.text = '正在刷新数据';
+                                setTimeout(next, 3000);
+                            });
+                            this.$refs.scroll.$on('loadmore', function(next){
+                                console.log('loadmoring');
+                                setTimeout(next, 3000);
+                            });
                     },
                     unload: function() {
-                        //console.log('b is unloaded')
+                        this.$refs.scroll.$off('refreshmove');
+                        this.$refs.scroll.$off('refreshend');
+                        this.$refs.scroll.$off('refresh');
+                        this.$refs.scroll.$off('loadmore');
                     }
                 }
             }
@@ -80,7 +139,20 @@ module.exports = {
         url: '/c',
         order: 2,
         webviews: {
-            c: {}
+            c: {
+                events: {
+                    beforeload: function(){
+                        this.$toolbar.status = true;
+                        this.$headbar.status = true;
+                        this.$headbar.left.icon='<i class="fa fa-angle-left"></i>';
+                        this.$headbar.left.text="Home";
+                        this.$headbar.center.text = 'Component C Page';
+                        this.$headbar.right.icon='';
+                        this.$headbar.right.text='';
+                        this.$headbar.class = '';
+                    }
+                }
+            }
         }
     },
     "bs": {
@@ -89,7 +161,20 @@ module.exports = {
         url: '/d',
         order: 3,
         webviews: {
-            d: {}
+            d: {
+                events: {
+                    beforeload: function(){
+                        this.$headbar.status = true;
+                        this.$headbar.left.icon='<i class="fa fa-angle-left"></i>';
+                        this.$headbar.left.text="Home";
+                        this.$headbar.center.text = 'Component D Page';
+                        this.$headbar.right.icon='';
+                        this.$headbar.right.text='';
+                        this.$headbar.class = '';
+                        this.$toolbar.status = false;
+                    }
+                }
+            }
         }
     }
 }

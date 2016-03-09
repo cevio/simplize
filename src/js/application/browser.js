@@ -36,13 +36,8 @@ exports.active = function(){
     }
 }
 
-exports.render = function(name, direction, foo){
-    if ( !foo ){
-        if ( typeof direction !== 'string' ){
-            foo = direction;
-            direction = 'history';
-        }
-    }
+exports.render = function(name, direction){
+    if ( !direction ){ direction = 'history'; }
     var app = this.$parent;
     var oldbrowser = app.ActiveBrowser;
     var newBrowser = this;
@@ -58,21 +53,17 @@ exports.render = function(name, direction, foo){
 
     utils.nextTick(function(){
         var webview = newBrowser.$webview(name);
-        animate(oldbrowser, newBrowser, oldwebview, webview, direction, foo);
+        animate(oldbrowser, newBrowser, oldwebview, webview, direction);
     });
 }
 
-exports.route = function(router, name, options){
+exports.route = function(router, name){
     if ( !name ){
         name = router;
         router = '/';
     }
     this.$active(router, function(){
-        this.$render(name, {
-            before: function(){
-                utils.$extend(this.$headbar, options || {});
-            }
-        });
+        this.$render(name);
     });
 }
 

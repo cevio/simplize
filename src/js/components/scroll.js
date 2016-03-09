@@ -59,7 +59,7 @@ exports.computed = {
 }
 
 exports.events = {
-    create: function(fn){
+    "webview-load": function(fn){
         var that = this;
         if ( this.isCreated ) return;
         setTimeout(function(){

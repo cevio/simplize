@@ -87,10 +87,12 @@ module.exports = function(name, options, item){
          },
          load: function(){
              this.direction = '';
+             this.$broadcast('webview-load');
              typeof _load === 'function' && _load.call(this);
          },
          unload: function(){
              this.direction = '';
+             this.$broadcast('webview-unload');
              typeof _unload === 'function' && _unload.call(this);
          }
      }

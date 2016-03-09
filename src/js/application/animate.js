@@ -2,7 +2,7 @@ var animationend = require('animationend');
 var utils = require('../utils');
 var keep = require('./session');
 
-module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction, foo){
+module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction){
     if ( !newBrowser ) return;
 
     var fixAnimation = webview.env.disableAnimation;
@@ -10,9 +10,7 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
     var $toolbar = app.$toolbar;
     var $headbar = newBrowser.$headbar;
     var $direction = app.$history;
-    var before,
-        after,
-        exchangeWithAnimation = !fixAnimation, // 是否使用动画过度
+    var exchangeWithAnimation = !fixAnimation, // 是否使用动画过度
         exchange = !!oldbrowser && oldbrowser == newBrowser; // 是否同一层browser之间webview切换
 
     /**
@@ -25,15 +23,6 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
      *  也不需要动画
      */
     if ( exchangeWithAnimation && oldbrowser != newBrowser ) exchangeWithAnimation = false;
-
-    /**
-     *  before 进入webview前执行的方法
-     *  after  webview加载完毕后执行的方法
-     */
-    if ( utils.$type(foo, 'object') ){
-        before = foo.before;
-        after = foo.after;
-    } else if ( typeof foo === 'function' ) { after = foo; }
 
     /**
      *  判断动画方向
@@ -51,12 +40,8 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
     $headbar && $headbar.$emit('before');
     $toolbar && $toolbar.$emit('before');
 
-    /**
-     *  开始执行before方法
-     *  可能会涉及到headbar和toolbar之间状态的切换
-     *  引起我们必须滞后加载页面动画
-     */
-    typeof before === 'function' && before.call(webview);
+    webview.$emit('beforeload');
+    oldwebview && oldwebview.$emit('beforeunload');
 
     /**
      *  如果不使用动画切换
@@ -82,10 +67,10 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
          */
         if ( fixAnimation ){
             return utils.nextTick(function(){
-                normalExchange(webview, oldwebview, $toolbar, after);
+                normalExchange(webview, oldwebview, $toolbar);
             });
         }else{
-            return normalExchange(webview, oldwebview, $toolbar, after);
+            return normalExchange(webview, oldwebview, $toolbar);
         }
     }
 
@@ -97,7 +82,7 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
     utils.nextTick(function(){
         headbarExchange($headbar, $direction);
         toolbarExchange($toolbar, $direction);
-        webviewExchange(webview, oldwebview, $direction, after);
+        webviewExchange(webview, oldwebview, $direction);
     });
 }
 
@@ -124,10 +109,8 @@ function toolbarExchange($toolbar, $direction){
 /**
  *  webview切换触发
  */
-function webviewExchange(webview, oldwebview, $direction, after, fn){
-    webview.$emit('beforeload');
-    oldwebview && oldwebview.$emit('beforeunload');
-    load(webview, after, fn);
+function webviewExchange(webview, oldwebview, $direction){
+    load(webview);
     unload(oldwebview);
     oldwebview.status = false;
     webview.status = true;
@@ -137,9 +120,7 @@ function webviewExchange(webview, oldwebview, $direction, after, fn){
 /**
  *  不使用动画触发方式
  */
-function normalExchange(webview, oldwebview, $toolbar, after){
-    webview.$emit('beforeload');
-    oldwebview && oldwebview.$emit('beforeunload');
+function normalExchange(webview, oldwebview, $toolbar){
     webview.status = true;
     oldwebview && (oldwebview.status = false);
     toolbarExchange($toolbar, 'normal');
@@ -147,19 +128,16 @@ function normalExchange(webview, oldwebview, $toolbar, after){
         typeof keep.temp === 'function' && keep.temp();
         webview.$emit('load');
         oldwebview && oldwebview.$emit('unload');
-        typeof after === 'function' && after.call(webview);
     });
 }
 
 /**
  *  监听webview进入动画
  */
-function load(webview, after, fn){
+function load(webview){
     animationend(webview.$el).then(function(){
         typeof keep.temp === 'function' && keep.temp();
         webview.$emit('load');
-        typeof after === 'function' && after.call(webview);
-        typeof fn === 'function' && fn();
     });
 }
 

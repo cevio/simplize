@@ -26,7 +26,7 @@ exports.beforeDestroy = function(){
 }
 
 exports.events = {
-    create: function(fn){
+    "webview-load": function(fn){
         if ( !this.isCreated ){
             var that = this;
             setTimeout(function(){
