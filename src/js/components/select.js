@@ -5,7 +5,7 @@ exports.props = ['data', 'value'];
 exports.template =
 '<div class="ui-select" v-el:root>' +
     '<ul v-el:box>' +
-        '<li v-for="item in data.list" @click="click($index)">{{item.text}}</li>' +
+        '<li v-for="item in data.list" @click="click($index)" :class={active:index===$index}>{{item.text}}</li>' +
     '</ul>' +
     '<div class="checked"></div>'+
 '</div>';
@@ -17,7 +17,9 @@ exports.data = function(){
         startY:0,
         moveY: 0,
         y:0,
-        index: -1
+        index: -1,
+        a: 0,
+        b: 0
     }
 }
 
@@ -28,6 +30,9 @@ exports.ready = function(){
     utils.on(this.$els.root, 'touchmove', this._touchMove = this.touchMove());
     utils.on(this.$els.root, 'touchend', this._touchEnd = this.touchEnd());
     this.index = findIndex(this.data.list, this.data.value);
+    this.a = this.height * 2;
+    this.b = this.height * (that.data.list.length - 3) * -1;
+    console.log(this.a, this.b)
     utils.nextTick(function(){
         that.$emit('scrollto');
     });
@@ -46,7 +51,16 @@ exports.methods = {
             utils.stop(e);
             that.y = Y(e);
             that.moveY = that.y - that.startY + that.distence;
+
+            if ( that.moveY > that.a ){
+                that.moveY = that.a;
+            }
+            if ( that.moveY < that.b ){
+                that.moveY = that.b;
+            }
+
             move(that.$els.box, that.moveY);
+            that.index = Math.round(2 - ( that.moveY / that.height ));
         }
     },
     touchEnd: function(){
@@ -55,7 +69,7 @@ exports.methods = {
             that.distence = that.moveY;
             that.startY = 0;
             that.moveY = 0;
-            that.index = Math.round(2 - ( that.distence / that.height ));
+            //that.index = Math.round(2 - ( that.distence / that.height ));
             that.$emit('scrollto');
         }
     },
