@@ -19,7 +19,7 @@
 <body>
 
   <template name="a">
-    <switcher>
+    <switcher class="dark">
         <case text="test1" value="1111" checked></case>
         <case text="test2" value="2222"></case>
     </switcher>
@@ -118,7 +118,7 @@
 
     </div>
 
-    <button v-on:click="cm">点击pop</button>
+    <button v-on:click="cm" class="dark">点击pop</button>
 
     <div class="container m10">
       <switch :value.sync="a.b.c.d"></switch>

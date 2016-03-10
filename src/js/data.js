@@ -76,6 +76,8 @@ module.exports = {
                         ], function(result){
                             alert(result.join())
                         });
+                        a.class="dark";
+                        console.log(a);
                     }
                 },
                 components: {
