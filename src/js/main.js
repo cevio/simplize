@@ -54,6 +54,7 @@ Vue.component('ui-model', require('./components/model'));
 Vue.component('scroll', require('./components/scroll'));
 Vue.component('slider', require('./components/slider'));
 Vue.component('ago', require('./components/ago'));
+Vue.component('date', require('./components/date'));
 Vue.mixin(require('./application/mixins'));
 
 function simplize(options){

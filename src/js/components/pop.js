@@ -52,6 +52,7 @@ exports.methods = {
         this.$parent.type = 0;
         this.$parent.mask = false;
         this.$off('ok');
+        this.class = '';
     }
 }
 

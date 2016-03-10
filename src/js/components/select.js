@@ -30,8 +30,6 @@ exports.ready = function(){
     utils.on(this.$els.root, 'touchmove', this._touchMove = this.touchMove());
     utils.on(this.$els.root, 'touchend', this._touchEnd = this.touchEnd());
     this.index = findIndex(this.data.list, this.data.value);
-    this.a = this.height * 2;
-    this.b = this.height * (that.data.list.length - 3) * -1;
     utils.nextTick(function(){
         that.$emit('scrollto');
     });
@@ -51,11 +49,14 @@ exports.methods = {
             that.y = Y(e);
             that.moveY = that.y - that.startY + that.distence;
 
-            if ( that.moveY > that.a ){
-                that.moveY = that.a;
+            var a = that.height * 2;
+            var b = that.height * (that.data.list.length - 3) * -1;
+
+            if ( that.moveY > a ){
+                that.moveY = a;
             }
-            if ( that.moveY < that.b ){
-                that.moveY = that.b;
+            if ( that.moveY < b ){
+                that.moveY = b;
             }
 
             move(that.$els.box, that.moveY);
@@ -75,6 +76,15 @@ exports.methods = {
     click: function(index){
         this.index = index;
         this.$emit('scrollto');
+    }
+}
+
+exports.watch = {
+    index: function(value){
+        this.$emit('get');
+        if ( this.data.change ){
+            this.$parent.$parent.$emit(this.data.change, this.data.list[value].value);
+        }
     }
 }
 
