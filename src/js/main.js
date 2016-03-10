@@ -47,6 +47,8 @@ module.exports = simplize;
 
 Vue.component('middle', require('./components/middle'));
 Vue.component('switch', require('./components/switch'));
+Vue.component('switcher', require('./components/switcher'));
+Vue.component('case', require('./components/case'));
 Vue.component('checkbox', require('./components/checkbox'));
 Vue.component('ui-model', require('./components/model'));
 Vue.component('scroll', require('./components/scroll'));

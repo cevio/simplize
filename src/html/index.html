@@ -19,7 +19,10 @@
 <body>
 
   <template name="a">
-
+    <switcher>
+        <case text="test1" value="1111" checked></case>
+        <case text="test2" value="2222"></case>
+    </switcher>
     <div class="row">
       <div class="col-50 red">dadwadw</div>
       <div class="col-50 blue">dnaiwdnawuin</div>
@@ -112,8 +115,10 @@
     <p style="text-align:center">{{g|fixProgress}}</p>
     <p>{{a.b.c.d}}</p>
     <div class="container m10">
-      
+
     </div>
+
+    <button v-on:click="cm">点击pop</button>
 
     <div class="container m10">
       <switch :value.sync="a.b.c.d"></switch>

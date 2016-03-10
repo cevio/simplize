@@ -9,6 +9,7 @@ exports.template =
             '<ui-prompt :status="type==3" v-ref:prompt></ui-prompt>' +
             // '<ui-sheet v-ref:sheet></ui-sheet>' +
             '<ui-loader :status="type==5" v-ref:loader></ui-loader>' +
+            '<ui-pop :status="type==6" v-ref:pop></ui-pop>' +
         '</div>' +
     '</div>';
 
@@ -21,6 +22,7 @@ exports.data = function(){
          *      3 - prompt
          *      4 - sheet
          *      5 - preloader
+         *      6 - pop
          */
         type: -1,
         mask: false
@@ -93,6 +95,13 @@ exports.methods = {
         Loader.content = content || '';
 
         return Loader;
+    },
+    $pop: function(type){
+        var Pop = this.$refs.pop;
+        this.type = 6;
+        this.mask = true;
+        Pop.type = type || 'html5';
+        return Pop;
     }
 }
 
@@ -101,7 +110,8 @@ exports.components = {
     "ui-alert": require('./alert'),
     "ui-confirm": require('./confirm'),
     "ui-prompt": require('./prompt'),
-    "ui-loader": require('./loader')
+    "ui-loader": require('./loader'),
+    "ui-pop": require('./pop')
 }
 
 exports.events = {

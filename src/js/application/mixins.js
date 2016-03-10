@@ -26,7 +26,19 @@ exports.methods = {
     $alert: function(content, title){ return this.$root.$refs.uiModel.$alert(content, title); },
     $confirm: function(content, title){ return this.$root.$refs.uiModel.$confirm(content, title); },
     $prompt: function(content, title){ return this.$root.$refs.uiModel.$prompt(content, title); },
-    $loader: function(){ return this.$root.$refs.uiModel.$loader.apply(this.$root.$refs.uiModel.$loader, arguments); }
+    $loader: function(){ return this.$root.$refs.uiModel.$loader.apply(this.$root.$refs.uiModel.$loader, arguments); },
+    $pop: function(type){ return this.$root.$refs.uiModel.$pop(type); },
+    $selects: function(data, fn){
+        return this.$pops([data], fn);
+    },
+    $pops: function(data, fn){
+        var component = this.$pop('selects');
+        component.arrays = data;
+        component.$on('ok', function(result){
+            typeof fn === 'function' && fn(result);
+        });
+        return component;
+    }
 }
 
 exports.computed = {
