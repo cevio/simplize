@@ -57,7 +57,7 @@ exports.methods = {
         var year = Number(new Date().getFullYear());
         for ( i = 1970 ; i <= year ; i++ ){
             result.push({
-                text: i,
+                text: i + '年',
                 value: i
             });
         }
@@ -67,7 +67,7 @@ exports.methods = {
         var result = [];
         for ( var i = 1; i <= 12 ; i++ ){
             result.push({
-                text: i,
+                text: i + '月',
                 value: i
             });
         }
@@ -78,7 +78,7 @@ exports.methods = {
         var result = [];
         for ( var i = 0 ; i < days ; i++ ){
             result.push({
-                text: i + 1,
+                text: (i + 1) + '日',
                 value: i + 1
             });
         }
