@@ -4,8 +4,8 @@ exports.name = 'ui-pop';
 exports.template =
     '<div class="ui-pop" v-if="status" transition="pop" :class="class" v-el:root>' +
         '<div class="ui-pop-header">' +
-            '<div class="ui-pop-header-item ui-pop-header-item-left clearflash" @click="cancel">close</div>' +
-            '<div class="ui-pop-header-item ui-pop-header-item-right clearflash" @click="ok">OK</div>' +
+            '<div class="ui-pop-header-item ui-pop-header-item-left clearflash" @click="cancel"></div>' +
+            '<div class="ui-pop-header-item ui-pop-header-item-right clearflash" @click="ok"></div>' +
         '</div>' +
         '<div class="ui-pop-content">' +
             '<component :is="type" :html.sync="html" :arrays.sync="arrays" :object.sync="object"></component>' +
