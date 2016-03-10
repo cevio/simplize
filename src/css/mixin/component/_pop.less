@@ -38,7 +38,7 @@
           }
         }
       }
-      li.active{
+      li.active {
         color: #fff !important;
       }
     }
@@ -62,12 +62,34 @@
         top: 0;
         left: 0;
         color: #b0b5b9;
+        &:after {
+          color: inherit;
+          content: "+";
+          transform: rotate(-45deg);
+          font-size: 4rem;
+          line-height: 0.9;
+          font-weight: lighter;
+          display: inline-block;
+          margin-left: -0.5rem;
+        }
       }
       &.ui-pop-header-item-right {
         background-color: @pop-main-color;
         color: #fbfdf8;
         top: 0;
         right: 0;
+        &:after {
+          display: inline-block;
+          margin-top: 43%;
+          margin-left: 5%;
+          width: 1.8rem;
+          height: 0.9rem;
+          border-width: 0 0 0.1rem 0.1rem;
+          border-style: solid;
+          border-color: #fbfdf8;
+          content: "";
+          transform: rotate(-45deg);
+        }
       }
     }
   }
