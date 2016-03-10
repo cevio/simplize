@@ -27,7 +27,7 @@
     .ui-pop-content-selects {
       .ui-pop-content-select {
         &:not(:last-child) {
-          border-right: 0.2rem solid #3a3a3a;
+          border-right: 0.05rem solid #3a3a3a;
         }
         .ui-select {
           .checked {
@@ -37,6 +37,9 @@
             height: 2.5em !important;
           }
         }
+      }
+      li.active{
+        color: #fff !important;
       }
     }
   }
@@ -99,7 +102,7 @@
             line-height: 2em;
             overflow: hidden;
             &.active {
-              border: 1px solid #ccc;
+              // border: 1px solid #ccc;
             }
           }
           ul.active {
