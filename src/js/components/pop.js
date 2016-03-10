@@ -52,7 +52,6 @@ exports.methods = {
         this.$parent.type = 0;
         this.$parent.mask = false;
         this.$off('ok');
-        this.class = '';
     }
 }
 
@@ -74,6 +73,7 @@ exports.transitions = {
             if ( typeof this._cb === 'function' ){
                 utils.off(document.body, 'click', this._cb);
             }
+            this.class = '';
         }
     }
 }

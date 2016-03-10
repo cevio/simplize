@@ -1,9 +1,9 @@
 var utils = require('../utils');
 exports.name = 'ui-switcher';
 exports.template = '<span class="ui-switcher" v-el:root>{{value}}<slot></slot></span>';
+exports.props = ['value'];
 exports.data = function(){
     return {
-        value: '',
         data: [],
         isSwitcher: true
     }

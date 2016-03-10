@@ -19,9 +19,9 @@
 <body>
 
   <template name="a">
-      <date></date>
-    <switcher>
-        <case text="test1" value="1111" checked></case>
+      <date :value.sync="bc" format="y/m/d"></date> {{bc}}
+    <switcher value="2222">
+        <case text="test1" value="1111"></case>
         <case text="test2" value="2222"></case>
     </switcher>
     <div class="row">

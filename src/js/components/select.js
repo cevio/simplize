@@ -69,22 +69,12 @@ exports.methods = {
             that.distence = that.moveY;
             that.startY = 0;
             that.moveY = 0;
-            //that.index = Math.round(2 - ( that.distence / that.height ));
             that.$emit('scrollto');
         }
     },
     click: function(index){
         this.index = index;
         this.$emit('scrollto');
-    }
-}
-
-exports.watch = {
-    index: function(value){
-        this.$emit('get');
-        if ( this.data.change ){
-            this.$parent.$parent.$emit(this.data.change, this.data.list[value].value);
-        }
     }
 }
 
@@ -109,6 +99,9 @@ exports.events = {
         if ( this.index > -1 && this.index < this.data.list.length ){
             this.data.value = this.data.list[this.index].value;
         }
+    },
+    reset: function(){
+        this.$emit('scrollto');
     }
 }
 

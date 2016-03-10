@@ -2,14 +2,17 @@ var utils = require('../utils');
 exports.name = 'ui-date';
 exports.template = '<span v-el:root>{{value | formatDate}}</span>';
 exports.props = ['value', 'format'];
-exports.ready = function(){
-    var that = this;
+exports.created = function(){
     if ( !this.value ){
         this.value = new Date();
     }
     if ( !this.format ){
         this.format = 'y-m-d';
     }
+}
+
+exports.ready = function(){
+    var that = this;
     this._cb = function(e){
         var y = that.value.getFullYear();
         var m = that.value.getMonth() + 1;
@@ -18,16 +21,34 @@ exports.ready = function(){
         var md = that.getMonths();
         var dd = that.getDates(y, m);
         var views = [
-            { value: y, list: yd, change: 'reday' },
-            { value: m, list: md, change: 'reday' },
+            { value: y, list: yd },
+            { value: m, list: md },
             { value: d, list: dd }
         ];
         var scope = that.$root.$pops(views, function(result){
             that.value = new Date(result.join('/'));
         });
-        scope.class = 'dark';
-        scope.$on('reday', function(){
-            views[2].list = that.getDates(views[0].value, views[1].value);
+
+        utils.nextTick(function(){
+            var selector = scope.$children[0];
+            var yc = selector.$children[0];
+            var mc = selector.$children[1];
+            var dc = selector.$children[2];
+            scope.class = 'dark';
+
+            yc.$watch('index', function(value){
+                this.$emit('get');
+                var result = that.getDates(this.data.value, mc.data.value);
+                dc.data.list = result;
+                dc.$emit('reset');
+            });
+
+            mc.$watch('index', function(value){
+                this.$emit('get');
+                var result = that.getDates(yc.data.value, this.data.value);
+                dc.data.list = result;
+                dc.$emit('reset');
+            });
         });
     }
     utils.on(this.$els.root, 'click', this._cb);
@@ -87,7 +108,7 @@ exports.methods = {
 }
 
 function getDaysInMonth(year,month){
-    month = parseInt(month,10); //parseInt(number,type)这个函数后面如果不跟第2个参数来表示进制的话，默认是10进制。
+    month = parseInt(month,10);
     var temp = new Date(year,month,0);
     return temp.getDate();
 }
