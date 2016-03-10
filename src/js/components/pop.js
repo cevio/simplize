@@ -2,7 +2,7 @@ var selects = require('./selects');
 var utils = require('../utils');
 exports.name = 'ui-pop';
 exports.template =
-    '<div class="ui-pop" v-if="status" transition="pop" :class="class">' +
+    '<div class="ui-pop" v-if="status" transition="pop" :class="class" v-el:root>' +
         '<div class="ui-pop-header">' +
             '<div class="ui-pop-header-item ui-pop-header-item-left clearflash" @click="cancel">close</div>' +
             '<div class="ui-pop-header-item ui-pop-header-item-right clearflash" @click="ok">OK</div>' +
@@ -52,5 +52,36 @@ exports.methods = {
         this.$parent.type = 0;
         this.$parent.mask = false;
         this.$off('ok');
+    }
+}
+
+exports.transitions = {
+    pop: {
+        enter: function(){
+            var that = this;
+            that._cb = function(e){
+                var target = e.target;
+                if ( loop(target, that.$els.root) ){
+                    that.cancel();
+                }
+            }
+            utils.on(document.body, 'click', that._cb);
+        },
+        leave: function(){
+            if ( typeof this._cb === 'function' ){
+                utils.off(document.body, 'click', this._cb);
+            }
+        }
+    }
+}
+
+function loop(el, root){
+    if ( el === document.body ){
+        return true;
+    }
+    if ( el === root ){
+        return false;
+    }else {
+        return loop(el.parentNode, root);
     }
 }

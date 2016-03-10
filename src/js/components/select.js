@@ -32,7 +32,6 @@ exports.ready = function(){
     this.index = findIndex(this.data.list, this.data.value);
     this.a = this.height * 2;
     this.b = this.height * (that.data.list.length - 3) * -1;
-    console.log(this.a, this.b)
     utils.nextTick(function(){
         that.$emit('scrollto');
     });
