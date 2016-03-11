@@ -61,6 +61,16 @@
           border-right: 0.05rem solid #3a3a3a;
         }
         .ui-select {
+          position: relative;
+          &:before,&:after{
+            display: block;
+            content: "";
+            width: 100%;
+            height: 20%;
+            position: absolute;
+            left: 0;
+
+          }
           .checked {
             width: 66% !important;
             left: 18% !important;
@@ -78,10 +88,11 @@
   }
   .ui-pop-header {
     position: relative;
-    border-bottom: 0.1rem solid #e5e5e5;
-    background: #eee;
+    // border-bottom: 0.1rem solid #e5e5e5;
+    // background: #eee;
     color: #c4cdd2;
     height: 4rem;
+    background: #f5f5f5;
     .ui-pop-header-item {
       position: absolute;
       display: inline-block;
@@ -91,10 +102,9 @@
       min-width: 5rem;
       text-align: center;
       &.ui-pop-header-item-left {
-        background-color: rgba(0,0,0,0.1);
         top: 0;
         left: 0;
-        color: #fff;
+        color: #000;
         &:after {
           color: inherit;
           content: "+";
@@ -107,7 +117,6 @@
         }
       }
       &.ui-pop-header-item-right {
-        background-color: rgb(124, 219, 145);
         color: #fbfdf8;
         top: 0;
         right: 0;
@@ -119,7 +128,7 @@
           height: 0.9rem;
           border-width: 0 0 0.1rem 0.1rem;
           border-style: solid;
-          border-color: #fbfdf8;
+          border-color: #00a87b;
           content: "";
           transform: rotate(-45deg);
         }
@@ -127,7 +136,6 @@
     }
   }
   .ui-pop-content {
-    padding: 1.5rem;
     background-color: #f5f5f5;
     .ui-pop-content-selects {
       .ui-pop-content-select {
@@ -135,6 +143,7 @@
           height: 10em;
           overflow: hidden;
           position: relative;
+          -webkit-mask-box-image: linear-gradient(to top, transparent, transparent 5%, white 40%, white 60%, transparent 95%, transparent);
           .checked {
             position: absolute;
             top: 4em;
@@ -150,13 +159,12 @@
           }
           li {
             text-align: center;
-            color: #999;
+            color: #111;
             height: 2em;
             line-height: 2em;
             overflow: hidden;
             &.active {
               // border: 1px solid #ccc;
-              color: #111;
             }
           }
           ul.active {
