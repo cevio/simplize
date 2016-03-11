@@ -37,7 +37,6 @@ exports.ready = function(){
             var yc = selector.$children[0];
             var mc = selector.$children[1];
             var dc = selector.$children[2];
-            scope.class = 'dark';
 
             yc.$watch('index', function(value){
                 this.$emit('get');
