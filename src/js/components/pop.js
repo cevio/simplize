@@ -27,7 +27,7 @@ exports.props = ['status'];
 exports.components = {
     "html5": {
         name: 'pop-component-html',
-        template: '<div class="ui-pop-content-html">{{html}}</div>',
+        template: '<div class="ui-pop-content-html" v-html="html"></div>',
         props: ['html', 'arrays', 'object']
     },
     "selects": selects
