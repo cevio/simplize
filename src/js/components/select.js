@@ -19,7 +19,8 @@ exports.data = function(){
         y:0,
         index: -1,
         a: 0,
-        b: 0
+        b: 0,
+        t: false
     }
 }
 
@@ -27,8 +28,8 @@ exports.ready = function(){
     var that = this;
     this.height = this.$els.root.clientHeight / 5;
     utils.on(this.$els.root, 'touchstart', this._touchStart = this.touchStart());
-    utils.on(this.$els.root, 'touchmove', this._touchMove = this.touchMove());
-    utils.on(this.$els.root, 'touchend', this._touchEnd = this.touchEnd());
+    utils.on(document.body, 'touchmove', this._touchMove = this.touchMove());
+    utils.on(document.body, 'touchend', this._touchEnd = this.touchEnd());
     this.index = findIndex(this.data.list, this.data.value);
     utils.nextTick(function(){
         that.$emit('scrollto');
@@ -40,11 +41,13 @@ exports.methods = {
         var that = this;
         return function(e){
             that.startY = Y(e);
+            that.t = true;
         }
     },
     touchMove: function(){
         var that = this;
         return function(e){
+            if ( !that.t ) return;
             utils.stop(e);
             that.y = Y(e);
             that.moveY = that.y - that.startY + that.distence;
@@ -66,9 +69,11 @@ exports.methods = {
     touchEnd: function(){
         var that = this;
         return function(){
+            if ( !that.t ) return;
             that.distence = that.moveY;
             that.startY = 0;
             that.moveY = 0;
+            that.t = false;
             that.$emit('scrollto');
         }
     },
