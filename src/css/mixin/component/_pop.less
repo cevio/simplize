@@ -163,8 +163,25 @@
             height: 2em;
             line-height: 2em;
             overflow: hidden;
+            transition: all 300ms linear;
             &.active {
               // border: 1px solid #ccc;
+              transform: scale(1.3) rotateX(0deg);
+            }
+            &[class^=prev],&[class^=next]{
+
+            }
+            &.prev{
+              transform: rotateX(30deg);
+            }
+            &.prevs{
+              transform: rotateX(60deg);
+            }
+            &.next{
+              transform: rotateX(-30deg);
+            }
+            &.nexts{
+              transform: rotateX(-60deg);
             }
           }
           ul.active {
