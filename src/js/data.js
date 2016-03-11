@@ -7,7 +7,7 @@ module.exports = {
         webviews: {
             a: {
                 data: {
-                    bc: new Date('1996-1-19 10:21:43'),
+                    bc: new Date('1996/1/19 10:21:43'),
                     test: [],
                     a:{
                         b:{

@@ -20,6 +20,11 @@ exports.ready = function(){
         var y = that.value.getFullYear();
         var m = that.value.getMonth() + 1;
         var d = that.value.getDate();
+
+        var h = that.value.getHours();
+        var i = that.value.getMinutes();
+        var s = Math.round(that.value.getTime() % 60000 / 1000);
+
         var yd = that.getYears();
         var md = that.getMonths();
         var dd = that.getDates(y, m);
@@ -29,7 +34,7 @@ exports.ready = function(){
             { value: d, list: dd }
         ];
         var scope = that.$root.$pops(views, function(result){
-            that.value = new Date(result.join('/'));
+            that.value = new Date(result.join('/') + ' ' + [h,i,s].join(':'));
         });
 
         utils.nextTick(function(){
