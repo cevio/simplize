@@ -55,6 +55,7 @@ Vue.component('scroll', require('./components/scroll'));
 Vue.component('slider', require('./components/slider'));
 Vue.component('ago', require('./components/ago'));
 Vue.component('date', require('./components/date'));
+Vue.component('time', require('./components/time'));
 Vue.mixin(require('./application/mixins'));
 
 function simplize(options){

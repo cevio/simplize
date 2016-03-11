@@ -1,13 +1,16 @@
 var utils = require('../utils');
 exports.name = 'ui-date';
 exports.template = '<span v-el:root>{{value | formatDate}}</span>';
-exports.props = ['value', 'format'];
+exports.props = ['value', 'format', 'future'];
 exports.created = function(){
     if ( !this.value ){
         this.value = new Date();
     }
     if ( !this.format ){
         this.format = 'y-m-d';
+    }
+    if ( !this.future ){
+        this.future = 0;
     }
 }
 
@@ -76,7 +79,7 @@ exports.methods = {
     getYears: function(){
         var result = [];
         var year = Number(new Date().getFullYear());
-        for ( i = 1970 ; i <= year ; i++ ){
+        for ( i = 1970 ; i <= year + Number(this.future) ; i++ ){
             result.push({
                 text: i + '年',
                 value: i

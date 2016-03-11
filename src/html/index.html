@@ -19,8 +19,10 @@
 <body>
 
   <template name="a">
-      <date :value.sync="bc" format="y/m/d"></date> {{bc}}
-    <switcher value="2222">
+      格式化时间：{{bc}}<br />
+      日期：<date :value.sync="bc" format="y/m/d" future="200"></date> <br />
+      时间：<time :value.sync="bc"></time> <br />
+    switcher: <switcher value="2222">
         <case text="test1" value="1111"></case>
         <case text="test2" value="2222"></case>
     </switcher>
