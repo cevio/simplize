@@ -36,6 +36,9 @@ exports.components = {
 exports.events = {
     send: function(value){
         this.result = value;
+    },
+    destroy: function(){
+        this.cancel();
     }
 }
 
@@ -58,33 +61,11 @@ exports.methods = {
 exports.transitions = {
     pop: {
         enter: function(){
-            var that = this;
             utils.windowTouchMoveDisabled(true);
-            that._cb = function(e){
-                var target = e.target;
-                if ( loop(target, that.$els.root) ){
-                    that.cancel();
-                }
-            }
-            utils.on(document.body, 'click', that._cb);
         },
         leave: function(){
             utils.windowTouchMoveDisabled(false);
-            if ( typeof this._cb === 'function' ){
-                utils.off(document.body, 'click', this._cb);
-            }
             this.class = '';
         }
-    }
-}
-
-function loop(el, root){
-    if ( el === document.body ){
-        return true;
-    }
-    if ( el === root ){
-        return false;
-    }else {
-        return loop(el.parentNode, root);
     }
 }

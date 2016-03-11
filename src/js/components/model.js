@@ -7,7 +7,6 @@ exports.template =
             '<ui-alert :status="type==1" v-ref:alert></ui-alert>' +
             '<ui-confirm :status="type==2" v-ref:confirm></ui-confirm>' +
             '<ui-prompt :status="type==3" v-ref:prompt></ui-prompt>' +
-            // '<ui-sheet v-ref:sheet></ui-sheet>' +
             '<ui-loader :status="type==5" v-ref:loader></ui-loader>' +
             '<ui-pop :status="type==6" v-ref:pop></ui-pop>' +
         '</div>' +

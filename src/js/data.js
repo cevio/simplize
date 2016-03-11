@@ -36,49 +36,8 @@ module.exports = {
                         }, 3000);
                     },
                     cm: function(){
-                        var list = [
-                            {
-                                text: '最新利率',
-                                value: 5.1
-                            },
-                            {
-                                text: '去年利率',
-                                value: 6.1
-                            },
-                            {
-                                text: '前年利率',
-                                value: 3.6
-                            },
-                            {
-                                text: '未来利率',
-                                value: 9.8
-                            },
-                            {
-                                text: '最新利率',
-                                value: 4.1
-                            },
-                            {
-                                text: '去年利率',
-                                value: 6.5
-                            },
-                            {
-                                text: '前年利率',
-                                value: 3.8
-                            },
-                            {
-                                text: '未来利率',
-                                value: 9.2
-                            }
-                        ];
-                        var a = this.$pops([
-                            { value:9.2, list: list },
-                            { value: 3.6, list: list },
-                            { value: 4.1, list: list }
-                        ], function(result){
-                            alert(result.join())
-                        });
-                        a.class="dark";
-                        console.log(a);
+                        var a = this.$pop();
+                        a.html = 'dafafd';
                     }
                 },
                 components: {
