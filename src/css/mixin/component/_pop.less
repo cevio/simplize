@@ -35,7 +35,7 @@
   background-color: #fff;
   z-index: 802;
   box-shadow: 0 0 1rem rgba(0,0,0,.9);
-  &.dark {
+  .android &{
     .ui-pop-header {
       border-bottom: 0.1rem solid #3a3a3a;
       background: #222222;
@@ -49,46 +49,53 @@
         &.ui-pop-header-item-right {
           background-color: @pop-main-color;
           color: #fbfdf8;
+          &:after{
+            border-color: #fbfdf8
+          }
         }
       }
     }
     .ui-pop-content {
       background-color: #222222;
-    }
-    .ui-pop-content-selects {
-      .ui-pop-content-select {
-        &:not(:last-child) {
-          border-right: 0.05rem solid #3a3a3a;
-        }
-        .ui-select {
-          position: relative;
-          &:before,&:after{
-            display: block;
-            content: "";
-            width: 100%;
-            height: 20%;
-            position: absolute;
-            left: 0;
+      .ui-pop-content-selects {
+        .ui-pop-content-select {
+          &:not(:last-child) {
+            border-right: 0.05rem solid #3a3a3a;
+          }
+          .ui-select {
+            position: relative;
+            li{
+              color: #888
+            }
+            &:before,&:after{
+              display: block;
+              content: "";
+              width: 100%;
+              height: 20%;
+              position: absolute;
+              left: 0;
 
-          }
-          .checked {
-            width: 66% !important;
-            left: 18% !important;
-            top: 3.75em !important;
-            height: 2.5em !important;
-            border-top: 0.2rem solid @pop-main-color;
-            border-bottom: 0.2rem solid @pop-main-color;
+            }
+            .checked {
+              width: 66% !important;
+              left: 18% !important;
+              top: 3.75em !important;
+              height: 2.5em !important;
+              border-top: 0.2rem solid @pop-main-color;
+              border-bottom: 0.2rem solid @pop-main-color;
+            }
           }
         }
-      }
-      li.active {
-        color: #fff !important;
+        li.active {
+          color: #fff !important;
+        }
       }
     }
+
   }
   .ui-pop-header {
     position: relative;
-    // border-bottom: 0.1rem solid #e5e5e5;
+    border-bottom: 0.1rem solid #e5e5e5;
     // background: #eee;
     color: #c4cdd2;
     height: 4rem;
@@ -150,6 +157,8 @@
             left: 0;
             width: 100%;
             height: 2em;
+            border-top: .1em solid #eee;
+            border-bottom: .1em solid #eee;
           }
           ul,
           li {
@@ -166,7 +175,7 @@
             transition: all 300ms linear;
             &.active {
               // border: 1px solid #ccc;
-              transform: scale(1.3) rotateX(0deg);
+              transform: scale(1.2) rotateX(0deg);
             }
             &[class^=prev],&[class^=next]{
 
