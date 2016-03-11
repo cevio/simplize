@@ -5,7 +5,7 @@ exports.props = ['data', 'value'];
 exports.template =
 '<div class="ui-select" v-el:root>' +
     '<ul v-el:box>' +
-        '<li v-for="item in data.list" @click="click($index)" :class={active:index===$index}>{{item.text}}</li>' +
+        '<li v-for="item in data.list" @click="click($index)">{{item.text}}</li>' +
     '</ul>' +
     '<div class="checked"></div>'+
 '</div>';
