@@ -59,7 +59,7 @@ exports.filters = {
 exports.methods = {
     getHours: function(){
         var result = [];
-        for ( i = 1 ; i <= 24 ; i++ ){
+        for ( i = 0 ; i <= 23 ; i++ ){
             result.push({
                 text: i + '时',
                 value: i
@@ -69,7 +69,7 @@ exports.methods = {
     },
     getMinutes: function(){
         var result = [];
-        for ( var i = 1; i <= 60 ; i++ ){
+        for ( var i = 0; i <= 59 ; i++ ){
             result.push({
                 text: i + '分',
                 value: i
@@ -79,7 +79,7 @@ exports.methods = {
     },
     getSeconds: function(y, m){
         var result = [];
-        for ( var i = 1; i <= 60 ; i++ ){
+        for ( var i = 0; i <= 59 ; i++ ){
             result.push({
                 text: i + '秒',
                 value: i
