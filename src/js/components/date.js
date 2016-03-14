@@ -46,15 +46,23 @@ exports.ready = function(){
             yc.$watch('index', function(value){
                 this.$emit('get');
                 var result = that.getDates(this.data.value, mc.data.value);
+                if ( result.length === dc.data.list.length ) return;
                 dc.data.list = result;
-                dc.$emit('reset');
+                utils.nextTick(function(){
+                    dc.$scroller.refresh();
+                    dc.$emit('reset');
+                });
             });
 
             mc.$watch('index', function(value){
                 this.$emit('get');
                 var result = that.getDates(yc.data.value, this.data.value);
+                if ( result.length === dc.data.list.length ) return;
                 dc.data.list = result;
-                dc.$emit('reset');
+                utils.nextTick(function(){
+                    dc.$scroller.refresh();
+                    dc.$emit('reset');
+                });
             });
         });
     }

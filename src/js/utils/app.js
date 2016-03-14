@@ -35,6 +35,7 @@ exports.createRoot = function(){
 exports.stop = EventStop;
 function EventStop(e){
     e.preventDefault();
+    e.stopPropagation();
 }
 exports.windowTouchMoveDisabledStatus = false;
 exports.windowTouchMoveDisabledListenner = null

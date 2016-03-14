@@ -1,11 +1,14 @@
 var utils = require('../utils');
 var animationend = require('animationend');
+var iscroll = require('iscroll');
 exports.name = 'pop-component-select';
 exports.props = ['data', 'value'];
 exports.template =
 '<div class="ui-select" v-el:root>' +
     '<ul v-el:box>' +
-        '<li v-for="item in data.list" @click="click($index)" :class="{active:index==$index,prev:index-1==$index,next:index+1==$index,prevs:index-2==$index,nexts:index+2==$index}">{{item.text}}</li>' +
+        '<li>&nbsp;</li><li>&nbsp;</li>' +
+        '<li v-for="item in data.list" @click="click($index)" :class="{active:index==$index}">{{item.text}}</li>' +
+        '<li>&nbsp;</li><li>&nbsp;</li>' +
     '</ul>' +
     '<div class="checked"></div>'+
 '</div>';
@@ -13,23 +16,22 @@ exports.template =
 exports.data = function(){
     return {
         height: 0,
-        distence: 0,
-        startY:0,
-        moveY: 0,
-        y:0,
-        index: -1,
-        a: 0,
-        b: 0,
-        t: false
+        index: -1
     }
 }
 
 exports.ready = function(){
     var that = this;
-    this.height = this.$els.root.clientHeight / 5;
-    utils.on(this.$els.root, 'touchstart', this._touchStart = this.touchStart());
-    utils.on(document.body, 'touchmove', this._touchMove = this.touchMove());
-    utils.on(document.body, 'touchend', this._touchEnd = this.touchEnd());
+    this.height = this.$els.root.offsetHeight / 5;
+    this.$scroller = new iscroll(this.$els.root, { scrollbars: false, snap: 'li',
+        linear: {
+            style: 'cubic-bezier(0,0,1,1)',
+            fn: function (k) { return k; }
+        }
+    });
+    this.$scroller.on('scrollEnd', function(e){
+        that.index = getIndex(this.y, that.height) - 2;
+    });
     this.index = findIndex(this.data.list, this.data.value);
     utils.nextTick(function(){
         that.$emit('scrollto');
@@ -37,46 +39,6 @@ exports.ready = function(){
 }
 
 exports.methods = {
-    touchStart: function(){
-        var that = this;
-        return function(e){
-            that.startY = Y(e);
-            that.t = true;
-        }
-    },
-    touchMove: function(){
-        var that = this;
-        return function(e){
-            if ( !that.t ) return;
-            utils.stop(e);
-            that.y = Y(e);
-            that.moveY = that.y - that.startY + that.distence;
-
-            var a = that.height * 2;
-            var b = that.height * (that.data.list.length - 3) * -1;
-
-            if ( that.moveY > a ){
-                that.moveY = a;
-            }
-            if ( that.moveY < b ){
-                that.moveY = b;
-            }
-
-            move(that.$els.box, that.moveY);
-            that.index = Math.round(2 - ( that.moveY / that.height ));
-        }
-    },
-    touchEnd: function(){
-        var that = this;
-        return function(){
-            if ( !that.t ) return;
-            that.distence = that.moveY;
-            that.startY = 0;
-            that.moveY = 0;
-            that.t = false;
-            that.$emit('scrollto');
-        }
-    },
     click: function(index){
         this.index = index;
         this.$emit('scrollto');
@@ -85,20 +47,10 @@ exports.methods = {
 
 exports.events = {
     scrollto: function(){
-        if ( this.index < 0 ){
-            this.index = 0;
-        }
-        if ( this.index >= this.data.list.length ){
-            this.index = this.data.list.length - 1;
-        }
-        var p = (2 - this.index) * this.height;
-        var that = this;
-        animationend(this.$els.box).then(function(){
-            utils.removeClass(that.$els.box, 'active');
-            that.distence = p;
-        });
-        utils.addClass(this.$els.box, 'active');
-        move(this.$els.box, p);
+        if ( this.index < 0 ){ this.index = 0; }
+        if ( this.index >= this.data.list.length ){ this.index = this.data.list.length - 1; }
+        var p = (2 - this.index - 2) * this.height;
+        this.$scroller.scrollTo(0, p, 300, iscroll.utils.ease.linear);
     },
     get: function(){
         if ( this.index > -1 && this.index < this.data.list.length ){
@@ -111,17 +63,12 @@ exports.events = {
 }
 
 exports.beforeDestroy = function(){
-    this._touchStart && utils.off(this.$els.root, 'touchstart', this._touchStart);
-    this._touchMove && utils.off(this.$els.root, 'touchmove', this._touchMove);
-    this._touchEnd && utils.off(this.$els.root, 'touchend', this._touchEnd);
+    this.$scroller.destroy();
+    this.$scroller = null;
 }
 
-function Y(e){
-    return e.targetTouches[0].pageY;
-}
-
-function move(el, px){
-    el.style.webkitTransform = 'translate3d(0,' + px + 'px,0)';
+function getIndex(y, h){
+    return Math.round(2 - ( y / h ))
 }
 
 function findIndex(list, value){
