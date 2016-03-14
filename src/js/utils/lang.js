@@ -48,3 +48,11 @@ exports.removeChild = function(node){
 }
 
 exports.noop = function(){}
+
+exports.mountDate = function(value){
+    value = Number(value);
+    if ( value < 10 ){
+        return '0' + value;
+    }
+    return value;
+}
