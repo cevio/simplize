@@ -8,6 +8,7 @@ var animationend = require('animationend');
 var Promise = require('es6-promise').Promise;
 var pathToRegExp = require('path-to-regexp');
 var fastClick = require('fastclick');
+var IScroll = require('iscroll');
 
 /**
  *  load deps.
@@ -111,6 +112,7 @@ simplize.routeLayer = layer;
 simplize.fastClick = fastClick;
 simplize.$toolbar = null;
 simplize.redirect = redirect;
+simplize.IScroll = IScroll;
 
 simplize.plugin = function(object){
     if ( typeof object.install === 'function' ){
