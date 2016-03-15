@@ -45,6 +45,9 @@
         &.ui-pop-header-item-left {
           background-color: #3a3a3a;
           color: #b0b5b9;
+          &:after,&::before{
+            background-color: #888;
+          }
         }
         &.ui-pop-header-item-right {
           background-color: @pop-main-color;
@@ -112,15 +115,22 @@
         top: 0;
         left: 0;
         color: #000;
-        &:after {
-          color: inherit;
-          content: "+";
+        position: relative;
+        &:after,&::before {
+          content: "";
+          display: block;
+          height: 0.05rem;
+          width: 40%;
+          left: 30%;
+          position: absolute;
+          top: 50%;
+          background-color: #888;
+        }
+        &:after{
           transform: rotate(-45deg);
-          font-size: 4rem;
-          line-height: 0.9;
-          font-weight: lighter;
-          display: inline-block;
-          margin-left: -0.5rem;
+        }
+        &:before{
+          transform: rotate(45deg);
         }
       }
       &.ui-pop-header-item-right {
@@ -129,10 +139,10 @@
         right: 0;
         &:after {
           display: inline-block;
-          margin-top: 43%;
-          margin-left: 5%;
-          width: 1.8rem;
-          height: 0.9rem;
+          margin-top: 29%;
+          margin-left: 3%;
+          width: 65%;
+          height: 32%;
           border-width: 0 0 0.1rem 0.1rem;
           border-style: solid;
           border-color: #00a87b;
