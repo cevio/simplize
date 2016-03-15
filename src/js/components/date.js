@@ -103,7 +103,7 @@ exports.methods = {
         var result = [];
         for ( var i = 1; i <= 12 ; i++ ){
             result.push({
-                text: i + '月',
+                text: utils.mountDate(i) + '月',
                 value: i
             });
         }
@@ -114,7 +114,7 @@ exports.methods = {
         var result = [];
         for ( var i = 0 ; i < days ; i++ ){
             result.push({
-                text: (i + 1) + '日',
+                text: utils.mountDate(i + 1) + '日',
                 value: i + 1
             });
         }

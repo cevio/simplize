@@ -61,7 +61,7 @@ exports.methods = {
         var result = [];
         for ( i = 0 ; i <= 23 ; i++ ){
             result.push({
-                text: i + '时',
+                text: utils.mountDate(i) + '时',
                 value: i
             });
         }
@@ -71,7 +71,7 @@ exports.methods = {
         var result = [];
         for ( var i = 0; i <= 59 ; i++ ){
             result.push({
-                text: i + '分',
+                text: utils.mountDate(i) + '分',
                 value: i
             });
         }
@@ -81,7 +81,7 @@ exports.methods = {
         var result = [];
         for ( var i = 0; i <= 59 ; i++ ){
             result.push({
-                text: i + '秒',
+                text: utils.mountDate(i) + '秒',
                 value: i
             });
         }
