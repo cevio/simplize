@@ -24,7 +24,7 @@ module.exports = function(name, options, item){
      html = '<' + name + ' v-ref:' + name + '></' + name + '>';
      result.template =
         '<div class="web-view" ' + mode + ' transition="move" :class="direction | fixAnimation" >' +
-            '<div class="web-view-content" :style="{paddingTop:HeadbarHeight,paddingBottom:ToolbarHeight}">' + template + '</div>' +
+            '<div class="web-view-content" :style="{paddingTop:HeadbarHeight,paddingBottom:ToolbarHeight}" name="' + name + '">' + template + '</div>' +
         '</div>';
 
      /**
@@ -84,7 +84,7 @@ module.exports = function(name, options, item){
              this.HeadbarHeight = this.$headbar.height;
              this.ToolbarHeight = this.$toolbar.height;
          },
-         beforeload: function(){         
+         beforeload: function(){
              typeof _beforeLoad === 'function' && _beforeLoad.call(this);
          },
          load: function(){
