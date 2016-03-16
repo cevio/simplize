@@ -2,7 +2,7 @@ var utils = require('../utils');
 var redirect = require('../application/redirect');
 module.exports = function(name, options, item){
     var result = {}, html;
-    var data = { status: false, direction: 'slient', HeadbarHeight: 0, ToolbarHeight: 0, name: name };
+    var data = { status: false, direction: 'slient', HeadbarHeight: 0, ToolbarHeight: 0, name: name, HeadForce: false };
     var ignores = ['name', 'data', 'keepAlive', 'template', 'computed', 'watch', 'methods', 'events'];
 
     result.name= 'webviw';
@@ -24,7 +24,7 @@ module.exports = function(name, options, item){
      html = '<' + name + ' v-ref:' + name + '></' + name + '>';
      result.template =
         '<div class="web-view" ' + mode + ' transition="move" :class="direction | fixAnimation" >' +
-            '<div class="web-view-content" :style="{paddingTop:HeadbarHeight,paddingBottom:ToolbarHeight}" name="' + name + '">' + template + '</div>' +
+            '<div class="web-view-content" :style="{paddingTop:HEADFORCE,paddingBottom:ToolbarHeight}" name="' + name + '">' + template + '</div>' +
         '</div>';
 
      /**
@@ -41,6 +41,13 @@ module.exports = function(name, options, item){
          env: {
              set: function(value){ this.$root.env = value; },
              get: function(){ return this.$root.env; }
+         },
+         HEADFORCE: function(){
+             if ( this.HeadForce ){
+                 return 0;
+             }else{
+                 return this.HeadbarHeight;
+             }
          }
      }
      utils.$extend(result.computed, computeds);
