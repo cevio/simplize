@@ -40,8 +40,8 @@ module.exports = function(oldbrowser, newBrowser, oldwebview, webview, direction
     $headbar && $headbar.$emit('before');
     $toolbar && $toolbar.$emit('before');
 
-    webview.$emit('beforeload');
     oldwebview && oldwebview.$emit('beforeunload');
+    webview.$emit('beforeload');
 
     /**
      *  如果不使用动画切换
