@@ -27,12 +27,15 @@ module.exports = function(options){
                 this.display = 'move';
             }
         }
+        options.watch.height = function(val){
+            this.$parent.$broadcast('headresize', val);
+        }
     }
-    
+
     if ( !options.ready ){
         options.ready = function(){
             this.$parent.$headbar = this;
-            this.height = this.fixHeight = this.$els.headbar.clientHeight;
+            this.$emit('size');
         }
     }
 
@@ -51,6 +54,9 @@ module.exports = function(options){
     if ( !options.events.run ){
         options.events.run = function(){
             this.state = this.status;
+        }
+        options.events.size = function(){
+            this.height = this.fixHeight = this.$els.headbar.clientHeight;
         }
     }
 

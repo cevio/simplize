@@ -4,6 +4,7 @@ module.exports = {
         icon: '<i class="fa fa-home"></i>',
         url: '/',
         order: 1,
+        keepAlive: true,
         webviews: {
             a: {
                 data: {
@@ -90,7 +91,7 @@ module.exports = {
                 events: {
                     beforeload: function(){
                         this.$toolbar.status = false;
-                        this.$headbar.status = true;
+                        this.$headbar.status = false;
                         this.$headbar.center.text = 'Simplize Blog Naps';
                         this.$headbar.left.icon='<i class="fa fa-angle-left"></i>';
                         this.$headbar.left.text="Back";
@@ -143,6 +144,7 @@ module.exports = {
         icon: '<i class="fa fa-home"></i>',
         url: '/c',
         order: 2,
+        keepAlive: true,
         webviews: {
             c: {
                 events: {
@@ -165,6 +167,7 @@ module.exports = {
         icon: '<i class="fa fa-list"></i>',
         url: '/d',
         order: 3,
+        keepAlive: true,
         webviews: {
             d: {
                 events: {

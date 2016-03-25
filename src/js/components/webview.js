@@ -103,6 +103,9 @@ module.exports = function(name, options, item){
              this.direction = '';
              this.$broadcast('webview-unload');
              typeof _unload === 'function' && _unload.call(this);
+         },
+         headresize: function(val){
+             this.HeadbarHeight = val;
          }
      }
      utils.$extend(result.events, events);

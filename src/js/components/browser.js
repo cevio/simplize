@@ -6,10 +6,10 @@ var HeadBar = require('../application/headbar');
 
 module.exports = function(name, options, toolbar){
     var result = {};
-    var data = { status: false };
+    var data = { status: false, __transition: options.transition || '' };
     var webviewCreater = webview.create(options.webviews || {});
     var mode = options.keepAlive ? 'v-show="status"' : 'v-if="status"';
-    var ignores = ['name', 'template', 'components', 'props', 'computed', 'keepAlive', 'methods', 'events', 'watch', 'data', 'webviews', 'headbar'];
+    var ignores = ['name', 'template', 'components', 'props', 'computed', 'keepAlive', 'methods', 'events', 'watch', 'data', 'webviews', 'headbar', 'transition'];
 
     toolbar.fix(options, data);
     result.name = 'browser';
@@ -18,7 +18,7 @@ module.exports = function(name, options, toolbar){
      *  browser template maker
      */
     result.template =
-        '<div class="web-browser" ' + mode + ' :transition="\'fade\' | fixAnimation">' +
+        '<div class="web-browser" ' + mode + ' :transition="__transition | fixAnimation">' +
             '<headbar v-ref:headbar></headbar>' +
             '<div class="web-views">' + webviewCreater.html + '</div>' +
         '</div>';
@@ -92,10 +92,16 @@ module.exports = function(name, options, toolbar){
     result.watch = options.watch || {};
     var watches = {
         "status": function(value){
+            var that = this;
             var app = this.$parent;
             if ( value ){
                 app.ActiveBrowser = this;
                 this.$emit('active');
+                if ( options.keepAlive ){
+                    utils.nextTick(function(){
+                        that.$headbar.$emit('size');
+                    })
+                }
             }else{
                 this.$emit('unactive');
                 var webview = this.$ActiveWebview;
