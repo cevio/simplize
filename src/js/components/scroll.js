@@ -1,5 +1,4 @@
 var utils = require('../utils');
-var animationend = require('animationend');
 var ISCROLL = require('iscroll');
 
 exports.name = 'scroll';
@@ -98,8 +97,6 @@ exports.events.build = function(){
     }
 
     this.scroller = new ISCROLL(this.$els.scroller, options);
-
-    console.log(this.scroller, that)
 
     this.scroller.on('scroll', function(){
         that.y = this.y;
