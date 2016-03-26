@@ -23,11 +23,11 @@ exports.methods.loadmoreMove = function(y){
     this.$els.loadmore.style.webkitTransform = 'translate3d(0,' + y + 'px,0)';
 }
 
-exports.events['webview-load'] = function(){
+exports.events['webview:load'] = function(){
     this.$emit('create');
 }
 
-exports.events['webview-unload'] = function(){
+exports.events['webview:unload'] = function(){
     this.scroller.destroy();
     utils.off(this.$els.scroller, this._touchstart);
     utils.off(document, this._touchend);
@@ -126,6 +126,9 @@ exports.events.build = function(){
             else if ( that.y < this.maxNativeScrollY - that.loadmoreHeight * 2 ){
                 that.$emit('loadmore:overflow');
             }
+        }
+        else if ( that.y < 0 && that.y > this.maxNativeScrollY && that.canLoadmore ){
+            that.loadmoreMove(0);
         }
     });
 

@@ -19,14 +19,8 @@ exports.data = function(){
     }
 }
 
-exports.beforeDestroy = function(){
-    this._touchStart && utils.off(this.$els.progress, 'touchstart', this._touchStart);
-    this._touchMove && utils.off(this.$els.progress, 'touchmove', this._touchMove);
-    this._touchEnd && utils.off(this.$els.progress, 'touchend', this._touchEnd);
-}
-
 exports.events = {
-    "webview-load": function(fn){
+    "webview:load": function(fn){
         if ( !this.isCreated ){
             var that = this;
             setTimeout(function(){
@@ -48,6 +42,11 @@ exports.events = {
                 that.isCreated = true;
             });
         }
+    },
+    "webview:unload": function(){
+        this._touchStart && utils.off(this.$els.progress, 'touchstart', this._touchStart);
+        this._touchMove && utils.off(this.$els.progress, 'touchmove', this._touchMove);
+        this._touchEnd && utils.off(this.$els.progress, 'touchend', this._touchEnd);
     }
 }
 
