@@ -134,6 +134,9 @@ exports.events.build = function(){
         if ( that.y < this.maxNativeScrollY && that.cmd != 3 ){
             return that.scroller.scrollTo(0, that.scroller.maxNativeScrollY, 300, that.scroller.options.bounceEasing);
         }
+        if ( that.y > 0 && that.cmd != 2 ){
+            return that.scroller.scrollTo(0, 0, 300, that.scroller.options.bounceEasing);
+        }
         switch (that.cmd) {
             case 2:
                 if ( that._events['refresh:trigger'] && that._events['refresh:trigger'].length ){

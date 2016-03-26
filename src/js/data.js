@@ -88,6 +88,11 @@ module.exports = {
                         status: 0
                     }
                 },
+                methods: {
+                    click: function(){
+                        alert(1)
+                    }
+                },
                 events: {
                     beforeload: function(){
                         this.$toolbar.status = false;
