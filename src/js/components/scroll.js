@@ -1,273 +1,202 @@
 var utils = require('../utils');
 var animationend = require('animationend');
+var ISCROLL = require('iscroll');
+
 exports.name = 'scroll';
+exports.props = ['refresh', 'loadmore'];
+exports.events = {};
+exports.methods = {};
 exports.template =
     '<div class="scroll-view" v-el:root>' +
-        '<div class="scroll-refresh scroll-exist" :style="rereshTopPx" v-el:refresh><slot name="refresh"></slot></div>' +
-        '<div class="scroll-view-content">' +
-            '<div class="scroll-view-content-overflow" v-el:content>' +
-                '<div class="scroll-view-content-overflow-area" v-el:area>' +
-                    '<slot></slot>' +
-                '</div>' +
-            '</div>' +
+        '<div class="scroll-refresh"  v-el:refresher><slot name="refresh"></slot></div>' +
+        '<div class="scroll-view-area" v-el:scroller>'+
+            '<div class="scroll-page" v-el:animate><slot></slot></div>' +
         '</div>' +
-        '<div class="scroll-more scroll-exist" :style="moreBottomPx" v-el:more><slot name="more"></slot></div>' +
+        '<div class="scroll-loadmore" v-el:loadmore><slot name="loadmore"></slot></div>' +
     '</div>';
 
-exports.props = ['refresh', 'loadmore'];
+exports.methods.refresherMove = function(y){
+    this.$els.refresher.style.webkitTransform = 'translate3d(0,' + y + 'px,0)';
+}
 
-exports.data = function(){
-    return {
-        isCreated: false,
-        refreshTop: 0,
-        moreBottom: 0,
-        height: 0,
-        rootHeight: 0,
-        startY: 0,
-        startTop: 0,
-        moveY: 0,
-        offset: 5,
-        status: false,
-        marginTop: 0,
-        marginBottom: 0
+exports.methods.loadmoreMove = function(y){
+    this.$els.loadmore.style.webkitTransform = 'translate3d(0,' + y + 'px,0)';
+}
+
+exports.events['webview-load'] = function(){
+    this.$emit('create');
+}
+
+exports.events['webview-unload'] = function(){
+    this.scroller.destroy();
+    utils.off(this.$els.scroller, this._touchstart);
+    utils.off(document, this._touchend);
+    this.$off('refresh:trigger');
+    this.$off('refresh:before');
+    this.$off('refresh:progress');
+    this.$off('refresh:overflow');
+    this.$off('loadmore:trigger');
+    this.$off('loadmore:before');
+    this.$off('loadmore:progress');
+    this.$off('loadmore:overflow');
+}
+
+exports.events['refresh:reset'] = function(){
+    if ( this.scroller.y > 0 ){
+        this.cmd = 9;
+        this.scroller.scrollTo(0, 0, 300, this.scroller.options.bounceEasing);
+    }else{
+        this.cmd = 0;
+        this.scroller.enable();
     }
 }
 
-exports.ready = function(){
-
-}
-
-exports.beforeDestroy = function(){
-    this._touchStart && utils.off(this.$els.root, 'touchstart', this._touchStart);
-    this._touchMove && utils.off(this.$els.root, 'touchmove', this._touchMove);
-    this._touchEnd && utils.off(this.$els.root, 'touchend', this._touchEnd);
-    this.$off('refresh');
-    this.$off('loadmore');
-    this.$off('refreshmove');
-    this.$off('refreshend');
-    this.$off('loadmoreend');
-    this.status = false;
-    this.isCreated = false;
-}
-
-exports.computed = {
-    rereshTopPx: function(){
-        return 'top:' + (this.refreshTop * -1) + 'px';
-    },
-    moreBottomPx: function(){
-        return 'bottom:' + (this.moreBottom * -1) + 'px';
+exports.events['loadmore:reset'] = function(){
+    if ( this.scroller.y < this.scroller.maxNativeScrollY ){
+        this.cmd = 8;
+        this.scroller.scrollTo(0, this.scroller.maxNativeScrollY, 300, this.scroller.options.bounceEasing);
+    }else{
+        this.cmd = 0;
+        this.scroller.enable();
     }
 }
 
-exports.events = {
-    "webview-load": function(fn){
-        var that = this;
-        if ( this.isCreated ) return;
-        setTimeout(function(){
+exports.events.create = function(){
+    this.canRefresh = this.refresh === 'on';
+    this.canLoadmore = this.loadmore === 'on';
 
-            if ( that.loadmore == 'on' ){
-                resolveTagMarginTop(that.$els.area.firstChild, that);
-                resolveTagMarginBottom(that.$els.area.lastChild, that);
-            }
-
-            that.refreshTop = that.$els.refresh.clientHeight;
-            that.moreBottom = that.$els.more.clientHeight;
-            that.height = that.$els.area.clientHeight;
-            that.rootHeight = that.$els.root.clientHeight;
-
-            if ( that.refresh == 'on' || that.loadmore == 'on' ){
-                utils.on(that.$els.root, 'touchstart', that._touchStart = that.touchStart());
-                utils.on(that.$els.root, 'touchmove', that._touchMove = that.touchMove());
-                utils.on(that.$els.root, 'touchend', that._touchEnd = that.touchEnd());
-            }
-            that.isCreated = true;
-
-            utils.removeClass(that.$els.refresh, 'scroll-exist');
-            utils.removeClass(that.$els.more, 'scroll-exist');
-
-            typeof fn === 'function' && fn.call(that);
-        });
-    },
-    refreshprocess: function(y){
-        if ( y <= this.refreshTop * 3 ){
-            move(this.$els.refresh, y);
-            move(this.$els.content, y);
-            this.$emit('refreshmove', y, this.refreshTop);
-        }
-    },
-    refreshstart: function(){
-        var that = this;
-        if ( that._events.refresh && that._events.refresh.length ){
-            if ( this.moveY > this.refreshTop * 2 ){
-                that.refreshAnimate(this.refreshTop, function(){
-                    that.$emit('refresh', next);
-                });
-            }else{
-                that.$emit('refresh', next);
-            }
-        }else{
-            next();
-            that.status = false;
-            utils.windowTouchMoveDisabled(false);
-        }
-
-        function next(){
-            that.refreshAnimate(0, function(remove){
-                that.status = false;
-                utils.windowTouchMoveDisabled(false);
-                remove();
-                that.$emit('refreshend');
-            });
-        }
-    },
-    refreshback: function(){
-        var that = this;
-        that.refreshAnimate(0, function(remove){
-            that.status = false;
-            utils.windowTouchMoveDisabled(false);
-            remove();
-        });
-    },
-    morestart: function(){
-        var that = this;
-        if ( that._events.loadmore && that._events.loadmore.length ){
-            that.moreAnimate(that.moreBottom * -1, function(){
-                that.$emit('loadmore', next);
-            });
-        }else{
-            that.status = false;
-            utils.windowTouchMoveDisabled(false);
-        }
-        function next(){
-            that.moreAnimate(0, function(remove){
-                that.status = false;
-                utils.windowTouchMoveDisabled(false);
-                remove();
-                that.$emit('loadmoreend');
-            });
-        }
+    if ( this.canRefresh ) {
+        this.refresherHeight = this.$els.refresher.offsetHeight;
+        this.$els.refresher.style.top = this.refresherHeight * -1;
     }
+    if ( this.canLoadmore ) {
+        this.loadmoreHeight = this.$els.loadmore.offsetHeight;
+        this.$els.loadmore.style.bottom = this.loadmoreHeight * -1;
+    }
+
+    this.cmd = 0;
+    this.$emit('build');
 }
 
-exports.methods = {
-    touchStart: function(){
-        var that = this;
-        return function(e){
-            if ( that.status || (that.refresh != 'on' && that.loadmore != 'on') ) return;
-            that.startY = Y(e);
-            that.startTop = that.$els.content.scrollTop;
+exports.events.build = function(){
+    var that = this;
+    var options = {
+        mouseWheel: true,
+        scrollbars: false
+    };
+
+    if ( this.canRefresh ) {
+        options.offsetTopY = this.refresherHeight;
+    }
+
+    if ( this.canLoadmore ) {
+        options.offsetBottomY = this.loadmoreHeight * -1;
+    }
+
+    if ( this.canRefresh || this.canLoadmore ){
+        options.probeType = 3;
+    }
+
+    this.scroller = new ISCROLL(this.$els.scroller, options);
+
+    console.log(this.scroller, that)
+
+    this.scroller.on('scroll', function(){
+        that.y = this.y;
+        if ( that.y > 0 && that.canRefresh ){
+            that.refresherMove(that.y);
+            if ( that.y <= that.refresherHeight ){
+                that.$emit('refresh:before');
+            }
+            else if ( that.y <= that.refresherHeight  * 2  ){
+                that.$emit('refresh:progress', that.y / that.refresherHeight - 1 );
+            }
+            else if ( that.y > that.refresherHeight  * 2 ){
+                that.$emit('refresh:overflow');
+            }
         }
-    },
-    touchMove: function(){
-        var that = this;
-        return function(e){
-            if ( that.status || that.refresh != 'on' ) return;
-            var y = Y(e);
-            that.moveY = y - that.startY - that.startTop;
-            if ( that.moveY >= 0 && that.refresh == 'on' ){
-                utils.stop(e);
-                if ( !utils.windowTouchMoveDisabledStatus ){
-                    utils.windowTouchMoveDisabled(true);
+        else if ( that.y < this.maxNativeScrollY && that.canLoadmore ){
+            that.loadmoreMove(that.y - this.maxNativeScrollY);
+            if ( that.y >= this.maxScrollY ){
+                that.$emit('loadmore:before');
+            }
+            else if ( that.y >= this.maxNativeScrollY - that.loadmoreHeight * 2 ){
+                that.$emit('loadmore:progress', 1 - (that.y - ( this.maxNativeScrollY - that.loadmoreHeight * 2 )) / that.loadmoreHeight );
+            }
+            else if ( that.y < this.maxNativeScrollY - that.loadmoreHeight * 2 ){
+                that.$emit('loadmore:overflow');
+            }
+        }
+    });
+
+    this.scroller.on('scrollEnd', function(){
+        if ( !that.canRefresh && !that.canLoadmore ) return;
+        if ( that.y < this.maxNativeScrollY && that.cmd != 3 ){
+            return that.scroller.scrollTo(0, that.scroller.maxNativeScrollY, 300, that.scroller.options.bounceEasing);
+        }
+        switch (that.cmd) {
+            case 2:
+                if ( that._events['refresh:trigger'] && that._events['refresh:trigger'].length ){
+                    that.$emit('refresh:trigger');
                 }
-                that.$emit('refreshprocess', that.moveY);
-            }else{
-                if ( utils.windowTouchMoveDisabledStatus ){
-                    utils.windowTouchMoveDisabled(false);
+                else{
+                    that.$emit('refresh:reset');
                 }
-            }
+                break;
+            case 3:
+                if ( that._events['loadmore:trigger'] && that._events['loadmore:trigger'].length ){
+                    that.$emit('loadmore:trigger');
+                }
+                else{
+                    that.$emit('loadmore:reset');
+                }
+                break;
+            case 8:
+            case 9:
+                that.cmd = 0;
+                that.scroller.enable();
+                break;
         }
-    },
-    touchEnd: function(){
-        var that = this;
-        return function(){
-            if ( that.status ) return;
-            if ( that.moveY > 0 && that.refresh == 'on' ){
-                if ( that.moveY >= that.refreshTop * 2 ){
-                    that.status = true;
-                    utils.windowTouchMoveDisabled(true);
-                    that.$emit('refreshstart');
+    });
+
+    utils.on(this.$els.scroller, 'touchstart', this._touchstart = function(){
+        if ( !that.canRefresh && !that.canLoadmore ) return;
+        that.cmd = 1; // 确定滚动
+    });
+
+    utils.on(document, 'touchend', this._touchend = function(){
+        if ( !that.canRefresh && !that.canLoadmore ) return;
+        if ( that.cmd = 1 ){
+            if ( that.y >= 0 ){
+                that.scroller.disable();
+                if ( that.y > that.refresherHeight * 2 ){
+                    that.cmd = 2; // 刷新
+                    that.scroller.scrollTo(0, that.refresherHeight, 300, that.scroller.options.bounceEasing);
                 }else{
-                    that.status = false;
-                    utils.windowTouchMoveDisabled(false);
-                    that.$emit('refreshback');
-                }
-            }else if ( that.moveY < 0 && that.loadmore == 'on' ){
-                if ( that.height + that.marginTop + that.marginBottom <= that.$els.content.scrollTop + that.offset * that.$root.env.viewScale + that.rootHeight ){
-                    that.status = true;
-                    utils.windowTouchMoveDisabled(true);
-                    that.$emit('morestart');
-                }else{
-                    that.status = false;
-                    utils.windowTouchMoveDisabled(false);
+                    if ( that.scroller.y == 0 ){
+                        that.cmd = 0;
+                        that.scroller.enable();
+                    }else{
+                        that.cmd = 9;
+                        that.scroller.scrollTo(0, 0, 300, that.scroller.options.bounceEasing);
+                    }
                 }
             }
-            that.startY = 0;
-            that.moveY = 0;
-            that.startTop = 0;
+            else if ( that.y <= that.scroller.maxNativeScrollY ){
+                that.scroller.disable();
+                if ( that.y < that.scroller.maxNativeScrollY - that.loadmoreHeight * 2 ){
+                    that.cmd = 3; // 加载更多
+                    that.scroller.scrollTo(0, that.scroller.maxScrollY, 300, that.scroller.options.bounceEasing);
+                }else{
+                    if ( that.y === that.scroller.maxNativeScrollY ){
+                        that.cmd = 0;
+                        that.scroller.enable();
+                    }else{
+                        that.cmd = 8;
+                        that.scroller.scrollTo(0, that.scroller.maxNativeScrollY, 300, that.scroller.options.bounceEasing);
+                    }
+                }
+            }
         }
-    },
-    refreshAnimate: function(y, fn){
-        var that = this;
-        animationend(that.$els.content).then(function(){
-            fn(removeClass);
-        });
-        that.$els.refresh.classList.add('active');
-        that.$els.content.classList.add('active');
-        move(that.$els.refresh, y);
-        move(that.$els.content, y);
-        function removeClass(){
-            that.$els.refresh.classList.remove('active');
-            that.$els.content.classList.remove('active');
-        }
-    },
-    moreAnimate: function(y, fn){
-        var that = this;
-        animationend(that.$els.content).then(function(){
-            fn(removeClass);
-        });
-        that.$els.more.classList.add('active');
-        that.$els.content.classList.add('active');
-        move(that.$els.more, y);
-        move(that.$els.content, y);
-        function removeClass(){
-            that.$els.more.classList.remove('active');
-            that.$els.content.classList.remove('active');
-        }
-    }
-}
-
-function Y(e){
-    return e.targetTouches[0].pageY;
-}
-
-function move(el, px){
-    el.style.webkitTransform = 'translate3d(0,' + px + 'px,0)';
-}
-
-function resolveTagMarginTop(el, that){
-    if ( !el ) return;
-    var type = el.nodeType;
-    if ( type == 3 ){
-        resolveTagMarginTop(el.nextSibling, that);
-    }else if ( type === 1 ){
-        var marginTop = Number(utils.style(el, 'marginTop').replace('px', ''));
-        if ( marginTop > that.marginTop ){
-            that.marginTop = marginTop;
-        }
-        resolveTagMarginTop(el.firstChild, that);
-    }
-}
-
-function resolveTagMarginBottom(el, that){
-    if ( !el ) return;
-    var type = el.nodeType;
-    if ( type == 3 ){
-        resolveTagMarginBottom(el.previousSibling, that);
-    }else if ( type === 1 ){
-        var marginTop = Number(utils.style(el, 'marginBottom').replace('px', ''));
-        if ( marginTop > that.marginBottom ){
-            that.marginBottom = marginTop;
-        }
-        resolveTagMarginBottom(el.lastChild,that);
-    }
+    });
 }

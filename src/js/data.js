@@ -104,36 +104,44 @@ module.exports = {
                     },
                     load: function() {
                         var that = this;
-                            this.$refs.scroll.$on('refreshmove', function(y, _y){
-                                if ( y > _y * 2 ){
-                                    that.scroll.status = 1;
-                                    that.scroll.text = '松开进行刷新'
-                                }else if ( y > _y ){
-                                    that.scroll.status = 0;
-                                    that.scroll.text = '继续下拉准备刷新';
-                                }else{
-                                    that.scroll.status = 0;
-                                    that.scroll.text = '下拉刷新';
-                                }
-                            });
-                            this.$refs.scroll.$on('refreshend', function(){
-                                that.scroll.status = 0;
-                                that.scroll.text = '下拉刷新';
-                            });
-                            this.$refs.scroll.$on('refresh', function(next){
-                                that.scroll.text = '正在刷新数据';
-                                setTimeout(next, 3000);
-                            });
-                            this.$refs.scroll.$on('loadmore', function(next){
-                                console.log('loadmoring');
-                                setTimeout(next, 3000);
-                            });
+                        var scroller = this.$refs.scroll;
+                        scroller.$on('refresh:trigger', function(){
+                            var self = this;
+                            console.log('refreshing...');
+                            setTimeout(function(){
+                                self.$emit('refresh:reset');
+                            }, 3000);
+                        });
+                        scroller.$on('refresh:before', function(){
+                            console.log('before');
+                        })
+                        scroller.$on('refresh:progress', function(percent){
+                            console.log('progress:' + (percent * 100).toFixed(2) + '%');
+                        });
+                        scroller.$on('refresh:overflow', function(){
+                            console.log('overflow');
+                        })
+
+                        scroller.$on('loadmore:trigger', function(){
+                            var self = this;
+                            console.log('loadmore...');
+                            setTimeout(function(){
+                                self.$emit('loadmore:reset');
+                            }, 3000);
+                        });
+
+                        scroller.$on('loadmore:before', function(){
+                            console.log('before');
+                        })
+                        scroller.$on('loadmore:progress', function(percent){
+                            console.log('progress:' + (percent * 100).toFixed(2) + '%');
+                        });
+                        scroller.$on('loadmore:overflow', function(){
+                            console.log('overflow');
+                        })
                     },
                     unload: function() {
-                        this.$refs.scroll.$off('refreshmove');
-                        this.$refs.scroll.$off('refreshend');
-                        this.$refs.scroll.$off('refresh');
-                        this.$refs.scroll.$off('loadmore');
+
                     }
                 }
             }
