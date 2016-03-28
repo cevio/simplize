@@ -23,13 +23,13 @@ exports.data = function(){
 exports.ready = function(){
     var that = this;
     this.height = this.$els.root.offsetHeight / 5;
-    this.$scroller = new iscroll(this.$els.root, { scrollbars: false, snap: 'li',
+    this.$scroller = new iscroll(this.$els.root, { scrollbars: false, snap: 'li', probeType: 3,
         linear: {
             style: 'cubic-bezier(0,0,1,1)',
             fn: function (k) { return k; }
         }
     });
-    this.$scroller.on('scrollEnd', function(e){
+    this.$scroller.on('scroll', function(e){
         that.index = getIndex(this.y, that.height) - 2;
     });
     this.index = findIndex(this.data.list, this.data.value);
