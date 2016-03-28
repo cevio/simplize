@@ -21,10 +21,7 @@
     clear: both;
   }
 }
-div[class^=web-col-],
-div[class^=col-] {
-  float: left;
-}
+
 @cols: @grid-cols;
 .web-row,
 .row {
@@ -39,6 +36,7 @@ div[class^=col-] {
     .web-col-@{className},
     .col-@{className} {
       width: ~"@{divider}%";
+      float: left;
       //width: ~"-webkit-calc((100% - 15px*@{n-1}) / @{n})";
       //width: ~"calc((100% - 15px*@{n-1}) / @{n})";
     }

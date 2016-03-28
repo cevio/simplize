@@ -58,6 +58,10 @@ cubic-bezier(0.1, 0.3, 0.5, 1) 惯性滚动函数
     height: 100%;
   }
 }
+.ui-middle-wrapper{
+  height: 100%;
+  width: 100%;
+}
 .fl {
   float: left;
 }
@@ -180,3 +184,99 @@ cubic-bezier(0.1, 0.3, 0.5, 1) 惯性滚动函数
 .func_padding(@padding-func-end);
 .func-fontSize(@font-func-end);
 .func-color(15);
+
+
+/*
+hairline-border(@border,@radius)用来实现"retina hairline"边框，
+@border参数传入border样式，如 1px solid #333,缺省值为 @default-border
+@radius参数传入border-radius值，如1px,1rem,缺省值 为 0
+注意： 如果引用hairline-border Mixin 方法，这个样式的定位方式会变成relative
+*/
+.hairline-border(@border:@default-border, @radius:0) {
+  position: relative;
+  &:after {
+    content: " ";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    left: 0;
+    top: 0;
+    border: @border;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    border-radius: @radius;
+    box-sizing: border-box;
+  }
+}
+/*
+hairline-border-single(@border,@pos,@pseudo) 可以用来实现单条的"retina hairline"边框，
+@border参数传入border样式，如 1px solid #333,缺省值为 @default-border
+@pos参数传入位置，可以为"top/bottom/left/right",缺省值 为 top
+@pseudo参数传入伪类值，可以为after或者before，所以，一个样式最多有2条单独的边框
+注意：对于某一条样式 hairline-border-single hairline-border 只能同时使用一种
+*/
+.hairline-border-single(@border:@default-border, @pos:top, @pseudo:after) {
+  position: relative;
+  .pseudo(@pseudo);
+  .pseudo(@pseudo) when (@pseudo=after) {
+    &:after {
+      .-(@pos);
+      content: " ";
+      position: absolute;
+      border: @border;
+      transform-origin: 0 0;
+      box-sizing: border-box;
+    }
+  }
+  .pseudo(@pseudo) when (@pseudo=before) {
+    &:before {
+      .-(@pos);
+      content: " ";
+      position: absolute;
+      border: @border;
+      transform-origin: 0 0;
+      box-sizing: border-box;
+    }
+  }
+  .-(@pos:top) when (@pos = top) {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 0;
+    transform: scaleY(0.25);
+  }
+  .-(@pos:top) when (@pos = bottom) {
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 0;
+    transform: scaleY(0.25);
+  }
+  .-(@pos:top) when (@pos = left) {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    transform: scaleX(0.25);
+  }
+  .-(@pos:top) when (@pos = right) {
+    left: 100%;
+    top: 0;
+    height: 100%;
+    width: 0;
+    transform: scaleX(0.25);
+  }
+}
+@ratios:25,33,50,75,100,150,200,300;
+.ratio_maker(@i:1) when (@i <= length(@ratios)){
+  @ratio: extract(@ratios, @i);
+  .ratio@{ratio}{
+    &:after{
+      display: inline-block;
+      content: "";
+      padding-bottom: @ratio*1%;
+    }
+  }
+  .ratio_maker((@i+1));
+}
+.ratio_maker();
