@@ -13,6 +13,7 @@ simplize.ready(function() {
 
     indexBrowser.$route('home');
     indexBrowser.$route('/button','button');
+    indexBrowser.$route('/cell','cell');
 
 
     app.$run();

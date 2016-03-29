@@ -17,10 +17,11 @@
   touch-action: manipulation;
   cursor: pointer;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  border: 1px solid transparent;
-  // .hairline-border(1px solid #000);
+  border: none;
+  .hairline-border(1px solid rgba(0,0,0,0.125),.6em);
   white-space: nowrap;
-  padding: .5em;
+  padding: .5em 1em;
+  user-select:none;
   // margin: 0 1rem 1rem;
   border-radius: .3em;
 
@@ -87,7 +88,9 @@
 .button-variant(@color; @background; @border) {
   color: @color;
   background-color: @background;
-  border-color: @border;
+  &:after{
+    border-color: @border;
+  }
 
   &:focus,
   &.focus {

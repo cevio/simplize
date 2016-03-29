@@ -7,7 +7,8 @@ module.exports = {
         keepAlive: true,
         webviews: {
             home: require('../routers/home'),
-            button: require('../routers/button')
+            button: require('../routers/button'),
+            cell: require('../routers/cell')
         }
     }
 }
