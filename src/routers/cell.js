@@ -5,7 +5,9 @@ exports.data = {
     a:1
   },
   vcode:"",
-  file:[]
+  file:[],
+  textarea:'',
+  account:''
 }
 exports.watch = {
   checkbox:function(newVal){

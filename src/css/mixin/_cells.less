@@ -34,7 +34,7 @@
 .cell-bd {
   .select-none;
 }
-.cell-primary{
+.cell-primary {
   flex: 1;
 }
 // cell foot
@@ -59,6 +59,44 @@
       margin-left: 0.3em;
       top: -0.08rem;
     }
+  }
+}
+.cell-select {
+  padding: 0;
+  padding-right: @default-gunnter;
+}
+.cell-saparate {
+  position: relative;
+  padding-right: 2em;
+  &:before {
+    content: " ";
+    display: inline-block;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    height: .5rem;
+    width: .5rem;
+    border-width: 2px 2px 0 0;
+    border-color: #C8C8CD;
+    border-style: solid;
+    position: relative;
+    top: 50%;
+    position: absolute;
+    right: 1.2rem;
+    margin-top: -0.25rem;
+  }
+  &:after {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    border-right: 1px solid #D9D9D9;
+    color: #D9D9D9;
+    -webkit-transform-origin: 100% 0;
+    transform-origin: 100% 0;
+    -webkit-transform: scaleX(0.5);
+    transform: scaleX(0.5);
   }
 }
 // 紧凑型cell  没有上下padding 和 右侧padding 但是有左侧padding

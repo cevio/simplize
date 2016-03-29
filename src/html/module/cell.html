@@ -117,7 +117,7 @@
         单选二
       </div>
 
-  </notify>
+    </notify>
     <notify class="cell clickable" event-name="notify:radio">
       <div class="cell-hd">
         <radio class="default green mr10" :raw.sync="radio" value="单选三"></radio>
@@ -126,7 +126,7 @@
         单选三
       </div>
 
-  </notify>
+    </notify>
   </div>
 
   <div class="cells-title c8 ">
@@ -222,7 +222,7 @@
       <div class="cell-ft ">
         <div v-if="vcode.length<=0" class="demo-icon-danger c15 mr5">!</div>
         <div v-else class="demo-icon-success c15 mr5">
-          <i class="fa fa-check demo-icon-check" ></i>
+          <i class="fa fa-check demo-icon-check"></i>
         </div>
       </div>
       <div class="cell-ft">
@@ -235,7 +235,7 @@
   </div>
   <div class="btn-area">
     <button class="btn btn-success btn-block f12">
-        提交
+      提交
     </button>
   </div>
 
@@ -248,28 +248,122 @@
       <div class="cell-bd cell-primary">
         <div class="uploader">
           <div class="uploader-hd">
-            图片上传 <div class="fr">{{file.length}}/9</div>
+            图片上传
+            <div class="fr">{{file.length}}/9</div>
           </div>
           <div class="uploader-bd">
             <div class="demo-img-list">
               <ratio value="100" class="demo-img-item" v-for="img in file" transition="fade" stagger="100">
-                <div  class="demo-bg-spz" :style="img.src|imgurl"></div>
+                <div class="demo-bg-spz" :style="img.src|imgurl"></div>
               </ratio>
               <div v-if="file.length<9" class="demo-img-item ">
                 <ratio value="100" class="demo-file-uploader">
                   <file class="demo-file" accept="image/*" v-ref:imgupload></file>
                 </ratio>
               </div>
-
             </div>
-
-
           </div>
         </div>
-
-
-
       </div>
+    </div>
+  </div>
+
+  <div class="cells-title c8">
+    文本域
+  </div>
+  <div class="cells">
+    <div class="cell">
+      <div class="cell-bd cell-primary">
+        <textarea class="textarea" name="" id="" cols="30" rows="4" placeholder="请输入评论" v-model="textarea"></textarea>
+        <div class="demo-input-count tr c9">
+          <span :class="textarea.length>200?'fc-danger f13':''">{{textarea.length}}</span>/200
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="cells-title c8">
+    表单报错
+  </div>
+  <div class="cells demo-form">
+    <div class="cell">
+      <div class="cell-hd">
+        <label class="demo-label">银行卡号</label>
+      </div>
+      <div class="cell-bd cell-primary">
+        <input class="input input-noboder" v-model="account" type="text" placeholder="请输入银行卡号">
+      </div>
+      <div class="cell-ft ">
+        <div v-if="account.length!=17" class="demo-icon-danger c15 mr5">!</div>
+        <div v-else class="demo-icon-success c15 mr5">
+          <i class="fa fa-check demo-icon-check"></i>
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cell-hd">
+        <label for="" class="demo-label">日期</label>
+      </div>
+      <div class="cell-bd cell-primary">
+        <input class="input" type="date" value="">
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cell-hd">
+        <label for="" class="demo-label">时间</label>
+      </div>
+      <div class="cell-bd cell-primary">
+        <input class="input" type="datetime-local" value="">
+      </div>
+    </div>
+  </div>
+
+  <div class="cells-title c8">
+    选择
+  </div>
+  <div class="cells demo-form">
+    <div class="cell cell-select">
+      <div class="cell-hd cell-saparate">
+        <select class="select" name="select2">
+          <option value="1">+86</option>
+          <option value="2">+80</option>
+          <option value="3">+84</option>
+          <option value="4">+87</option>
+        </select>
+      </div>
+      <div class="cell-bd cell-primary pl10">
+        <input class="input " type="text" placeholder="请输入手机号码">
+      </div>
+    </div>
+  </div>
+
+  <div class="cells-title c8">
+    选择列表
+  </div>
+  <div class="cells">
+    <div class="cell cell-select cell-linked">
+      <div class="cell-bd cell-primary">
+        <select class="select" name="select1">
+          <option selected="" value="1">微信号</option>
+          <option value="2">QQ号</option>
+          <option value="3">Email</option>
+        </select>
+      </div>
+      <div class="cell-ft"></div>
+    </div>
+    <div class="cell cell-select cell-linked">
+      <div class="cell-hd pl10">
+        国家/地区
+      </div>
+      <div class="cell-bd cell-primary">
+        <select class="select" name="select2">
+          <option value="1">中国</option>
+          <option value="2">美国</option>
+          <option value="3">英国</option>
+        </select>
+      </div>
+      <div class="cell-ft"></div>
     </div>
   </div>
 
