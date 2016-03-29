@@ -27,11 +27,11 @@ exports.methods.select = function(e){
         status.pass = false;
         status.val = e;
     }
-    this.$emit('file:before', next, fail);
+    this.$emit('file:before', files, next, fail);
     if ( !status.pass ){
         return this.$emit('file:error', status.val);
     }
-    
+
     for ( var i = 0 ; i < files.length ; i++ ){
       this.read(files[i]);
     }
