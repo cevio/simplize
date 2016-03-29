@@ -43,8 +43,7 @@ exports.ready = function(){
             var mc = selector.$children[1];
             var dc = selector.$children[2];
 
-            yc.$watch('index', function(value){
-                this.$emit('get');
+            yc.$on('scroll:end', function(value){
                 var result = that.getDates(this.data.value, mc.data.value);
                 if ( result.length === dc.data.list.length ) return;
                 dc.data.list = result;
@@ -54,8 +53,7 @@ exports.ready = function(){
                 });
             });
 
-            mc.$watch('index', function(value){
-                this.$emit('get');
+            mc.$on('scroll:end', function(value){
                 var result = that.getDates(yc.data.value, this.data.value);
                 if ( result.length === dc.data.list.length ) return;
                 dc.data.list = result;

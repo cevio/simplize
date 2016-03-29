@@ -32,6 +32,10 @@ exports.ready = function(){
     this.$scroller.on('scroll', function(e){
         that.index = getIndex(this.y, that.height) - 2;
     });
+    this.$scroller.on('scrollEnd', function(){
+        that.$emit('get');
+        that.$emit('scroll:end');
+    });
     this.index = findIndex(this.data.list, this.data.value);
     utils.nextTick(function(){
         that.$emit('scrollto');

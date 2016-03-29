@@ -100,7 +100,7 @@ exports.events.build = function(){
 
     this.scroller.on('scroll', function(){
         that.y = this.y;
-        if ( that.y > 0 && that.canRefresh ){
+        if ( that.y >= 0 && that.canRefresh ){
             that.refresherMove(that.y);
             if ( that.y <= that.refresherHeight ){
                 that.$emit('refresh:before');
@@ -112,7 +112,7 @@ exports.events.build = function(){
                 that.$emit('refresh:overflow');
             }
         }
-        else if ( that.y < this.maxNativeScrollY && that.canLoadmore ){
+        else if ( that.y <= this.maxNativeScrollY && that.canLoadmore ){
             that.loadmoreMove(that.y - this.maxNativeScrollY);
             if ( that.y >= this.maxScrollY ){
                 that.$emit('loadmore:before');
@@ -124,8 +124,9 @@ exports.events.build = function(){
                 that.$emit('loadmore:overflow');
             }
         }
-        else if ( that.y < 0 && that.y > this.maxNativeScrollY && that.canLoadmore ){
-            that.loadmoreMove(0);
+        else if ( that.y < 0 && that.y > this.maxNativeScrollY ){
+            that.canLoadmore && that.loadmoreMove(0);
+            that.canRefresh && that.refresherMove(0);
         }
     });
 
