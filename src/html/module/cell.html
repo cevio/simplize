@@ -100,7 +100,7 @@
     <div class="f8 c10">当前选中:{{radio}}</div>
   </div>
   <div class="cells ">
-    <notify class="cell clickable" event-name="'notify:radio'">
+    <notify class="cell clickable" event-name="notify:radio">
       <div class="cell-bd">
         单选一
       </div>
@@ -108,22 +108,22 @@
         <radio class="default green" :raw.sync="radio" value="单选一"></radio>
       </div>
     </notify>
-    <div class="cell clickable" v-on:click="radio='单选二'">
+    <notify class="cell clickable" event-name="notify:radio">
       <div class="cell-bd">
         单选二
       </div>
       <div class="cell-ft">
         <radio class="default green" :raw.sync="radio" value="单选二"></radio>
       </div>
-    </div>
-    <div class="cell clickable" v-on:click="radio='单选三'">
+  </notify>
+    <notify class="cell clickable" event-name="notify:radio">
       <div class="cell-bd">
         单选三
       </div>
       <div class="cell-ft">
         <radio class="default green" :raw.sync="radio" value="单选三"></radio>
       </div>
-    </div>
+  </notify>
   </div>
 
   <div class="cells-title c8 ">
