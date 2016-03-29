@@ -60,6 +60,7 @@ Vue.component('date', require('./components/date'));
 Vue.component('time', require('./components/time'));
 Vue.component('ratio', require('./components/ratio'));
 Vue.component('notify', require('./components/notify'));
+Vue.component('file', require('./components/file'));
 Vue.mixin(require('./application/mixins'));
 
 function simplize(options){
