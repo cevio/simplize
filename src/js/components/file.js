@@ -19,6 +19,19 @@ exports.filters = {
 exports.methods = {};
 exports.methods.select = function(e){
     var files = e.target.files;
+    var status = { pass: true, val: '' };
+    var next = function(){
+        status.pass = true;
+    }
+    var fail = function(e){
+        status.pass = false;
+        status.val = e;
+    }
+    this.$emit('file:before', next, fail);
+    if ( !status.pass ){
+        return this.$emit('file:error', status.val);
+    }
+    
     for ( var i = 0 ; i < files.length ; i++ ){
       this.read(files[i]);
     }
@@ -32,7 +45,7 @@ exports.methods.read = function(file){
     reader.onload = function(e){
         that.$emit('file:success', this, e);
     }
-    reader.onerror = function(){
-        that.$emit('file:error', file);
+    reader.onerror = function(e){
+        that.$emit('file:error');
     }
 }
