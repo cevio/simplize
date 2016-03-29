@@ -3,6 +3,10 @@
 // --------------------------------------------------
 // Base styles
 // --------------------------------------------------
+.btn_area{
+  margin: 1.17647059em @default-gunnter 0.3em;
+}
+
 .box-shadow(@i) {
   box-shadow: @i;
 }
@@ -20,7 +24,7 @@
   border: none;
   .hairline-border(1px solid rgba(0,0,0,0.125),.6em);
   white-space: nowrap;
-  padding: .5em 1em;
+  padding: .6em 1em;
   user-select:none;
   // margin: 0 1rem 1rem;
   border-radius: .3em;
@@ -100,8 +104,8 @@
   }
   &:hover {
     color: @color;
-    background-color: darken(@background, 10%);
-        border-color: darken(@border, 12%);
+    // background-color: darken(@background, 10%);
+    //     border-color: darken(@border, 12%);
   }
   &:active,
   &.active,

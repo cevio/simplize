@@ -3,7 +3,8 @@ exports.data = {
   checkbox:[],
   switch:{
     a:1
-  }
+  },
+  vcode:""
 }
 exports.watch = {
   checkbox:function(newVal){
@@ -15,6 +16,7 @@ exports.watch = {
 }
 exports.methods ={
   toggle:function(tag,source){
+
 
   }
 }

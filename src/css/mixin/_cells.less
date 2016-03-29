@@ -23,13 +23,23 @@
     }
   }
 }
+.cell-tips {
+  margin-top: 0.3em;
+  color: #888;
+  padding-left: @default-gunnter;
+  padding-right: @default-gunnter;
+  font-size: 1rem;
+}
+//cell body
 .cell-bd {
   .select-none;
   flex: 1;
 }
+// cell foot
 .cell-ft {
   color: #888;
 }
+// 带连接的cell
 .cell-linked {
   .ui-click-highlight;
   .cell-ft {
@@ -38,8 +48,8 @@
       display: inline-block;
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg);
-      height: .5rem;
-      width: .5rem;
+      height: 0.5rem;
+      width: 0.5rem;
       border-width: 2px 2px 0 0;
       border-color: #C8C8CD;
       border-style: solid;
@@ -48,4 +58,14 @@
       top: -0.08rem;
     }
   }
+}
+// 紧凑型cell  没有上下padding 和 右侧padding 但是有左侧padding
+.cell-tight {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+//cell的颜色定义
+.cell-danger {
+  color: @brand-danger;
 }

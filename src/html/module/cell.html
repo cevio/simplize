@@ -101,28 +101,31 @@
   </div>
   <div class="cells ">
     <notify class="cell clickable" event-name="notify:radio">
+      <div class="cell-hd">
+        <radio class="default green mr10" :raw.sync="radio" value="单选一"></radio>
+      </div>
       <div class="cell-bd">
         单选一
       </div>
-      <div class="cell-ft">
-        <radio class="default green" :raw.sync="radio" value="单选一"></radio>
-      </div>
+
     </notify>
     <notify class="cell clickable" event-name="notify:radio">
+      <div class="cell-hd">
+        <radio class="default green mr10" :raw.sync="radio" value="单选二"></radio>
+      </div>
       <div class="cell-bd">
         单选二
       </div>
-      <div class="cell-ft">
-        <radio class="default green" :raw.sync="radio" value="单选二"></radio>
-      </div>
+
   </notify>
     <notify class="cell clickable" event-name="notify:radio">
+      <div class="cell-hd">
+        <radio class="default green mr10" :raw.sync="radio" value="单选三"></radio>
+      </div>
       <div class="cell-bd">
         单选三
       </div>
-      <div class="cell-ft">
-        <radio class="default green" :raw.sync="radio" value="单选三"></radio>
-      </div>
+
   </notify>
   </div>
 
@@ -131,30 +134,30 @@
     <div class="f8 c10">当前选中: {{checkbox.join(',')}}</div>
   </div>
   <div class="cells ">
-    <div class="cell clickable">
+    <notify class="cell clickable" event-name="notify:checkbox">
       <div class="cell-bd">
         选项一
       </div>
       <div class="cell-ft">
         <checkbox class="green default" :raw.sync="checkbox" value="选项一"></checkbox>
       </div>
-    </div>
-    <div class="cell clickable">
+    </notify>
+    <notify class="cell clickable" event-name="notify:checkbox">
       <div class="cell-bd">
         选项二
       </div>
       <div class="cell-ft">
         <checkbox class="green default" :raw.sync="checkbox" value="选项二"></checkbox>
       </div>
-    </div>
-    <div class="cell clickable">
+    </notify>
+    <notify class="cell clickable" event-name="notify:checkbox">
       <div class="cell-bd">
         选项三
       </div>
       <div class="cell-ft">
         <checkbox class="green default" :raw.sync="checkbox" value="选项三"></checkbox>
       </div>
-    </div>
+    </notify>
   </div>
 
   <div class="cells-title c8 ">
@@ -178,7 +181,7 @@
   <div class="cells ">
     <div class="cell ">
       <div class="cell-hd">
-        <label class="label">QQ</label>
+        <label class="demo-label">QQ</label>
       </div>
       <div class="cell-bd">
         <input class="input input-noboder" type="number" pattern="[0-9]*" placeholder="请输入QQ号">
@@ -187,39 +190,53 @@
 
       </div>
     </div>
-    <div class="cell ">
+    <div class="cell cell-tight">
       <div class="cell-hd">
-        <label class="label">验证码</label>
+        <label class="demo-label">验证码</label>
       </div>
       <div class="cell-bd">
-        <input class="input input-noboder" type="text" placeholder="请输入QQ号">
+        <input class="input input-noboder" type="text" placeholder="请输入验证码">
+      </div>
+      <div class="cell-ft">
+        <img class="demo-vcode" src="http://weui.github.io/weui/images/vcode.jpg" alt="">
+      </div>
+    </div>
+    <div class="cell ">
+      <div class="cell-hd">
+        <label class="demo-label">银行卡</label>
+      </div>
+      <div class="cell-bd">
+        <input class="input input-noboder" type="number" pattern="[0-9]*" placeholder="请输入银行卡">
       </div>
       <div class="cell-ft">
 
       </div>
     </div>
-    <div class="cell ">
+    <div class="cell cell-tight " :class="vcode==''?'cell-danger':'cell-success'">
       <div class="cell-hd">
-        <label class="label">银行卡</label>
+        <label class="demo-label">验证码</label>
       </div>
       <div class="cell-bd">
-        <input class="input input-noboder" type="text" placeholder="请输入QQ号">
+        <input class="input input-noboder" v-model="vcode" type="text" placeholder="请输入验证码">
+      </div>
+      <div class="cell-ft ">
+        <div v-if="vcode.length<=0" class="demo-icon-danger c15 mr5">!</div>
+        <div v-else class="demo-icon-success c15 mr5">
+          <i class="fa fa-check demo-icon-check" ></i>
+        </div>
       </div>
       <div class="cell-ft">
-
+        <img class="demo-vcode" src="http://weui.github.io/weui/images/vcode.jpg" alt="">
       </div>
     </div>
-    <div class="cell ">
-      <div class="cell-hd">
-        <label class="label">验证码</label>
-      </div>
-      <div class="cell-bd">
-        <input class="input input-noboder" type="text" placeholder="请输入QQ号">
-      </div>
-      <div class="cell-ft">
-
-      </div>
-    </div>
+  </div>
+  <div class="cell-tips">
+    底部说明文字底部说明文字
+  </div>
+  <div class="btn_area">
+    <button class="btn btn-success btn-block f12">
+        提交
+    </button>
   </div>
 
 

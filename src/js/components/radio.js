@@ -23,7 +23,6 @@ exports.events = {
         this._cb && utils.off(this.$els.root, 'click', this._cb);
     },
     "notify:radio": function(){
-      console.log(111)
         this._cb && this._cb();
     }
 }
