@@ -4,10 +4,12 @@ var utils = require('../utils');
 var next = require('../next');
 var ago = require('../components/agos').computed;
 var ajax = require('./ajax');
+var directiveNotify = require('../directives/notify');
 
 exports.created = function(){ this.$next = new next(function(){ this.$emit('end'); }, this); }
 exports.directives = {
-    redirect: directiveRedirect
+    redirect: directiveRedirect,
+    notify: directiveNotify
 }
 exports.filters = {
     ago: function(value, diff){ return ago(value, diff || this.$root.timestamp); },

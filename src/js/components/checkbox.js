@@ -28,5 +28,8 @@ exports.events = {
     },
     "webview:unload": function(){
         this._cb && utils.off(this.$els.root, 'click', this._cb);
+    },
+    "notify:checkbox": function(){
+        this._cb && this._cb();
     }
 }
