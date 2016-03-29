@@ -6,7 +6,6 @@ import {
 } from '../../util/index'
 
 export default function (Vue) {
-
   /**
    * Apply a list of filter (descriptors) to a value.
    * Using plain for loops here because this will be called in
@@ -23,7 +22,7 @@ export default function (Vue) {
   Vue.prototype._applyFilters = function (value, oldValue, filters, write) {
     var filter, fn, args, arg, offset, i, l, j, k
     for (i = 0, l = filters.length; i < l; i++) {
-      filter = filters[i]
+      filter = filters[write ? l - i - 1 : i]
       fn = resolveAsset(this.$options, 'filters', filter.name)
       if (process.env.NODE_ENV !== 'production') {
         assertAsset(fn, 'filter', filter.name)
@@ -53,14 +52,19 @@ export default function (Vue) {
    * resolves asynchronously and caches the resolved
    * constructor on the factory.
    *
-   * @param {String} id
+   * @param {String|Function} value
    * @param {Function} cb
    */
 
-  Vue.prototype._resolveComponent = function (id, cb) {
-    var factory = resolveAsset(this.$options, 'components', id)
-    if (process.env.NODE_ENV !== 'production') {
-      assertAsset(factory, 'component', id)
+  Vue.prototype._resolveComponent = function (value, cb) {
+    var factory
+    if (typeof value === 'function') {
+      factory = value
+    } else {
+      factory = resolveAsset(this.$options, 'components', value)
+      if (process.env.NODE_ENV !== 'production') {
+        assertAsset(factory, 'component', value)
+      }
     }
     if (!factory) {
       return
@@ -76,7 +80,7 @@ export default function (Vue) {
       } else {
         factory.requested = true
         var cbs = factory.pendingCallbacks = [cb]
-        factory(function resolve (res) {
+        factory.call(this, function resolve (res) {
           if (isPlainObject(res)) {
             res = Vue.extend(res)
           }
@@ -88,7 +92,8 @@ export default function (Vue) {
           }
         }, function reject (reason) {
           process.env.NODE_ENV !== 'production' && warn(
-            'Failed to resolve async component: ' + id + '. ' +
+            'Failed to resolve async component' +
+            (typeof value === 'string' ? ': ' + value : '') + '. ' +
             (reason ? '\nReason: ' + reason : '')
           )
         })

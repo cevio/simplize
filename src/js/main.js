@@ -41,11 +41,15 @@ var timer = null;
 Vue.config.debug = false;
 Vue.config.silent = true;
 Vue.config.convertAllProperties = false;
+
 /**
- *  expose proxy.
+ *  output module
  */
 module.exports = simplize;
 
+/**
+ *  公用组件注册
+ */
 Vue.component('middle', require('./components/middle'));
 Vue.component('switch', require('./components/switch'));
 Vue.component('switcher', require('./components/switcher'));
@@ -63,11 +67,20 @@ Vue.component('notify', require('./components/notify'));
 Vue.component('file', require('./components/file'));
 Vue.mixin(require('./application/mixins'));
 
-function simplize(options){
+/**
+ *  simplize原型函数
+ *  创建新的app应用
+ */
+function simplize(options, appDatas){
+    appDatas = appDatas || {};
     simplize.$toolbar = simplize.$toolbar || toolbar;
     simplize.init();
     var components = operators(simplize, options, simplize.$toolbar);
     components.toolbar = tollbarComponent(simplize.$toolbar.component);
+
+    utils.extend(appDatas, resource);
+    resource = appDatas;
+
     return simplize.app = new Vue({
         el: simplize.$root,
         data: resource,
@@ -103,6 +116,10 @@ function simplize(options){
     });
 }
 
+/**
+ *  原型上对外输出
+ *  内置方法或者属性，供插件调用
+ */
 simplize.ago = TimeAgos;
 simplize.nextTick = utils.nextTick;
 simplize.Vue = Vue;

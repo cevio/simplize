@@ -1,8 +1,9 @@
-import { parseTemplate } from '../parsers/template'
 import { parseText } from '../parsers/text'
+import { parseTemplate } from '../parsers/template'
 import {
   warn,
   isTemplate,
+  isFragment,
   prepend,
   extractContent,
   createAnchor,
@@ -49,7 +50,7 @@ export function transclude (el, options) {
       el = transcludeTemplate(el, options)
     }
   }
-  if (el instanceof DocumentFragment) {
+  if (isFragment(el)) {
     // anchors for fragment instance
     // passing in `persist: true` to avoid them being
     // discarded by IE during template cloning
@@ -151,7 +152,7 @@ function mergeAttrs (from, to) {
     if (!to.hasAttribute(name) && !specialCharRE.test(name)) {
       to.setAttribute(name, value)
     } else if (name === 'class' && !parseText(value)) {
-      value.split(/\s+/).forEach(function (cls) {
+      value.trim().split(/\s+/).forEach(function (cls) {
         addClass(to, cls)
       })
     }

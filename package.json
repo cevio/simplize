@@ -12,7 +12,9 @@
     "url": "https://github.com/cevio/simplize"
   },
   "timestamp": 1456220103108,
-  "dependencies": {},
+  "dependencies": {
+    "vue": "^1.0.20"
+  },
   "devDependencies": {
     "iscroll": "^5.1.3",
     "animationend": "0.0.1",

@@ -7,7 +7,6 @@ import {
 const eventRE = /^v-on:|^@/
 
 export default function (Vue) {
-
   /**
    * Setup the instance's option events & watchers.
    * If the value is a string, we pull it from the
@@ -38,8 +37,18 @@ export default function (Vue) {
       if (eventRE.test(name)) {
         name = name.replace(eventRE, '')
         handler = (vm._scope || vm._context).$eval(attrs[i].value, true)
-        handler._fromParent = true
-        vm.$on(name.replace(eventRE), handler)
+        if (typeof handler === 'function') {
+          handler._fromParent = true
+          vm.$on(name.replace(eventRE), handler)
+        } else if (process.env.NODE_ENV !== 'production') {
+          warn(
+            'v-on:' + name + '="' + attrs[i].value + '"' + (
+              vm.$options.name
+                ? ' on component <' + vm.$options.name + '>'
+                : ''
+            ) + ' expects a function value, got ' + handler
+          )
+        }
       }
     }
   }
