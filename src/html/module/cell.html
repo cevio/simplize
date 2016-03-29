@@ -240,8 +240,8 @@
   </div>
 
 
-  <div class="cell-title">
-    图片上传
+  <div class="cells-title c8">
+    上传
   </div>
   <div class="cells">
     <div class="cell">
@@ -251,12 +251,19 @@
             图片上传 <div class="fr">{{file.length}}/9</div>
           </div>
           <div class="uploader-bd">
-            <ul>
-              <ratio value="100" class="demo-bg-spz col-33" v-for="img in file" :style="img.src|imgurl"></ratio>
+            <div class="demo-img-list">
+              <ratio value="100" class="demo-img-item" v-for="img in file" transition="fade" stagger="100">
+                <div  class="demo-bg-spz" :style="img.src|imgurl"></div>
+              </ratio>
+              <div v-if="file.length<9" class="demo-img-item ">
+                <ratio value="100" class="demo-file-uploader">
+                  <file class="demo-file" accept="image/*" v-ref:imgupload></file>
+                </ratio>
+              </div>
 
-            </ul>
+            </div>
 
-            <file accept="image/*" v-ref:imgupload></file>
+
           </div>
         </div>
 

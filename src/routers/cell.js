@@ -47,11 +47,21 @@ exports.events = {
             src:base64,
             size: e.total
           }
-          console.log(img)
           that.file.push(img);
+      });
+      imgupload.$on("file:before",function(files,resolve,reject){
+        if(files.length + that.file.length <= 9){
+          resolve();
+        }else{
+          reject(new Error("最多只能上传九张") );
+        }
       })
-      imgupload.$on('file:error',function(file){
-          console.log(file);
+      imgupload.$on('file:error',function(err){
+        if(err){
+          that.$alert(err.message);
+        }else{
+          that.$alert("文件读取失败");
+        }
       })
     }
 }
