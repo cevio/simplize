@@ -4,7 +4,8 @@ exports.data = {
   switch:{
     a:1
   },
-  vcode:""
+  vcode:"",
+  file:[]
 }
 exports.watch = {
   checkbox:function(newVal){
@@ -20,6 +21,11 @@ exports.methods ={
 
   }
 }
+exports.filters = {
+  imgurl: function(url){
+    return 'background-image:url(' + url + ')';
+  }
+}
 exports.events = {
     beforeload: function() {
         this.$headbar.$reset();
@@ -31,5 +37,21 @@ exports.events = {
         };
         this.$headbar.class = '';
         this.$toolbar.status = false;
+    },
+    load:function(){
+      var imgupload = this.$refs.imgupload;
+      var that = this;
+      imgupload.$on('file:success',function(file, e){
+          var base64 = file.result;
+          var img={
+            src:base64,
+            size: e.total
+          }
+          console.log(img)
+          that.file.push(img);
+      })
+      imgupload.$on('file:error',function(file){
+          console.log(file);
+      })
     }
 }
