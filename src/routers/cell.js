@@ -1,5 +1,22 @@
 exports.data = {
+  radio:'未选中',
+  checkbox:[],
+  switch:{
+    a:1
+  }
+}
+exports.watch = {
+  checkbox:function(newVal){
+    console.log(newVal.join(','))
+  },
+  radio:function(newVal){
+    console.log(newVal);
+  }
+}
+exports.methods ={
+  toggle:function(tag,source){
 
+  }
 }
 exports.events = {
     beforeload: function() {
