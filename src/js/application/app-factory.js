@@ -32,7 +32,6 @@ export function compileBrowser(name, resource = {}){
 
 export function compileWebview(name, resource = {}){
     let result = {};
-    let webview = {};
     let defaults = {
         name: 'webview',
         template: require('../../html/webview.html').replace('{{webview}}', resource.template || ''),
@@ -40,7 +39,6 @@ export function compileWebview(name, resource = {}){
             return resource.data || {};
         }
     }
-    Object.assign(webview, resource, defaults);
-    result['webview-' + name] = webview;
+    result['webview-' + name] = Object.assign({}, resource, defaults);;
     return result;
 }
