@@ -16,7 +16,7 @@ export function compileBrowser(name, resource = {}){
     _data.SP_currentWebview = 'webview-index';
     let browser = {
         name: 'browser',
-        template: require('../../html/browser.html'),
+        template: require('../../../html/browser.html'),
         components: {},
         data: function(){ return _data; }
     }
@@ -34,7 +34,7 @@ export function compileWebview(name, resource = {}){
     let result = {};
     let defaults = {
         name: 'webview',
-        template: require('../../html/webview.html').replace('{{webview}}', resource.template || ''),
+        template: require('../../../html/webview.html').replace('{{webview}}', resource.template || ''),
         data: function(){
             return resource.data || {};
         }

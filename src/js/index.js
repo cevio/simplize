@@ -12,7 +12,7 @@ const resource = {
         },
         webviews: {
             index: {
-                
+
             }
         }
     }
@@ -25,5 +25,6 @@ const data = {
 
 simplize.ready(function(){
     let app = simplize.bootstrap(resource, data);
-    console.log(app);
+    app.$run();
+    console.log(app)
 })

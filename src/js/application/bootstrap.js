@@ -1,9 +1,12 @@
 import vue from 'vue';
 import * as mixin from './mixins';
-import { compileApp } from './app-factory';
+import { compileApp } from './app/factory';
 import { initUrl } from './init';
+import appMethods from './app/method';
+import { appWatches } from './app/watch';
+import { appEvents } from './app/event';
 
-let firstEnter = true;
+let firstEnter = true, firstEnterCallback;
 
 let _resource = {
     req: {},
@@ -11,31 +14,34 @@ let _resource = {
         viewScale: 1,
         viewType: 'device-width'
     },
-    __currentBrowser: ''
+    SP_currentBrowser: 'browser-home'
 }
 
 vue.mixin(mixin);
 
-export default {
-    bootstrap( resource = {}, data = {} ){
-        _resource.req = initUrl(window.location);
-        if ( firstEnter ){
-            history.replaceState({ url: _resource.req.href }, document.title, _resource.req.origin);
-            firstEnter = false;
+export function bootstrap( resource = {}, data = {} ){
+    _resource.req = initUrl(window.location);
+
+    if ( firstEnter ){
+        history.replaceState({ url: _resource.req.href }, document.title, _resource.req.origin);
+        firstEnter = false;
+        firstEnterCallback = function(object){
+            object.$emit('app:route');
         }
-
-        let _data = Object.assign({}, _resource, data);
-
-        _data.SP_currentBrowser = 'browser-home';
-
-        let browsers = compileApp(resource);
-        return new vue({
-            el: createRoot(),
-            data: _data,
-            template: require('../../html/app.html'),
-            components: browsers
-        });
     }
+
+    let _data = Object.assign({}, _resource, data);
+    let browsers = compileApp(resource);
+
+    return new vue({
+        el: createRoot(),
+        data: _data,
+        template: require('../../html/app.html'),
+        components: browsers,
+        methods: appMethods(firstEnterCallback),
+        watch: appWatches,
+        events: appEvents
+    });
 }
 
 function createRoot(){
