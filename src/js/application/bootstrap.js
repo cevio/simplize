@@ -6,7 +6,7 @@ const _resource = {
 }
 
 export default {
-    bootstrap(resource, data){
+    bootstrap( resource = {}, data = {} ){
         let _data = {};
         Object.assign(_data, _resource, data);
         return new vue({
