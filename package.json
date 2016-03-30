@@ -16,6 +16,7 @@
     "domready": "^1.0.8",
     "es6-promise": "^3.1.2",
     "fastclick": "^1.0.6",
+    "path-to-regexp": "^1.2.1",
     "vue": "^1.0.20"
   },
   "devDependencies": {
