@@ -1,1 +1,8 @@
 @charset "UTF-8";
+
+// core 目录下  写的是simplize默认的样式   基本上用户不会用到
+@import "core/browser";
+@import "core/headbar";
+@import "core/toolbar";
+
+//ui 目录下 
