@@ -1,33 +1,24 @@
 {
   "name": "simplize",
-  "description": "simplize project",
-  "version": "1.0.36",
-  "keywords": [],
-  "files": [
-    "build"
+  "description": "simplize tool",
+  "version": "0.0.1",
+  "keywords": [
+    "simplize",
+    "component"
   ],
   "main": "build/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cevio/simplize"
+    "url": ""
   },
-  "timestamp": 1456220103108,
-  "dependencies": {
-    "vue": "^1.0.20"
-  },
+  "timestamp": 1459321727160,
+  "dependencies": {},
   "devDependencies": {
-    "iscroll": "^5.1.3",
-    "animationend": "0.0.1",
-    "domready": "^1.0.8",
-    "es6-promise": "^3.1.2",
-    "fastclick": "^1.0.6",
-    "path-to-regexp": "^1.2.1",
-    "type-of": "^2.0.1",
-    "vue": "^1.0.16"
+    "babel-preset-es2015": "^6.6.0"
   },
   "scripts": {
-    "build": "nap server grunt",
-    "dev": "nap server dev -i 0.0.0.0"
+    "build": "spz build",
+    "dev": "spz server -i 0.0.0.0 -p 8000"
   },
   "engine-strict": true,
   "engines": {
@@ -37,8 +28,5 @@
     {
       "type": "MIT"
     }
-  ],
-  "napDependencies": {
-    "querystrings": "^0.0.2"
-  }
+  ]
 }

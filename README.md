@@ -1,4 +1,5 @@
-# simplizer
+# Project
 
+By simplize.
 
-a new tool
+MIT
