@@ -1,2 +1,5 @@
 import * as simplize from './main.js';
-console.log(simplize)
+
+simplize.ready(function(){
+    simplize.bootstrap();
+})
