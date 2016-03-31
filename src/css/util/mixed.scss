@@ -1,0 +1,17 @@
+.show {
+    display: block !important;
+}
+.hidden,
+.hide {
+    display: none !important;
+}
+
+.wide {
+    width: 100%;
+}
+//文本溢出 省略号
+.tof {
+    overflow     : hidden;
+    text-overflow: ellipsis;
+    white-space  : nowrap;
+}

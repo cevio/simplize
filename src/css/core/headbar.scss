@@ -1,0 +1,39 @@
+.sp-headbars {
+    position: absolute;
+    left    : 0;
+    top     : 0;
+    width   : 100%;
+    height  : 44px;
+    z-index : 100;
+}
+.sp-headbar {
+    position  : relative;
+    height    : 100%;
+    z-index   : 102;
+    background: #999;
+    opacity   : 0.5;
+}
+.sp-headbar-temp {
+    position: absolute;
+    top     : 0;
+    left    : 0;
+    width   : 100%;
+    height  : 100%;
+    z-index : 101;
+}
+
+.sp-headbar-left {
+    padding-left: $ui-side-padding;
+    height      : 100%;
+    position    : absolute;
+    left        : 0;
+}
+.sp-headbar-right {
+    padding-right: $ui-side-padding;
+    height       : 100%;
+    position     : absolute;
+    right        : 0;
+}
+.ios {}
+
+.android {}

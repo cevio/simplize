@@ -1,0 +1,16 @@
+.sp-toolbar {
+    position                   : absolute;
+    width                      : 100%;
+    bottom                     : 0;
+    left                       : 0;
+    height                     : 58px;
+    background                 : #88d;
+    opacity                    : 0.5;
+    z-index                    : 100;
+    -webkit-user-select        : none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout      : none;
+}
+.sp-toolbar-item {
+    height: 100%;
+}

@@ -15,60 +15,101 @@
 </head>
 
 <body>
-    <div class="sp-app">
+    <div class="sp-app ">
         <!-- browser start -->
-        <div class="sp-browser">
-            <!-- headbar start -->
-            <div class="sp-headbars">
-                <div class="sp-headbar sp-flex sp-flex-row">
-                    <div class="sp-headbar-left sp-cell-petty tl">
-                        <div class="sp-icon"></div>
-                        <div class="sp-text"></div>
-                    </div>
-                    <div class="sp-headbar-center sp-cell-primary tc">
-                        <div class="sp-icon"></div>
-                        <div class="sp-text"></div>
-                    </div>
-                    <div class="sp-headbar-right sp-cell-petty tr">
-                        <div class="sp-icon"></div>
-                        <div class="sp-text"></div>
-                    </div>
-                </div>
-                <div class="sp-headbar sp-headbar-temp sp-flex sp-flex-row">
-                    <div class="sp-headbar-left sp-cell-petty tl">
-                        <div class="sp-icon"></div>
-                        <div class="sp-text"></div>
-                    </div>
-                    <div class="sp-headbar-center sp-cell-primary tc">
-                        <div class="sp-icon"></div>
-                        <div class="sp-text"></div>
-                    </div>
-                    <div class="sp-headbar-right sp-cell-petty tr">
-                        <div class="sp-icon"></div>
-                        <div class="sp-text"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- headbar end -->
+        <div class="sp-browsers">
+            <div class="sp-browser">
+                <!-- headbar start -->
+                <div class="sp-headbars">
+                    <div class="sp-headbar sp-flex sp-flex-row">
+                        <div class="sp-headbar-left sp-flex sp-flex-row tl">
+                            <div class="sp-icon">icon</div>
+                            <div class="sp-text">返回</div>
+                        </div>
+                        <div class="sp-headbar-center sp-flex-primary tc">
+                            <div class="sp-text">wwww</div>
+                        </div>
+                        <div class="sp-headbar-right sp-flex sp-flex-row tr">
 
-            <!-- webviews start -->
-            <div class="sp-webviews">
-                <div class="sp-webview">
+                            <div class="sp-text">www</div>
+                            <div class="sp-icon">ss</div>
+                        </div>
+                    </div>
+                    <div class="sp-headbar sp-headbar-temp sp-flex sp-flex-row">
+                        <div class="sp-headbar-left sp-flex-petty tl">
+                            <div class="sp-icon"></div>
+                            <div class="sp-text"></div>
+                        </div>
+                        <div class="sp-headbar-center sp-flex-primary tc">
+                            <div class="sp-icon"></div>
+                            <div class="sp-text"></div>
+                        </div>
+                        <div class="sp-headbar-right sp-flex-petty tr">
+                            <div class="sp-text"></div>
+                            <div class="sp-icon"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="sp-webview">
+                <!-- headbar end -->
+
+                <!-- webviews start -->
+                <div class="sp-webviews">
+                    <div class="sp-webview  test1 ">
+                        <div class="sp-webview-content p20 f20">
+                            Grunt是基于Node.js的项目构建工具。它可以自动运行你所设定的任务。Grunt拥有数量庞大的插件，几乎任何你所要做的事情都可以用Grunt实现。
+
+
+                        </div>
+                    </div>
+                    <div class="sp-webview  test2 ">
+                        <div class="sp-webview-content p20 f20">
+                            Headroom.js 是一个轻量级、纯 JavaScript 组件，用来隐藏或展现页面上的元素，为你的页面留下更多展示内容的空间。
+
+                        </div>
+                    </div>
+                </div>
+                <!-- webviews end -->
+
+                <div class="sp-footbar psa pslb wide">
+                    用户自定义 固定底部
                 </div>
             </div>
-            <!-- webviews end -->
+
         </div>
         <!-- browser end -->
 
 
         <!-- toolbar start -->
         <div class="sp-toolbar sp-flex sp-flex-row">
-            <div class="sp-toolbar-item sp-flex sp-cell-primary">
-
+            <div class="sp-toolbar-item sp-flex-primary  sp-flex test3">
+                sssss
+            </div>
+            <div class="sp-toolbar-item sp-flex-primary  sp-flex test4">
+                bbbb
             </div>
         </div>
+
+        <!-- <script>
+            var t1 = document.querySelector('.test1');
+            var t2 = document.querySelector('.test2');
+            document.querySelector('.test3').addEventListener('click', function() {
+                var t1 = document.querySelector('.test1');
+                var t2 = document.querySelector('.test2');
+                t1.classList.toggle('sp-right-upper-in');
+                t2.classList.toggle('sp-right-under-out');
+
+            });
+            setInterval(function() {
+                t1.classList.toggle('sp-left-upper-in');
+                t2.classList.toggle('sp-left-under-out');
+            }, 500)
+            document.querySelector('.test4').addEventListener('click', function() {
+
+                t1.classList.toggle('sp-left-upper-in');
+                t2.classList.toggle('sp-left-under-out');
+
+            });
+        </script> -->
         <!-- toolbar end -->
     </div>
 
