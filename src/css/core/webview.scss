@@ -23,6 +23,22 @@
     overflow-y: auto;
 }
 
+.sp-upper-transition {
+    transition: translate3d(0,0,0);
+}
+.sp-upper-enter,
+.sp-upper-leave {
+    transition: translate3d(100%,0,0);
+}
+
+.sp-under-transition {
+    transition: translate3d(0,0,0);
+}
+.sp-under-enter,
+.sp-under-leave {
+    transition: translate3d(-30%,0,0);
+}
+
 // sp-切入方向-图层-进出
 .sp-right-upper-in {
     animation: rightUpperIn 400ms forwards;
@@ -36,7 +52,6 @@
 .sp-right-under-out {
     animation: rightUnderOut 400ms forwards 50ms;
     z-index  : 11;
-
 }
 
 .sp-left-upper-in {
