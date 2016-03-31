@@ -18,6 +18,9 @@ const resource = {
                         console.log('load')
                     }
                 }
+            },
+            info: {
+                template: require('../html/info.html')
             }
         }
     }
@@ -35,9 +38,8 @@ simplize.ready(function(){
     })
 
     var home = app.$get('home');
-    home.$use(function(next){
-        console.log('pass cross middle ware')
-        next();
+    home.$active('/info', function(){
+        this.$render('info');
     });
     home.$active(function(){
         this.$render('index');
@@ -46,5 +48,4 @@ simplize.ready(function(){
     app.$use(home);
 
     app.$run();
-    console.log(app)
 })
