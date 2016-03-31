@@ -39,9 +39,11 @@ simplize.ready(function(){
 
     var home = app.$get('home');
     home.$active('/info', function(){
+        console.log(1)
         this.$render('info');
     });
     home.$active(function(){
+        console.log(2)
         this.$render('index');
     });
 

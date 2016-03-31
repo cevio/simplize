@@ -35,9 +35,12 @@ export default class Route {
             if (!layer) {
                 return done.call(that, err);
             }
+            var match = matchLayer(layer, url);
 
-            if ( matchLayer(layer, url) ){
+            if ( match ){
                 that.$layer = layer;
+            }else{
+                return next(err);
             }
 
             if (layerError) {
