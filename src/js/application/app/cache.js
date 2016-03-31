@@ -38,10 +38,17 @@ export default class Cache extends route {
         if ( this.childrens[webview_name] && this.root ){
             this.root.SP_currentBrowser = browser_name;
             utils.nextTick(function(){
-                that.root.$refs.browser.SP_currentWebview = webview_name;
-                utils.nextTick(function(){
-                    that.root.$refs.browser.$refs.webview.$emit('load');
-                })
+                webview_name = utils.camelize('webview-' + name);
+                if ( that.root.$refs.browser.$refs[webview_name] ){
+                    let oldWebview = that.root.$refs.browser.SP_currentWebview;
+                    if ( oldWebview ){
+                        oldWebview.$emit('webview:unactive');
+                    }
+                    that.root.$refs.browser.$refs[webview_name].$emit('webview:active');
+                    utils.nextTick(function(){
+                        that.root.$refs.browser.$refs[webview_name].$emit('load');
+                    });
+                }
             })
         }
     }

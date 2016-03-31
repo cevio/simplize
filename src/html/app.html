@@ -1,6 +1,6 @@
 <div class="sp-app">
     <div class="sp-modal"></div>
     <div class="sp-browsers">
-        <component :is="SP_currentBrowser" v-ref:browser></component>
+        <component :is="SP_currentBrowser" v-ref:browser transition="fade" transition-mode="out-in"></component>
     </div>
 </div>
