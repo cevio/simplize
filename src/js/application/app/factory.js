@@ -13,8 +13,8 @@ export function compileBrowser(name, resource = {}, cache){
     let options = resource.options || {};
     let webviews = resource.webviews || {};
     let _data = options.data || {};
-    let result = {};
-    _data.SP_currentWebview = '';
+    let result = {}, templates = [];
+    _data.SP_currentWebview = null;
     let browser = {
         name: 'browser',
         template: require('../../../html/browser.html'),
@@ -24,23 +24,51 @@ export function compileBrowser(name, resource = {}, cache){
     for ( let i in webviews ){
         if ( webviews.hasOwnProperty(i) ){
             cache.set('webview-' + i);
-            Object.assign(browser.components, compileWebview(i, webviews[i]));
+            var component = compileWebview(i, webviews[i]);
+            templates.push(component.tag);
+            browser.components[component.name] = component.component;
         }
     }
-
+    browser.template = browser.template.replace('{{webviews}}', templates.join(''));
     result['browser-' + name] = browser;
     return result;
 }
 
 export function compileWebview(name, resource = {}){
-    let result = {};
+    let result = { component: null, tag: '', name: '' };
+    resource.data = resource.data || {};
+    resource.data.SP_status = false;
     let defaults = {
         name: 'webview',
         template: require('../../../html/webview.html').replace('{{webview}}', resource.template || ''),
         data: function(){
-            return resource.data || {};
+            return resource.data;
+        },
+        events: {
+            "webview:active": function(){
+                this.SP_status = true;
+                this.$parent.SP_currentWebview = this;
+            },
+            "webview:unactive": function(){
+                this.SP_status = false;
+            }
         }
     }
-    result['webview-' + name] = Object.assign({}, resource, defaults);;
+
+    if ( resource.keepalive === undefined || !!resource.keepalive ){
+        resource.keepalive = true;
+    }else{
+        resource.keepalive = false;
+    }
+
+    if ( resource.keepalive ){
+        defaults.template = defaults.template.replace('{{status}}', 'show');
+    }else{
+        defaults.template = defaults.template.replace('{{status}}', 'if');
+    }
+
+    result.component = Object.assign({}, resource, defaults);
+    result.tag = '<webview-' + name + ' v-ref:webview-' + name + '></webview-' + name + '>';
+    result.name = 'webview-' + name;
     return result;
 }
