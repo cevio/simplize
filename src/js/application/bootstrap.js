@@ -5,7 +5,6 @@ import { initUrl } from './init';
 import appMethods from './app/method';
 import { appWatches } from './app/watch';
 import { appEvents } from './app/event';
-import appCreeated from './app/created';
 import cache from './app/cache';
 
 let firstEnter = true, firstEnterCallback;
@@ -43,8 +42,7 @@ export function bootstrap( resource = {}, data = {} ){
         components: browsers,
         methods: appMethods(firstEnterCallback),
         watch: appWatches,
-        events: appEvents,
-        created: appCreeated
+        events: appEvents
     });
     Vue.$cache = Cache;
     Object.defineProperty(Cache, 'root', { get: function(){ return Vue; } });
