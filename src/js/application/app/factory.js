@@ -15,6 +15,7 @@ export function compileBrowser(name, resource = {}, cache){
     let _data = options.data || {};
     let result = {}, templates = [];
     _data.SP_currentWebview = null;
+    _data.SP_firstEnter = true;
     let browser = {
         name: 'browser',
         template: require('../../../html/browser.html'),
@@ -51,6 +52,11 @@ export function compileWebview(name, resource = {}){
             },
             "webview:unactive": function(){
                 this.SP_status = false;
+            }
+        },
+        computed: {
+            SP_animate: function(){
+                return this.$parent.SP_firstEnter ? '' : 'fade';
             }
         }
     }
