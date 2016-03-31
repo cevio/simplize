@@ -26,7 +26,7 @@
 .sp-upper-transition {
     z-index   : 12;
     transform : translate3d(0,0,0);
-    transition: all 400ms ease;
+    transition: all $page-animate-duration ease;
 }
 .sp-upper-enter,
 .sp-upper-leave {
@@ -36,14 +36,15 @@
 .sp-under-transition {
     z-index   : 11;
     transform : translate3d(0,0,0);
-    transition: all 400ms ease;
+    transition: all $page-animate-duration ease;
 }
 .sp-under-enter,
 .sp-under-leave {
     transform: translate3d(-30%,0,0);
 }
 .fade-transition {
-    opacity: 1;
+    transition: all $page-animate-duration ease;
+    opacity   : 1;
 }
 .fade-enter,
 .fade-leave {
