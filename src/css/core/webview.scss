@@ -24,6 +24,7 @@
 }
 
 .sp-upper-transition {
+    z-index   : 12;
     transition: translate3d(0,0,0);
 }
 .sp-upper-enter,
@@ -32,11 +33,19 @@
 }
 
 .sp-under-transition {
+    z-index   : 11;
     transition: translate3d(0,0,0);
 }
 .sp-under-enter,
 .sp-under-leave {
     transition: translate3d(-30%,0,0);
+}
+.fade-transition {
+    opacity: 1;
+}
+.fade-enter,
+.fade-leave {
+    opacity: 0;
 }
 
 // sp-切入方向-图层-进出
