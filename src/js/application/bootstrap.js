@@ -5,6 +5,8 @@ import { initUrl } from './init';
 import appMethods from './app/method';
 import { appWatches } from './app/watch';
 import { appEvents } from './app/event';
+import appCreeated from './app/created';
+import cache from './app/cache';
 
 let firstEnter = true, firstEnterCallback;
 
@@ -14,7 +16,7 @@ let _resource = {
         viewScale: 1,
         viewType: 'device-width'
     },
-    SP_currentBrowser: 'browser-home'
+    SP_currentBrowser: ''
 }
 
 vue.mixin(mixin);
@@ -30,18 +32,23 @@ export function bootstrap( resource = {}, data = {} ){
         }
     }
 
+    let Cache = new cache();
     let _data = Object.assign({}, _resource, data);
-    let browsers = compileApp(resource);
+    let browsers = compileApp(resource, Cache);
 
-    return new vue({
+    let Vue = new vue({
         el: createRoot(),
         data: _data,
         template: require('../../html/app.html'),
         components: browsers,
         methods: appMethods(firstEnterCallback),
         watch: appWatches,
-        events: appEvents
+        events: appEvents,
+        created: appCreeated
     });
+    Vue.$cache = Cache;
+    Object.defineProperty(Cache, 'root', { get: function(){ return Vue; } });
+    return Vue;
 }
 
 function createRoot(){

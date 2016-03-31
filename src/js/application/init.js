@@ -33,6 +33,7 @@ export function initUrl(local){
         search: search,
         query: querys,
         href: href,
+        params: {},
         origin: local.origin + local.pathname + '#' + href
     }
 }

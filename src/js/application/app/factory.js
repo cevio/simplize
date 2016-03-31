@@ -1,19 +1,20 @@
-export function compileApp(resource = {}){
+export function compileApp(resource = {}, cache){
     let result = {};
     for ( let i in resource ){
         if ( resource.hasOwnProperty(i) ){
-            Object.assign(result, compileBrowser(i, resource[i]));
+            var _cache = cache.set('browser-' + i);
+            Object.assign(result, compileBrowser(i, resource[i], _cache));
         }
     }
     return result;
 }
 
-export function compileBrowser(name, resource = {}){
+export function compileBrowser(name, resource = {}, cache){
     let options = resource.options || {};
     let webviews = resource.webviews || {};
     let _data = options.data || {};
     let result = {};
-    _data.SP_currentWebview = 'webview-index';
+    _data.SP_currentWebview = '';
     let browser = {
         name: 'browser',
         template: require('../../../html/browser.html'),
@@ -22,6 +23,7 @@ export function compileBrowser(name, resource = {}){
     }
     for ( let i in webviews ){
         if ( webviews.hasOwnProperty(i) ){
+            cache.set('webview-' + i);
             Object.assign(browser.components, compileWebview(i, webviews[i]));
         }
     }
