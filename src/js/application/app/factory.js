@@ -87,17 +87,17 @@ export function compileWebview(name, resource = {}) {
         transitions: {
             "sp-webview": {
                 enter: function() {
-                    //this.SP_direction = '';
                     console.log('enter')
                 },
                 afterEnter: function(){
+                    this.SP_direction = '';
                     console.log('after enter')
                 },
                 leave: function() {
-                    //this.SP_direction = '';
                     console.log('leave')
                 },
                 afterLeave: function(){
+                    this.SP_direction = '';
                     console.log('after leave')
                 }
             },
@@ -111,9 +111,11 @@ export function compileWebview(name, resource = {}) {
                     console.log('none leave')
                 },
                 afterEnter: function(){
+                    this.SP_direction = '';
                     console.log('after enter')
                 },
                 afterLeave: function(){
+                    this.SP_direction = '';
                     console.log('after leave')
                 }
             }
