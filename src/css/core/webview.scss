@@ -26,9 +26,9 @@
 }
 
 .sp-webview-transition {
-    transition: transform $page-animate-duration ease;
+    transition: transform $page-animate-duration ease,opacity $page-animate-duration ease;
     &.upper {
-        z-index: 12;
+        z-index: 11;
         &:after {
             transition: opacity $page-animate-duration ease;
             opacity   : 1;
@@ -36,7 +36,7 @@
     }
     &.under {
         opacity: 1;
-        z-index: 11;
+        z-index: 9;
     }
 }
 .sp-webview-enter,
@@ -49,112 +49,7 @@
     }
     &.under {
         opacity         : 0.8;
-        transition-delay: 50ms;
+        transition-delay: 30ms;
         transform       : translate3d(-30%,0,0);
-    }
-}
-
-// .sp-upper-transition {
-//     z-index   : 12;
-//     transform : translate3d(0,0,0);
-//     transition: all $page-animate-duration ease;
-// }
-// .sp-upper-enter {
-//     transform: translate3d(100%,0,0);
-// }
-// .sp-upper-leave {
-//     transform: translate3d(-100%,0,0);
-// }
-//
-// .sp-under-transition {
-//     z-index   : 11;
-//     transform : translate3d(0,0,0);
-//     transition: all $page-animate-duration ease;
-// }
-// .sp-under-enter,
-// .sp-under-leave {
-//     transform: translate3d(-30%,0,0);
-// }
-// .fade-transition {
-//     transition: all $page-animate-duration ease;
-//     opacity   : 1;
-// }
-// .fade-enter,
-// .fade-leave {
-//     opacity: 0;
-// }
-//
-// // sp-切入方向-图层-进出
-// .sp-right-upper-in {
-//     animation: rightUpperIn 400ms forwards;
-//     z-index  : 12;
-//     &:after {
-//         background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.4) 100%);
-//         left            : -15px;
-//         animation       : fadeIn 400ms ease-out;
-//     }
-// }
-// .sp-right-under-out {
-//     animation: rightUnderOut 400ms forwards 50ms;
-//     z-index  : 11;
-// }
-//
-// .sp-left-upper-in {
-//     animation: leftUpperIn 400ms forwards;
-//     z-index  : 12;
-//     &:after {
-//         background-image: linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.4) 100%);
-//         right           : -15px;
-//         animation       : fadeIn 400ms ease-out;
-//     }
-// }
-// .sp-left-under-out {
-//     animation: leftUnderOut 400ms forwards 50ms;
-//     z-index  : 11;
-// }
-//
-// @keyframes rightUpperIn {
-//     0% {
-//         transform: translate3d(100%,0,0);
-//     }
-//     100% {
-//         transform: translate3d(0,0,0);
-//     }
-// }
-// @keyframes rightUnderOut {
-//     0% {
-//         opacity  : 1;
-//         transform: translate3d(0,0,0);
-//     }
-//     100% {
-//         opacity  : 0.8;
-//         transform: translate3d(-30%,0,0);
-//     }
-// }
-//
-// @keyframes leftUpperIn {
-//     0% {
-//         transform: translate3d(-100%,0,0);
-//     }
-//     100% {
-//         transform: translate3d(0,0,0);
-//     }
-// }
-// @keyframes leftUnderOut {
-//     0% {
-//         opacity  : 1;
-//         transform: translate3d(0,0,0);
-//     }
-//     100% {
-//         opacity  : 0.8;
-//         transform: translate3d(30%,0,0);
-//     }
-// }
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
     }
 }
