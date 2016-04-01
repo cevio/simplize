@@ -15,11 +15,15 @@ export function initUrl(local){
 
     if ( hash ){
         let index = hash.indexOf('?');
-        path = hash.substring(0, index);
-        let _search = hash.substring(index).replace(/^\?/, '');
-        if ( _search ){
-            let _querys = format(_search);
-            querys = deepExtend(querys, _querys);
+        if ( index > -1 ){
+            path = hash.substring(0, index);
+            let _search = hash.substring(index).replace(/^\?/, '');
+            if ( _search ){
+                let _querys = format(_search);
+                querys = deepExtend(querys, _querys);
+            }
+        }else{
+            path = hash;
         }
     }
 

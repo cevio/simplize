@@ -26,11 +26,11 @@
 }
 
 .sp-webview-transition {
-    transition: all $page-animate-duration ease;
+    transition: transform $page-animate-duration ease;
     &.upper {
         z-index: 12;
         &:after {
-            transition: all $page-animate-duration ease;
+            transition: opacity $page-animate-duration ease;
             opacity   : 1;
         }
     }
