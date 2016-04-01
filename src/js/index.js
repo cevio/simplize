@@ -1,6 +1,5 @@
 import * as simplize from './main.js';
 
-
 const resource = {
     home: {
         options: {
@@ -43,6 +42,10 @@ simplize.ready(function(){
     });
     home.$active(function(){
         this.$render('index');
+    });
+
+    app.$use('/sync', function(next){
+
     });
 
     app.$use(home);
