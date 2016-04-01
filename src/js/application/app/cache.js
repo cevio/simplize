@@ -41,6 +41,7 @@ export default class Cache extends route {
             this.notify = function(){
                 utils.nextTick(function(){
                     that._render(webview_name);
+                    that.notify = null;
                 });
             }
         }

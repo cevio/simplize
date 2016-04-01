@@ -1,6 +1,7 @@
 .test1 {
     background: #f5f5f5;
-    height    : 100%;
+    min-height: 100%;
+
 }
 .test2 {
     background: #fffbfb;
@@ -10,8 +11,11 @@
     background: rgb(252, 106, 83);
 }
 .bg2 {
-    background: rgb(136, 250, 195);
+    background: rgb(249, 137, 70);
 }
 .bg3 {
-    background: rgb(140, 187, 96);
+    background: rgb(35, 143, 251);
+}
+.radius {
+    border-radius: 0.5rem;
 }

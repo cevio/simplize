@@ -8,6 +8,7 @@ export default function (name, fn) {
             result = compileBrowser(name, result, _cache)['browser-' + name];
             resolve(result);
             _cache.notify();
+            _cache._isSync = false;
         })
     });
 }
