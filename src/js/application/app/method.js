@@ -34,7 +34,7 @@ export default function(callback){
                 return this;
             }
 
-            route.use.apply(route, [path].concat(fns));
+            cache.$use.apply(cache, [path].concat(fns));
             return this;
         },
 

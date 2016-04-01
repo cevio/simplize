@@ -1,4 +1,9 @@
 import * as simplize from './main.js';
+import fetcher from './require';
+
+simplize.browser('sync', function(resolve){
+    fetcher(['http://127.0.0.1:8000/js/sync.js'], resolve);
+});
 
 const resource = {
     home: {
@@ -23,6 +28,10 @@ const resource = {
             }
         }
     }
+    //
+    // sync: function(resolve){
+    //     fetcher(['http://127.0.0.1:8000/js/sync.js'], resolve);
+    // }
 }
 
 const data = {
@@ -44,10 +53,12 @@ simplize.ready(function(){
         this.$render('index');
     });
 
-    app.$use('/sync', function(next){
-
+    var sync = app.$get('sync');
+    sync.$active(function(){
+        this.$render('index');
     });
 
+    app.$use('/sync', sync);
     app.$use(home);
 
     app.$run();

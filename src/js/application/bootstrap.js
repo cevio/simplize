@@ -10,6 +10,7 @@ import session from './session';
 
 window.HISTORY_NAME = 'simplize-histories';
 window.HISTORY = new session(window.HISTORY_NAME);
+window.simplizeCache = new cache();
 
 let _resource = {
     req: {},
@@ -31,7 +32,7 @@ export function bootstrap( resource = {}, data = {} ){
     history.replaceState({ url: _resource.req.href }, document.title, _resource.req.origin);
     HISTORY.add(_resource.req);
 
-    let Cache = new cache();
+    let Cache = window.simplizeCache;
     let _data = Object.assign({}, _resource, data);
     let browsers = compileApp(resource, Cache);
 

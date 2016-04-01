@@ -35,10 +35,25 @@ export default class Cache extends route {
         let browser_name = this.name;
         let webview_name = 'webview-' + name;
         let that = this;
-        if ( this.childrens[webview_name] && this.root ){
+
+        if ( this._isSync ){
             this.root.SP_currentBrowser = browser_name;
+            this.notify = function(){
+                utils.nextTick(function(){
+                    that._render(webview_name);
+                });
+            }
+        }
+        else{
+            this._render(webview_name, browser_name)
+        }
+    }
+    _render(webview_name, browser_name){
+        let that = this;
+        if ( this.childrens[webview_name] && this.root ){
+            browser_name && (this.root.SP_currentBrowser = browser_name);
             utils.nextTick(function(){
-                webview_name = utils.camelize('webview-' + name);
+                webview_name = utils.camelize(webview_name);
                 if ( that.root.$refs.browser.$refs[webview_name] ){
                     let oldWebview = that.root.$refs.browser.SP_currentWebview;
                     if ( oldWebview ){
