@@ -14,7 +14,7 @@ const resource = {
             index: {
                 template: require('../html/index.html'),
                 events: {
-                    load: function(){
+                    "webview:load": function(){
                         console.log('load')
                     }
                 }

@@ -46,7 +46,6 @@ export default class Cache extends route {
                     }
                     that.root.$refs.browser.$refs[webview_name].$emit('webview:active');
                     utils.nextTick(function(){
-                        that.root.$refs.browser.$refs[webview_name].$emit('load');
                         that.root.$refs.browser.SP_firstEnter = false;
                     });
                 }

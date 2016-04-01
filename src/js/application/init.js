@@ -6,10 +6,8 @@ export function initUrl(local){
     let hash = local.hash.replace(/^\#/, '');
     let querys = {};
     let path = '/';
-    let replaceHistory = false;
 
     if ( search ){
-        replaceHistory = true;
         querys = format(search);
     }
 

@@ -10,11 +10,11 @@ export function compileApp(resource = {}, cache) {
 }
 
 export function compileBrowser(name, resource = {}, cache) {
+    let result = {}, templates = [];
     let options = resource.options || {};
     let webviews = resource.webviews || {};
     let _data = options.data || {};
-    let result = {},
-        templates = [];
+    if ( options.data ) delete options.data;
     _data.SP_currentWebview = null;
     _data.SP_firstEnter = true;
     let browser = {
@@ -33,8 +33,9 @@ export function compileBrowser(name, resource = {}, cache) {
             browser.components[component.name] = component.component;
         }
     }
+
     browser.template = browser.template.replace('{{webviews}}', templates.join(''));
-    result['browser-' + name] = browser;
+    result['browser-' + name] = assign(options, browser);
     return result;
 }
 
@@ -44,14 +45,17 @@ export function compileWebview(name, resource = {}) {
         tag: '',
         name: ''
     };
-    resource.data = resource.data || {};
-    resource.data.SP_status = false;
-    resource.data.SP_direction = '';
+
+    let _data = resource.data || {};
+    _data.SP_status = false;
+    _data.SP_direction = '';
+    if ( resource.data ) delete resource.data;
+
     let defaults = {
         name: 'webview',
         template: require('../../../html/webview.html').replace('{{webview}}', resource.template || ''),
         data: function() {
-            return resource.data;
+            return _data;
         },
         events: {
             "webview:active": function() {
@@ -76,49 +80,38 @@ export function compileWebview(name, resource = {}) {
                         break;
                 }
                 this.SP_status = false;
-                // this.SP_direction = 'under';
             }
         },
         computed: {
             SP_animate: function() {
                 return this.$parent.SP_firstEnter ? 'none' : 'sp-webview';
             }
+        }
+    }
+
+    defaults.transitions = {};
+    defaults.transitions["sp-webview"] =
+    defaults.transitions["none"] =
+    {
+        beforeEnter: function(){
+            this.$emit('webview:preload');
         },
-        transitions: {
-            "sp-webview": {
-                enter: function() {
-                    console.log('enter')
-                },
-                afterEnter: function(){
-                    this.SP_direction = '';
-                    console.log('after enter')
-                },
-                leave: function() {
-                    console.log('leave')
-                },
-                afterLeave: function(){
-                    this.SP_direction = '';
-                    console.log('after leave')
-                }
-            },
-            "none": {
-                enter: function() {
-                    //this.SP_direction = '';
-                    console.log('none enter')
-                },
-                leave: function() {
-                    //this.SP_direction = '';
-                    console.log('none leave')
-                },
-                afterEnter: function(){
-                    this.SP_direction = '';
-                    console.log('after enter')
-                },
-                afterLeave: function(){
-                    this.SP_direction = '';
-                    console.log('after leave')
-                }
-            }
+        enter: function() {
+            this.$emit('webview:loading');
+        },
+        afterEnter: function(){
+            this.SP_direction = '';
+            this.$emit('webview:load');
+        },
+        beforeLeave: function(){
+            this.$emit('webview:preunload');
+        },
+        leave: function() {
+            this.$emit('webview:unloading');
+        },
+        afterLeave: function(){
+            this.SP_direction = '';
+            this.$emit('webview:unload');
         }
     }
 
@@ -134,8 +127,38 @@ export function compileWebview(name, resource = {}) {
         defaults.template = defaults.template.replace('{{status}}', 'if');
     }
 
-    result.component = Object.assign({}, resource, defaults);
+    if ( resource.keepalive !== undefined ){
+        delete resource.keepalive;
+    }
+
+    result.component = assign(resource, defaults);
     result.tag = '<webview-' + name + ' v-ref:webview-' + name + '></webview-' + name + '>';
     result.name = 'webview-' + name;
     return result;
+}
+
+function assign(source, target){
+    let keys = ['computed', 'methods', 'watch', 'directives', 'elementDirectives', 'filters', 'components', 'transitions', 'partials', 'events', 'mixins'];
+    let result = {};
+    extend(source);
+    extend(target);
+    return result;
+
+    function extend(which){
+        for ( let i in which ){
+            if ( which.hasOwnProperty(i) ){
+                let value = which[i];
+                if ( keys.indexOf(i) > -1 ){
+                    if ( !result[i] ) result[i] = {};
+                    for ( let j in value ){
+                        if ( value.hasOwnProperty(j) ) {
+                            result[i][j] = value[j];
+                        }
+                    }
+                }else{
+                    result[i] = value;
+                }
+            }
+        }
+    }
 }
