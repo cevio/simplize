@@ -83,9 +83,15 @@ export function compileWebview(name, resource = {}){
                     //this.SP_direction = '';
                     console.log('enter')
                 },
+                afterEnter: function(){
+                    console.log('after enter')
+                },
                 leave: function(){
                     //this.SP_direction = '';
                     console.log('leave')
+                },
+                afterLeave: function(){
+                    console.log('after leave')
                 }
             },
             "none": {
@@ -96,6 +102,12 @@ export function compileWebview(name, resource = {}){
                 leave: function(){
                     //this.SP_direction = '';
                     console.log('none leave')
+                },
+                afterEnter: function(){
+                    console.log('after enter')
+                },
+                afterLeave: function(){
+                    console.log('after leave')
                 }
             }
         }
