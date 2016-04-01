@@ -8,6 +8,8 @@ export default class Cache extends route {
         this.childrens = {};
         this.parent = parent;
         this._isCache = true;
+        this._isSync = false;
+        this._webviews = [];
     }
     set(name){
         var that = this;

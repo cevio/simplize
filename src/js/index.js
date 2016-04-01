@@ -5,6 +5,10 @@ simplize.browser('sync', function(resolve){
     fetcher(['http://127.0.0.1:8000/js/sync.js'], resolve);
 });
 
+simplize.webview('home', 'list', function(resolve){
+    fetcher(['http://127.0.0.1:8000/js/list.js'], resolve);
+});
+
 const resource = {
     home: {
         options: {
@@ -19,12 +23,17 @@ const resource = {
                 template: require('../html/index.html'),
                 events: {
                     "webview:load": function(){
-                        console.log('load')
+                        console.log('index load')
                     }
                 }
             },
             info: {
-                template: require('../html/info.html')
+                template: require('../html/info.html'),
+                events: {
+                    "webview:load": function(){
+                        console.log('info load')
+                    }
+                }
             }
         }
     }
@@ -48,6 +57,9 @@ simplize.ready(function(){
     var home = app.$get('home');
     home.$active('/info', function(){
         this.$render('info');
+    });
+    home.$active('/list', function(){
+        this.$render('list');
     });
     home.$active(function(){
         this.$render('index');

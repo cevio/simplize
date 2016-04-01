@@ -34,6 +34,10 @@ export function compileBrowser(name, resource = {}, cache) {
         }
     }
 
+    cache._webviews.forEach(function(web){
+        templates.push(web);
+    });
+
     browser.template = browser.template.replace('{{webviews}}', templates.join(''));
     result['browser-' + name] = assign(options, browser);
     return result;
@@ -94,12 +98,15 @@ export function compileWebview(name, resource = {}) {
     defaults.transitions["none"] =
     {
         beforeEnter: function(){
+            if ( this.$options._isAsync ) return;
             this.$emit('webview:preload');
         },
         enter: function() {
+            if ( this.$options._isAsync ) return;
             this.$emit('webview:loading');
         },
         afterEnter: function(){
+            if ( this.$options._isAsync ) return this.$options._isAsync = false;
             this.SP_direction = '';
             this.$emit('webview:load');
         },
