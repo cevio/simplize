@@ -1,0 +1,48 @@
+@mixin border1px($color) {
+    // color: $color;
+    position: relative;
+    &:before {
+        position        : absolute;
+        content         : "";
+        width           : 200%;
+        height          : 200%;
+        border          : 1px solid $color;
+        transform       : scale(0.5);
+        top             : 0;
+        left            : 0;
+        transform-origin: 0 0;
+    }
+}
+
+.border-1 {
+    @include border1px(#000);
+}
+
+// @mixin eee($color) {
+//     color: $color;
+//     // &:before {
+//     //     content  : "";
+//     //     width    : 200%;
+//     //     height   : 200%;
+//     //     transform: scale(0.5);
+//     // }
+//     // @media screen and (-webkit-min-device-pixel-ratio: 2) {
+//     //     &:before {
+//     //         content      : "";
+//     //         width        : 200%;
+//     //         height       : 200%;
+//     //         border-radius: $radius*2;
+//     //         transform    : scale(0.5);
+//     //     }
+//     // }
+//     // @media screen and (-webkit-min-device-pixel-ratio: 3) {
+//     //     &:before {
+//     //         content      : "";
+//     //         width        : 300%;
+//     //         height       : 300%;
+//     //         border-radius: $radius*3;
+//     //         transform    : scale(0.333333);
+//     //     }
+//     // }
+//
+// }
