@@ -1,7 +1,7 @@
-export function compileApp(resource = {}, cache){
+export function compileApp(resource = {}, cache) {
     let result = {};
-    for ( let i in resource ){
-        if ( resource.hasOwnProperty(i) ){
+    for (let i in resource) {
+        if (resource.hasOwnProperty(i)) {
             var _cache = cache.set('browser-' + i);
             Object.assign(result, compileBrowser(i, resource[i], _cache));
         }
@@ -9,21 +9,24 @@ export function compileApp(resource = {}, cache){
     return result;
 }
 
-export function compileBrowser(name, resource = {}, cache){
+export function compileBrowser(name, resource = {}, cache) {
     let options = resource.options || {};
     let webviews = resource.webviews || {};
     let _data = options.data || {};
-    let result = {}, templates = [];
+    let result = {},
+        templates = [];
     _data.SP_currentWebview = null;
     _data.SP_firstEnter = true;
     let browser = {
         name: 'browser',
         template: require('../../../html/browser.html'),
         components: {},
-        data: function(){ return _data; }
+        data: function() {
+            return _data;
+        }
     }
-    for ( let i in webviews ){
-        if ( webviews.hasOwnProperty(i) ){
+    for (let i in webviews) {
+        if (webviews.hasOwnProperty(i)) {
             cache.set('webview-' + i);
             var component = compileWebview(i, webviews[i]);
             templates.push(component.tag);
@@ -35,65 +38,69 @@ export function compileBrowser(name, resource = {}, cache){
     return result;
 }
 
-export function compileWebview(name, resource = {}){
-    let result = { component: null, tag: '', name: '' };
+export function compileWebview(name, resource = {}) {
+    let result = {
+        component: null,
+        tag: '',
+        name: ''
+    };
     resource.data = resource.data || {};
     resource.data.SP_status = false;
     resource.data.SP_direction = '';
     let defaults = {
         name: 'webview',
         template: require('../../../html/webview.html').replace('{{webview}}', resource.template || ''),
-        data: function(){
+        data: function() {
             return resource.data;
         },
         events: {
-            "webview:active": function(){
+            "webview:active": function() {
                 switch (this.$root.env.direction) {
                     case 'turn:left':
                         this.SP_direction = 'upper';
                         break;
                     case 'turn:right':
-                        this.SP_direction = 'upper';
+                        this.SP_direction = 'under';
                         break;
                 }
                 this.SP_status = true;
                 this.$parent.SP_currentWebview = this;
             },
-            "webview:unactive": function(){
+            "webview:unactive": function() {
                 switch (this.$root.env.direction) {
                     case 'turn:left':
                         this.SP_direction = 'under';
                         break;
                     case 'turn:right':
-                        this.SP_direction = 'under';
+                        this.SP_direction = 'upper';
                         break;
                 }
                 this.SP_status = false;
-                this.SP_direction = 'under';
+                // this.SP_direction = 'under';
             }
         },
         computed: {
-            SP_animate: function(){
+            SP_animate: function() {
                 return this.$parent.SP_firstEnter ? 'none' : 'sp-webview';
             }
         },
         transitions: {
             "sp-webview": {
-                enter: function(){
+                enter: function() {
                     //this.SP_direction = '';
                     console.log('enter')
                 },
-                leave: function(){
+                leave: function() {
                     //this.SP_direction = '';
                     console.log('leave')
                 }
             },
             "none": {
-                enter: function(){
+                enter: function() {
                     //this.SP_direction = '';
                     console.log('none enter')
                 },
-                leave: function(){
+                leave: function() {
                     //this.SP_direction = '';
                     console.log('none leave')
                 }
@@ -101,15 +108,15 @@ export function compileWebview(name, resource = {}){
         }
     }
 
-    if ( resource.keepalive === undefined || !!resource.keepalive ){
+    if (resource.keepalive === undefined || !!resource.keepalive) {
         resource.keepalive = true;
-    }else{
+    } else {
         resource.keepalive = false;
     }
 
-    if ( resource.keepalive ){
+    if (resource.keepalive) {
         defaults.template = defaults.template.replace('{{status}}', 'show');
-    }else{
+    } else {
         defaults.template = defaults.template.replace('{{status}}', 'if');
     }
 

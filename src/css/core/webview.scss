@@ -25,15 +25,19 @@
 
 .sp-webview-transition {
     transition: all $page-animate-duration ease;
+    &.upper {
+        z-index: 12;
+    }
+    &.under {
+        z-index: 11;
+    }
 }
 .sp-webview-enter,
 .sp-webview-leave {
     &.upper {
-        z-index  : 12;
         transform: translate3d(100%,0,0);
     }
     &.under {
-        z-index  : 11;
         transform: translate3d(-30%,0,0);
     }
 }
