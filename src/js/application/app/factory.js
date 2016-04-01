@@ -39,6 +39,7 @@ export function compileWebview(name, resource = {}){
     let result = { component: null, tag: '', name: '' };
     resource.data = resource.data || {};
     resource.data.SP_status = false;
+    resource.data.SP_direction = '';
     let defaults = {
         name: 'webview',
         template: require('../../../html/webview.html').replace('{{webview}}', resource.template || ''),
@@ -47,16 +48,55 @@ export function compileWebview(name, resource = {}){
         },
         events: {
             "webview:active": function(){
+                switch (this.$root.env.direction) {
+                    case 'turn:left':
+                        this.SP_direction = 'upper';
+                        break;
+                    case 'turn:right':
+                        this.SP_direction = 'upper';
+                        break;
+                }
                 this.SP_status = true;
                 this.$parent.SP_currentWebview = this;
             },
             "webview:unactive": function(){
+                switch (this.$root.env.direction) {
+                    case 'turn:left':
+                        this.SP_direction = 'under';
+                        break;
+                    case 'turn:right':
+                        this.SP_direction = 'under';
+                        break;
+                }
                 this.SP_status = false;
+                this.SP_direction = 'under';
             }
         },
         computed: {
             SP_animate: function(){
-                return this.$parent.SP_firstEnter ? '' : 'fade';
+                return this.$parent.SP_firstEnter ? 'none' : 'sp-webview';
+            }
+        },
+        transitions: {
+            "sp-webview": {
+                enter: function(){
+                    //this.SP_direction = '';
+                    console.log('enter')
+                },
+                leave: function(){
+                    //this.SP_direction = '';
+                    console.log('leave')
+                }
+            },
+            "none": {
+                enter: function(){
+                    //this.SP_direction = '';
+                    console.log('none enter')
+                },
+                leave: function(){
+                    //this.SP_direction = '';
+                    console.log('none leave')
+                }
             }
         }
     }
