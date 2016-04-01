@@ -1,6 +1,7 @@
 import * as utils from '../../utils/index';
 import { initUrl } from '../init';
 import { type } from '../../utils';
+import Redirect from '../redirect';
 
 let timer = null;
 
@@ -10,6 +11,7 @@ export default function(callback){
             hashChange(this);
             typeof callback == 'function' && callback(this);
         },
+
         // 中间件
         $use(...fn){
             let that = this;
@@ -38,6 +40,10 @@ export default function(callback){
 
         $get(name){
             return this.$cache.get('browser-' + name);
+        },
+
+        $redirect(url){
+            Redirect(this)(url);
         }
     }
 }
@@ -45,9 +51,47 @@ function hashChange(that){
     utils.on(window, 'hashchange', function(e){
         e.preventDefault();
         if ( timer ) clearTimeout(timer);
-        timer = setTimeout(function(){
-            that.req = initUrl(window.location);
-        }, 10);
+        let referrer = that.req.path + '';
+        let object = initUrl(window.location);
+        let result = window.HISTORY.diff(referrer, object.path);
+
+        switch ( result.usage ) {
+            case 'add':
+                delay(function(){
+                    window.HISTORY.push(object.path);
+                    that.env.direction = 'turn:left';
+                });
+                break;
+            case 'rebuild':
+                delay(function(){
+                    result.fn();
+                    that.env.direction = 'turn:left';
+                });
+                break;
+            case 'refresh':
+                delay(function(){
+                    that.env.direction = 'turn:still';
+                });
+                break;
+            case 'forward':
+                delay(function(){
+                    that.env.direction = 'turn:left';
+                });
+                break;
+            case 'back':
+                delay(function(){
+                    that.env.direction = 'turn:right';
+                });
+                break;
+        }
+
+        function delay(fn){
+            timer = setTimeout(function(){
+                fn && fn();
+                that.env.referrer = referrer;
+                Object.assign(that.req, object);
+            }, 1000 / 60);
+        }
     });
 }
 

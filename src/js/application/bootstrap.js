@@ -6,12 +6,17 @@ import appMethods from './app/method';
 import { appWatches } from './app/watch';
 import { appEvents } from './app/event';
 import cache from './app/cache';
+import session from './session';
 
-let firstEnter = true, firstEnterCallback;
+window.HISTORY_NAME = 'simplize-histories';
+window.HISTORY = new session(window.HISTORY_NAME);
 
 let _resource = {
     req: {},
     env: {
+        direction: '',
+        referrer: '',
+        animateDisable: false,
         viewScale: 1,
         viewType: 'device-width'
     },
@@ -23,13 +28,8 @@ vue.mixin(mixin);
 export function bootstrap( resource = {}, data = {} ){
     _resource.req = initUrl(window.location);
 
-    if ( firstEnter ){
-        history.replaceState({ url: _resource.req.href }, document.title, _resource.req.origin);
-        firstEnter = false;
-        firstEnterCallback = function(object){
-            object.$emit('app:route');
-        }
-    }
+    history.replaceState({ url: _resource.req.href }, document.title, _resource.req.origin);
+    HISTORY.add(_resource.req);
 
     let Cache = new cache();
     let _data = Object.assign({}, _resource, data);
@@ -40,12 +40,14 @@ export function bootstrap( resource = {}, data = {} ){
         data: _data,
         template: require('../../html/app.html'),
         components: browsers,
-        methods: appMethods(firstEnterCallback),
+        methods: appMethods(function(object){ object.$emit('app:route'); }),
         watch: appWatches,
         events: appEvents
     });
-    Vue.$cache = Cache;
+
     Object.defineProperty(Cache, 'root', { get: function(){ return Vue; } });
+    Vue.$cache = Cache;
+
     return Vue;
 }
 
