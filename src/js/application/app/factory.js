@@ -24,7 +24,10 @@ export function compileBrowser(name, resource = {}, cache) {
         name: 'browser',
         template: require('../../../html/browser.html'),
         components: {},
-        data() { return _data; }
+        data() { return _data; },
+        beforeDestroy(){
+            _data.SP_firstEnter = true;
+        }
     }
     for (let i in webviews) {
         if (webviews.hasOwnProperty(i)) {
