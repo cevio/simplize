@@ -19,6 +19,7 @@ export function compileBrowser(name, resource = {}, cache) {
     if ( options.data ) delete options.data;
     _data.SP_currentWebview = null;
     _data.SP_firstEnter = true;
+    _data.SP_background_color = '';
     let browser = {
         name: 'browser',
         template: require('../../../html/browser.html'),
@@ -62,7 +63,7 @@ export function compileWebview(name, resource = {}) {
     _data.SP_webviewForceNoPadding = false;
     _data.SP_webviewContentClass = '';
     _data.SP_webviewContentStyle = '';
-    
+
     if ( resource.data ) delete resource.data;
 
     let defaults = {
