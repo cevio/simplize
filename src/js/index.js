@@ -2,11 +2,11 @@ import * as simplize from './main.js';
 import fetcher from './require';
 
 simplize.browser('sync', function(resolve){
-    fetcher(['http://127.0.0.1:8000/js/sync.js'], resolve);
+    fetcher(['http://192.168.2.104:8000/js/sync.js'], resolve);
 });
 
 simplize.webview('home', 'list', function(resolve){
-    fetcher(['http://127.0.0.1:8000/js/list.js'], resolve);
+    fetcher(['http://192.168.2.104:8000/js/list.js'], resolve);
 });
 
 const resource = {
@@ -43,7 +43,7 @@ const resource = {
                         console.log('info load')
                     },
                     "webview:preset": function(head){
-                        //head.active();
+                        head.active();
                         head.data.left.icon = '<i class="fa fa-send"></i>';
                         head.data.left.text = 'Back';
                         head.data.right.icon = '<i class="fa fa-map-marker"></i>';
