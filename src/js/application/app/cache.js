@@ -68,6 +68,7 @@ export default class Cache extends route {
                         object.notify = function(){
                             webview = that.root.$refs.browser.$refs[_webview_name]
                             webview_Render(webview, oldWebview, that.root);
+                            object.notify = null;
                         }
                     }else{
                         console.warn('component ' + webview_name + ' can not been found.');
