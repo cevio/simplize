@@ -1,16 +1,19 @@
 {
   "name": "simplize",
   "description": "simplize tool",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "keywords": [
     "simplize",
     "component"
   ],
-  "main": "build/index.js",
+  "main": "build/simplize.min.js",
   "repository": {
     "type": "git",
     "url": ""
   },
+  "files": [
+      "build"
+  ],
   "timestamp": 1459321727160,
   "dependencies": {
     "array-flatten": "^2.0.0",

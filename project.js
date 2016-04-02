@@ -2,6 +2,10 @@ module.exports = function(config) {
     var result = {};
     // 写入路由规则
     result.routes = [{
+        name: 'compare-js',
+        file: './src/js/main.js'
+    },
+    {
         name: 'index-js',
         type: 'js',
         rule: '/js/index', // js 资源路由
@@ -31,6 +35,14 @@ module.exports = function(config) {
             html: "./build/index.html",
             js: "./build/js/index.js",
             css: "./build/css/index.css"
+        },
+        "compare-simplize": {
+            tool: true,
+            resource: 'compare-js',
+            js: "./build/simplize.min.js",
+            mode: 'umd',
+            library: 'simplize',
+            main: 'build/simplize.min.js'
         }
     }
 
