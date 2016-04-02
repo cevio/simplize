@@ -25,9 +25,8 @@ export function compileBrowser(name, resource = {}, cache) {
         template: require('../../../html/browser.html'),
         components: {},
         data() { return _data; },
-        beforeDestroy(){
-            _data.SP_firstEnter = true;
-        }
+        beforeDestroy(){ _data.SP_firstEnter = true; },
+        ready(){ this.$emit('browser:async'); }
     }
     for (let i in webviews) {
         if (webviews.hasOwnProperty(i)) {

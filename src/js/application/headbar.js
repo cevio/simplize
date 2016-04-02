@@ -21,6 +21,11 @@ export let headbar = {
             }
         }
     },
+    beforeDestroy(){
+        this.status = false;
+        this.direction = '';
+        this.clear();
+    },
     computed: {
         transition: function(){
             return this.$parent.SP_firstEnter ? 'none' : 'sp-headbar';

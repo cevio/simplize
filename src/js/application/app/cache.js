@@ -56,25 +56,36 @@ export default class Cache extends route {
         if ( this.childrens[webview_name] && this.root ){
             browser_name && (this.root.SP_currentBrowser = browser_name);
             utils.nextTick(function(){
-                const _webview_name = utils.camelize(webview_name);
-                let webview = that.root.$refs.browser.$refs[_webview_name];
-                const oldWebview = that.root.$refs.browser.SP_currentWebview;
-                let object = that.childrens[webview_name];
-                if ( webview ){
-                    object._isSync = false;
-                    webview_Render(webview, oldWebview, that.root);
+                if ( that.root.$refs.browser._isReady ){
+                    browser_Render(webview_name, that);
                 }else{
-                    if ( object && object._isSync ){
-                        object.notify = function(){
-                            webview = that.root.$refs.browser.$refs[_webview_name]
-                            webview_Render(webview, oldWebview, that.root);
-                            object.notify = null;
-                        }
-                    }else{
-                        console.warn('component ' + webview_name + ' can not been found.');
-                    }
+                    that.root.$refs.browser.$on('browser:async', function(){
+                        browser_Render(webview_name, that);
+                        this.$off('browser:async');
+                    });
                 }
             })
+        }
+    }
+}
+
+function browser_Render(webview_name, that){
+    const _webview_name = utils.camelize(webview_name);
+    let webview = that.root.$refs.browser.$refs[_webview_name];
+    const oldWebview = that.root.$refs.browser.SP_currentWebview;
+    let object = that.childrens[webview_name];
+    if ( webview ){
+        object._isSync = false;
+        webview_Render(webview, oldWebview, that.root);
+    }else{
+        if ( object && object._isSync ){
+            object.notify = function(){
+                webview = that.root.$refs.browser.$refs[_webview_name]
+                webview_Render(webview, oldWebview, that.root);
+                object.notify = null;
+            }
+        }else{
+            console.warn('component ' + webview_name + ' can not been found.');
         }
     }
 }
