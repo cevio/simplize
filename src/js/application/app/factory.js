@@ -1,3 +1,4 @@
+import { headbar } from '../headbar';
 export function compileApp(resource = {}, cache) {
     let result = {};
     for (let i in resource) {
@@ -14,6 +15,7 @@ export function compileBrowser(name, resource = {}, cache) {
     let options = resource.options || {};
     let webviews = resource.webviews || {};
     let _data = options.data || {};
+    let _headbar = resource.headbar || headbar;
     if ( options.data ) delete options.data;
     _data.SP_currentWebview = null;
     _data.SP_firstEnter = true;
@@ -33,6 +35,8 @@ export function compileBrowser(name, resource = {}, cache) {
             browser.components[component.name] = component.component;
         }
     }
+
+    browser.components['headbar'] = _headbar;
 
     cache._webviews.forEach(function(web){
         templates.push(web);
@@ -109,6 +113,7 @@ export function compileWebview(name, resource = {}) {
             if ( this.$options._isAsync ) return this.$options._isAsync = false;
             this.SP_direction = '';
             this.$emit('webview:load');
+            this.$parent.$refs.headbar.$emit('webview:load');
         },
         beforeLeave: function(){
             this.$emit('webview:preunload');

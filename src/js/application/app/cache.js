@@ -57,15 +57,32 @@ export default class Cache extends route {
             browser_name && (this.root.SP_currentBrowser = browser_name);
             utils.nextTick(function(){
                 webview_name = utils.camelize(webview_name);
-                if ( that.root.$refs.browser.$refs[webview_name] ){
-                    let oldWebview = that.root.$refs.browser.SP_currentWebview;
-                    if ( oldWebview ){
-                        oldWebview.$emit('webview:unactive');
-                    }
-                    that.root.$refs.browser.$refs[webview_name].$emit('webview:active');
+                const webview = that.root.$refs.browser.$refs[webview_name];
+                const oldWebview = that.root.$refs.browser.SP_currentWebview;
+                if ( webview ){
+                    const headbar = webview.$parent.$refs.headbar;
+
+                    /**
+                     *  进入之前首先进行headbar的before事件处理
+                     *  然后会触发 webview的preset 事件
+                     *  该事件用来设置 headbar 和 toolbar
+                     */
+
+                    headbar.$emit('headbar:before');
+                    webview.$emit('webview:preset', headbar);
+
+                    // 当设置完毕后，进行webview的跳转
                     utils.nextTick(function(){
-                        that.root.$refs.browser.SP_firstEnter = false;
+                        headbar.$emit('headbar:direct');
+                        if ( oldWebview ){
+                            oldWebview.$emit('webview:unactive');
+                        }
+                        webview.$emit('webview:active');
+                        utils.nextTick(function(){
+                            that.root.$refs.browser.SP_firstEnter = false;
+                        });
                     });
+
                 }
             })
         }
