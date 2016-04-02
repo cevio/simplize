@@ -21,6 +21,11 @@ export let headbar = {
             }
         }
     },
+    computed: {
+        transition: function(){
+            return this.$parent.SP_firstEnter ? 'none' : 'sp-headbar';
+        }
+    },
     methods: {
         copy(){
             this.temp.class = this.data.class;

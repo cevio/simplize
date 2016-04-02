@@ -30,8 +30,9 @@ const resource = {
                         head.data.left.icon = '<i class="fa fa-close"></i>';
                         head.data.left.text = 'Exit';
                         head.data.right.icon = '<i class="fa fa-globe"></i>';
-                        head.data.right.text = 'SoyieInjector';
+                        head.data.right.text = 'Soyieer';
                         head.data.center.text = 'Simplize demo';
+                        this.SP_webviewContentClass = 'test1';
                     }
                 }
             },
@@ -42,7 +43,7 @@ const resource = {
                         console.log('info load')
                     },
                     "webview:preset": function(head){
-                        head.active();
+                        //head.active();
                         head.data.left.icon = '<i class="fa fa-send"></i>';
                         head.data.left.text = 'Back';
                         head.data.right.icon = '<i class="fa fa-map-marker"></i>';
@@ -51,6 +52,7 @@ const resource = {
                             history.back();
                         }
                         head.data.center.text = 'Simplize info';
+                        this.SP_webviewClass = 'test1';
                     }
                 }
             }

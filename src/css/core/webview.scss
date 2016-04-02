@@ -18,11 +18,15 @@
         left            : -15px;
     }
 }
+.sp-webview{
+    background-color: #fff;
+}
 .sp-webview-content {
     width     : 100%;
     height    : 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: #fff;
 }
 
 .sp-webview-transition {

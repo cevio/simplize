@@ -76,10 +76,10 @@
     .sp-headbar{
         .sp-animate{
             &.sp-icon{
-                animation: HeadbarMoveFadeIn $page-animate-duration ease forwards;
+                animation: HeadbarMoveFadeIn $page-animate-duration forwards;
             }
             &.sp-text{
-                animation: HeadbarMoveFromRightToCenter $page-animate-duration ease forwards;
+                animation: HeadbarMoveFromRightToCenter $page-animate-duration forwards;
             }
         }
         .sp-headbar-left{
@@ -93,17 +93,17 @@
             }
         }
         .sp-headbar-center .sp-text{
-            animation: HeadbarMoveHalfFromRightToCenter $page-animate-duration ease forwards;
+            animation: HeadbarMoveHalfFromRightToCenter $page-animate-duration forwards;
         }
     }
     .sp-headbar-temp{
-        animation: HeadbarMoveFadeOut $page-animate-duration ease forwards;
+        animation: HeadbarMoveFadeOut $page-animate-duration forwards;
         .sp-animate{
             &.sp-icon{
-                animation: HeadbarMoveFadeOut $page-animate-duration ease forwards;
+                animation: HeadbarMoveFadeOut $page-animate-duration forwards;
             }
             &.sp-text{
-                animation: HeadbarMoveFromCenterToLeft $page-animate-duration ease forwards;
+                animation: HeadbarMoveFromCenterToLeft $page-animate-duration forwards;
             }
         }
         .sp-headbar-left{
@@ -117,7 +117,7 @@
             }
         }
         .sp-headbar-center .sp-text{
-            animation: HeadbarMoveHalfFromCenterToLeft $page-animate-duration ease forwards;
+            animation: HeadbarMoveHalfFromCenterToLeft $page-animate-duration forwards;
         }
     }
 }
@@ -126,10 +126,10 @@
     .sp-headbar{
         .sp-animate{
             &.sp-icon{
-                animation: HeadbarMoveFadeIn $page-animate-duration ease forwards;
+                animation: HeadbarMoveFadeIn $page-animate-duration forwards;
             }
             &.sp-text{
-                animation: HeadbarMoveFromLeftToCenter $page-animate-duration ease forwards;
+                animation: HeadbarMoveFromLeftToCenter $page-animate-duration forwards;
             }
         }
         .sp-headbar-left{
@@ -143,17 +143,17 @@
             }
         }
         .sp-headbar-center .sp-text{
-            animation: HeadbarMoveHalfFromLeftToCenter $page-animate-duration ease forwards;
+            animation: HeadbarMoveHalfFromLeftToCenter $page-animate-duration forwards;
         }
     }
     .sp-headbar-temp{
-        animation: HeadbarMoveFadeOut $page-animate-duration ease forwards;
+        animation: HeadbarMoveFadeOut $page-animate-duration forwards;
         .sp-animate{
             &.sp-icon{
-                animation: HeadbarMoveFadeOut $page-animate-duration ease forwards;
+                animation: HeadbarMoveFadeOut $page-animate-duration forwards;
             }
             &.sp-text{
-                animation: HeadbarMoveFromCenterToRight $page-animate-duration ease forwards;
+                animation: HeadbarMoveFromCenterToRight $page-animate-duration forwards;
             }
         }
         .sp-headbar-left{
@@ -167,7 +167,7 @@
             }
         }
         .sp-headbar-center .sp-text{
-            animation: HeadbarMoveHalfFromCenterToRight $page-animate-duration ease forwards;
+            animation: HeadbarMoveHalfFromCenterToRight $page-animate-duration forwards;
         }
     }
 }

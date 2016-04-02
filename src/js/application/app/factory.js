@@ -23,9 +23,7 @@ export function compileBrowser(name, resource = {}, cache) {
         name: 'browser',
         template: require('../../../html/browser.html'),
         components: {},
-        data: function() {
-            return _data;
-        }
+        data() { return _data; }
     }
     for (let i in webviews) {
         if (webviews.hasOwnProperty(i)) {
@@ -55,16 +53,22 @@ export function compileWebview(name, resource = {}) {
     };
 
     let _data = resource.data || {};
+
     _data.SP_status = false;
     _data.SP_direction = '';
+    _data.SP_paddingTop = 0;
+    _data.SP_paddingBottom = 0;
+    _data.SP_webviewClass = '';
+    _data.SP_webviewForceNoPadding = false;
+    _data.SP_webviewContentClass = '';
+    _data.SP_webviewContentStyle = '';
+    
     if ( resource.data ) delete resource.data;
 
     let defaults = {
         name: 'webview',
         template: require('../../../html/webview.html').replace('{{webview}}', resource.template || ''),
-        data: function() {
-            return _data;
-        },
+        data() { return _data; },
         events: {
             "webview:active": function() {
                 switch (this.$root.env.direction) {
@@ -77,6 +81,7 @@ export function compileWebview(name, resource = {}) {
                 }
                 this.SP_status = true;
                 this.$parent.SP_currentWebview = this;
+                this.SP_paddingTop = this.$parent.$refs.headbar.height;
             },
             "webview:unactive": function() {
                 switch (this.$root.env.direction) {
@@ -91,8 +96,21 @@ export function compileWebview(name, resource = {}) {
             }
         },
         computed: {
+            SP_webviewClasses: function(){
+                var classes = [];
+                this.SP_direction && classes.push(this.SP_direction);
+                this.SP_webviewClass && classes.push(this.SP_webviewClass);
+                return classes.join(' ');
+            },
             SP_animate: function() {
                 return this.$parent.SP_firstEnter ? 'none' : 'sp-webview';
+            },
+            SP_content_style: function(){
+                var styles = [];
+                styles.push('padding-top:' + (this.SP_webviewForceNoPadding ? 0 : this.SP_paddingTop) + 'px');
+                styles.push('padding-bottom:' + this.SP_paddingBottom + 'px');
+                this.SP_webviewContentStyle && styles.push(this.SP_webviewContentStyle);
+                return styles.join(';');
             }
         }
     }
