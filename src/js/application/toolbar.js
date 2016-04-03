@@ -40,12 +40,16 @@ export let Toolbar = {
             let i = keys.length;
             while ( i-- ) {
                 if (browsers[keys[i]]._isSync) continue;
+                let order = browsers[keys[i]].inject.order;
+                if ( order === undefined ){
+                    order = 99;
+                }
                 results.push({
                     name: keys[i],
                     icon: browsers[keys[i]].inject.icon,
                     text: browsers[keys[i]].inject.text,
                     url: browsers[keys[i]].inject.url,
-                    order: browsers[keys[i]].inject.order
+                    order: order
                 })
             }
             return results;
