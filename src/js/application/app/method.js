@@ -8,10 +8,11 @@ let timer = null;
 
 export default function(callback){
     return {
-        $run(){
-            hashChange(this);
-            typeof callback == 'function' && callback(this);
-        },
+        $run(){ hashChange(this); typeof callback == 'function' && callback(this); },
+        $browser(name){ return this.$cache.get('browser-' + name); },
+        $redirect(url){ Redirect(this)(url); },
+        $disableAnimation(){ this.SP_disableAnimation = true; },
+        $enableAnimation(){ this.SP_disableAnimation = false; },
 
         // 中间件
         $use(...fn){
@@ -37,14 +38,6 @@ export default function(callback){
 
             cache.$use.apply(cache, [path].concat(fns));
             return this;
-        },
-
-        $browser(name){
-            return this.$cache.get('browser-' + name);
-        },
-
-        $redirect(url){
-            Redirect(this)(url);
         }
     }
 }

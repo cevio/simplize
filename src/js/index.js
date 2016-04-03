@@ -30,8 +30,9 @@ const resource = {
                     "webview:load": function(){
                         console.log('index load')
                     },
-                    "webview:preset": function(head){
+                    "webview:preset": function(head, tool){
                         head.active();
+                        tool.active();
                         head.data.left.icon = '<i class="fa fa-close"></i>';
                         head.data.left.text = 'Exit';
                         head.data.right.icon = '<i class="fa fa-globe"></i>';
@@ -100,4 +101,5 @@ simplize.ready(function(){
     app.$use(home);
 
     app.$run();
+    console.log(app)
 })

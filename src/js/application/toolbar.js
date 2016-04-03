@@ -2,7 +2,7 @@ import * as PROXY from './proxy';
 export let Toolbar = {
     name: 'toolbar',
     template: require('../../html/toolbar.html'),
-    data: function(){
+    data(){
         return {
             data: this.GetDataFromSimplizeCache(),
             status: false,
@@ -11,22 +11,33 @@ export let Toolbar = {
         }
     },
     computed: {
-        width: function(){
+        width(){
             return (100 / this.data.length).toFixed(4) + '%';
+        },
+        transition(){
+            return this.$root.env.stopAnimate
+                ? ''
+                : (
+                    this.$root.SP_firstEnter
+                    ? 'none'
+                    : 'sp-toolbar'
+                );
         }
     },
     events: {
         "browser:added": function(){
             this.data = this.GetDataFromSimplizeCache();
+        },
+        "toolbar:before": function(){
+            this.status = false;
         }
     },
     methods: {
-        GetDataFromSimplizeCache: function(){
+        GetDataFromSimplizeCache(){
             let browsers = PROXY.simplizeCache.childrens;
             let results = [];
             let keys = Object.keys(browsers);
             let i = keys.length;
-            console.log(i)
             while ( i-- ) {
                 if (browsers[keys[i]]._isSync) continue;
                 results.push({
@@ -38,6 +49,21 @@ export let Toolbar = {
                 })
             }
             return results;
+        },
+        active(){
+            this.status = true;
+        },
+        remove(){
+            this.status = false;
+        }
+    },
+    watch: {
+        status(state){
+            if ( state ){
+                this.height = this.$els.root.offsetHeight;
+            }else{
+                this.height = 0;
+            }
         }
     }
 }

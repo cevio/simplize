@@ -1,7 +1,7 @@
 export let headbar = {
     name: 'headbar',
     template: require('../../html/headbar.html'),
-    data: function(){
+    data(){
         return {
             height: 0,
             status: false,
@@ -27,8 +27,14 @@ export let headbar = {
         this.clear();
     },
     computed: {
-        transition: function(){
-            return this.$parent.SP_firstEnter ? 'none' : 'sp-headbar';
+        transition(){
+            return this.$root.env.stopAnimate
+                ? ''
+                : (
+                    this.$parent.SP_firstEnter
+                    ? 'none'
+                    : 'sp-headbar'
+                );
         }
     },
     methods: {
@@ -89,7 +95,7 @@ export let headbar = {
         }
     },
     watch: {
-        "status": function(state){
+        status(state){
             this.type = 1;
             if ( state ){
                 this.height = this.$els.root.offsetHeight;

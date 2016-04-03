@@ -4,6 +4,7 @@ export function compileApp(resource = {}, cache) {
     for (let i in resource) {
         if (resource.hasOwnProperty(i)) {
             var _cache = cache.set('browser-' + i);
+            _cache._type = 'browser';
             Object.assign(result, compileBrowser(i, resource[i], _cache));
         }
     }
@@ -28,18 +29,25 @@ export function compileBrowser(name, resource = {}, cache) {
         template: require('../../../html/browser.html'),
         components: {},
         data() { return _data; },
-        beforeDestroy(){ this.SP_firstEnter = true; },
+        beforeDestroy(){
+            this.SP_firstEnter = true;
+            this.SP_background_color = '';
+            this.SP_currentWebview = null;
+        },
         ready(){ this.$emit('browser:async'); },
         events: {
+            // 告诉toolbar，现在正在使用这个browser
             'toolbar:exchange': function(){
                 this.$root.$refs.toolbar.current = this.SP_browser_name;
             }
         }
     }
+
     for (let i in webviews) {
         if (webviews.hasOwnProperty(i)) {
-            cache.set('webview-' + i);
-            var component = compileWebview(i, webviews[i]);
+            let webCache = cache.set('webview-' + i);
+            let component = compileWebview(i, webviews[i]);
+            webCache._type = 'webview';
             templates.push(component.tag);
             browser.components[component.name] = component.component;
         }
@@ -93,6 +101,22 @@ export function compileWebview(name, resource = {}) {
                 this.SP_status = true;
                 this.$parent.SP_currentWebview = this;
                 this.SP_paddingTop = this.$parent.$refs.headbar.height;
+                this.SP_paddingBottom = this.$root.$refs.toolbar.height;
+
+                if ( this.SP_animate == 'none' || this.$root.env.stopAnimate ){
+                    this.$nextTick(() => {
+                        if ( this.$options._isAsync ){
+                            this.$options._isAsync = false;
+                            return;
+                        }
+                        this.SP_direction = '';
+                        this.SP_status = true;
+                        this.$emit('webview:preload');
+                        this.$emit('webview:loading');
+                        this.$emit('webview:load');
+                        this.$parent.$refs.headbar.$emit('webview:load');
+                    })
+                }
             },
             "webview:unactive": function() {
                 switch (this.$root.env.direction) {
@@ -104,6 +128,14 @@ export function compileWebview(name, resource = {}) {
                         break;
                 }
                 this.SP_status = false;
+                if ( this.SP_animate == 'none' || this.$root.env.stopAnimate ){
+                    this.$nextTick(() => {
+                        this.SP_direction = '';
+                        this.$emit('webview:preunload');
+                        this.$emit('webview:unloading');
+                        this.$emit('webview:unload');
+                    })
+                }
             }
         },
         computed: {
@@ -114,7 +146,13 @@ export function compileWebview(name, resource = {}) {
                 return classes.join(' ');
             },
             SP_animate: function() {
-                return this.$parent.SP_firstEnter ? 'none' : 'sp-webview';
+                return this.$root.env.stopAnimate
+                    ? ''
+                    : (
+                        this.$parent.SP_firstEnter
+                        ? 'none'
+                        : 'sp-webview'
+                    );
             },
             SP_content_style: function(){
                 var styles = [];
@@ -128,7 +166,6 @@ export function compileWebview(name, resource = {}) {
 
     defaults.transitions = {};
     defaults.transitions["sp-webview"] =
-    defaults.transitions["none"] =
     {
         beforeEnter: function(){
             if ( this.$options._isAsync ) return;
@@ -139,7 +176,10 @@ export function compileWebview(name, resource = {}) {
             this.$emit('webview:loading');
         },
         afterEnter: function(){
-            if ( this.$options._isAsync ) return this.$options._isAsync = false;
+            if ( this.$options._isAsync ){
+                this.$options._isAsync = false;
+                return ;
+            }
             this.SP_direction = '';
             this.$emit('webview:load');
             this.$parent.$refs.headbar.$emit('webview:load');

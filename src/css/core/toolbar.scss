@@ -19,3 +19,11 @@
         color:#ff0000;
     }
 }
+
+.sp-toolbar-transition{
+    transition: transform $page-animate-duration ease;
+}
+.sp-toolbar-enter,
+.sp-toolbar-leave{
+    transform: translate3d(0, 100%, 0);
+}
