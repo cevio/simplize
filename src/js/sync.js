@@ -1,11 +1,9 @@
 define(function(require, exports, module){
     return {
-        options: {
-            data: {
-                icon: '<i class="fa fa-send"></i>',
-                text: 'sync',
-                url: '/'
-            }
+        inject: {
+            icon: '<i class="fa fa-send"></i>',
+            text: 'sync',
+            url: '/sync'
         },
         webviews: {
             index: {

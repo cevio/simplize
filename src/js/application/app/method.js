@@ -2,6 +2,7 @@ import * as utils from '../../utils/index';
 import { initUrl } from '../init';
 import { type } from '../../utils';
 import Redirect from '../redirect';
+import * as PROXY from '../proxy';
 
 let timer = null;
 
@@ -38,7 +39,7 @@ export default function(callback){
             return this;
         },
 
-        $get(name){
+        $browser(name){
             return this.$cache.get('browser-' + name);
         },
 
@@ -53,12 +54,12 @@ function hashChange(that){
         if ( timer ) clearTimeout(timer);
         let referrer = that.req.path + '';
         let object = initUrl(window.location);
-        let result = window.HISTORY.diff(referrer, object.path);
+        let result = PROXY.HISTORY.diff(referrer, object.path);
 
         switch ( result.usage ) {
             case 'add':
                 delay(function(){
-                    window.HISTORY.push(object.path);
+                    PROXY.HISTORY.push(object.path);
                     that.env.direction = 'turn:left';
                 });
                 break;

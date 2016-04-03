@@ -11,17 +11,22 @@ simplize.webview('home', 'list', function(resolve){
 
 const resource = {
     home: {
-        options: {
-            data: {
-                icon: '<i class="fa fa-home"></i>',
-                text: 'HOME',
-                url: '/'
-            }
+        inject: {
+            icon: '<i class="fa fa-home"></i>',
+            text: 'HOME',
+            url: '/',
+            order: 1
         },
         webviews: {
             index: {
                 template: require('../html/index.html'),
                 events: {
+                    "webview:preload": function(){
+                        console.log('index preload')
+                    },
+                    "webview:loading": function(){
+                        console.log('index loading')
+                    },
                     "webview:load": function(){
                         console.log('index load')
                     },
@@ -75,7 +80,7 @@ simplize.ready(function(){
         console.log('passed');
     })
 
-    var home = app.$get('home');
+    var home = app.$browser('home');
     home.$active('/info', function(){
         this.$render('info');
     });
@@ -86,7 +91,7 @@ simplize.ready(function(){
         this.$render('index');
     });
 
-    var sync = app.$get('sync');
+    var sync = app.$browser('sync');
     sync.$active(function(){
         this.$render('index');
     });

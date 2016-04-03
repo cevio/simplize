@@ -108,6 +108,7 @@ function webview_Render(webview, oldWebview, app){
         if ( oldWebview ){
             oldWebview.$emit('webview:unactive');
         }
+        webview.$parent.$emit('toolbar:exchange');
         webview.$emit('webview:active');
         utils.nextTick(function(){
             if ( app.$refs.browser.SP_firstEnter ){

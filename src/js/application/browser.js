@@ -1,7 +1,8 @@
 import vue from 'vue';
 import { compileBrowser } from './app/factory';
+import * as PROXY from './proxy';
 export default function (name, fn) {
-    var _cache = window.simplizeCache.set('browser-' + name);
+    var _cache = PROXY.simplizeCache.set('browser-' + name);
     _cache._isSync = true;
     vue.component('browser-' + name, function(resolve){
         fn(function(result){
@@ -9,6 +10,7 @@ export default function (name, fn) {
             resolve(result);
             _cache.notify();
             _cache._isSync = false;
+            PROXY.simplizeCache.root.$refs.toolbar.$emit('browser:added');
         })
     });
 }

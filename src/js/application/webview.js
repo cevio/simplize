@@ -1,8 +1,9 @@
 import vue from 'vue';
 import { compileWebview } from './app/factory';
+import * as PROXY from './proxy';
 
 export default function (browser, webview, fn) {
-    var _cache = window.simplizeCache.set('browser-' + browser);
+    var _cache = PROXY.simplizeCache.set('browser-' + browser);
     var __cache = _cache.set('webview-' + webview);
     __cache._isSync = true;
     _cache._webviews.push('<webview-' + webview + ' v-ref:webview-' + webview + '></webview-' + webview + '>');

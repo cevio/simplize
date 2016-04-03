@@ -1,3 +1,4 @@
+import * as PROXY from './proxy';
 export default function redirect (app) {
     return function(url){
         let index = url.indexOf('?');
@@ -5,7 +6,7 @@ export default function redirect (app) {
             ? url
             : url.substring(0, index);
 
-        let result = window.HISTORY.diff(app.req.path, path);
+        let result = PROXY.HISTORY.diff(app.req.path, path);
 
         switch ( result.usage ) {
             case 'rebuild':

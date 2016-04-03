@@ -4,13 +4,18 @@
     bottom                     : 0;
     left                       : 0;
     height                     : 58px;
-    background                 : #88d;
-    opacity                    : 0.5;
-    z-index                    : 100;
+    background                 : #fff;
+    z-index                    : 102;
     -webkit-user-select        : none;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout      : none;
+    display: table;
 }
 .sp-toolbar-item {
+    display: table-cell;
     height: 100%;
+    vertical-align: middle;
+    &.active{
+        color:#ff0000;
+    }
 }

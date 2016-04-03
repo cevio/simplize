@@ -8,10 +8,11 @@ import { appEvents } from './app/event';
 import cache from './app/cache';
 import session from './session';
 import fastclick from 'fastclick';
+import { Toolbar } from './toolbar';
+import * as PROXY from './proxy';
 
-window.HISTORY_NAME = 'simplize-histories';
-window.HISTORY = new session(window.HISTORY_NAME);
-window.simplizeCache = new cache();
+PROXY.HISTORY = new session(PROXY.HISTORY_NAME);
+PROXY.simplizeCache = new cache();
 
 let _resource = {
     req: {},
@@ -27,16 +28,17 @@ let _resource = {
 
 vue.mixin(mixin);
 
-export function bootstrap( resource = {}, data = {} ){
+export function bootstrap( resource = {}, data = {}, toolbar = Toolbar ){
     fastclick(document.body);
     _resource.req = initUrl(window.location);
 
     history.replaceState({ url: _resource.req.href }, document.title, _resource.req.origin);
-    HISTORY.add(_resource.req);
+    PROXY.HISTORY.add(_resource.req);
 
-    let Cache = window.simplizeCache;
+    let Cache = PROXY.simplizeCache;
     let _data = Object.assign({}, _resource, data);
     let browsers = compileApp(resource, Cache);
+    browsers.toolbar = toolbar;
 
     let Vue = new vue({
         el: createRoot(),

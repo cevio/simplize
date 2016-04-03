@@ -4,11 +4,13 @@ module.exports = function(config) {
     result.routes = [
         {
             name: 'compare-js',
-            file: './src/js/main.js'
+            file: './src/js/main.js',
+            type: 'tool'
         },
         {
             name: 'compare-css',
-            file: ['./src/css/index.scss']
+            file: ['./src/css/index.scss'],
+            type: 'tool'
         },
         {
             name: 'index-js',

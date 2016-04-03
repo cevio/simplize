@@ -12,6 +12,7 @@ export function compileApp(resource = {}, cache) {
 
 export function compileBrowser(name, resource = {}, cache) {
     let result = {}, templates = [];
+    let inject = resource.inject || {};
     let options = resource.options || {};
     let webviews = resource.webviews || {};
     let _data = options.data || {};
@@ -20,13 +21,20 @@ export function compileBrowser(name, resource = {}, cache) {
     _data.SP_currentWebview = null;
     _data.SP_firstEnter = true;
     _data.SP_background_color = '';
+    _data.SP_browser_name = 'browser-' + name;
+    cache.inject = inject;
     let browser = {
         name: 'browser',
         template: require('../../../html/browser.html'),
         components: {},
         data() { return _data; },
-        beforeDestroy(){ _data.SP_firstEnter = true; },
-        ready(){ this.$emit('browser:async'); }
+        beforeDestroy(){ this.SP_firstEnter = true; },
+        ready(){ this.$emit('browser:async'); },
+        events: {
+            'toolbar:exchange': function(){
+                this.$root.$refs.toolbar.current = this.SP_browser_name;
+            }
+        }
     }
     for (let i in webviews) {
         if (webviews.hasOwnProperty(i)) {
