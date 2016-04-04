@@ -135,6 +135,9 @@ export default class Cache extends route {
         const headbar = webview.$parent.$refs.headbar;
         const toolbar = app.$refs.toolbar;
 
+        // 检查webview的zindex属性对方向的影响
+        this._webview_Direction(app, webview, oldWebview);
+
         /**
          *  进入之前首先进行headbar的before事件处理
          *  然后会触发 webview的preset 事件
@@ -147,7 +150,7 @@ export default class Cache extends route {
 
          // 当设置完毕后，进行webview的跳转
 
-         utils.nextTick(function(){
+         utils.nextTick(() => {
 
              // 触发头部方向翻转
              headbar.$emit('headbar:direct');
@@ -176,5 +179,15 @@ export default class Cache extends route {
                  app.SP_firstEnter = false;
              });
          });
+    }
+    _webview_Direction(app, webview, oldWebview){
+        const a = webview.$options.zindex || 99;
+        const b = oldWebview ? oldWebview.$options.zindex || 99 : 99;
+
+        if ( a > b ){
+            app.env.direction = 'turn:left';
+        }else if ( a < b ){
+            app.env.direction = 'turn:right';
+        }
     }
 }

@@ -2,11 +2,11 @@ import * as simplize from './main.js';
 import fetcher from './require';
 
 simplize.browser('sync', function(resolve){
-    fetcher(['http://192.168.2.104:8000/js/sync.js'], resolve);
+    fetcher(['http://192.168.2.102:8000/js/sync.js'], resolve);
 });
 
 simplize.webview('home', 'list', function(resolve){
-    fetcher(['http://192.168.2.104:8000/js/list.js'], resolve);
+    fetcher(['http://192.168.2.102:8000/js/list.js'], resolve);
 });
 
 const resource = {
@@ -19,6 +19,7 @@ const resource = {
         },
         webviews: {
             index: {
+                zindex: 2,
                 template: require('../html/index.html'),
                 events: {
                     "webview:preload": function(){
@@ -43,6 +44,7 @@ const resource = {
                 }
             },
             info: {
+                zindex: 3,
                 template: require('../html/info.html'),
                 events: {
                     "webview:load": function(){
@@ -59,6 +61,9 @@ const resource = {
                         }
                         head.data.center.text = 'Simplize info';
                         this.SP_webviewClass = 'test1';
+                    },
+                    "webview:refresh": function(){
+                        console.log('refresh');
                     }
                 }
             }

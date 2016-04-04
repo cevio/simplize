@@ -56,19 +56,17 @@ function hashChange(that){
                     that.env.direction = 'turn:left';
                 });
                 break;
-            case 'rebuild':
-                delay(function(){
-                    result.fn();
-                    that.env.direction = 'turn:left';
-                });
-                break;
             case 'refresh':
                 delay(function(){
                     that.env.direction = 'turn:still';
+                    return function(){
+                        that.$emit('app:route');
+                    }
                 });
                 break;
             case 'forward':
                 delay(function(){
+                    result.fn();
                     that.env.direction = 'turn:left';
                 });
                 break;
@@ -81,9 +79,15 @@ function hashChange(that){
 
         function delay(fn){
             timer = setTimeout(function(){
-                fn && fn();
+                let _fn;
+                if ( typeof fn === 'function' ){
+                    _fn = fn();
+                }
                 that.env.referrer = referrer;
                 Object.assign(that.req, object);
+                if ( typeof _fn === 'function' ){
+                    _fn();
+                }
             }, 1000 / 60);
         }
     });

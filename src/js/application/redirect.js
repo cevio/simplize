@@ -9,7 +9,6 @@ export default function redirect (app) {
         let result = PROXY.HISTORY.diff(app.req.path, path);
 
         switch ( result.usage ) {
-            case 'rebuild':
             case 'refresh':
             case 'add': window.location.href = '#' + url; break;
             case 'back':
