@@ -31,6 +31,21 @@ export default class Cache extends route {
         return this;
     }
 
+    $define(_path, _webview){
+        let path, webview;
+        if ( !_webview ){
+            path = '/';
+            webview = _path;
+        }else{
+            path = _path;
+            webview = _webview;
+        }
+        this.$active(path, function(){
+            this.$render(webview);
+        });
+        return this;
+    }
+
     /**
      *  这里将讲述最复杂的路由唤起功能
      *  $render 将唤当前browser下的名为name的webview。
@@ -135,6 +150,9 @@ export default class Cache extends route {
         const headbar = webview.$parent.$refs.headbar;
         const toolbar = app.$refs.toolbar;
 
+        // 检查webview的zindex属性对方向的影响
+        this._webview_Direction(app, webview, oldWebview);
+
         /**
          *  进入之前首先进行headbar的before事件处理
          *  然后会触发 webview的preset 事件
@@ -147,7 +165,7 @@ export default class Cache extends route {
 
          // 当设置完毕后，进行webview的跳转
 
-         utils.nextTick(function(){
+         utils.nextTick(() => {
 
              // 触发头部方向翻转
              headbar.$emit('headbar:direct');
@@ -176,5 +194,15 @@ export default class Cache extends route {
                  app.SP_firstEnter = false;
              });
          });
+    }
+    _webview_Direction(app, webview, oldWebview){
+        const a = webview.$options.zindex || 99;
+        const b = oldWebview ? oldWebview.$options.zindex || 99 : 99;
+
+        if ( a > b ){
+            app.env.direction = 'turn:left';
+        }else if ( a < b ){
+            app.env.direction = 'turn:right';
+        }
     }
 }

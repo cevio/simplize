@@ -3,11 +3,11 @@ import fetcher from './require';
 import Picker from './components/picker/picker.js';
 
 simplize.browser('sync', function(resolve){
-    fetcher(['http://192.168.2.104:8000/js/sync.js'], resolve);
+    fetcher(['http://192.168.2.102:8000/js/sync.js'], resolve);
 });
 
 simplize.webview('home', 'list', function(resolve){
-    fetcher(['http://192.168.2.104:8000/js/list.js'], resolve);
+    fetcher(['http://192.168.2.102:8000/js/list.js'], resolve);
 });
 
 const resource = {
@@ -20,6 +20,7 @@ const resource = {
         },
         webviews: {
             index: {
+                zindex: 2,
                 template: require('../html/index.html'),
                 events: {
                     "webview:preload": function(){
@@ -44,6 +45,7 @@ const resource = {
                 }
             },
             info: {
+                zindex: 3,
                 template: require('../html/info.html'),
                 events: {
                     "webview:load": function(){
@@ -55,11 +57,14 @@ const resource = {
                         head.data.left.text = 'Back';
                         head.data.right.icon = '<i class="fa fa-map-marker"></i>';
                         head.data.right.text = 'options';
-                        head.data.left.click = function(){
-                            history.back();
+                        head.data.left.click = () => {
+                            this.$redirect('/');
                         }
                         head.data.center.text = 'Simplize info';
-                        this.SP_webviewClass = 'test1';
+                        this.SP_webviewContentClass = 'test2';
+                    },
+                    "webview:refresh": function(){
+                        console.log('refresh');
                     }
                 }
             },
@@ -81,10 +86,6 @@ const resource = {
             }
         }
     }
-    //
-    // sync: function(resolve){
-    //     fetcher(['http://127.0.0.1:8000/js/sync.js'], resolve);
-    // }
 }
 
 const data = {
@@ -97,7 +98,7 @@ simplize.ready(function(){
     app.$on('app:passend', function(){
         console.log('passed');
     })
-
+    
     var home = app.$browser('home');
     home.$active('/info', function(){
         this.$render('info');
@@ -117,8 +118,10 @@ simplize.ready(function(){
         this.$render('index');
     });
 
-    app.$use('/sync', sync);
-    app.$use(home);
+    const home = app.$browser('home').$define('/info', 'info').$define('/list', 'list').$define('index');
+    const sync = app.$browser('sync').$define('index');
+
+    app.$use('/sync', sync).$use(home);
 
     app.$run();
     console.log(app)

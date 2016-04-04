@@ -76,7 +76,6 @@ export default class SessionMap {
 
     /**
      *  add     : push a new url on end
-     *  rebuid  : delete part of source from end postion and add new url on end
      *  refresh : refresh url
      *  forward : forward history
      *  back    : back history
@@ -94,13 +93,9 @@ export default class SessionMap {
         if ( b == -1 ){
             if ( a + 1 < this.history.length ){
                 return {
-                    usage: 'rebuild',
-                    fn: function(){
-                        let his = that.history.slice(0, a + 1);
-                        his.push(target);
-                        that.history = his;
-                        that.set();
-                    }
+                    usage: 'forward',
+                    steps: b - a,
+                    fn(){ that.replace(a, target); }
                 }
             }else{
                 return { usage: 'add' }
@@ -114,7 +109,8 @@ export default class SessionMap {
         if ( a < b ){
             return {
                 usage: 'forward',
-                steps: b - a
+                steps: b - a,
+                fn(){ that.replace(a, target); }
             }
         }
 
@@ -124,5 +120,12 @@ export default class SessionMap {
                 steps: b - a
             }
         }
+    }
+
+    replace(a, target){
+        let his = this.history.slice(0, a + 1);
+        his.push(target);
+        this.history = his;
+        this.set();
     }
 }

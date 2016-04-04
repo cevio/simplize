@@ -90,6 +90,11 @@ export function compileWebview(name, resource = {}) {
         data() { return _data; },
         events: {
             "webview:active": function() {
+                if ( this.$root.env.direction === 'turn:still' ){
+                    this.$emit('webview:refresh');
+                    return;
+                }
+
                 switch (this.$root.env.direction) {
                     case 'turn:left':
                         this.SP_direction = 'upper';
@@ -119,6 +124,7 @@ export function compileWebview(name, resource = {}) {
                 }
             },
             "webview:unactive": function() {
+                if ( this.$root.env.direction === 'turn:still' ) return;
                 switch (this.$root.env.direction) {
                     case 'turn:left':
                         this.SP_direction = 'under';
