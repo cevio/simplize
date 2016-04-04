@@ -10,7 +10,6 @@ export default function(callback){
     return {
         $run(){ hashChange(this); typeof callback == 'function' && callback(this); },
         $browser(name){ return this.$cache.get('browser-' + name); },
-        $redirect(url){ Redirect(this)(url); },
         $disableAnimation(){ this.SP_disableAnimation = true; },
         $enableAnimation(){ this.SP_disableAnimation = false; },
 

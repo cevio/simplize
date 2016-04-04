@@ -12,9 +12,7 @@ export let directives = {
         deep: true,
         _url: null,
         bind(){
-             this._cb = () => {
-                Redirect(this.vm.$root)(this._url);
-             };
+             this._cb = () => { Redirect(this.vm.$root)(this._url); };
              on(this.el, 'click', this._cb);
         },
         update(newValue){
@@ -24,4 +22,8 @@ export let directives = {
             off(this.el, 'click', this._cb);
         }
     }
+}
+
+export let methods = {
+    $redirect(url){ Redirect(this.$root)(url); }
 }

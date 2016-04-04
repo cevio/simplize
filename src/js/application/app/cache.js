@@ -31,6 +31,21 @@ export default class Cache extends route {
         return this;
     }
 
+    $define(_path, _webview){
+        let path, webview;
+        if ( !_webview ){
+            path = '/';
+            webview = _path;
+        }else{
+            path = _path;
+            webview = _webview;
+        }
+        this.$active(path, function(){
+            this.$render(webview);
+        });
+        return this;
+    }
+
     /**
      *  这里将讲述最复杂的路由唤起功能
      *  $render 将唤当前browser下的名为name的webview。
