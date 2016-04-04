@@ -2,6 +2,19 @@
 //变量
 @import "variables";
 
+//util (工具样式不使用前缀 且 较为简短)
+@import "util/font";
+@import "util/margin";
+@import "util/padding";
+@import "util/float";
+@import "util/mixed";
+@import "util/position";
+@import "util/animation";
+
+// ui
+@import "ui/1px";
+@import "ui/flexbox";
+
 //form
 @import "form/address";
 @import "form/button";
@@ -16,19 +29,6 @@
 @import "form/selector";
 @import "form/switch";
 @import "form/textarea";
-
-// ui
-@import "ui/1px";
-@import "ui/flexbox";
-@import "ui/animate";
-
-//util (工具样式不使用前缀 且 较为简短)
-@import "util/font";
-@import "util/margin";
-@import "util/padding";
-@import "util/float";
-@import "util/mixed";
-@import "util/position";
 
 // core 目录下存放的是simplize内部的一些样式
 @import "core/browser";
