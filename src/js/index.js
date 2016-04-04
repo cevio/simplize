@@ -1,5 +1,6 @@
 import * as simplize from './main.js';
 import fetcher from './require';
+import Picker from './components/picker/picker.js';
 
 simplize.browser('sync', function(resolve){
     fetcher(['http://192.168.2.104:8000/js/sync.js'], resolve);
@@ -61,6 +62,22 @@ const resource = {
                         this.SP_webviewClass = 'test1';
                     }
                 }
+            },
+            picker: {
+                template: require('../html/picker.html'),
+                events: {
+                    'webview:load': function(){
+                        console.log('picker load')
+                    },
+                    'webview:preset': function(){
+                        new Picker(this.$el.querySelector('.SP-picker-container'), {
+                            data: [
+                                '1', '2', '3', '4', '5', '6', '7', '8', '9'
+                            ],
+                            defaultValue: '8'
+                        })
+                    }
+                }
             }
         }
     }
@@ -88,6 +105,9 @@ simplize.ready(function(){
     home.$active('/list', function(){
         this.$render('list');
     });
+    home.$active('/picker', function(){
+        this.$render('picker');
+    })
     home.$active(function(){
         this.$render('index');
     });
