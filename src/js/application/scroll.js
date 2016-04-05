@@ -3,19 +3,18 @@
  * 实时返回手指在当前滚动区域的位移量
  */
 
-class Scroll {
+export default class Scroll {
     /**
      * @param {Element} el 需要响应滚动的区域元素
      * @param {Function} cb touchMove产生的位移信息的返回
      */
-    constructor(el, cb){
-        this.el = el;
-        this.cb = cb;
-        this.event_map = {};
+    constructor(vm, el){
+        this.vm = vm;
+        this.el = vm.$els[el];
 
         this.init();
     }
-    
+
     /**
      * 初始化滚动操作
      */
@@ -23,10 +22,6 @@ class Scroll {
         this.bindTouchStart();
         this.bindTouchMove();
         this.bindTouchEnd();
-    }
-    
-    on(type, listener){
-        this.event_map[type] = listener;
     }
 
     bindTouchStart() {
@@ -36,21 +31,18 @@ class Scroll {
             }
             e.preventDefault();
             this.__doTouchStart(e.touches, e.timeStamp);
-            this.event_map['start'] && this.event_map['start'](e.touches, e.timeStamp);
         }, false)
     }
 
     bindTouchMove() {
         this.el.addEventListener('touchmove', (e) => {
             this.__doTouchMove(e.touches, e.timeStamp);
-            this.event_map['move'] && this.event_map['move'](e.touches, e.timeStamp);
         }, false)
     }
 
     bindTouchEnd() {
         this.el.addEventListener('touchend', (e) => {
             this.__doTouchEnd(e.timeStamp)
-            this.event_map['end'] && this.event_map['end'](e.timeStamp);
         }, false)
     }
 
@@ -58,6 +50,7 @@ class Scroll {
         this.startX = this.lastX = touches[0].pageX;
         this.startY = this.lastY = touches[0].pageY;
         this.lastTimeStamp = timeStamp;
+        this.vm.$emit('scroll:start', this);
     }
 
     __doTouchMove(touches, timeStamp) {
@@ -77,12 +70,10 @@ class Scroll {
         this.lastY = touches[0].pageY;
         this.lastTimeStamp = timeStamp;
 
-        this.cb(result);
+        this.vm.$emit('scroll:move', this, result);
     }
 
     __doTouchEnd(timeStamp) {
-
+        this.vm.$emit('scroll:end', this);
     }
 }
-
-export default Scroll;

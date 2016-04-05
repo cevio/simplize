@@ -31,8 +31,14 @@ const default_options = {
     data: {}
 };
 
-class Picker{
-    constructor(container, options = {}) {
+class Picker extends Scroll {
+    constructor(vm, el, options = {}) {
+        super(vm, el);
+
+        this._component = this.vm.$els.component;
+        this._content = this.vm.$els.content;
+        this._indicator = this.vm.$els.indicator;
+
         this._isAnimating = false;
         this._isSingleTouch = true;
 
@@ -126,7 +132,7 @@ class Picker{
             this._positions = [];
             this._didDecelerationComplete = false;
             this._lastTimeStamp = timeStamp;
-            
+
             if(this._isDecelerating){
                 Animate.stop(this._isDecelerating);
                 this._isDecelerating = false;
@@ -145,7 +151,7 @@ class Picker{
                 if(this._isSingleTouch && (timeStamp - this._lastTimeStamp) <= 100){
                     let endPos = this._positions.length - 1;
                     let startPos = endPos;
-                    
+
                     for( var i = endPos; i > 0 && this._positions[i] > (this._lastTimeStamp - 100) ; i -= 2 ){
                         startPos = i;
                     }
@@ -252,7 +258,7 @@ class Picker{
         if(duration){
             let oldTop = this._scrollTop;
             let diffTop = top - oldTop;
-            
+
             console.log(diffTop);
 
             let step = function(percent){
@@ -285,24 +291,24 @@ class Picker{
 
     scrollingComplete(){
         let index = Math.round((this._scrollTop - this._minScrollTop - this._itemHeight / 2) / this._itemHeight);
-        
+
         this.selectItem(this._content.children[index]);
 
         if(this._prevValue !== null && this._prevValue !== this.value){
             this.options.onSelect(this.value);
         }
     }
-    
+
     startDeceleration(timeStamp){
         this._minDecelerationScrollTop = this._minScrollTop;
         this._maxDecelerationScrollTop = this._maxScrollTop;
-        
+
         let step = function(percent, now, render){
             this.stepThroughDeceleration(render);
         }.bind(this)
-        
+
         let minVelocityToKeepDecelerating = 0.5;
-        
+
         let verify = function(){
             let shouldContinue = Math.abs(this._decelerationVelocityY) >= minVelocityToKeepDecelerating;
             if(!shouldContinue){
@@ -310,32 +316,32 @@ class Picker{
             }
             return shouldContinue;
         }.bind(this);
-        
+
         let completed = function(){
             this._isDecelerating = false;
-            
+
             if(this._scrollTop <= this._minScrollTop || this._scrollTop >= this._maxScrollTop){
                 this.scrollTo(this._scrollTop);
                 return;
             }
-            
+
             if(this._didDecelerationComplete){
                 this.scrollingComplete();
             }
         }.bind(this);
-        
+
         this._isDecelerating = Animate.start(step, verify, completed);
     }
-    
+
     stepThroughDeceleration(){
         let scrollTop = this._scrollTop + this._decelerationVelocityY;
-        
+
         let scrollTopFixed = Math.max(Math.min(this._maxDecelerationScrollTop, scrollTop), this._minDecelerationScrollTop);
         if(scrollTopFixed !== scrollTop){
             scrollTop = scrollTopFixed;
             this._decelerationVelocityY = 0;
         }
-        
+
         if(Math.abs(this._decelerationVelocityY) <= 1){
             if(Math.abs(scrollTop % this._itemHeight) < 1){
                 this._decelerationVelocityY = 0;
@@ -344,7 +350,7 @@ class Picker{
         else {
             this._decelerationVelocityY *= 0.95;
         }
-        
+
         this.publish(scrollTop);
     }
 }
