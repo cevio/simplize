@@ -8,14 +8,27 @@ import { bootstrap } from './application/bootstrap';
 import * as PROXY from './application/proxy';
 import * as ANIMATE from './application/animate';
 import SCROLL from './application/scroll';
+import DEDINE from './application/define';
 
 export default {
     vue: vue,
     ready: domReady,
-    config: PROXY,
+    proxy: PROXY,
     bootstrap: bootstrap,
     browser: asyncBrowser,
     webview: asyncWebview,
     animate: ANIMATE,
-    scroll: SCROLL
+    scroll: SCROLL,
+    define: DEDINE
 }
+
+/*
+-----------------------------------------------------
+    common plugins install
+-----------------------------------------------------
+ */
+import { ALERT } from './plugins/alert/index';
+
+// install
+
+DEDINE('$alert', ALERT);

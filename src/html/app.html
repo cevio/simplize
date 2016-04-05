@@ -1,5 +1,5 @@
 <div class="sp-app">
-    <div class="sp-modal"></div>
+    <modal v-ref:modal></modal>
     <div class="sp-browsers">
         <component :is="SP_currentBrowser" v-ref:browser :transition="SP_BrowserAnimate" transition-mode="out-in"></component>
     </div>

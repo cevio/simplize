@@ -10,6 +10,7 @@ import session from './session';
 import fastclick from 'fastclick';
 import { Toolbar } from './toolbar';
 import * as PROXY from './proxy';
+import { modal } from './modal';
 
 PROXY.HISTORY = new session(PROXY.HISTORY_NAME);
 PROXY.simplizeCache = new cache();
@@ -42,6 +43,7 @@ export function bootstrap( resource = {}, data = {}, toolbar = Toolbar ){
     let _data = Object.assign({}, _resource, data);
     let browsers = compileApp(resource, Cache);
     browsers.toolbar = toolbar;
+    browsers.modal = modal;
 
     let Vue = new vue({
         el: createRoot(),

@@ -44,7 +44,8 @@ const resource = {
                         console.log('index loading')
                     },
                     "webview:load": function(){
-                        console.log('index load')
+                        console.log('index load');
+                        this.$alert('Hello world!');
                     },
                     "webview:preset": function(head, tool){
                         head.active();
