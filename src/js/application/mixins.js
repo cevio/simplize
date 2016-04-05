@@ -1,5 +1,6 @@
 import Redirect from './redirect';
 import { on, off } from '../utils/index';
+import { picker } from "../components/picker/index";
 export let filters = {
     rem: function(val){
         return val / this.$root.env.viewScale;
@@ -26,4 +27,8 @@ export let directives = {
 
 export let methods = {
     $redirect(url){ Redirect(this.$root)(url); }
+}
+
+export let components = {
+    picker
 }

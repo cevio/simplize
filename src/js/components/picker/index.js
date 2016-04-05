@@ -14,7 +14,8 @@ export let picker = {
     methods: {
         create(){
             this.$picker = new PICKER(this);
-        }
+        },
+        
         destroy(){
             this.$picker._destroy();
         }

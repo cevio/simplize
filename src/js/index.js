@@ -1,6 +1,5 @@
 import * as simplize from './main.js';
 import fetcher from './require';
-import Picker from './components/picker/picker.js';
 
 simplize.browser('sync', function(resolve){
     fetcher(['http://192.168.20.57:8000/js/sync.js'], resolve);
@@ -9,6 +8,13 @@ simplize.browser('sync', function(resolve){
 simplize.webview('home', 'list', function(resolve){
     fetcher(['http://192.168.20.57:8000/js/list.js'], resolve);
 });
+
+let picker_data = [];
+for(let pi = 0; pi < 15; pi++){
+    picker_data.push({
+        text: pi
+    })
+}
 
 const resource = {
     home: {
@@ -70,17 +76,16 @@ const resource = {
             },
             picker: {
                 template: require('../html/picker.html'),
+                data: {
+                    list: picker_data,
+                    index: 3
+                },
                 events: {
                     'webview:load': function(){
                         console.log('picker load')
                     },
                     'webview:preset': function(){
-                        new Picker(this.$el.querySelector('.SP-picker-container'), {
-                            data: [
-                                '1', '2', '3', '4', '5', '6', '7', '8', '9'
-                            ],
-                            defaultValue: '8'
-                        })
+                        
                     }
                 }
             }

@@ -50,7 +50,7 @@ export default class Scroll {
         this.startX = this.lastX = touches[0].pageX;
         this.startY = this.lastY = touches[0].pageY;
         this.lastTimeStamp = timeStamp;
-        this.vm.$emit('scroll:start');
+        this.vm.$emit('scroll:start', timeStamp);
     }
 
     __doTouchMove(touches, timeStamp) {
@@ -74,7 +74,7 @@ export default class Scroll {
     }
 
     __doTouchEnd(timeStamp) {
-        this.vm.$emit('scroll:end');
+        this.vm.$emit('scroll:end', timeStamp);
     }
 
     __destroy(){
