@@ -9,17 +9,21 @@ import * as PROXY from './application/proxy';
 import * as ANIMATE from './application/animate';
 import SCROLL from './application/scroll';
 import DEDINE from './application/define';
+import { Promise } from 'es6-promise';
+import * as utils from './utils/index';
 
 export default {
-    vue: vue,
+    vue,
+    Promise,
+    bootstrap,
     ready: domReady,
     proxy: PROXY,
-    bootstrap: bootstrap,
     browser: asyncBrowser,
     webview: asyncWebview,
     animate: ANIMATE,
     scroll: SCROLL,
-    define: DEDINE
+    define: DEDINE,
+    util: utils
 }
 
 /*
