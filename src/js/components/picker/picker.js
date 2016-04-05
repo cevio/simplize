@@ -14,9 +14,8 @@ export default class PICKER extends Scroll {
         this._lastTimeStamp = null;
         this._scrollTop = 0;
         this._isSingleTouch = true;
-
-        vm.value = vm.value >= vm.data.length ? 0 : vm.value;
-        this.select(vm.value, false);
+        
+        this.select(this.getIndex(vm.value), false);
 
         vm.$on('scroll:start', this._doScrollStart.bind(this));
         vm.$on('scroll:move', this._doScrollMove.bind(this));
@@ -110,6 +109,15 @@ export default class PICKER extends Scroll {
 
         this.scrollingComplete();
         this.select(this.value);
+    }
+    
+    getIndex(value){
+        for(let i = 0, len = this.vm.data.length; i < len; i++){
+            if(value === this.vm.data[i].value){
+                return i;
+            }
+        }
+        return 0;
     }
 
     setDimensions(){
