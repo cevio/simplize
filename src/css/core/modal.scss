@@ -1,0 +1,33 @@
+.sp-modal{
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    .sp-modal-mask{
+        width: 100%;
+        height: 100%;
+        .sp-modal-masker{
+            background-color: #000;
+            opacity: .5;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .sp-ui-table{
+        position: absolute;
+        top: 0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        display: table;
+        .sp-ui-cell{
+            display: table-cell;
+            height: 100%;
+            vertical-align: middle;
+            width: 100%;
+        }
+    }
+}

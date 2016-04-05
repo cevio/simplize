@@ -6,7 +6,15 @@ export let modal = {
     data: function(){
         return {
             current: '',
-            mask: false
+            mask: false,
+            class: ''
+        }
+    },
+    methods: {
+        destroy(){
+            this.current = '';
+            this.mask = false;
+            this.class = '';
         }
     }
 }

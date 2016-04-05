@@ -31,10 +31,16 @@
 @import "form/textarea";
 
 // core 目录下存放的是simplize内部的一些样式
+@import "core/app";
 @import "core/browser";
 @import "core/webview";
 @import "core/headbar";
 @import "core/toolbar";
+@import "core/modal";
 
 //components 组件样式
-@import "components/picker";
+@import "../js/components/picker/picker";
+
+//plugin class
+
+@import "../js/plugins/alert/alert";

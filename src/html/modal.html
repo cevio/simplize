@@ -1,4 +1,4 @@
 <div class="sp-modal">
-    <div class="sp-modal-masker" v-if="mask"></div>
-    <div class="sp-modal-content"><component :is="current" v-ref:target></component></div>
+    <div class="sp-modal-mask" v-if="mask" transition="fade"><div class="sp-modal-masker" :class="class"></div></div>
+    <component :is="current" v-ref:target></component>
 </div>
