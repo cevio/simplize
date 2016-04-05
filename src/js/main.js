@@ -12,6 +12,10 @@ import DEDINE from './application/define';
 import { Promise } from 'es6-promise';
 import * as utils from './utils/index';
 
+if ( typeof window.Promise === 'undefined' ){
+    window.Promise = Promise;
+}
+
 export default {
     vue,
     Promise,
