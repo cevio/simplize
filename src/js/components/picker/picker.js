@@ -15,6 +15,7 @@ export default class PICKER extends Scroll {
         this._scrollTop = 0;
         this._isSingleTouch = true;
 
+        vm.value = vm.value >= vm.data.length ? 0 : vm.value;
         this.select(vm.value, false);
 
         vm.$on('scroll:start', this._doScrollStart.bind(this));
