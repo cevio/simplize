@@ -138,9 +138,9 @@ export function compileWebview(name, resource = {}) {
                 if ( this.SP_animate == 'none' || this.$root.env.stopAnimate ){
                     this.$nextTick(() => {
                         this.SP_direction = '';
+                        this.$broadcast('webview:unload');
                         this.$emit('webview:preunload');
                         this.$emit('webview:unloading');
-                        this.$broadcast('webview:unload');
                         this.$emit('webview:unload');
                     })
                 }
@@ -194,11 +194,11 @@ export function compileWebview(name, resource = {}) {
             this.$broadcast('webview:load');
         },
         beforeLeave: function(){
+            this.$broadcast('webview:unload');
             this.$emit('webview:preunload');
         },
         leave: function() {
             this.$emit('webview:unloading');
-            this.$broadcast('webview:unload');
         },
         afterLeave: function(){
             this.SP_direction = '';
