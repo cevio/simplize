@@ -203,7 +203,7 @@ export default class PICKER extends Scroll {
         this.value = index;
 
         if(this._prevValue !== null && this._prevValue !== this.value){
-            this.vm.$emit('scroll:selected', this.vm.data[this.value], this.value);
+            this.vm.$emit('scroll:select', this.vm.data[this.value], this.value);
         }
     }
 

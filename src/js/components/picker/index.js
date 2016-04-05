@@ -10,8 +10,9 @@ export let picker = {
         "webview:unload": function(){
             this.destroy();
         },
-        "scroll:selected": function(data, index){
+        "scroll:select": function(data, index){
             this.value = data.value;
+            this.$emit('scroll:selected', data, index);
         }
     },
     methods: {
@@ -20,6 +21,7 @@ export let picker = {
         },
 
         destroy(){
+            if ( !this.$picker ) return;
             this.$picker._destroy();
             this.$picker = null;
         }

@@ -109,7 +109,7 @@ const resource = {
                         }, 10000);
                     },
                     "webview:unload": function(){
-                        this.$refs.picker.$off('scroll:selected')
+                        this.$refs.picker.$off('scroll:selected');
                     }
                 }
             }
@@ -124,14 +124,19 @@ const data = {
 
 simplize.ready(function(){
     let app = simplize.bootstrap(resource, data);
-    app.$on('app:passend', function(){
-        console.log('passed');
-    })
 
-    const home = app.$browser('home').$define('/info', 'info').$define('/list', 'list').$define('/picker', 'picker').$define('index');
-    const sync = app.$browser('sync').$define('index');
-
-    app.$use('/sync', sync).$use(home);
+    app
+        .$use('/sync',
+            app.$browser('sync')
+                .$define('index')
+        )
+        .$use(
+            app.$browser('home')
+                .$define('/info', 'info')
+                .$define('/list', 'list')
+                .$define('/picker', 'picker')
+                .$define('index')
+        );
 
     app.$run();
     console.log(app)
