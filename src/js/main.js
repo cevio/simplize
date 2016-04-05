@@ -28,7 +28,11 @@ export default {
 -----------------------------------------------------
  */
 import { ALERT } from './plugins/alert/index';
+import { CONFIRM } from './plugins/confirm/index';
+import { PROMPT } from './plugins/prompt/index';
 
 // install
 
 DEDINE('$alert', ALERT);
+DEDINE('$confirm', CONFIRM);
+DEDINE('$prompt', PROMPT);
