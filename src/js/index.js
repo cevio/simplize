@@ -1,5 +1,6 @@
 import * as simplize from './main.js';
 import fetcher from './require';
+import Picker from './components/picker/picker.js';
 
 simplize.browser('sync', function(resolve){
     fetcher(['http://192.168.20.57:8000/js/sync.js'], resolve);
@@ -66,6 +67,22 @@ const resource = {
                         console.log('refresh');
                     }
                 }
+            },
+            picker: {
+                template: require('../html/picker.html'),
+                events: {
+                    'webview:load': function(){
+                        console.log('picker load')
+                    },
+                    'webview:preset': function(){
+                        new Picker(this.$el.querySelector('.SP-picker-container'), {
+                            data: [
+                                '1', '2', '3', '4', '5', '6', '7', '8', '9'
+                            ],
+                            defaultValue: '8'
+                        })
+                    }
+                }
             }
         }
     }
@@ -81,9 +98,28 @@ simplize.ready(function(){
     app.$on('app:passend', function(){
         console.log('passed');
     })
+    
+    var home = app.$browser('home');
+    home.$active('/info', function(){
+        this.$render('info');
+    });
+    home.$active('/list', function(){
+        this.$render('list');
+    });
+    home.$active('/picker', function(){
+        this.$render('picker');
+    })
+    home.$active(function(){
+        this.$render('index');
+    });
 
-    const home = app.$browser('home').$define('/info', 'info').$define('/list', 'list').$define('index');
-    const sync = app.$browser('sync').$define('index');
+    var sync = app.$browser('sync');
+    sync.$active(function(){
+        this.$render('index');
+    });
+
+    home = app.$browser('home').$define('/info', 'info').$define('/list', 'list').$define('index');
+    sync = app.$browser('sync').$define('index');
 
     app.$use('/sync', sync).$use(home);
 
