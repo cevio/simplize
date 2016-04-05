@@ -10,7 +10,7 @@ export default class Scroll {
      */
     constructor(vm, el){
         this.vm = vm;
-        this.el = vm.$els[el];
+        this.el = el;
 
         this.init();
     }
@@ -25,7 +25,7 @@ export default class Scroll {
     }
 
     bindTouchStart() {
-        this.el.addEventListener('touchstart', (e) => {
+        this.el.addEventListener('touchstart', this.__eventEmitterTouchStart = (e) => {
             if (e.target.tagName.match(/input|textarea|select/i)) {
                 return
             }
@@ -35,13 +35,13 @@ export default class Scroll {
     }
 
     bindTouchMove() {
-        this.el.addEventListener('touchmove', (e) => {
+        this.el.addEventListener('touchmove', this.__eventEmitterTouchMove = (e) => {
             this.__doTouchMove(e.touches, e.timeStamp);
         }, false)
     }
 
     bindTouchEnd() {
-        this.el.addEventListener('touchend', (e) => {
+        this.el.addEventListener('touchend', this.__eventEmitterTouchEnd = (e) => {
             this.__doTouchEnd(e.timeStamp)
         }, false)
     }
@@ -50,7 +50,7 @@ export default class Scroll {
         this.startX = this.lastX = touches[0].pageX;
         this.startY = this.lastY = touches[0].pageY;
         this.lastTimeStamp = timeStamp;
-        this.vm.$emit('scroll:start', this);
+        this.vm.$emit('scroll:start');
     }
 
     __doTouchMove(touches, timeStamp) {
@@ -70,10 +70,24 @@ export default class Scroll {
         this.lastY = touches[0].pageY;
         this.lastTimeStamp = timeStamp;
 
-        this.vm.$emit('scroll:move', this, result);
+        this.vm.$emit('scroll:move', result);
     }
 
     __doTouchEnd(timeStamp) {
-        this.vm.$emit('scroll:end', this);
+        this.vm.$emit('scroll:end');
+    }
+
+    __destroy(){
+        removeEventListener(this.el, 'touchstart', this.__eventEmitterTouchStart);
+        removeEventListener(this.el, 'touchmove', this.__eventEmitterTouchMove);
+        removeEventListener(this.el, 'touchend', this.__eventEmitterTouchEnd);
+    }
+}
+
+function removeEventListener(el, event, fn){
+    if ( el.removeEventListener ) {
+        el.removeEventListener(event, fn);
+    } else if ( el.detachEvent ) {
+        el.detachEvent("on" + event, fn);
     }
 }
