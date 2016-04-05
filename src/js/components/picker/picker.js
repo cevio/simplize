@@ -159,10 +159,15 @@ class Picker{
 
                         if(Math.abs(this._decelerationVelocityY) > minVelocityToStartDeceleration){
                             this.startDeceleration(timeStamp);
+                            return;
                         }
                     }
                 }
             }
+
+            console.log(this._scrollTop);
+            this.scrollingComplete();
+            this.select(this.value);
         })
     }
 
@@ -186,6 +191,8 @@ class Picker{
                 return;
             }
         }
+
+        self.selectByIndex(0, animate)
     }
 
     selectByIndex(index, animate){
@@ -193,8 +200,8 @@ class Picker{
             return;
         }
 
-        this._scrollTop = this._minScrollTop + index * this._itemHeight;
-        this.scrollTo(this._scrollTop, animate);
+        let scrollTop = this._minScrollTop + index * this._itemHeight;
+        this.scrollTo(scrollTop, animate);
 
         this.selectItem(this._content.children[index]);
     }
@@ -245,6 +252,8 @@ class Picker{
         if(duration){
             let oldTop = this._scrollTop;
             let diffTop = top - oldTop;
+            
+            console.log(diffTop);
 
             let step = function(percent){
                 this._scrollTop = oldTop + (diffTop * percent);
@@ -276,7 +285,7 @@ class Picker{
 
     scrollingComplete(){
         let index = Math.round((this._scrollTop - this._minScrollTop - this._itemHeight / 2) / this._itemHeight);
-
+        
         this.selectItem(this._content.children[index]);
 
         if(this._prevValue !== null && this._prevValue !== this.value){

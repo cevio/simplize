@@ -118,8 +118,8 @@ simplize.ready(function(){
         this.$render('index');
     });
 
-    const home = app.$browser('home').$define('/info', 'info').$define('/list', 'list').$define('index');
-    const sync = app.$browser('sync').$define('index');
+    home = app.$browser('home').$define('/info', 'info').$define('/list', 'list').$define('index');
+    sync = app.$browser('sync').$define('index');
 
     app.$use('/sync', sync).$use(home);
 
