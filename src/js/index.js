@@ -98,28 +98,9 @@ simplize.ready(function(){
     app.$on('app:passend', function(){
         console.log('passed');
     })
-    
-    var home = app.$browser('home');
-    home.$active('/info', function(){
-        this.$render('info');
-    });
-    home.$active('/list', function(){
-        this.$render('list');
-    });
-    home.$active('/picker', function(){
-        this.$render('picker');
-    })
-    home.$active(function(){
-        this.$render('index');
-    });
 
-    var sync = app.$browser('sync');
-    sync.$active(function(){
-        this.$render('index');
-    });
-
-    home = app.$browser('home').$define('/info', 'info').$define('/list', 'list').$define('index');
-    sync = app.$browser('sync').$define('index');
+    const home = app.$browser('home').$define('/info', 'info').$define('/list', 'list').$define('/picker', 'picker').$define('index');
+    const sync = app.$browser('sync').$define('index');
 
     app.$use('/sync', sync).$use(home);
 
