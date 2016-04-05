@@ -10,9 +10,10 @@ simplize.webview('home', 'list', function(resolve){
 });
 
 let picker_data = [];
-for(let pi = 0; pi < 15; pi++){
+for(let pi = 0; pi < 150; pi++){
     picker_data.push({
-        text: pi
+        value: pi + 1,
+        text: "第" + (pi + 1) + '个数据'
     })
 }
 
@@ -81,11 +82,24 @@ const resource = {
                     index: 3
                 },
                 events: {
-                    'webview:load': function(){
-                        console.log('picker load')
+                    "webview:preset": function(headbar, toolbar){
+                        headbar.active();
+                        toolbar.active();
+                        headbar.data.left.icon = '<i class="fa fa-angle-left"></i>';
+                        headbar.data.left.text = 'Back';
+                        headbar.data.left.click = function(){
+                            history.back();
+                        }
+                        headbar.data.center.text = 'Picker scroller';
+                        this.SP_webviewContentClass = 'test2';
                     },
-                    'webview:preset': function(){
-                        
+                    'webview:load': function(){
+                        this.$refs.picker.$on('scroll:selected', function(data, index){
+                            console.log(data, index)
+                        })
+                    },
+                    "webview:unload": function(){
+                        this.$refs.picker.$off('scroll:selected')
                     }
                 }
             }

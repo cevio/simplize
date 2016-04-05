@@ -2,7 +2,7 @@ import PICKER from './picker';
 export let picker = {
     name: 'picker',
     template: require('./picker.html'),
-    props: ['data', 'value'],
+    props: ['data', 'value', 'title'],
     events: {
         "webview:load": function(){
             this.create();
@@ -15,7 +15,7 @@ export let picker = {
         create(){
             this.$picker = new PICKER(this);
         },
-        
+
         destroy(){
             this.$picker._destroy();
         }

@@ -1,4 +1,4 @@
-import * as Animate from './animate';
+import * as Animate from '../../application/animate';
 import Scroll from '../../application/scroll';
 
 export default class PICKER extends Scroll {
@@ -7,7 +7,7 @@ export default class PICKER extends Scroll {
         this._clientHeight = this.el.clientHeight;
         this._itemHeight = vm.$els.indicator.clientHeight;
         this.setDimensions();
-        
+
         this._positions = [];
         this._isDragging = this._didDecelerationComplete = this._isAnimating = this._isDecelerating = false;
         this._enableScrollY = false;
@@ -16,7 +16,7 @@ export default class PICKER extends Scroll {
         this._isSingleTouch = true;
 
         this.select(vm.value, false);
-        
+
         vm.$on('scroll:start', this._doScrollStart.bind(this));
         vm.$on('scroll:move', this._doScrollMove.bind(this));
         vm.$on('scroll:end', this._doScrollEnd.bind(this));
@@ -106,7 +106,7 @@ export default class PICKER extends Scroll {
                 }
             }
         }
-        
+
         this.scrollingComplete();
         this.select(this.value);
     }
@@ -118,7 +118,7 @@ export default class PICKER extends Scroll {
         this._minScrollTop = -this._itemHeight * (clientItemCount / 2);
         this._maxScrollTop = this._minScrollTop + itemCount * this._itemHeight - 0.1;
     }
-    
+
     select(index, animate){
         if(index < 0 || index > this.vm.data.length - 1){
             return;
@@ -133,7 +133,7 @@ export default class PICKER extends Scroll {
     move(top){
         this.vm.$els.content.style.webkitTransform = 'translate3d(0, ' + (top * -1) + 'px, 0)';
     }
-    
+
     publish(top, duration){
         let wasAnimation = this._isAnimating;
         if(wasAnimation){
@@ -195,7 +195,7 @@ export default class PICKER extends Scroll {
 
         this.selectValue(index);
     }
-    
+
     selectValue(index){
         if(this.value !== null){
             this._prevValue = this.value;
@@ -203,7 +203,7 @@ export default class PICKER extends Scroll {
         this.value = index;
 
         if(this._prevValue !== null && this._prevValue !== this.value){
-            this.vm.$emit('scroll:selected', this.value);
+            this.vm.$emit('scroll:selected', this.vm.data[this.value], this.value);
         }
     }
 

@@ -6,6 +6,8 @@ import asyncBrowser from './application/browser';
 import asyncWebview from './application/webview';
 import { bootstrap } from './application/bootstrap';
 import * as PROXY from './application/proxy';
+import * as ANIMATE from './application/animate';
+import SCROLL from './application/scroll';
 
 export default {
     vue: vue,
@@ -13,5 +15,7 @@ export default {
     config: PROXY,
     bootstrap: bootstrap,
     browser: asyncBrowser,
-    webview: asyncWebview
+    webview: asyncWebview,
+    animate: ANIMATE,
+    scroll: SCROLL
 }
