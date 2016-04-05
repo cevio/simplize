@@ -2,11 +2,11 @@ import * as simplize from './main.js';
 import fetcher from './require';
 
 simplize.browser('sync', function(resolve){
-    fetcher(['http://192.168.2.102:8000/js/sync.js'], resolve);
+    fetcher(['http://192.168.20.57:8000/js/sync.js'], resolve);
 });
 
 simplize.webview('home', 'list', function(resolve){
-    fetcher(['http://192.168.2.102:8000/js/list.js'], resolve);
+    fetcher(['http://192.168.20.57:8000/js/list.js'], resolve);
 });
 
 const resource = {
