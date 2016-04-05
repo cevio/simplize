@@ -120,6 +120,7 @@ export function compileWebview(name, resource = {}) {
                         this.$emit('webview:loading');
                         this.$emit('webview:load');
                         this.$parent.$refs.headbar.$emit('webview:load');
+                        this.$broadcast('webview:load');
                     })
                 }
             },
@@ -139,6 +140,7 @@ export function compileWebview(name, resource = {}) {
                         this.SP_direction = '';
                         this.$emit('webview:preunload');
                         this.$emit('webview:unloading');
+                        this.$broadcast('webview:unload');
                         this.$emit('webview:unload');
                     })
                 }
@@ -189,12 +191,14 @@ export function compileWebview(name, resource = {}) {
             this.SP_direction = '';
             this.$emit('webview:load');
             this.$parent.$refs.headbar.$emit('webview:load');
+            this.$broadcast('webview:load');
         },
         beforeLeave: function(){
             this.$emit('webview:preunload');
         },
         leave: function() {
             this.$emit('webview:unloading');
+            this.$broadcast('webview:unload');
         },
         afterLeave: function(){
             this.SP_direction = '';
