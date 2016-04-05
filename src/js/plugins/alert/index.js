@@ -14,12 +14,5 @@ export let ALERT = {
             this.text = text;
             this.title = title;
         }
-    },
-    ready(){
-        this._cb = () => this.$parent.destroy();
-        on(this.$els.root, 'click', this._cb);
-    },
-    beforeDestroyed(){
-        this._cb && off(this.$els.root, 'click', this._cb);
     }
 }

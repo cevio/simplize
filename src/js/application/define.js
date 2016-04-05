@@ -10,7 +10,10 @@ export default function define( methodName, component ) {
             const modal = this.$root.$refs.modal;
             modal.current = name;
             this.$nextTick(() => {
-                modal.$refs.target.entry.apply(modal.$refs.target, args);
+                modal.status = true;
+                this.$nextTick(() => {
+                    modal.$refs.target.entry.apply(modal.$refs.target, args);
+                });        
             });
         }
     })(component.name);

@@ -7,7 +7,8 @@ export let modal = {
         return {
             current: '',
             mask: false,
-            class: ''
+            class: '',
+            status: false
         }
     },
     methods: {
@@ -15,6 +16,13 @@ export let modal = {
             this.current = '';
             this.mask = false;
             this.class = '';
+        }
+    },
+    transitions: {
+        fade: {
+            afterLeave(){
+                this.status = false;
+            }
         }
     }
 }
