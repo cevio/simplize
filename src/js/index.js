@@ -10,8 +10,15 @@ simplize.webview('home', 'list', function(resolve){
 });
 
 let picker_data = [];
-for(let pi = 0; pi < 150; pi++){
+for(let pi = 0; pi < 10; pi++){
     picker_data.push({
+        value: pi + 1,
+        text: "第" + (pi + 1) + '个数据'
+    })
+}
+let picker_data2 = [];
+for(let pi = 0; pi < 150; pi++){
+    picker_data2.push({
         value: pi + 1,
         text: "第" + (pi + 1) + '个数据'
     })
@@ -96,7 +103,10 @@ const resource = {
                     'webview:load': function(){
                         this.$refs.picker.$on('scroll:selected', function(data, index){
                             console.log(data, index)
-                        })
+                        });
+                        setTimeout(() => {
+                            this.list = picker_data2;
+                        }, 10000);
                     },
                     "webview:unload": function(){
                         this.$refs.picker.$off('scroll:selected')

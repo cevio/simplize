@@ -1,3 +1,4 @@
 <div class="SP-picker-container mt20">
-    <picker :data="list" :value="index" v-ref:picker title="数据元"></picker>
+    {{index}}
+    <picker :data="list" :value.sync="index" v-ref:picker title="数据元"></picker>
 </div>
