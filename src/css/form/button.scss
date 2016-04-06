@@ -1,0 +1,35 @@
+.sp-btn {
+    @include sp-1px(rgba(0,0,0,.2),5px);
+    display                    : block;
+    background-color           : #f7f7f7;
+    padding-left               : 14px;
+    padding-right              : 14px;
+    font-size                  : 18px;
+    text-align                 : center;
+    line-height                : 2.4;
+    border-radius              : 5px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    text-decoration            : none;
+    user-select                : none;
+
+    &+& {
+        margin-top: 15px;
+    }
+}
+.sp-btn-default {
+    color: #454545;
+}
+.sp-btn-primary {
+    background-color: #04be02;
+    color           : #fff;
+}
+.sp-btn-warn {
+    background-color: #ef4f4f;
+    color           : #fff;
+}
+.sp-btn-disabled {
+    color: hsla(0,0%,100%,.6);
+    &.sp-btn-default {
+        color: #c9c9c9;
+    }
+}
