@@ -45,14 +45,6 @@ const resource = {
                     },
                     "webview:load": function() {
                         console.log('index load');
-                        this.$alert('Hello world!').then(function(Alert) {
-                            console.log(Alert);
-                            Alert.$on('alert:ok', function(){
-                                console.log('close ok')
-                            })
-                        })
-
-
                     },
                     "webview:preset": function(head, tool) {
                         head.active();
@@ -63,6 +55,16 @@ const resource = {
                         head.data.right.text = 'Soyieer';
                         head.data.center.text = 'Simplize demo';
                         this.SP_webviewContentClass = 'test1';
+                    }
+                },
+                methods: {
+                    alertHandler: function(){
+                        this.$alert('Hello world!').then(function(Alert) {
+                            console.log(Alert);
+                            Alert.$on('alert:ok', function(){
+                                console.log('close ok')
+                            })
+                        })
                     }
                 }
             },
