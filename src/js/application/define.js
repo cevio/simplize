@@ -17,7 +17,7 @@ export default function define( methodName, component ) {
                         reject(new Error('cannot find this component on modal.'));
                     }else{
                         this.$nextTick(() => {
-                            modal.$refs.target.entry.apply(modal.$refs.target, args);
+                            modal.$refs.target.$constructor.apply(modal.$refs.target, args);
                             resolve(modal.$refs.target);
                         });
                     }
