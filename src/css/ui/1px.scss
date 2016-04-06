@@ -1,4 +1,4 @@
-@mixin border1px($color) {
+@mixin sp-1px($color, $radius:0) {
     // color: $color;
     position: relative;
     &:before {
@@ -7,15 +7,77 @@
         width           : 200%;
         height          : 200%;
         border          : 1px solid $color;
+        border-radius   : $radius *2;
         transform       : scale(0.5);
         top             : 0;
         left            : 0;
         transform-origin: 0 0;
     }
 }
+@mixin sp-1px-side($color, $direction:top ) {
+    position: relative;
+    @if $direction == top {
+        &:before {
+            width    : 100%;
+            height   : 1px;
+            transform: scaleY(0.5);
+            top      : 0;
+            left     : 0;
+        }
+    }
+    @if $direction == bottom {
+        &:before {
+            width    : 100%;
+            height   : 1px;
+            transform: scaleY(0.5);
+            bottom   : 0;
+            left     : 0;
+        }
+    }
+    @if $direction == left {
+        &:before {
+            width    : 1px;
+            height   : 100%;
+            transform: scaleX(0.5);
+            top      : 0;
+            left     : 0;
+        }
+    }
+    @if $direction == right {
+        &:before {
+            width    : 1px;
+            height   : 100%;
+            transform: scaleX(0.5);
+            top      : 0;
+            right    : 0;
+        }
+    }
+    &:before {
+        position        : absolute;
+        content         : "";
+        background-color: $color;
+        transform-origin: 0 0;
+    }
+}
 
-.border-1 {
-    @include border1px(#000);
+.sp-1px {
+    @include sp-1px($ui-default-border-color);
+}
+.sp-1px-t {
+    @include sp-1px-side($ui-default-border-color,top);
+}
+.sp-1px-b {
+    @include sp-1px-side($ui-default-border-color,bottom);
+}
+.sp-1px-r {
+    @include sp-1px-side($ui-default-border-color,right);
+}
+.sp-1px-l {
+    @include sp-1px-side($ui-default-border-color,left);
+}
+
+.sp-1px-lt {
+    @include sp-1px-side($ui-default-border-color,left);
 }
 
 // @mixin eee($color) {
