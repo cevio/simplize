@@ -5,7 +5,8 @@ export let CONFIRM = {
         return {
             text: '',
             title: '',
-            showCancel: true
+            showCancel: true,
+            status: false
         }
     },
     methods: {
@@ -13,16 +14,21 @@ export let CONFIRM = {
             this.$parent.mask = true;
             this.text = text;
             this.title = title;
+            this.status = true;
         },
 
         ok: function(){
-            this.$emit('confirm:ok');
-            this.$parent.destroy();
+            this.status = false;
+            this.$parent.prevTick(() => {
+                this.$emit('confirm:ok');
+            });
         },
         
         cancel: function(){
-            this.$emit('confirm:cancel');
-            this.$parent.destroy();
+            this.status = false;
+            this.$parent.prevTick(() => {
+                this.$emit('confirm:cancel');
+            });
         }
     }
 };
