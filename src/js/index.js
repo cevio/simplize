@@ -65,6 +65,42 @@ const resource = {
                                 console.log('close ok')
                             })
                         })
+                    },
+
+                    confirmHandler: function(){
+                        this.$confirm('Hello world!').then(function(Confirm) {
+                            console.log(Confirm);
+                            Confirm.$on('confirm:ok', function(){
+                                console.log('confirm close ok')
+                            })
+                            
+                            Confirm.$on('confirm:cancel', function(){
+                                console.log('confirm close cancel')
+                            })
+                        })
+                    },
+
+                    confirmAlert: function(){
+                        var that = this;
+                        this.$alert('Hello world2').then((Alert) => {
+                            console.log(Alert);
+                            Alert.$on('alert:ok', () => {
+                                console.log('close ok')
+                                setTimeout(function(){
+                                    that.$confirm('Hello world confirm').then(function(Confirm) {
+                                        console.log(Confirm);
+                                        Confirm.$on('confirm:ok', function(){
+                                            console.log('confirm close ok')
+                                        })
+
+                                        Confirm.$on('confirm:cancel', function(){
+                                            console.log('confirm close cancel')
+                                        })
+                                    })
+                                }, 0)
+                                
+                            })
+                        })
                     }
                 }
             },

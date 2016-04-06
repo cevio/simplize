@@ -9,7 +9,7 @@ export let ALERT = {
         return {
             text: '',
             title: '',
-            status: false
+            showCancel: false
         }
     },
     methods: {
@@ -17,11 +17,9 @@ export let ALERT = {
             this.$parent.mask = true;
             this.text = text;
             this.title = title;
-            this.status = true;
         },
         
         ok: function(){
-            this.status = false;
             this.$emit('alert:ok');
             this.$parent.destroy();
         }

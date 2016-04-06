@@ -21,7 +21,11 @@ export let modal = {
     transitions: {
         fade: {
             afterLeave(){
-                this.status = false;
+                this.current === '' && (this.status = false);
+            },
+
+            leaveCancelled(){
+                console.log('leave cancel');
             }
         }
     }
