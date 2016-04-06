@@ -47,27 +47,29 @@ export default class Scroll {
     }
 
     __doTouchStart(touches, timeStamp) {
-        this.startX = this.lastX = touches[0].pageX;
-        this.startY = this.lastY = touches[0].pageY;
+        let position = touchesPosition(touches);
+        this.startX = this.lastX = position.x;
+        this.startY = this.lastY = position.y;
         this.lastTimeStamp = timeStamp;
         this.vm.$emit('scroll:start', timeStamp);
     }
 
     __doTouchMove(touches, timeStamp) {
+        let position = touchesPosition(touches);
         let result = {
-            currentX: touches[0].pageX,
-            currentY: touches[0].pageY,
+            currentX: position.x,
+            currentY: position.y,
             currentTimeStamp: timeStamp,
-            shiftX: touches[0].pageX - this.lastX,
-            shiftY: touches[0].pageY - this.lastY,
+            shiftX: position.x - this.lastX,
+            shiftY: position.y - this.lastY,
             startX: this.startX,
             startY: this.startY
         };
         result.speedX = Math.abs(result.shiftX) / (timeStamp - this.lastTimeStamp);
         result.speedY = Math.abs(result.shiftY) / (timeStamp - this.lastTimeStamp);
 
-        this.lastX = touches[0].pageX;
-        this.lastY = touches[0].pageY;
+        this.lastX = position.x;
+        this.lastY = position.y;
         this.lastTimeStamp = timeStamp;
 
         this.vm.$emit('scroll:move', result);
@@ -89,5 +91,20 @@ function removeEventListener(el, event, fn){
         el.removeEventListener(event, fn);
     } else if ( el.detachEvent ) {
         el.detachEvent("on" + event, fn);
+    }
+}
+
+function touchesPosition(touches){
+    let x1 = touches[0].pageX;
+    let y1 = touches[0].pageY;
+
+    if(touches.length > 1){
+        x1 = (x1 + touches[1].pageX) / 2;
+        y1 = (y1 + touches[1].pageY) / 2;
+    }
+
+    return {
+        x: x1,
+        y: y1
     }
 }
