@@ -14,10 +14,10 @@
         transform-origin: 0 0;
     }
 }
-@mixin sp-1px-side($color, $direction:top ) {
+@mixin sp-1px-side($color, $direction:top, $pseudo:before) {
     position: relative;
     @if $direction == top {
-        &:before {
+        &:#{$pseudo} {
             width    : 100%;
             height   : 1px;
             transform: scaleY(0.5);
@@ -26,16 +26,17 @@
         }
     }
     @if $direction == bottom {
-        &:before {
+        &:#{$pseudo} {
             width    : 100%;
             height   : 1px;
             transform: scaleY(0.5);
-            bottom   : 0;
+            bottom   : -1px;
             left     : 0;
+
         }
     }
     @if $direction == left {
-        &:before {
+        &:#{$pseudo} {
             width    : 1px;
             height   : 100%;
             transform: scaleX(0.5);
@@ -44,15 +45,15 @@
         }
     }
     @if $direction == right {
-        &:before {
+        &:#{$pseudo} {
             width    : 1px;
             height   : 100%;
             transform: scaleX(0.5);
             top      : 0;
-            right    : 0;
+            right    : -1px;
         }
     }
-    &:before {
+    &:#{$pseudo} {
         position        : absolute;
         content         : "";
         background-color: $color;
@@ -77,34 +78,18 @@
 }
 
 .sp-1px-lt {
-    @include sp-1px-side($ui-default-border-color,left);
+    @include sp-1px-side($ui-default-border-color,left,before);
+    @include sp-1px-side($ui-default-border-color,top,after);
 }
-
-// @mixin eee($color) {
-//     color: $color;
-//     // &:before {
-//     //     content  : "";
-//     //     width    : 200%;
-//     //     height   : 200%;
-//     //     transform: scale(0.5);
-//     // }
-//     // @media screen and (-webkit-min-device-pixel-ratio: 2) {
-//     //     &:before {
-//     //         content      : "";
-//     //         width        : 200%;
-//     //         height       : 200%;
-//     //         border-radius: $radius*2;
-//     //         transform    : scale(0.5);
-//     //     }
-//     // }
-//     // @media screen and (-webkit-min-device-pixel-ratio: 3) {
-//     //     &:before {
-//     //         content      : "";
-//     //         width        : 300%;
-//     //         height       : 300%;
-//     //         border-radius: $radius*3;
-//     //         transform    : scale(0.333333);
-//     //     }
-//     // }
-//
-// }
+.sp-1px-rb {
+    @include sp-1px-side($ui-default-border-color,right,before);
+    @include sp-1px-side($ui-default-border-color,bottom,after);
+}
+.sp-1px-lr {
+    @include sp-1px-side($ui-default-border-color,left,before);
+    @include sp-1px-side($ui-default-border-color,right,after);
+}
+.sp-1px-tb {
+    @include sp-1px-side($ui-default-border-color,top,before);
+    @include sp-1px-side($ui-default-border-color,bottom,after);
+}

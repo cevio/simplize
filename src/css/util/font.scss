@@ -16,18 +16,18 @@ $fcs: (#000,#111,#222,#333,#444,#555,#666,#777,#888,#999,#aaa,#bbb,#ccc,#ddd,#ee
 
 //text-align
 .tc {
-    text-align: center;
+    text-align: center !important;
 }
 .tl {
-    text-align: left;
+    text-align: left !important;
 }
 .tr {
-    text-align: right;
+    text-align: right !important;
 }
 //font-weight
 .fn {
-    font-weight: normal;
+    font-weight: normal !important;
 }
 .fb {
-    font-weight: bold;
+    font-weight: bold !important;
 }
