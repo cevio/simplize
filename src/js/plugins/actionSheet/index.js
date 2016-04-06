@@ -1,16 +1,24 @@
-export let PROMPT = {
-    name: 'sp-ui-prompt',
-    template: require('./prompt.html'),
+export let ACTIONSHEET = {
+    name: 'sp-ui-actionsheet',
+    template: require('./actionSheet.html'),
     data: function(){
         return {
-            text: '',
-            title: ''
+            menus: [],
+            needCancel: false
         }
     },
     methods: {
-        entry(text = '', title = ''){
-            this.text = text;
-            this.title = title;
+        entry(menus = [], needCancel = false){
+            this.menus = menus;
+            this.needCancel = needCancel;
+        },
+
+        close: function(){
+            this.$emit('actionsheet:cancel');
+        },
+        
+        select: function(index){
+            this.$emit('actionsheet:select', this.menus[index]);
         }
     }
 };

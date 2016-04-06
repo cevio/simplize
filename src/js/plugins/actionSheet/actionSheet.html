@@ -1,21 +1,13 @@
 <div class="sp-ui-actionsheet">
     <div class="sp-ui-actionsheet-menu">
-        <div class="sp-ui-actionsheet-cell sp-1px-t">
-            选项一
+        <div class="sp-ui-actionsheet-cell sp-1px-t" v-if="menu in menus" v-on:click="select($index)">
+            {{ menu.text }}
         </div>
 
-        <div class="sp-ui-actionsheet-cell sp-1px-t">
-            选项二
+        <div v-if="needCancel" class="sp-ui-actionsheet-gap">
         </div>
 
-        <div class="sp-ui-actionsheet-cell sp-1px-t">
-            选项三
-        </div>
-
-        <div class="sp-ui-actionsheet-gap">
-        </div>
-
-        <div class="sp-ui-actionsheet-cell sp-1px-t">
+        <div v-if="needCancel" class="sp-ui-actionsheet-cell sp-1px-t" v-on:click="close">
             取消
         </div>
     </div>
