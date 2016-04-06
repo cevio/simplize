@@ -9,6 +9,7 @@ export let ACTIONSHEET = {
     },
     methods: {
         entry(menus = [], needCancel = false){
+            this.$parent.mask = true;
             this.menus = menus;
             this.needCancel = needCancel;
         },
@@ -17,7 +18,7 @@ export let ACTIONSHEET = {
             this.$emit('actionsheet:cancel');
             this.$parent.destroy();
         },
-        
+
         select: function(index){
             this.$emit('actionsheet:select', this.menus[index]);
             this.$parent.destroy();

@@ -1,6 +1,6 @@
 <div class="sp-ui-actionsheet">
     <div class="sp-ui-actionsheet-menu">
-        <div class="sp-ui-actionsheet-cell sp-1px-t" v-if="menu in menus" v-on:click="select($index)">
+        <div class="sp-ui-actionsheet-cell sp-1px-t" v-for="menu in menus" v-on:click="select($index)">
             {{ menu.text }}
         </div>
 
