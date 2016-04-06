@@ -18,8 +18,8 @@ export let ACTIONSHEET = {
 
         close: function(){
             this.$emit('actionsheet:cancel');
-            this.status = false;
             this.$parent.destroy();
+            this.status = false;
         },
 
         select: function(index){
