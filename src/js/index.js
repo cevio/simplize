@@ -93,7 +93,7 @@ const resource = {
             picker: {
                 template: require('../html/picker.html'),
                 data: {
-                    list: picker_data,
+                    list: picker_data2,
                     index: 3
                 },
                 events: {
@@ -112,9 +112,6 @@ const resource = {
                         this.$refs.picker.$on('scroll:selected', function(data, index) {
                             console.log(data, index)
                         });
-                        setTimeout(() => {
-                            this.list = picker_data2;
-                        }, 10000);
                     },
                     "webview:unload": function() {
                         this.$refs.picker.$off('scroll:selected');
