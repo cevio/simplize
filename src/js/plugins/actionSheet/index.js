@@ -15,10 +15,12 @@ export let ACTIONSHEET = {
 
         close: function(){
             this.$emit('actionsheet:cancel');
+            this.$parent.destroy();
         },
         
         select: function(index){
             this.$emit('actionsheet:select', this.menus[index]);
+            this.$parent.destroy();
         }
     }
 };
