@@ -9,19 +9,25 @@ export let ALERT = {
         return {
             text: '',
             title: '',
-            showCancel: false
+            showCancel: false,
+            status: false
         }
     },
     methods: {
         entry(text = '', title = '') {
-            this.$parent.mask = true;
-            this.text = text;
-            this.title = title;
+            this.$parent.nextTick(() => {
+                this.$parent.mask = true;
+                this.text = text;
+                this.title = title;
+                this.status = true;
+            });
         },
-        
+
         ok: function(){
-            this.$emit('alert:ok');
-            this.$parent.destroy();
+            this.status = false;
+            this.$parent.prevTick(() => {
+                this.$emit('alert:ok');
+            });
         }
     }
 };

@@ -186,12 +186,16 @@ const resource = {
                 },
                 methods: {
                   openSheet: function(needCancel){
-                    this.$actionsheet([{text:"wwww"},{text:"aaaaa"}],needCancel).then(function(obj){
+                    this.$actionsheet([{text:"wwww"},{text:"aaaaa"}],needCancel).then((obj) => {
                       obj.$on("actionsheet:cancel",function(){
-                        console.log('cancle');
+                        //console.log('cancle');
                       });
-                      obj.$on("actionsheet:select",function(select){
-                        console.log(select);
+                      obj.$on("actionsheet:select",(select) => {
+                          //console.log('in')
+                          //setTimeout(() => {
+this.$alert("dsafa")
+                          //}, 100);
+
                       })
                     })
                   }
