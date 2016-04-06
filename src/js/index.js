@@ -45,9 +45,9 @@ const resource = {
                     },
                     "webview:load": function(){
                         console.log('index load');
-                        this.$alert('Hello world!').then(function(Alert){
-                            console.log(Alert);
-                        })
+                        // this.$alert('Hello world!').then(function(Alert){
+                        //     console.log(Alert);
+                        // })
                     },
                     "webview:preset": function(head, tool){
                         head.active();
