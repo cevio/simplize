@@ -1,5 +1,5 @@
 <div class="sp-modal" v-if="status">
-    <div class="sp-modal-mask sp-duration-short" v-if="mask" transition="fade">
+    <div class="sp-modal-mask sp-duration-short" v-if="mask" transition="fade" v-on:click="maskClick">
         <div class="sp-modal-masker" :class="class"></div>
     </div>
     <component :is="current" v-ref:target></component>

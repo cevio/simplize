@@ -4,7 +4,8 @@ export let ACTIONSHEET = {
     data: function(){
         return {
             menus: [],
-            needCancel: false
+            needCancel: false,
+            status: false
         }
     },
     methods: {
@@ -12,16 +13,24 @@ export let ACTIONSHEET = {
             this.$parent.mask = true;
             this.menus = menus;
             this.needCancel = needCancel;
+            this.status = true;
         },
 
         close: function(){
             this.$emit('actionsheet:cancel');
+            this.status = false;
             this.$parent.destroy();
         },
 
         select: function(index){
             this.$emit('actionsheet:select', this.menus[index]);
+            this.status = false;
             this.$parent.destroy();
+        }
+    },
+    events: {
+        'modal:maskclick': function(){
+            this.close();
         }
     }
 };

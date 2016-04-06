@@ -16,6 +16,10 @@ export let modal = {
             this.current = '';
             this.mask = false;
             this.class = '';
+        },
+
+        maskClick: function(){
+            this.$broadcast('modal:maskclick')
         }
     },
     transitions: {
