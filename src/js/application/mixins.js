@@ -1,6 +1,7 @@
 import Redirect from './redirect';
 import { on, off } from '../utils/index';
 import { picker } from "../components/picker/index";
+import { middle } from "../components/middle/index";
 import * as PROXY from './proxy';
 export let filters = {
     rem: function(val){
@@ -31,5 +32,5 @@ export let methods = {
 }
 
 export let components = {
-    picker
+    picker,middle
 }
