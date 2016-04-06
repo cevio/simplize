@@ -177,19 +177,24 @@ const resource = {
                         headbar.data.center.text = 'ActionSheet';
                     },
                     'webview:load': function() {
-                      this.$actionsheet([{text:"wwww"},{text:"aaaaa"}],true).then(function(obj){
-                        obj.$on("actionsheet:cancel",function(){
-                          console.log(1111);
-                        });
-                        obj.$on("actionsheet:select",function(){
-                          console.log(2222);
-                        })
-                      })
+
 
                     },
                     "webview:unload": function() {
 
                     }
+                },
+                methods: {
+                  openSheet: function(){
+                    this.$actionsheet([{text:"wwww"},{text:"aaaaa"}],true).then(function(obj){
+                      obj.$on("actionsheet:cancel",function(){
+                        console.log(1111);
+                      });
+                      obj.$on("actionsheet:select",function(){
+                        console.log(2222);
+                      })
+                    })
+                  }
                 }
             }
         }

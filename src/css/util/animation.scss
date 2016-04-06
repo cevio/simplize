@@ -9,6 +9,17 @@ bounce  bounceLeft bounceRight bounceUp bounceDown
 slideLeft slideRight slideUp slideDown
 */
 
+//duration
+.sp-duration-short {
+    animation-duration: 300ms !important;
+}
+.sp-duration-middle {
+    animation-duration: 600ms !important;
+}
+.sp-duration-long {
+    animation-duration: 1000ms !important;
+}
+
 /*
   fade animation   (fade  fadeLeft fadeRight fadeUp fadeDown)
 */
@@ -534,7 +545,7 @@ slideLeft slideRight slideUp slideDown
     animation: slideInUp $animate-default-duration both;
 }
 .slideUp-leave {
-    animation: slideOutUp $animate-default-duration both;
+    animation: slideOutDown $animate-default-duration both;
 }
 @keyframes slideInUp {
     from {
