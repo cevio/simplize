@@ -1,4 +1,4 @@
-<div class="sp-ui-table">
+<div class="sp-ui-table" v-if="status">
     <div class="sp-ui-cell">
         <div class="sp-ui-dialog sp-ui-alert">
             <div class="sp-ui-dialog-hd">
@@ -9,7 +9,7 @@
             </div>
             <div class="sp-ui-dialog-ft">
                 <!-- <div class="sp-ui-dialog-btn">取消</div> -->
-                <div class="sp-ui-dialog-btn primary">确定</div>
+                <div class="sp-ui-dialog-btn primary" v-on:click="ok">确定</div>
             </div>
         </div>
     </div>

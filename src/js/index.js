@@ -47,6 +47,9 @@ const resource = {
                         console.log('index load');
                         this.$alert('Hello world!').then(function(Alert) {
                             console.log(Alert);
+                            Alert.$on('alert:ok', function(){
+                                console.log('close ok')
+                            })
                         })
 
 
