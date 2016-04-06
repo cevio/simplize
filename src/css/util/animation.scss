@@ -47,10 +47,10 @@ slideLeft slideRight slideUp slideDown
 }
 
 .fadeLeft-enter {
-    animation: fadeOutLeft $animate-default-duration both;
+    animation: fadeInLeft $animate-default-duration both;
 }
 .fadeLeft-leave {
-    animation: fadeInLeft $animate-default-duration both;
+    animation: fadeOutRight $animate-default-duration both;
 }
 @keyframes fadeInLeft {
     from {
@@ -81,7 +81,7 @@ slideLeft slideRight slideUp slideDown
     animation: fadeInRight $animate-default-duration both;
 }
 .fadeRight-leave {
-    animation: fadeOutRight $animate-default-duration both;
+    animation: fadeOutLeft $animate-default-duration both;
 }
 
 @keyframes fadeInRight {
@@ -113,7 +113,7 @@ slideLeft slideRight slideUp slideDown
     animation: fadeInUp $animate-default-duration both;
 }
 .fadeUp-leave {
-    animation: fadeOutUp $animate-default-duration both;
+    animation: fadeOutDown $animate-default-duration both;
 }
 @keyframes fadeInUp {
     from {
@@ -144,7 +144,7 @@ slideLeft slideRight slideUp slideDown
     animation: fadeInDown $animate-default-duration both;
 }
 .fadeDown-leave {
-    animation: fadeOutDown $animate-default-duration both;
+    animation: fadeOutUp $animate-default-duration both;
 }
 @keyframes fadeInDown {
     from {
@@ -240,7 +240,7 @@ slideLeft slideRight slideUp slideDown
     animation: bounceInLeft $animate-default-duration both;
 }
 .bounceLeft-leave {
-    animation: bounceOutLeft $animate-default-duration both;
+    animation: bounceOutRight $animate-default-duration both;
 }
 @keyframes bounceInLeft {
     from,
@@ -297,7 +297,7 @@ slideLeft slideRight slideUp slideDown
     animation: bounceInRight $animate-default-duration both;
 }
 .bounceRight-leave {
-    animation: bounceOutRight $animate-default-duration both;
+    animation: bounceOutLeft $animate-default-duration both;
 }
 @keyframes bounceInRight {
     from,
@@ -354,7 +354,7 @@ slideLeft slideRight slideUp slideDown
     animation: bounceInUp $animate-default-duration both;
 }
 .bounceUp-leave {
-    animation: bounceOutUp $animate-default-duration both;
+    animation: bounceOutDown $animate-default-duration both;
 }
 @keyframes bounceInUp {
     from,
@@ -483,7 +483,7 @@ slideLeft slideRight slideUp slideDown
     animation: slideInLeft $animate-default-duration both;
 }
 .slideLeft-leave {
-    animation: slideOutLeft $animate-default-duration both;
+    animation: slideOutRight $animate-default-duration both;
 }
 @keyframes slideInLeft {
     from {
@@ -514,7 +514,7 @@ slideLeft slideRight slideUp slideDown
     animation: slideInRight $animate-default-duration both;
 }
 .slideRight-leave {
-    animation: slideOutRight $animate-default-duration both;
+    animation: slideOutLeft $animate-default-duration both;
 }
 @keyframes slideInRight {
     from {
@@ -576,7 +576,7 @@ slideLeft slideRight slideUp slideDown
     animation: slideInDown $animate-default-duration both;
 }
 .slideDown-leave {
-    animation: slideOutDown $animate-default-duration both;
+    animation: slideOutUp $animate-default-duration both;
 }
 @keyframes slideInDown {
     from {

@@ -185,13 +185,13 @@ const resource = {
                     }
                 },
                 methods: {
-                  openSheet: function(){
-                    this.$actionsheet([{text:"wwww"},{text:"aaaaa"}],true).then(function(obj){
+                  openSheet: function(needCancel){
+                    this.$actionsheet([{text:"wwww"},{text:"aaaaa"}],needCancel).then(function(obj){
                       obj.$on("actionsheet:cancel",function(){
-                        console.log(1111);
+                        console.log('cancle');
                       });
-                      obj.$on("actionsheet:select",function(){
-                        console.log(2222);
+                      obj.$on("actionsheet:select",function(select){
+                        console.log(select);
                       })
                     })
                   }
