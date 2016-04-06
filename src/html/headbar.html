@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="sp-headbar sp-headbar-temp sp-flex sp-flex-row" :class="temp.class" :style="temp.style" v-if="temp.status">
-        <div class="sp-headbar-left sp-flex-petty tl">
+        <div class="sp-headbar-left sp-flex sp-flex-row tl">
             <div class="sp-headbar-cell">
                 <div class="sp-headbar-item"><div class="sp-animate sp-icon" v-html="temp.left.icon"></div></div>
                 <div class="sp-headbar-item"><div class="sp-animate sp-text" v-html="temp.left.text"></div></div>
@@ -30,7 +30,7 @@
                 <div class="sp-animate sp-text" v-html="temp.center.text"></div>
             </div>
         </div>
-        <div class="sp-headbar-right sp-flex-petty tr">
+        <div class="sp-headbar-right sp-flex sp-flex-row tr">
             <div class="sp-headbar-cell">
                 <div class="sp-headbar-item"><div class="sp-animate sp-text" v-html="temp.right.text"></div></div>
                 <div class="sp-headbar-item"><div class="sp-animate sp-icon" v-html="temp.right.icon"></div></div>

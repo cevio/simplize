@@ -64,7 +64,7 @@ export let Toolbar = {
     watch: {
         status(state){
             if ( state ){
-                this.height = this.$els.root.offsetHeight;
+                this.height = this.$els.root.offsetHeight + 1;
             }else{
                 this.height = 0;
             }
