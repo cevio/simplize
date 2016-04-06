@@ -10,7 +10,7 @@ export let CONFIRM = {
         }
     },
     methods: {
-        entry(text = '', title = '') {
+        $constructor(text = '', title = '') {
             this.$parent.mask = true;
             this.text = text;
             this.title = title;
@@ -23,7 +23,7 @@ export let CONFIRM = {
                 this.$emit('confirm:ok');
             });
         },
-        
+
         cancel: function(){
             this.status = false;
             this.$parent.prevTick(() => {

@@ -9,7 +9,7 @@ export let ACTIONSHEET = {
         }
     },
     methods: {
-        entry(menus = [], needCancel = true){
+        $constructor(menus = [], needCancel = true){
             this.$parent.nextTick(() => {
                 this.$parent.mask = true;
                 this.menus = menus;
