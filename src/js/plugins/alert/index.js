@@ -8,7 +8,8 @@ export let ALERT = {
     data() {
         return {
             text: '',
-            title: ''
+            title: '',
+            showCancel: false
         }
     },
     methods: {
@@ -16,6 +17,11 @@ export let ALERT = {
             this.$parent.mask = true;
             this.text = text;
             this.title = title;
+        },
+        
+        ok: function(){
+            this.$emit('alert:ok');
+            this.$parent.destroy();
         }
     }
-}
+};

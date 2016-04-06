@@ -61,6 +61,52 @@ const resource = {
                         head.data.center.text = 'Simplize demo';
                         this.SP_webviewContentClass = 'test1';
                     }
+                },
+                methods: {
+                    alertHandler: function() {
+                        this.$alert('Hello world!').then(function(Alert) {
+                            console.log(Alert);
+                            Alert.$on('alert:ok', function() {
+                                console.log('close ok')
+                            })
+                        })
+                    },
+
+                    confirmHandler: function() {
+                        this.$confirm('Hello world!').then(function(Confirm) {
+                            console.log(Confirm);
+                            Confirm.$on('confirm:ok', function() {
+                                console.log('confirm close ok')
+                            })
+
+                            Confirm.$on('confirm:cancel', function() {
+                                console.log('confirm close cancel')
+                            })
+                        })
+                    },
+
+                    confirmAlert: function() {
+                        var that = this;
+                        this.$alert('Hello world2').then((Alert) => {
+                            console.log(Alert);
+                            Alert.$on('alert:ok', () => {
+                                console.log('close ok')
+                                setTimeout(function() {
+                                    that.$confirm('Hello world confirm').then(function(Confirm) {
+                                        console.log(Confirm);
+                                        Confirm.$on('confirm:ok', function() {
+                                            console.log('confirm close ok')
+                                        })
+
+                                        Confirm.$on('confirm:cancel', function() {
+                                            console.log('confirm close cancel')
+                                        })
+                                    })
+                                }, 0)
+
+                            })
+                        })
+                    }
                 }
             },
             info: {
@@ -90,7 +136,7 @@ const resource = {
             picker: {
                 template: require('../html/picker.html'),
                 data: {
-                    list: picker_data,
+                    list: picker_data2,
                     index: 3
                 },
                 events: {
@@ -109,9 +155,6 @@ const resource = {
                         this.$refs.picker.$on('scroll:selected', function(data, index) {
                             console.log(data, index)
                         });
-                        setTimeout(() => {
-                            this.list = picker_data2;
-                        }, 10000);
                     },
                     "webview:unload": function() {
                         this.$refs.picker.$off('scroll:selected');
