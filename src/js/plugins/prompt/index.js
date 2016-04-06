@@ -8,7 +8,7 @@ export let PROMPT = {
         }
     },
     methods: {
-        entry(text = '', title = ''){
+        $constructor(text = '', title = ''){
             this.text = text;
             this.title = title;
         }
