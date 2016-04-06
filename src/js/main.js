@@ -8,7 +8,7 @@ import { bootstrap } from './application/bootstrap';
 import * as PROXY from './application/proxy';
 import * as ANIMATE from './application/animate';
 import SCROLL from './application/scroll';
-import DEDINE from './application/define';
+import DEFINE from './application/define';
 import { Promise } from 'es6-promise';
 import * as utils from './utils/index';
 
@@ -26,7 +26,7 @@ export default {
     webview: asyncWebview,
     animate: ANIMATE,
     scroll: SCROLL,
-    define: DEDINE,
+    define: DEFINE,
     util: utils
 }
 
@@ -41,6 +41,6 @@ import { PROMPT } from './plugins/prompt/index';
 
 // install
 
-DEDINE('$alert', ALERT);
-DEDINE('$confirm', CONFIRM);
-DEDINE('$prompt', PROMPT);
+DEFINE('$alert', ALERT);
+DEFINE('$confirm', CONFIRM);
+DEFINE('$prompt', PROMPT);

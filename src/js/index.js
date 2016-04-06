@@ -48,6 +48,8 @@ const resource = {
                         this.$alert('Hello world!').then(function(Alert) {
                             console.log(Alert);
                         })
+
+
                     },
                     "webview:preset": function(head, tool) {
                         head.active();

@@ -26,6 +26,9 @@ export default class PICKER extends Scroll {
         this.vm.$off('scroll:start');
         this.vm.$off('scroll:move');
         this.vm.$off('scroll:end');
+
+        this._stopLastAnimate();
+        
         this.__destroy();
     }
 
@@ -34,6 +37,10 @@ export default class PICKER extends Scroll {
         this._didDecelerationComplete = false;
         this._lastTimeStamp = timeStamp;
 
+        this._stopLastAnimate();
+    }
+    
+    _stopLastAnimate(){
         if(this._isDecelerating){
             Animate.stop(this._isDecelerating);
             this._isDecelerating = false;
