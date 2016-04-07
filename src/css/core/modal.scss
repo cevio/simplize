@@ -16,14 +16,14 @@
         }
     }
 
-    .sp-ui-table {
+    .sp-modal-outter {
         position: absolute;
         top     : 0;
         left    : 0;
         width   : 100%;
         height  : 100%;
         display : table;
-        .sp-ui-cell {
+        .sp-modal-inner {
             display       : table-cell;
             height        : 100%;
             vertical-align: middle;
@@ -32,5 +32,15 @@
     }
 }
 
-.sp-ui-alert {
+.sp-ui-alert {}
+
+.sp-dialog-transition {
+    transition: transform 200ms ease,opacity 200ms ease;
+    transform : scale(1);
+    opacity   : 1;
+}
+.sp-dialog-enter,
+.sp-dialog-leave {
+    transform: scale(0.5);
+    opacity  : 0;
 }

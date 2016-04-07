@@ -15,6 +15,7 @@ simplize.ready(function() {
                 .$define('/picker', 'picker')
                 .$define('/modal', 'modal')
                 .$define('/button', 'button')
+                .$define('/1px', '1px')
                 .$define('index')
         );
 
