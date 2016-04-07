@@ -11,11 +11,19 @@ export let alert = {
     },
     methods: {
         openAlert(){
-            this.$alert('Simple警告信息')
+            this.$alert('Simple警告信息').then(function(alert){
+                alert.$on('alert:ok', function(){
+                    console.log('close ok')
+                })
+            })
         },
         
         openAlertWithTitle(){
-            this.$alert('Simple警告信息', '自定义Title');
+            this.$alert('Simple警告信息', '自定义Title').then(function(alert){
+                alert.$on('alert:ok', function(){
+                    console.log('close ok')
+                })
+            });
         }
     }
 };

@@ -2,8 +2,8 @@ export let modals = {
     template: require('../../html/webviews/modals.html'),
     data: {
         components: [
-            { text: 'Alert', url: '/modal/alert' },
-            { text: 'Confirm', url: '/modal/confirm' },
+            { text: 'Alert', url: '/modal/alert', ok: true },
+            { text: 'Confirm', url: '/modal/confirm', ok: true },
             { text: 'Prompt', url: '/modal/prompt' },
             { text: 'ActionSheet', url: '/modal/actionsheet' ,ok:true},
             { text: 'Toast', url: '/modal/toast' ,ok:true},

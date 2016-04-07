@@ -8,5 +8,30 @@ export let confirm = {
             headbar.data.left.click = function () { history.back(); }
             headbar.data.center.text = 'Simplize Modal Confirm';
         }
+    },
+    methods: {
+        openConfirm(){
+            this.$confirm('Simple提示信息').then(function(confirm){
+                confirm.$on('confirm:ok', function(){
+                    console.log('confirm ok')
+                });
+
+                confirm.$on('confirm:cancel', function(){
+                    console.log('confirm cancel')
+                })
+            })
+        },
+
+        openConfirmWithTitle(){
+            this.$confirm('Simple提示信息', '自定义Title').then(function(confirm){
+                confirm.$on('confirm:ok', function(){
+                    console.log('confirm ok')
+                })
+
+                confirm.$on('confirm:cancel', function(){
+                    console.log('confirm cancel')
+                })
+            });
+        }
     }
 }

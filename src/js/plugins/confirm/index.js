@@ -10,11 +10,13 @@ export let CONFIRM = {
         }
     },
     methods: {
-        $constructor(text = '', title = '') {
-            this.$parent.mask = true;
-            this.text = text;
-            this.title = title;
-            this.status = true;
+        $constructor(text = '', title = '提示') {
+            this.$parent.nextTick(() => {
+                this.$parent.mask = true;
+                this.text = text;
+                this.title = title;
+                this.status = true;
+            });
         },
 
         ok: function(){
