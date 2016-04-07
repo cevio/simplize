@@ -8,5 +8,15 @@ export let alert = {
             headbar.data.left.click = function () { history.back(); }
             headbar.data.center.text = 'Simplize Modal Alert';
         }
+    },
+    methods: {
+        openAlert(){
+            this.$alert('Simple警告信息')
+        },
+        
+        openAlertWithTitle(){
+            this.$alert('Simple警告信息', '自定义Title');
+        }
     }
-}
+};
+

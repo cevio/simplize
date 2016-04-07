@@ -14,7 +14,7 @@ export let ALERT = {
         }
     },
     methods: {
-        $constructor(text = '', title = '') {
+        $constructor(text = '', title = '提示') {
             this.$parent.nextTick(() => {
                 this.$parent.mask = true;
                 this.text = text;
