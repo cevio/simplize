@@ -1,21 +1,14 @@
 import * as simplize from './main.js';
 import * as browsers from '../example/resource.js';
 
-const data = {
-    SP_animate_switch: 'fade'
-}
-
 simplize.ready(function() {
     let app = simplize.bootstrap(browsers, { SP_animate_switch: 'fade' });
 
     app
         .$use(
             app.$browser('cores')
-                .$define('/info', 'info')
-                .$define('/picker', 'picker')
-                .$define('/modal', 'modal')
-                .$define('/button', 'button')
-                .$define('/1px', '1px')
+                .$define('/modals', 'modals')
+                .$define('/buttons', 'buttons')
                 .$define('index')
         );
 

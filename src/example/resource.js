@@ -11,9 +11,7 @@ export let cores = {
     },
     webviews: {
         index: coresBrowser.index,
-        info: coresBrowser.info,
-        picker: coresBrowser.picker,
-        modal: coresBrowser.modal,
-        button: coresBrowser.button
+        modals: coresBrowser.modals,
+        buttons: coresBrowser.buttons
     }
 }
