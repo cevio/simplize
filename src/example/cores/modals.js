@@ -7,7 +7,12 @@ export let modals = {
             { text: 'Prompt', url: '/modal/prompt' },
             { text: 'ActionSheet', url: '/modal/actionsheet' },
             { text: 'Toast', url: '/modal/toast' },
-            { text: 'Loading', url: '/modal/loading' }
+            { text: 'Loading', url: '/modal/loading' },
+            { text: 'Selector', url: '/modal/selector' },
+            { text: 'Datetime', url: '/modal/datetime' },
+            { text: 'Tip', url: '/modal/tip' },
+            { text: 'Popup', url: '/modal/popup' },
+            { text: 'iframe', url: '/modal/iframe' }
         ]
     },
     events: {
