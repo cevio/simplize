@@ -2,18 +2,18 @@ export let modals = {
     template: require('../../html/webviews/modals.html'),
     data: {
         components: [
-            { text: 'Alert', url: '/modal/alert', ok: true },
-            { text: 'Confirm', url: '/modal/confirm', ok: true },
-            { text: 'Prompt', url: '/modal/prompt' },
-            { text: 'ActionSheet', url: '/modal/actionsheet' ,ok:true},
-            { text: 'Toast', url: '/modal/toast' ,ok:true},
-            { text: 'Loading', url: '/modal/loading' ,ok:true},
-            { text: 'Selector', url: '/modal/selector' },
-            { text: 'Datetime', url: '/modal/datetime' },
-            { text: 'Tip', url: '/modal/tip' },
-            { text: 'Popup', url: '/modal/popup' },
-            { text: 'Popover', url: '/modal/popover' },
-            { text: 'iframe', url: '/modal/iframe' }
+            { text: 'Alert', url: '/modal/alert', icon: 'iconfont icon-info', ok: true },
+            { text: 'Confirm', url: '/modal/confirm', icon: 'iconfont icon-roundcheck', ok: true },
+            { text: 'Prompt', url: '/modal/prompt', icon: 'iconfont2 icon-prompt', ok: false  },
+            { text: 'ActionSheet', url: '/modal/actionsheet', icon: 'iconfont2 icon-sheet', ok:true },
+            { text: 'Toast', url: '/modal/toast', icon: 'iconfont icon-squarecheck', ok:true },
+            { text: 'Loading', url: '/modal/loading', icon: 'iconfont icon-iconloading-copy', ok:true },
+            { text: 'Selector', url: '/modal/selector', icon: 'iconfont2 icon-cc-select', ok: false },
+            { text: 'Datetime', url: '/modal/datetime', icon: 'iconfont2 icon-datetime', ok: false },
+            { text: 'Tip', url: '/modal/tip', icon: 'iconfont2 icon-tip', ok: false },
+            { text: 'Popup', url: '/modal/popup', icon: 'iconfont2 icon-pragpopup', ok: false },
+            { text: 'Popover', url: '/modal/popover', icon: 'iconfont2 icon-pop', ok: false },
+            { text: 'iframe', url: '/modal/iframe', icon: 'iconfont2 icon-iframe', ok: false }
         ]
     },
     events: {
