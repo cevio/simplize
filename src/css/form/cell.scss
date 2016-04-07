@@ -1,0 +1,37 @@
+.sp-cell-group {
+    @include sp-1px-side(darken($ui-default-border-color,10%),top,before);
+    @include sp-1px-side(darken($ui-default-border-color,10%),bottom,after);
+    background-color: #fff;
+}
+.sp-cell {
+    @extend .sp-flex-box,.sp-flex-row;
+    @include sp-1px-side($ui-default-border-color,bottom,before);
+    padding-left : $ui-side-padding;
+    padding-right: $ui-side-padding;
+    &.linked {
+        padding-right: 2rem;
+        &:after {
+            position    : absolute;
+            width       : 0.5em;
+            height      : 0.5em;
+            content     : "";
+            border-width: 2px 2px 0 0;
+            border-style: solid;
+            border-color: #888;
+            transform   : rotate(45deg);
+            right       : 1rem;
+            top         : 50%;
+            margin-top  : -0.25em;
+        }
+    }
+    &::before {
+        left : $ui-side-padding;
+        width: auto;
+        right: 0;
+    }
+}
+.sp-cell-hd {}
+.sp-cell-bd {
+    @extend .sp-flex-item,.sp-flex-1;
+}
+.sp-cell-ft {}
