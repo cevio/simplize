@@ -11,7 +11,7 @@ export let button = {
             headbar.data.left.click = function() {
                 history.back();
             }
-            headbar.data.center.text = 'ActionSheet';
+            headbar.data.center.text = 'Button';
         },
         'webview:load': function() {
 

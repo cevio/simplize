@@ -20,6 +20,9 @@
     border-radius: 0.5rem;
 }
 
+.sp-webview-content {
+    background-color: #fbf9fe;
+}
 .title {
     color: #3cc51f;
 }
@@ -30,4 +33,7 @@
         background : #fff;
         height     : 120px;
     }
+}
+.demo-title {
+    padding: 1.2em 0 0.8em;
 }

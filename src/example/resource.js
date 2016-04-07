@@ -1,5 +1,7 @@
 import * as coresBrowser from './cores';
 
+console.log(coresBrowser)
+
 export let cores = {
     inject: {
         icon: '<i class="fa fa-home"></i>',
@@ -11,7 +13,7 @@ export let cores = {
         index: coresBrowser.index,
         info: coresBrowser.info,
         picker: coresBrowser.picker,
-        actionsheet: coresBrowser.actionsheet,
+        modal: coresBrowser.modal,
         button: coresBrowser.button
     }
 }

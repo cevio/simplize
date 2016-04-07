@@ -174,10 +174,10 @@ slideLeft slideRight slideUp slideDown
 /*
   bonuce animation   (bounce  bounceLeft bounceRight bounceUp bounceDown)
 */
-.bonuce-enter {
+.bounce-enter {
     animation: bounceIn $animate-default-duration both;
 }
-.bonuce-leave {
+.bounce-leave {
     animation: bounceOut $animate-default-duration both;
 }
 @keyframes bounceIn {

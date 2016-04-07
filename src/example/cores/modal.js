@@ -1,5 +1,5 @@
-export let actionsheet = {
-    template: require('../../html/webviews/actionsheet.html'),
+export let modal = {
+    template: require('../../html/webviews/modal.html'),
     data: {},
     events: {
         "webview:preset": function (headbar, toolbar) {
@@ -34,6 +34,9 @@ export let actionsheet = {
 
                 })
             })
+        },
+        openToast: function (needCancel) {
+            this.$toast()
         }
     }
 }

@@ -35,4 +35,7 @@
     &.sp-btn-default {
         color: #c9c9c9;
     }
+    &:active::before {
+        background-color: transparent !important;
+    }
 }

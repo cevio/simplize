@@ -13,7 +13,8 @@ simplize.ready(function() {
             app.$browser('cores')
                 .$define('/info', 'info')
                 .$define('/picker', 'picker')
-                .$define('/actionsheet', 'actionsheet')
+                .$define('/modal', 'modal')
+                .$define('/button', 'button')
                 .$define('index')
         );
 

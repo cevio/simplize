@@ -39,6 +39,7 @@ import { ALERT } from './plugins/alert/index';
 import { CONFIRM } from './plugins/confirm/index';
 import { PROMPT } from './plugins/prompt/index';
 import { ACTIONSHEET } from './plugins/actionSheet/index';
+import { TOAST } from './plugins/toast/index';
 
 // install
 
@@ -46,3 +47,4 @@ DEFINE('$alert', ALERT);
 DEFINE('$confirm', CONFIRM);
 DEFINE('$prompt', PROMPT);
 DEFINE('$actionsheet', ACTIONSHEET);
+DEFINE('$toast', TOAST);
