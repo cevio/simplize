@@ -1,7 +1,5 @@
 import * as coresBrowser from './cores';
 
-console.log(coresBrowser)
-
 export let cores = {
     inject: {
         icon: '<i class="fa fa-home"></i>',
@@ -12,6 +10,8 @@ export let cores = {
     webviews: {
         index: coresBrowser.index,
         modals: coresBrowser.modals,
-        buttons: coresBrowser.buttons
+        buttons: coresBrowser.buttons,
+        components: coresBrowser.components,
+        alert: coresBrowser.alert
     }
 }

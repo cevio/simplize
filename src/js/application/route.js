@@ -37,7 +37,8 @@ export default class Route {
             }
             var match = matchLayer(layer, url);
 
-            if ( match ){
+            if ( match == true ){
+                that.root.req.params = layer.params;
                 that.$layer = layer;
             }else{
                 return next(err);
