@@ -12,6 +12,11 @@ export let cores = {
         modals: coresBrowser.modals,
         buttons: coresBrowser.buttons,
         components: coresBrowser.components,
-        alert: coresBrowser.alert
+        alert: coresBrowser.alert,
+        confirm: coresBrowser.confirm,
+        prompt: coresBrowser.prompt,
+        loading: coresBrowser.loading,
+        toast: coresBrowser.toast,
+        actionsheet: coresBrowser.actionsheet
     }
 }
