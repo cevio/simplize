@@ -3,14 +3,22 @@ export let components = {
     data: {
         components: [
             { text: 'Middle', url: '/component/middle' },
-            { text: 'Ratio', url: '/modal/ratio' },
-            { text: 'Datetime', url: '/modal/cp-datetime' },
-            { text: 'Selector', url: '/modal/cp-selector' },
-            { text: 'Scrollview', url: '/modal/scrollview' },
-            { text: 'Ago', url: '/modal/ago' },
-            { text: 'Radio', url: '/modal/radio' },
-            { text: 'Checkbox', url: '/modal/checkbox' },
-            { text: 'switch', url: '/modal/switch' }
+            { text: 'Ratio', url: '/component/ratio' },
+            { text: 'Datetime', url: '/component/cp-datetime' },
+            { text: 'Selector', url: '/component/cp-selector' },
+            { text: 'Scroll View', url: '/component/scrollview' },
+            { text: 'Ago', url: '/component/ago' },
+            { text: 'Radio', url: '/component/radio' },
+            { text: 'Checkbox', url: '/component/checkbox' },
+            { text: 'switch', url: '/component/switch' },
+            { text: 'Range', url: '/component/range' },
+            { text: 'Rater', url: '/component/rater' },
+            { text: 'Picker', url: '/component/picker' },
+            { text: 'Progress', url: '/component/progress' },
+            { text: 'Search', url: '/component/search' },
+            { text: 'Spinner', url: '/component/spinner' },
+            { text: 'Circle', url: '/component/circle' },
+            { text: 'Lazy Image', url: '/component/lazyimage' }
         ]
     },
     events: {
