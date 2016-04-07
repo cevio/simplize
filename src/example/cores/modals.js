@@ -4,7 +4,7 @@ export let modals = {
         components: [
             { text: 'Alert', url: '/modal/alert', ok: true },
             { text: 'Confirm', url: '/modal/confirm', ok: true },
-            { text: 'Prompt', url: '/modal/prompt' },
+            { text: 'Prompt', url: '/modal/prompt', ok: true },
             { text: 'ActionSheet', url: '/modal/actionsheet' ,ok:true},
             { text: 'Toast', url: '/modal/toast' ,ok:true},
             { text: 'Loading', url: '/modal/loading' ,ok:true},
