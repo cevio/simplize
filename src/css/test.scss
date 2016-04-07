@@ -1,3 +1,4 @@
+@import "./index";
 @font-face {
   font-family: 'iconfont2';
   src: url('//at.alicdn.com/t/font_1460016922_3622885.eot'); /* IE9*/
@@ -64,4 +65,14 @@ font-size:16px;font-style:normal;}
 
 body{
     color:#333;
+}
+
+.sp-headbar{
+    @extend .sp-1px-b;
+    .sp-headbar-left,
+    .sp-headbar-right{
+        .sp-icon, .sp-text{
+            color:#3cc51f;
+        }
+    }
 }

@@ -22,7 +22,6 @@ module.exports = function(config) {
             type: 'css',
             rule: '/css/index', // css 资源路由
             file: [
-                './src/css/index.scss', // 加载自定义的scss文件样式
                 './src/css/test.scss'
             ]
         }, {
