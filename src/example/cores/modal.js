@@ -35,14 +35,21 @@ export let modal = {
             })
         },
         openToast: function () {
-            this.$toast('数据加载中', false).then((Toast) => {
+            this.$toast('数据加载中').then((Toast) => {
                 Toast.$on('toast:hide', function(){
                     console.log('toastHide');
-                })
+                });
+            })
+        },
+        openLoading: function(){
+            this.$loading('数据加载中').then((Loading) => {
+                Loading.$on('loading:hide', function(){
+                    console.log('loadingHide');
+                });
                 
                 setTimeout(function(){
-                    Toast.hide();
-                }, 2000)
+                    Loading.hide();
+                }, 3000)
             })
         }
     }

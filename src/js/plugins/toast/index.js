@@ -24,12 +24,12 @@ export let TOAST = {
                 this.status = true;
 
                 this.timer = setTimeout(() => {
-                    this.hide();
+                    this._hide();
                 }, this.autoHideGap);
             });
         },
 
-        hide: function(){
+        _hide: function(){
             this.status = false;
             this.$parent.prevTick(() => {
                 this.$emit('toast:hide');
