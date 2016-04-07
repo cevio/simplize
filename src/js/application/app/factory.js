@@ -125,6 +125,7 @@ export function compileWebview(name, resource = {}) {
                 }
             },
             "webview:unactive": function() {
+                this.$root.$refs.modal.pool = 0;
                 if ( this.$root.env.direction === 'turn:still' ) return;
                 switch (this.$root.env.direction) {
                     case 'turn:left':
