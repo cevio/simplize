@@ -49,6 +49,12 @@ function hashChange(that){
         let result = PROXY.HISTORY.diff(referrer, object.path);
 
         switch ( result.usage ) {
+            case 'replace':
+                delay(function(){
+                    typeof result.fn === 'function' && result.fn();
+                    that.env.direction = 'turn:left';
+                });
+                break;
             case 'add':
                 delay(function(){
                     PROXY.HISTORY.push(object.path);
@@ -65,7 +71,7 @@ function hashChange(that){
                 break;
             case 'forward':
                 delay(function(){
-                    result.fn();
+                    typeof result.fn === 'function' && result.fn();
                     that.env.direction = 'turn:left';
                 });
                 break;

@@ -93,8 +93,7 @@ export default class SessionMap {
         if ( b == -1 ){
             if ( a + 1 < this.history.length ){
                 return {
-                    usage: 'forward',
-                    steps: b - a,
+                    usage: 'replace',
                     fn(){ that.replace(a, target); }
                 }
             }else{
