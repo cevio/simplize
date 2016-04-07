@@ -40,6 +40,7 @@ import { CONFIRM } from './plugins/confirm/index';
 import { PROMPT } from './plugins/prompt/index';
 import { ACTIONSHEET } from './plugins/actionSheet/index';
 import { TOAST } from './plugins/toast/index';
+import { LOADING } from './plugins/loading/index';
 
 // install
 
@@ -48,3 +49,4 @@ DEFINE('$confirm', CONFIRM);
 DEFINE('$prompt', PROMPT);
 DEFINE('$actionsheet', ACTIONSHEET);
 DEFINE('$toast', TOAST);
+DEFINE('$loading', LOADING);

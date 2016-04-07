@@ -14,7 +14,6 @@ export let modal = {
         },
         'webview:load': function () {
 
-
         },
         "webview:unload": function () {
 
