@@ -3,7 +3,14 @@ export let components = {
     data: {
         components: [
             { text: 'Middle', url: '/component/middle' },
-            { text: 'Ratio', url: '/modal/ratio' }
+            { text: 'Ratio', url: '/modal/ratio' },
+            { text: 'Datetime', url: '/modal/cp-datetime' },
+            { text: 'Selector', url: '/modal/cp-selector' },
+            { text: 'Scrollview', url: '/modal/scrollview' },
+            { text: 'Ago', url: '/modal/ago' },
+            { text: 'Radio', url: '/modal/radio' },
+            { text: 'Checkbox', url: '/modal/checkbox' },
+            { text: 'switch', url: '/modal/switch' }
         ]
     },
     events: {
