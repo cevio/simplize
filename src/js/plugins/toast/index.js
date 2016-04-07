@@ -15,7 +15,23 @@ export let TOAST = {
         }
     },
     methods: {
-        $constructor(text='', icon='') {
+        $constructor(text='', ...args) {
+            let time = this.autoHideGap;
+            let icon = '';
+            
+            if(args.length === 1){
+                if(typeof args[0] === 'number'){
+                    time = args[0];
+                }
+                else {
+                    icon = args[0]
+                }
+            }
+            
+            if(args.length === 2){
+                time = args[0];
+                icon = args[1];
+            }
             this.$parent.nextTick(() => {
                 clearTimeout(this.timer);
                 this.$parent.mask = false;
@@ -25,7 +41,7 @@ export let TOAST = {
 
                 this.timer = setTimeout(() => {
                     this._hide();
-                }, this.autoHideGap);
+                }, time);
             });
         },
 
