@@ -20,6 +20,20 @@ slideLeft slideRight slideUp slideDown
     animation-duration: 1000ms !important;
 }
 
+.sp-spin {
+    transform-origin: center center;
+    animation       : spin 2000ms linear infinite;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+
+}
+
 /*
   fade animation   (fade  fadeLeft fadeRight fadeUp fadeDown)
 */

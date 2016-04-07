@@ -5,7 +5,7 @@ export let button = {
     events: {
         "webview:preset": function(headbar, toolbar) {
             headbar.active();
-            toolbar.active();
+            // toolbar.active();
             headbar.data.left.icon = '<i class="fa fa-angle-left"></i>';
             headbar.data.left.text = 'Back';
             headbar.data.left.click = function() {

@@ -35,7 +35,7 @@ export let modal = {
             })
         },
         openToast: function () {
-            this.$toast('数据加载中').then((Toast) => {
+            this.$toast('成功','<i class="iconfont icon-hook f35">').then((Toast) => {
                 Toast.$on('toast:hide', function(){
                     console.log('toastHide');
                 });
@@ -46,7 +46,6 @@ export let modal = {
                 Loading.$on('loading:hide', function(){
                     console.log('loadingHide');
                 });
-                
                 setTimeout(function(){
                     Loading.hide();
                 }, 3000)

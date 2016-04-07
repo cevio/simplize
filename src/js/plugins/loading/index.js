@@ -13,7 +13,7 @@ export let LOADING = {
         }
     },
     methods: {
-        $constructor(text='', icon='<i class="iconfont icon-loading"></i>') {
+        $constructor(text='', icon='<i class="iconfont icon-iconloading-copy sp-loading f30"></i>') {
             this.$parent.nextTick(() => {
                 this.$parent.mask = false;
                 this.text = text;

@@ -12,6 +12,12 @@
 .high {
     height: 100%;
 }
+.ib {
+    display: inline-block;
+}
+.line-height-1 {
+    line-height: 1;
+}
 .middle {
     &:after {
         content       : "";

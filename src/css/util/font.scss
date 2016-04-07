@@ -10,7 +10,7 @@ $fcs: (#000,#111,#222,#333,#444,#555,#666,#777,#888,#999,#aaa,#bbb,#ccc,#ddd,#ee
 //f5-f35
 @for $i from $util-fontsize-start through $util-fontsize-end {
     .f#{$i} {
-        font-size: $i * 0.1rem;
+        font-size: $i * 0.1rem !important;
     }
 }
 body {
