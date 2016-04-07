@@ -14,7 +14,7 @@ export let toast = {
         this.$toast("3s后关闭","<i class='iconfont icon-hook f30 line-height-1'></i>")
       },
       openToast2:function(){
-        this.$toast("3s后关闭","<i class='iconfont icon-apps f20 line-height-1 '></i>");
+        this.$toast("3s后关闭","<i class='iconfont icon-apps f30 line-height-1 '></i>");
       }
     }
 }

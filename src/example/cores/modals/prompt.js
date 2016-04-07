@@ -11,13 +11,13 @@ export let prompt = {
     },
     methods: {
         openPrompt: function(){
-            this.$prompt('请输入一段文字').then(function(prompt){
-                prompt.$on('prompt:ok', function(text){
-                    console.log(text);
+            this.$prompt('请输入一段文字').then((prompt) => {
+                prompt.$on('prompt:ok', (text) => {
+                    this.$toast(text, '<i class="iconfont icon-hook f30 line-height-1"></i>');
                 })
-                
-                prompt.$on('prompt:cancel', function(){
-                    console.log('prompt cancel');
+
+                prompt.$on('prompt:cancel', () => {
+                    this.$toast('prompt cancel', '<i class="iconfont icon-close f30 line-height-1"></i>');
                 })
             })
         }
