@@ -35,8 +35,16 @@ export let modal = {
                 })
             })
         },
-        openToast: function (needCancel) {
-            this.$toast()
+        openToast: function () {
+            this.$toast('数据加载中', false).then((Toast) => {
+                Toast.$on('toast:hide', function(){
+                    console.log('toastHide');
+                })
+                
+                setTimeout(function(){
+                    Toast.hide();
+                }, 2000)
+            })
         }
     }
 }
