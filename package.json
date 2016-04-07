@@ -30,7 +30,8 @@
   },
   "scripts": {
     "build": "spz build",
-    "dev": "spz server -i 0.0.0.0 -p 8000"
+    "dev": "spz server -i 0.0.0.0 -p 8000",
+    "git": "git add . && git commit -m \"update\" && git push origin es6"
   },
   "engine-strict": true,
   "engines": {
