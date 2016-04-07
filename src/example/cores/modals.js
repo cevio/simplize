@@ -12,7 +12,7 @@ export let modals = {
             { text: 'Datetime', url: '/modal/datetime' },
             { text: 'Tip', url: '/modal/tip' },
             { text: 'Popup', url: '/modal/popup' },
-            { text: 'Popover', url: '/modal/popover' }
+            { text: 'Popover', url: '/modal/popover' },
             { text: 'iframe', url: '/modal/iframe' }
         ]
     },
