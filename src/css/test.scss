@@ -38,7 +38,11 @@ font-size:16px;font-style:normal;}
     background-color: #fbf9fe;
 }
 .title {
-    color: #93eb81;
+    color: #61e246;
+    span{
+        color:#3cc51f;
+        text-shadow: 1px 1px 1px rgba(255,255,255,.9);
+    }
 }
 .demo-modules {
     .sp-flex-item {
