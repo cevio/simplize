@@ -1,18 +1,12 @@
 <div class="sp-cell-group">
-    <div class="sp-cell">
+    <div class="sp-cell clickable" @click="openToast1">
         <div class="sp-cell-bd">
-            自动关闭
-        </div>
-        <div class="sp-cell-ft">
-            <div class="sp-btn sp-btn-primary f8" @click="openToast1">弹出</div>
+            toast auto close
         </div>
     </div>
-    <div class="sp-cell">
+    <div class="sp-cell clickable" @click="openToast2">
         <div class="sp-cell-bd">
-            默认
-        </div>
-        <div class="sp-cell-ft">
-            <div class="sp-btn sp-btn-primary f8" @click="openToast2">弹出</div>
+            toast with icon
         </div>
     </div>
 </div>

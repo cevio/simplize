@@ -1,16 +1,20 @@
 @import "./index";
 @font-face {
-  font-family: 'iconfont2';
-  src: url('//at.alicdn.com/t/font_1460016922_3622885.eot'); /* IE9*/
-  src: url('//at.alicdn.com/t/font_1460016922_3622885.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('//at.alicdn.com/t/font_1460016922_3622885.woff') format('woff'), /* chrome、firefox */
-  url('//at.alicdn.com/t/font_1460016922_3622885.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-  url('//at.alicdn.com/t/font_1460016922_3622885.svg#iconfont') format('svg'); /* iOS 4.1- */
+    font-family: 'iconfont2';
+    src        : url(//at.alicdn.com/t/font_1460016922_3622885.eot);
+    /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    /* chrome、firefox */
+    /* IE6-IE8 */
+    /* IE9*/
+    src        : url(//at.alicdn.com/t/font_1460016922_3622885.eot?#iefix) format('embedded-opentype'),url('//at.alicdn.com/t/font_1460016922_3622885.woff') format('woff'),url('//at.alicdn.com/t/font_1460016922_3622885.ttf') format('truetype'),url('//at.alicdn.com/t/font_1460016922_3622885.svg#iconfont') format('svg');
+    /* iOS 4.1- */
 }
 
-.iconfont2{font-family:"iconfont2";
-font-size:16px;font-style:normal;}
-
+.iconfont2 {
+    font-family: "iconfont2";
+    font-size  : 16px;
+    font-style : normal;
+}
 
 .test1 {
     background: #f5f5f5;
@@ -39,10 +43,13 @@ font-size:16px;font-style:normal;}
 }
 .title {
     color: #61e246;
-    span{
-        color:#3cc51f;
+    span {
+        color      : #3cc51f;
         text-shadow: 1px 1px 1px rgba(255,255,255,.9);
     }
+}
+.green {
+    color: #61e246;
 }
 .demo-modules {
     .sp-flex-item {
@@ -55,27 +62,28 @@ font-size:16px;font-style:normal;}
 .demo-title {
     padding: 1.2em 0 0.8em;
 }
-.sp-headbar .iconfont{
+.sp-headbar .iconfont {
     font-size: 1.5em;
 }
-.grids{
-    font-size: .8em;
-    color:#777;
-    i{
+.grids {
+    font-size: 0.8em;
+    color    : #777;
+    i {
         font-size: 2em;
-        color:#333;
+        color    : #333;
     }
 }
 
-body{
-    color:#333;
+body {
+    color: #333;
 }
 
-.sp-headbars{
-    .sp-headbar{
+.sp-headbars {
+    .sp-headbar {
         background-color: #3cc51f;
-        .sp-icon, .sp-text{
-            color:#fff;
+        .sp-icon,
+        .sp-text {
+            color: #fff;
         }
     }
 }

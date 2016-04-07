@@ -8,5 +8,21 @@ export let actionsheet = {
             headbar.data.left.click = function () { history.back(); }
             headbar.data.center.text = 'Simplize Modal Actionsheet';
         }
+    },
+    methods:{
+      openSheet1:function(){
+        this.$actionsheet([{text:'action1'},{text:'action2'}],true).then(function(opt){
+          opt.$on("actionsheet:select",function(select){
+            alert(select.text);
+          });
+        });
+      },
+      openSheet2:function(){
+        this.$actionsheet([{text:'action1'},{text:'action2'}],false).then(function(opt){
+          opt.$on("actionsheet:select",function(select){
+            alert(select.text);
+          })
+        });
+      }
     }
 }

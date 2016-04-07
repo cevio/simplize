@@ -1,8 +1,10 @@
 <div class="sp-modal-outter sp-duration-short" v-if="status" transition="fade">
-    <div class="sp-modal-inner ">
+    <div class="sp-modal-inner tc">
         <div class="sp-ui-toast tc">
             {{{ icon }}}
-            <br> {{ text }}
+            <div class="pt5 pl10 pr10" v-if="text">
+                {{ text }}
+            </div>
         </div>
     </div>
 </div>
