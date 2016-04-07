@@ -43,7 +43,7 @@ export let modal = {
                 
                 setTimeout(function(){
                     Toast.hide();
-                }, 4000)
+                }, 2000)
             })
         }
     }
