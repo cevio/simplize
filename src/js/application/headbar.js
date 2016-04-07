@@ -98,7 +98,7 @@ export let headbar = {
         status(state){
             this.type = 1;
             if ( state ){
-                this.height = this.$els.root.offsetHeight + 1;
+                this.height = this.$els.root.offsetHeight;
             }else{
                 this.height = 0;
             }
