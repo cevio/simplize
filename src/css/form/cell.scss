@@ -6,10 +6,18 @@
 .sp-cell {
     @extend .sp-flex-box,.sp-flex-row;
     @include sp-1px-side($ui-default-border-color,bottom,before);
-    padding-left : $ui-side-padding;
-    padding-right: $ui-side-padding;
+    padding    : 0.8rem $ui-side-padding;
+    user-select: none;
+    &.clickable {
+        &:active {
+            background-color: rgba(200,200,200,0.2);
+        }
+    }
     &.linked {
         padding-right: 2rem;
+        &:active {
+            background-color: rgba(200,200,200,0.2);
+        }
         &:after {
             position    : absolute;
             width       : 0.5em;
