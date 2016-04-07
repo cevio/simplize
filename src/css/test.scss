@@ -38,7 +38,11 @@ font-size:16px;font-style:normal;}
     background-color: #fbf9fe;
 }
 .title {
-    color: #3cc51f;
+    color: #61e246;
+    span{
+        color:#3cc51f;
+        text-shadow: 1px 1px 1px rgba(255,255,255,.9);
+    }
 }
 .demo-modules {
     .sp-flex-item {
@@ -67,12 +71,11 @@ body{
     color:#333;
 }
 
-.sp-headbar{
-    @extend .sp-1px-b;
-    .sp-headbar-left,
-    .sp-headbar-right{
+.sp-headbars{
+    .sp-headbar{
+        background-color: #3cc51f;
         .sp-icon, .sp-text{
-            color:#3cc51f;
+            color:#fff;
         }
     }
 }
