@@ -11,13 +11,15 @@ let padding = 10;
 export let POPOVER = {
     name: 'sp-ui-popover',
     template: require('./popover.html'),
-    data: {
-        list: [],
-        initObject: init_style_obj,
-        angleClass: false,
-        angleStyle: {},
-        listStyle: {},
-        status: false
+    data: function(){
+        return {
+            list: [],
+            initObject: init_style_obj,
+            angleClass: false,
+            angleStyle: {},
+            listStyle: {},
+            status: false
+        }
     },
     methods: {
         $constructor(ele, menus){
@@ -147,16 +149,16 @@ export let POPOVER = {
 
         select: function(index){
             this.$emit('popover:select', this.list[index]);
-        },
-
-        events: {
-            'modal:maskclick': function(){
-                this.$emit('popover:close');
-                this.$parent.prevTick(() => {
-                    this.list = [];
-                    this.status = false;
-                });
-            }
+        }
+    },
+    
+    events: {
+        'modal:maskclick': function(){
+            this.$emit('popover:close');
+            this.$parent.prevTick(() => {
+                this.list = [];
+                this.status = false;
+            });
         }
     }
 };

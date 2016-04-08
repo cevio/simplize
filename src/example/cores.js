@@ -12,3 +12,4 @@ export { toast } from "./cores/modals/toast";
 export { tip } from "./cores/modals/tip";
 export { selector } from "./cores/modals/selector";
 export { pxborder } from "./cores/1px";
+export { popover } from './cores/modals/popover';
