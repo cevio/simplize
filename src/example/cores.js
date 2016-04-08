@@ -15,3 +15,5 @@ export { datetime } from "./cores/modals/datetime";
 export { pxborder } from "./cores/1px";
 export { popover } from './cores/modals/popover';
 export { popup } from './cores/modals/popup';
+
+export { middle } from './cores/components/middle';
