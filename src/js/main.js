@@ -45,7 +45,8 @@ import { TIP } from './plugins/tip/index';
 import { SELECTOR } from './plugins/selector/index';
 import { DATETIME } from './plugins/datetime/index';
 import { POPOVER } from './plugins/popover/popover';
-import { IFRAME } from './plugins/iframe/index'
+import { IFRAME } from './plugins/iframe/index';
+import { POPUP } from './plugins/popup/index'
 
 // install
 
@@ -60,3 +61,4 @@ DEFINE('$select', SELECTOR);
 DEFINE('$datetime', DATETIME);
 DEFINE('$popover', POPOVER);
 DEFINE('$iframe', IFRAME);
+DEFINE('$popup', POPUP);

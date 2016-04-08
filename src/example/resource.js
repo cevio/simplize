@@ -24,6 +24,6 @@ export let cores = {
         datetime: coresBrowser.datetime,
         pxborder:coresBrowser.pxborder,
         popover: coresBrowser.popover,
-        iframe: coresBrowser.iframe
+        popup: coresBrowser.popup
     }
 }
