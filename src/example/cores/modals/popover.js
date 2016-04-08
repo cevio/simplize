@@ -18,14 +18,10 @@ export let popover = {
     },
     methods: {
         openPopover: function(e){
-            this.$popover(e.target, data).then((prompt) => {
-                prompt.$on('prompt:ok', (text) => {
-                    this.$toast(text, '<i class="iconfont icon-hook f30 line-height-1"></i>');
-                })
-
-                prompt.$on('prompt:cancel', () => {
-                    this.$toast('prompt cancel', '<i class="iconfont icon-close f30 line-height-1"></i>');
-                })
+            this.$popover(e.target, data).then((popover) => {
+                popover.$on('popover:select', (obj) => {
+                    this.$toast(obj.text, '<i class="iconfont icon-hook f30 line-height-1"></i>');
+                });
             })
         }
     }

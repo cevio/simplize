@@ -52,7 +52,7 @@ export let POPOVER = {
                     else if(fullHeight < rect.bottom){
                         direct = 'top'
                     }
-                    else if(listRect.left > listRect.right){
+                    else if(rect.left > rect.right){
                         direct = 'right';
                     }
                     else {
@@ -75,8 +75,8 @@ export let POPOVER = {
                                 angleLeft = 0;
                             }
                         }
-                        else if((tempLeft + listRect.width / 2) > (bodyWidth - padding)){
-                            let diff = (tempLeft + listRect.width / 2) -  (bodyWidth - padding);
+                        else if((baseLeft + listRect.width / 2) > (bodyWidth - padding)){
+                            let diff = (baseLeft + listRect.width / 2) -  (bodyWidth - padding);
                             tempLeft -= diff;
                             angleLeft += diff;
                             if((angleLeft + angleRect.width) > listRect.width){
@@ -103,7 +103,7 @@ export let POPOVER = {
                     else {
                         let baseTop= rect.top + rect.height / 2;
                         let tempTop = baseTop - listRect.height / 2;
-                        let angleTop = listRect.height / 2 - angleRect.height / 2;
+                        let angleTop = listRect.height / 2;
 
                         if(tempTop < padding){
                             let diff = padding - tempTop;
@@ -113,12 +113,12 @@ export let POPOVER = {
                                 angleTop = 0;
                             }
                         }
-                        else if((tempTop + listRect.height / 2) > (bodyHeight - padding)){
-                            let diff = (tempTop + listRect.height / 2) -  (bodyHeight - padding);
+                        else if((baseTop + listRect.height / 2) > (bodyHeight - padding)){
+                            let diff = (baseTop + listRect.height / 2) -  (bodyHeight - padding);
                             tempTop -= diff;
                             angleTop += diff;
-                            if((angleTop + angleRect.height) > listRect.height){
-                                angleTop = listRect.height - angleRect.height;
+                            if((angleTop) > listRect.height){
+                                angleTop = listRect.height;
                             }
                         }
 
@@ -131,16 +131,17 @@ export let POPOVER = {
                         };
 
                         if( direct === 'left' ){
-                            listStyle.left = rect.left + rect.width - angleRect.width / 2;
-                            if((listStyle.left + listRect.width + angleRect.width / 2) > (bodyWidth - padding)){
-                                listStyle.left -= (listStyle.left + listRect.width + angleRect.width / 2) - (bodyWidth - padding);
+                            listStyle.left = rect.left + rect.width + angleRect.width / 2;
+                            if((listStyle.left + listRect.width) > (bodyWidth - padding)){
+                                listStyle.left -= ((listStyle.left + listRect.width) - (bodyWidth - padding));
                             }
                             listStyle.left += 'px';
                         }
                         else {
-                            listStyle.right = rect.right + rect.width - angleRect.width / 2;
-                            if((listStyle.right + listRect.width + angleRect.width / 2) > (bodyWidth - padding))
-                            listStyle.right = (listStyle.right + listRect.width + angleRect.width / 2) - (bodyWidth - padding);
+                            listStyle.right = rect.right + rect.width + angleRect.width / 2;
+                            if((listStyle.right + listRect.width) > (bodyWidth - padding)){
+                                listStyle.right -= ((listStyle.right + listRect.width) - (bodyWidth - padding));
+                            }
                             listStyle.right += 'px';
                         }
                     }
@@ -158,16 +159,21 @@ export let POPOVER = {
 
         select: function(index){
             this.$emit('popover:select', this.list[index]);
-        }
-    },
-    
-    events: {
-        'modal:maskclick': function(){
+            this.close();
+        },
+        
+        close: function(){
             this.$emit('popover:close');
             this.$parent.prevTick(() => {
                 this.list = [];
                 this.status = false;
             });
+        }
+    },
+    
+    events: {
+        'modal:maskclick': function(){
+            this.close();
         }
     }
 };
