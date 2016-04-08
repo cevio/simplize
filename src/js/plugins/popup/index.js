@@ -1,9 +1,10 @@
 export let POPUP = {
     name: 'sp-ui-popup',
     template: require('./popup.html'),
-    data(){ return { html: '', status: false, heightObject: {} } },
+    data(){ return { html: '', status: false, showHead: false, heightObject: {} } },
     methods: {
-        $constructor(html, full=false){
+        $constructor(html, showHead=false, full=false){
+            this.showHead = showHead;
             this.$parent.nextTick(() => {
                 if(full){
                     this.heightObject = {
