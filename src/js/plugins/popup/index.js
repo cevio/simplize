@@ -10,9 +10,10 @@ export let POPUP = {
                         height: '100%'
                     }
                 }
+
                 this.$parent.mask = true;
                 this.status = true;
-                this.html = html;
+                this.html = html
             });
         },
         close(){
