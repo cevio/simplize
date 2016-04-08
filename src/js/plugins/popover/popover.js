@@ -65,7 +65,7 @@ export let POPOVER = {
                     if(direct === 'top' || direct === 'bottom'){
                         let baseLeft = rect.left + rect.width / 2;
                         let tempLeft = baseLeft - listRect.width / 2;
-                        let angleLeft = listRect.width / 2 - angleRect.width / 2;
+                        let angleLeft = listRect.width / 2;
 
                         if(tempLeft < padding){
                             let diff = padding - tempLeft;
