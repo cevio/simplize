@@ -20,6 +20,7 @@ export let cores = {
         actionsheet: coresBrowser.actionsheet,
         tip: coresBrowser.tip,
         cell: coresBrowser.cell,
-        selector: coresBrowser.selector
+        selector: coresBrowser.selector,
+        popover: coresBrowser.popover
     }
 }
