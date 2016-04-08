@@ -4,7 +4,8 @@ $iframe-head-height: 44px;
     bottom  : 0;
     left    : 0;
     width   : 100%;
-    height: 100%;
+    height  : 100%;
+    overflow: auto;
     .sp-modal-iframe-head {
         height          : $iframe-head-height;
         background-color: #fff;
@@ -12,6 +13,18 @@ $iframe-head-height: 44px;
         @extend .sp-1px-b;
     }
     .sp-modal-iframe-body {
+        margin-top      : - $iframe-head-height;
         background-color: #f2f2f2;
+        height          : 100%;
+        width           : 100%;
+        // -webkit-overflow-scrolling: touch;
+        overflow        : scroll;
+    }
+    iframe {
+        margin-top : - $iframe-head-height;
+        padding-top: $iframe-head-height;
+        height     : 100%;
+        width      : 100%;
+        // z-index    : -1;
     }
 }

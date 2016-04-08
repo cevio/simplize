@@ -1,0 +1,18 @@
+.sp-progress {
+    height          : 0.2em;
+    background-color: #ddd;
+    margin          : 0.9em 0;
+    dt {
+        background-color: #aaa;
+
+    }
+    dt,
+    dl {
+        position: absolute;
+        height  : 0.2em;
+        display : block;
+    }
+    dl {
+        background-color: #09BB07;
+    }
+}

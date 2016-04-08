@@ -33,6 +33,14 @@
     font-size: 15px;
     color    : #888;
 }
+.sp-ui-dialog-input {
+    display      : block;
+    width        : 100%;
+    padding      : 0.8em 1em;
+    outline      : none;
+    border-radius: 5px;
+    border       : 1px solid #d9d9d9;
+}
 
 .sp-ui-dialog-ft {
     line-height: 42px;

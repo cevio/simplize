@@ -13,7 +13,7 @@ export let iframe = {
     },
     methods: {
         click(){
-            this.$iframe('http://www.baidu.com/');
+            this.$iframe('http://www.qq.com/');
         }
     }
 }

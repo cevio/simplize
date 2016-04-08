@@ -1,3 +1,4 @@
+import { on, off } from '../../utils/index';
 export let IFRAME = {
     name: 'sp-ui-iframe',
     template: require('./iframe.html'),
