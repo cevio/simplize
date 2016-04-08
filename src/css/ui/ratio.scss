@@ -1,0 +1,39 @@
+.sp-ratio {
+    display: inline-block;
+    &:after {
+        content: "";
+        display: inline-block;
+    }
+}
+.sp-ratio-100 {
+    &:after {
+        padding-bottom: 100%;
+    }
+}
+
+.sp-ratio-50 {
+    &:after {
+        padding-bottom: 50%;
+    }
+}
+.sp-ratio-200 {
+    &:after {
+        padding-bottom: 200%;
+    }
+}
+.sp-ratio-150 {
+    &:after {
+        padding-bottom: 150%;
+    }
+}
+@mixin sp-ratio($x) {
+    display: inline-block;
+    &:after {
+        content       : "";
+        display       : inline-block;
+        padding-bottom: $x * 1%;
+    }
+}
+.ssss {
+    @include sp-ratio(50);
+}
