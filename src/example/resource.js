@@ -23,6 +23,7 @@ export let cores = {
         selector: coresBrowser.selector,
         datetime: coresBrowser.datetime,
         pxborder:coresBrowser.pxborder,
-        popover: coresBrowser.popover
+        popover: coresBrowser.popover,
+        iframe: coresBrowser.iframe
     }
 }
