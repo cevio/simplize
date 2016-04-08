@@ -21,7 +21,7 @@ export let cores = {
         tip: coresBrowser.tip,
         cell: coresBrowser.cell,
         selector: coresBrowser.selector,
-        pxborder:coresBrowser.pxborder
+        pxborder:coresBrowser.pxborder,
         popover: coresBrowser.popover
 
     }
