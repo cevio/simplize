@@ -12,7 +12,7 @@ export let modals = {
             { text: 'Datetime', url: '/modal/datetime', icon: 'iconfont2 icon-datetime', ok: true },
             { text: 'Tip', url: '/modal/tip', icon: 'iconfont2 icon-tip', ok: true },
             { text: 'Popup', url: '/modal/popup', icon: 'iconfont2 icon-pragpopup', ok: false },
-            { text: 'Popover', url: '/modal/popover', icon: 'iconfont2 icon-pop', ok: false },
+            { text: 'Popover', url: '/modal/popover', icon: 'iconfont2 icon-pop', ok: true },
             { text: 'iframe', url: '/modal/iframe', icon: 'iconfont2 icon-iframe', ok: false }
         ]
     },
