@@ -8,3 +8,4 @@ export { confirm } from "./cores/modals/confirm";
 export { loading } from "./cores/modals/loading";
 export { prompt } from "./cores/modals/prompt";
 export { toast } from "./cores/modals/toast";
+export { cell } from "./cores/cell";

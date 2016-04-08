@@ -17,6 +17,7 @@ export let cores = {
         prompt: coresBrowser.prompt,
         loading: coresBrowser.loading,
         toast: coresBrowser.toast,
-        actionsheet: coresBrowser.actionsheet
+        actionsheet: coresBrowser.actionsheet,
+        cell: coresBrowser.cell
     }
 }

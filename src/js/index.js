@@ -20,6 +20,7 @@ simplize.ready(function() {
                 .$define('/modals', 'modals')
                 .$define('/buttons', 'buttons')
                 .$define('/components', 'components')
+                .$define('/cell', 'cell')
                 .$define('index')
         );
 
