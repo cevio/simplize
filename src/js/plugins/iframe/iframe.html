@@ -1,3 +1,10 @@
-<div class="sp-ui-iframe">
-    <iframe :src="src"></iframe>
+<div class="sp-modal-iframe sp-duration-short" v-if="status" transition="slideUp">
+    <div class="sp-modal-iframe-head clearfix">
+        <div class="fr" @click="close">
+            <middle><i class="iconfont icon-close"></i></middle>
+        </div>
+    </div>
+    <div class="sp-modal-iframe-body">
+        <iframe :src="src"></iframe>
+    </div>
 </div>
