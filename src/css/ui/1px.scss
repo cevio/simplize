@@ -8,18 +8,31 @@
         height          : 100%;
         border          : 1px solid $color;
         border-radius   : $radius *2;
-        transform       : scale(0.5);
         top             : 0;
         left            : 0;
         transform-origin: 0 0;
         z-index         : 99;
         box-sizing      : border-box;
     }
+    @media screen and (-webkit-min-device-pixel-ratio:1.5) {
+        &:before {
+            width    : 150%;
+            height   : 150%;
+            transform: scale(0.6667);
+        }
+    }
     @media screen and (-webkit-min-device-pixel-ratio: 2) {
         &:before {
             width    : 200%;
             height   : 200%;
             transform: scale(0.5);
+        }
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3) {
+        &:before {
+            width    : 300%;
+            height   : 300%;
+            transform: scale(0.3333);
         }
     }
 
@@ -30,14 +43,23 @@
         &:#{$pseudo} {
             width     : 100%;
             height    : 1px;
-            transform : scaleY(0.5);
             border-top: 1px solid $color;
             top       : 0;
             left      : 0;
         }
+        @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+            &:#{$pseudo} {
+                transform: scaleY(0.6667);
+            }
+        }
         @media screen and (-webkit-min-device-pixel-ratio: 2) {
             &:#{$pseudo} {
                 transform: scaleY(0.5);
+            }
+        }
+        @media screen and (-webkit-min-device-pixel-ratio: 3) {
+            &:#{$pseudo} {
+                transform: scaleY(0.33333);
             }
         }
     }
@@ -49,9 +71,19 @@
             border-bottom: 1px solid $color;
             left         : 0;
         }
+        @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+            &:#{$pseudo} {
+                transform: scaleY(0.6667);
+            }
+        }
         @media screen and (-webkit-min-device-pixel-ratio: 2) {
             &:#{$pseudo} {
                 transform: scaleY(0.5);
+            }
+        }
+        @media screen and (-webkit-min-device-pixel-ratio: 3) {
+            &:#{$pseudo} {
+                transform: scaleY(0.3333);
             }
         }
     }
@@ -63,9 +95,19 @@
             top        : 0;
             left       : 0;
         }
+        @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+            &:#{$pseudo} {
+                transform: scaleX(0.6667);
+            }
+        }
         @media screen and (-webkit-min-device-pixel-ratio: 2) {
             &:#{$pseudo} {
                 transform: scaleX(0.5);
+            }
+        }
+        @media screen and (-webkit-min-device-pixel-ratio: 3) {
+            &:#{$pseudo} {
+                transform: scaleX(0.3333);
             }
         }
     }
@@ -77,9 +119,19 @@
             top         : 0;
             right       : -1px;
         }
+        @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+            &:#{$pseudo} {
+                transform: scaleX(0.6667);
+            }
+        }
         @media screen and (-webkit-min-device-pixel-ratio: 2) {
             &:#{$pseudo} {
                 transform: scaleX(0.5);
+            }
+        }
+        @media screen and (-webkit-min-device-pixel-ratio: 3) {
+            &:#{$pseudo} {
+                transform: scaleX(0.3333);
             }
         }
     }

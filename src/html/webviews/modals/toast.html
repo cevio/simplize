@@ -3,10 +3,30 @@
         <div class="sp-cell-bd">
             toast auto close
         </div>
+        <div class="sp-cell-ft">
+            <div class="sp-ui-switch" @click="switchToggle()" v-el:switch></div>
+        </div>
     </div>
     <div class="sp-cell clickable" @click="openToast2">
         <div class="sp-cell-bd">
             toast with icon
         </div>
+        <div class="sp-cell-ft">
+            <div class="sp-radio" v-el:radio>
+                <i class="iconfont icon-radio"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="sp-cell clickable" @click="openToast3">
+        <div class="sp-cell-hd">
+            <div class="sp-radio sp-radio-noborder" v-el:radio2>
+                <i class="iconfont icon-radio"></i>
+            </div>
+        </div>
+        <div class="sp-cell-bd">
+            toast with icon
+        </div>
+
     </div>
 </div>

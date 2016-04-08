@@ -15,6 +15,14 @@ export let toast = {
       },
       openToast2:function(){
         this.$toast("3s后关闭","<i class='iconfont icon-apps f30 line-height-1 '></i>");
+        this.$els.radio.classList.toggle("checked")
+      },
+      openToast3:function(){
+        this.$toast("3s后关闭","<i class='iconfont icon-apps f30 line-height-1 '></i>");
+        this.$els.radio2.classList.toggle("checked")
+      },
+      switchToggle:function(){
+        this.$els.switch.classList.toggle("active")
       }
     }
 }
