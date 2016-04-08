@@ -9,7 +9,7 @@ module.exports = function(config) {
         },
         {
             name: 'compare-css',
-            file: ['./src/css/index.scss','./src/css/icons/style.css'],
+            file: ['./src/css/index.scss'],
             type: 'tool'
         },
         {
