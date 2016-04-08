@@ -42,6 +42,7 @@ import { ACTIONSHEET } from './plugins/actionSheet/index';
 import { TOAST } from './plugins/toast/index';
 import { LOADING } from './plugins/loading/index';
 import { TIP } from './plugins/tip/index';
+import { SELECTOR } from './plugins/selector/index';
 
 // install
 
@@ -52,3 +53,4 @@ DEFINE('$actionsheet', ACTIONSHEET);
 DEFINE('$toast', TOAST);
 DEFINE('$loading', LOADING);
 DEFINE('$tip', TIP);
+DEFINE('$select', SELECTOR);

@@ -1,6 +1,7 @@
 import PICKER from './picker';
 export let picker = {
     name: 'picker',
+    isPicker: true,
     template: require('./picker.html'),
     props: ['data', 'value', 'title'],
     events: {

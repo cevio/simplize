@@ -19,6 +19,7 @@ export let cores = {
         toast: coresBrowser.toast,
         actionsheet: coresBrowser.actionsheet,
         tip: coresBrowser.tip,
-        cell: coresBrowser.cell
+        cell: coresBrowser.cell,
+        selector: coresBrowser.selector
     }
 }
