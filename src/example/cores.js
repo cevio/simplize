@@ -9,3 +9,4 @@ export { loading } from "./cores/modals/loading";
 export { prompt } from "./cores/modals/prompt";
 export { toast } from "./cores/modals/toast";
 export { tip } from "./cores/modals/tip";
+export { cell } from "./cores/cell";
