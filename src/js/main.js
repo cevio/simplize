@@ -44,6 +44,7 @@ import { LOADING } from './plugins/loading/index';
 import { TIP } from './plugins/tip/index';
 import { SELECTOR } from './plugins/selector/index';
 import { DATETIME } from './plugins/datetime/index';
+import { POPOVER } from './plugins/popover/popover';
 
 // install
 
@@ -56,3 +57,4 @@ DEFINE('$loading', LOADING);
 DEFINE('$tip', TIP);
 DEFINE('$select', SELECTOR);
 DEFINE('$datetime', DATETIME);
+DEFINE('$popover', POPOVER);

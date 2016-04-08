@@ -47,3 +47,74 @@
 .sp-loading {
     @extend .ib,.sp-spin;
 }
+
+//popover
+.sp-ui-popover {
+    position        : absolute;
+    width           : 240px;
+    background-color: rgba(255,255,255,0.95);
+    border-radius   : 5px;
+    // overflow        : auto;
+}
+.sp-ui-popover-list {
+    overflow: auto;
+}
+.sp-ui-popover-item {
+    list-style : none;
+    text-align : center;
+    padding    : 0.6em 1em;
+    user-select: none;
+    &:active {
+        background-color: rgba(240,240,240,0.95);
+    }
+    &:not(:last-child) {
+        @extend .sp-1px-b;
+    }
+}
+.sp-ui-popover-angle {
+    display    : block;
+    width      : 2rem;
+    height     : 2rem;
+    position   : absolute;
+    overflow   : hidden;
+    left       : 50%;
+    margin-left: -1rem;
+    &:after {
+        content         : "";
+        width           : 2rem;
+        height          : 2rem;
+        background-color: rgba(255, 255, 255, 0.95);
+        display         : block;
+        border-radius   : 5px;
+        margin          : 0 auto;
+    }
+    &.sp-ui-popover-angle-bottom {
+        bottom: -2rem;
+        &:after {
+            transform: translateY(-80%) rotate(45deg);
+        }
+    }
+    &.sp-ui-popover-angle-top {
+        top: -2rem;
+        &:after {
+            transform: translateY(80%) rotate(45deg);
+        }
+    }
+    &.sp-ui-popover-angle-left {
+        top       : 50%;
+        margin-top: -1rem;
+        left      : -1rem;
+        &:after {
+            transform: translateX(80%) rotate(45deg);
+        }
+    }
+    &.sp-ui-popover-angle-right {
+        top       : 50%;
+        margin-top: -1rem;
+        left      : auto;
+        right     : -2rem;
+        &:after {
+            transform: translateX(-80%) rotate(45deg);
+        }
+    }
+}

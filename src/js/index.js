@@ -21,6 +21,7 @@ simplize.ready(function() {
                 .$define('/buttons', 'buttons')
                 .$define('/components', 'components')
                 .$define('/cell', 'cell')
+                .$define('/1px', 'pxborder')
                 .$define('index')
         );
 

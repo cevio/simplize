@@ -1,0 +1,6 @@
+<div class="sp-ui-popover" v-bind:style="listStyle">
+    <ul v-el:list class="sp-ui-popover-list">
+        <li class="sp-ui-popover-item" v-for="item in list" v-on:click="select($index)">{{ item.text }}</li>
+    </ul>
+    <div v-el:angle class="sp-ui-popover-angle" :style="angleStyle" :class="angleClass ? angleClass : ''"></div>
+</div>

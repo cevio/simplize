@@ -21,6 +21,8 @@ export let cores = {
         tip: coresBrowser.tip,
         cell: coresBrowser.cell,
         selector: coresBrowser.selector,
-        datetime: coresBrowser.datetime
+        datetime: coresBrowser.datetime,
+        pxborder:coresBrowser.pxborder,
+        popover: coresBrowser.popover
     }
 }
