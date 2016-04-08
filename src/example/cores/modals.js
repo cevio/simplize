@@ -11,7 +11,7 @@ export let modals = {
             { text: 'Selector', url: '/modal/selector', icon: 'iconfont2 icon-cc-select', ok: true },
             { text: 'Datetime', url: '/modal/datetime', icon: 'iconfont2 icon-datetime', ok: true },
             { text: 'Tip', url: '/modal/tip', icon: 'iconfont2 icon-tip', ok: true },
-            { text: 'Popup', url: '/modal/popup', icon: 'iconfont2 icon-pragpopup', ok: false },
+            { text: 'Popup', url: '/modal/popup', icon: 'iconfont2 icon-pragpopup', ok: true },
             { text: 'Popover', url: '/modal/popover', icon: 'iconfont2 icon-pop', ok: true }
         ]
     },
