@@ -14,7 +14,6 @@ export let POPOVER = {
     data: function(){
         return {
             list: [],
-            initObject: init_style_obj,
             angleClass: false,
             angleStyle: {},
             listStyle: {},
@@ -23,7 +22,8 @@ export let POPOVER = {
     },
     methods: {
         $constructor(ele, menus){
-            this.initObject = init_style_obj;
+            let listStyle = Object.assign({}, init_style_obj);
+            this.listStyle = listStyle;
             let rect = ele.getBoundingClientRect();
             this.status = true;
             this.$parent.nextTick(() => {
@@ -52,7 +52,7 @@ export let POPOVER = {
                     }
 
                     this.angleClass = 'sp-ui-popover-angle-' + direct;
-                    let listStyle = {};
+                    
                     let angleStyle = {};
                     if(direct === 'top' || direct === 'bottom'){
                         let baseLeft = rect.left + rect.width / 2;
@@ -89,6 +89,7 @@ export let POPOVER = {
                         }
                         else {
                             listStyle.bottom = rect.bottom + rect.height - angleRect.height / 2 + 'px';
+                            listStyle.top = null;
                         }
                     }
                     else {
@@ -136,9 +137,9 @@ export let POPOVER = {
                         }
                     }
 
-                    this.listStyle = listStyle;
+                    this.listStyle = Object.assign({}, this.listStyle, listStyle);
                     this.angleStyle = angleStyle;
-                    this.initObject = {};
+                    this.listStyle.opacity = 1;
 
                     nextTick(() => {
                         this.$parent.mask = true;
