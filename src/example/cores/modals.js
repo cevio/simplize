@@ -10,7 +10,7 @@ export let modals = {
             { text: 'Loading', url: '/modal/loading', icon: 'iconfont icon-iconloading-copy', ok:true },
             { text: 'Selector', url: '/modal/selector', icon: 'iconfont2 icon-cc-select', ok: false },
             { text: 'Datetime', url: '/modal/datetime', icon: 'iconfont2 icon-datetime', ok: false },
-            { text: 'Tip', url: '/modal/tip', icon: 'iconfont2 icon-tip', ok: false },
+            { text: 'Tip', url: '/modal/tip', icon: 'iconfont2 icon-tip', ok: true },
             { text: 'Popup', url: '/modal/popup', icon: 'iconfont2 icon-pragpopup', ok: false },
             { text: 'Popover', url: '/modal/popover', icon: 'iconfont2 icon-pop', ok: false },
             { text: 'iframe', url: '/modal/iframe', icon: 'iconfont2 icon-iframe', ok: false }

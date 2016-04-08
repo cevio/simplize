@@ -41,6 +41,7 @@ import { PROMPT } from './plugins/prompt/index';
 import { ACTIONSHEET } from './plugins/actionSheet/index';
 import { TOAST } from './plugins/toast/index';
 import { LOADING } from './plugins/loading/index';
+import { TIP } from './plugins/tip/index';
 
 // install
 
@@ -50,3 +51,4 @@ DEFINE('$prompt', PROMPT);
 DEFINE('$actionsheet', ACTIONSHEET);
 DEFINE('$toast', TOAST);
 DEFINE('$loading', LOADING);
+DEFINE('$tip', TIP);
