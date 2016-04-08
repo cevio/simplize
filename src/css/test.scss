@@ -1,41 +1,68 @@
 @import "./index";
 
-
 @font-face {
-  font-family: 'iconfont2';
-  src: url('//at.alicdn.com/t/font_1460036599_7828496.eot'); /* IE9*/
-  src: url('//at.alicdn.com/t/font_1460036599_7828496.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('//at.alicdn.com/t/font_1460036599_7828496.woff') format('woff'), /* chrome、firefox */
-  url('//at.alicdn.com/t/font_1460036599_7828496.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-  url('//at.alicdn.com/t/font_1460036599_7828496.svg#iconfont') format('svg'); /* iOS 4.1- */
+    font-family: 'iconfont2';
+    src        : url(//at.alicdn.com/t/font_1460036599_7828496.eot);
+    /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    /* chrome、firefox */
+    /* IE6-IE8 */
+    /* IE9*/
+    src        : url(//at.alicdn.com/t/font_1460036599_7828496.eot?#iefix) format('embedded-opentype'),url('//at.alicdn.com/t/font_1460036599_7828496.woff') format('woff'),url('//at.alicdn.com/t/font_1460036599_7828496.ttf') format('truetype'),url('//at.alicdn.com/t/font_1460036599_7828496.svg#iconfont') format('svg');
+    /* iOS 4.1- */
 }
-
-
 
 .iconfont2 {
-  font-family:"iconfont2" !important;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;
+    font-family              : "iconfont2" !important;
+    font-style               : normal;
+    -webkit-font-smoothing   : antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing  : grayscale;
 }
-.icon-pragpopup:before { content: "\e607"; }
-.icon-icon:before { content: "\e600"; }
-.icon-tip:before { content: "\e608"; }
-.icon-prompt:before { content: "\e609"; }
-.icon-datetime:before { content: "\e60a"; }
-.icon-pop:before { content: "\e60b"; }
-.icon-mode:before { content: "\e601"; }
-.icon-layout:before { content: "\e602"; }
-.icon-cellmerge:before { content: "\e603"; }
-.icon-sheet:before { content: "\e60c"; }
-.icon-button:before { content: "\e604"; }
-.icon-cc-select:before { content: "\e60f"; }
-.icon-component:before { content: "\e605"; }
-.icon-exchangexy:before { content: "\e606"; }
-.icon-iframe:before { content: "\e60e"; }
-
-
+.icon-pragpopup:before {
+    content: "\e607";
+}
+.icon-icon:before {
+    content: "\e600";
+}
+.icon-tip:before {
+    content: "\e608";
+}
+.icon-prompt:before {
+    content: "\e609";
+}
+.icon-datetime:before {
+    content: "\e60a";
+}
+.icon-pop:before {
+    content: "\e60b";
+}
+.icon-mode:before {
+    content: "\e601";
+}
+.icon-layout:before {
+    content: "\e602";
+}
+.icon-cellmerge:before {
+    content: "\e603";
+}
+.icon-sheet:before {
+    content: "\e60c";
+}
+.icon-button:before {
+    content: "\e604";
+}
+.icon-cc-select:before {
+    content: "\e60f";
+}
+.icon-component:before {
+    content: "\e605";
+}
+.icon-exchangexy:before {
+    content: "\e606";
+}
+.icon-iframe:before {
+    content: "\e60e";
+}
 
 .test1 {
     background: #f5f5f5;
@@ -109,6 +136,20 @@ body {
     }
 }
 
-.sp-cell-hd i{
-    color:#3cc51f;
+.sp-cell-hd i {
+    color: #3cc51f;
+}
+
+.demo-1px-1 {
+    @include sp-1px(red,10px);
+}
+.demo-1px-2 {
+    @include sp-1px-side(blue,top)
+}
+.demo-1px-3 {
+    @include sp-1px-side(pink,left);
+    @include sp-1px-side(red,right,after);
+}
+.demo-defalut-border {
+    border: $ui-default-border;
 }
