@@ -7,7 +7,7 @@ export let pxborder = {
     },
     "webview:preset": function(head) {
         head.active();
-        head.data.left.icon = '<i class="fa fa-send"></i>';
+        head.data.left.icon = '<i class="iconfont icon-back"></i>';
         head.data.left.text = 'Back';
         head.data.right.icon = '';
         head.data.right.text = '';
