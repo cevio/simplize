@@ -1,9 +1,9 @@
-export let info = {
+export let pxborder = {
     zindex: 3,
-        template: require('../../html/1px.html'),
+        template: require('../../html/webviews/1px.html'),
     events: {
     "webview:load": function() {
-        console.log('info load')
+
     },
     "webview:preset": function(head) {
         head.active();

@@ -6,6 +6,11 @@
 .sp-cell {
     @extend .sp-flex-box,.sp-flex-row;
     @include sp-1px-side($ui-default-border-color,bottom,before);
+    &:last-child {
+        &::before {
+            display: none;
+        }
+    }
     padding    : 0.8rem $ui-side-padding;
     user-select: none;
     &.clickable {
