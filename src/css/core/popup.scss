@@ -6,6 +6,19 @@
     width           : 100%;
     left            : 0;
 }
+.sp-modal-popup-head {
+    height    : $ui-head-height;
+    width     : 100%;
+    background: #fff;
+}
+.sp-modal-popup-body {
+    position: relative;
+    // margin-top: - $ui-head-height;
+    // padding-top: $ui-head-height;
+    height  : 100%;
+    width   : 100%;
+    overflow: auto;
+}
 .sp-popup-hd {}
 .sp-popup-bd {}
 .sp-popup-ft {}
