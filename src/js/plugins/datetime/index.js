@@ -1,7 +1,6 @@
 import * as utils from '../../utils/index';
 export let DATETIME = {
     name: 'datetime',
-    template: require('./datetime.html'),
     methods: {
         $constructor(time, type, over){
             let data = [];
