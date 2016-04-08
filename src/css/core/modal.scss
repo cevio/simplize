@@ -97,4 +97,21 @@
             transform: translateY(80%) rotate(45deg);
         }
     }
+    &.sp-ui-popover-angle-left {
+        top       : 50%;
+        margin-top: -1rem;
+        left      : -2rem;
+        &:after {
+            transform: translateX(-80%) rotate(45deg);
+        }
+    }
+    &.sp-ui-popover-angle-right {
+        top       : 50%;
+        margin-top: -1rem;
+        left      : auto;
+        right     : -2rem;
+        &:after {
+            transform: translateX(80%) rotate(45deg);
+        }
+    }
 }
