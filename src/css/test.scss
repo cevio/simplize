@@ -1,15 +1,14 @@
 @import "./index";
 
 @font-face {
-    font-family: 'iconfont2';
-    src        : url(//at.alicdn.com/t/font_1460036599_7828496.eot);
-    /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-    /* chrome、firefox */
-    /* IE6-IE8 */
-    /* IE9*/
-    src        : url(//at.alicdn.com/t/font_1460036599_7828496.eot?#iefix) format('embedded-opentype'),url('//at.alicdn.com/t/font_1460036599_7828496.woff') format('woff'),url('//at.alicdn.com/t/font_1460036599_7828496.ttf') format('truetype'),url('//at.alicdn.com/t/font_1460036599_7828496.svg#iconfont') format('svg');
-    /* iOS 4.1- */
+  font-family: 'iconfont2';
+  src: url('//at.alicdn.com/t/font_1460113699_6535943.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/font_1460113699_6535943.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/font_1460113699_6535943.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/font_1460113699_6535943.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/font_1460113699_6535943.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
+
 
 .iconfont2 {
     font-family              : "iconfont2" !important;
@@ -18,51 +17,35 @@
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing  : grayscale;
 }
-.icon-pragpopup:before {
-    content: "\e607";
-}
-.icon-icon:before {
-    content: "\e600";
-}
-.icon-tip:before {
-    content: "\e608";
-}
-.icon-prompt:before {
-    content: "\e609";
-}
-.icon-datetime:before {
-    content: "\e60a";
-}
-.icon-pop:before {
-    content: "\e60b";
-}
-.icon-mode:before {
-    content: "\e601";
-}
-.icon-layout:before {
-    content: "\e602";
-}
-.icon-cellmerge:before {
-    content: "\e603";
-}
-.icon-sheet:before {
-    content: "\e60c";
-}
-.icon-button:before {
-    content: "\e604";
-}
-.icon-cc-select:before {
-    content: "\e60f";
-}
-.icon-component:before {
-    content: "\e605";
-}
-.icon-exchangexy:before {
-    content: "\e606";
-}
-.icon-iframe:before {
-    content: "\e60e";
-}
+.icon-star:before { content: "\e60d"; }
+.icon-pragpopup:before { content: "\e607"; }
+.icon-icon:before { content: "\e600"; }
+.icon-tip:before { content: "\e608"; }
+.icon-alignmiddle:before { content: "\e610"; }
+.icon-checkbox:before { content: "\e611"; }
+.icon-radio:before { content: "\e612"; }
+.icon-prompt:before { content: "\e609"; }
+.icon-clock:before { content: "\e613"; }
+.icon-datetime:before { content: "\e60a"; }
+.icon-spinner:before { content: "\e614"; }
+.icon-pop:before { content: "\e60b"; }
+.icon-mode:before { content: "\e601"; }
+.icon-layout:before { content: "\e602"; }
+.icon-cellmerge:before { content: "\e603"; }
+.icon-electricrange:before { content: "\e615"; }
+.icon-sheet:before { content: "\e60c"; }
+.icon-button:before { content: "\e604"; }
+.icon-giconpicker:before { content: "\e616"; }
+.icon-cc-select:before { content: "\e60f"; }
+.icon-circle:before { content: "\e617"; }
+.icon-ratio:before { content: "\e618"; }
+.icon-image:before { content: "\e619"; }
+.icon-switch:before { content: "\e61a"; }
+.icon-iconxx2:before { content: "\e61b"; }
+.icon-progress:before { content: "\e61c"; }
+.icon-component:before { content: "\e605"; }
+.icon-exchangexy:before { content: "\e606"; }
+.icon-iframe:before { content: "\e60e"; }
 
 .test1 {
     background: #f5f5f5;

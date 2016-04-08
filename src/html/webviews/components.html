@@ -1,5 +1,7 @@
 <div class="sp-cell-group mt10">
     <div class="sp-cell linked" v-for="component in components" v-redirect="component.url">
+        <div class="sp-cell-hd"><i :class="component.icon"></i></div>
         <div class="sp-cell-bd">{{component.text}}</div>
+        <div class="sp-cell-ft"> <i v-if="component.ok" class="iconfont icon-hook green"></i> </div>
     </div>
 </div>
