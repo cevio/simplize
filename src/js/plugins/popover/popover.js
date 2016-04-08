@@ -23,8 +23,18 @@ export let POPOVER = {
     methods: {
         $constructor(ele, menus){
             let listStyle = Object.assign({}, init_style_obj);
+            let bodyHeight = window.document.body.clientHeight;
+            let bodyWidth = window.document.body.clientWidth;
             this.listStyle = listStyle;
-            let rect = ele.getBoundingClientRect();
+            let _rect = ele.getBoundingClientRect();
+            let rect = {
+                left: _rect.left,
+                top: _rect.top,
+                width: _rect.width,
+                height: _rect.height
+            };
+            rect.right = bodyWidth - rect.left - rect.width;
+            rect.bottom = bodyHeight - rect.top - rect.height;
             this.status = true;
             this.$parent.nextTick(() => {
                 this.list = menus;
@@ -33,9 +43,7 @@ export let POPOVER = {
                     let direct;
                     let listRect = this.$els.list.getBoundingClientRect();
                     let angleRect = this.$els.angle.getBoundingClientRect();
-                    let bodyHeight = window.document.body.clientHeight;
-                    let bodyWidth = window.document.body.clientWidth;
-
+                    
                     let fullHeight = listRect.height + angleRect.height / 2;
 
                     if(fullHeight < rect.top){
@@ -85,10 +93,10 @@ export let POPOVER = {
                         };
 
                         if( direct === 'top' ){
-                            listStyle.top = rect.top + rect.height - angleRect.height / 2 + 'px';
+                            listStyle.top = rect.top + rect.height + angleRect.height / 2 + 'px';
                         }
                         else {
-                            listStyle.bottom = rect.bottom + rect.height - angleRect.height / 2 + 'px';
+                            listStyle.bottom = rect.bottom + rect.height + angleRect.height / 2 + 'px';
                             listStyle.top = null;
                         }
                     }
