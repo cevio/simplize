@@ -1,29 +1,26 @@
 export let IFRAME = {
     name: 'sp-ui-iframe',
     template: require('./iframe.html'),
-    data() {
-        return {
-            text: '',
-            title: '',
-            showCancel: false,
-            status: false
-        }
-    },
+    data(){ return { src: '', status: false } },
     methods: {
-        $constructor(src) {
+        $constructor(src){
             this.$parent.nextTick(() => {
                 this.$parent.mask = true;
-                this.text = text;
-                this.title = title;
+                this.src = src;
                 this.status = true;
             });
         },
-
-        ok: function(){
+        close(){
             this.status = false;
             this.$parent.prevTick(() => {
-                this.$emit('alert:ok');
-            });
+                this.src = '';
+                this.$emit('iframe:close');
+            })
+        }
+    },
+    events: {
+        "modal:maskclick": function(){
+            this.close();
         }
     }
-};
+}
