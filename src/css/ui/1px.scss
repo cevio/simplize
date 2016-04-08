@@ -4,8 +4,8 @@
     &:before {
         position        : absolute;
         content         : "";
-        width           : 200%;
-        height          : 200%;
+        width           : 100%;
+        height          : 100%;
         border          : 1px solid $color;
         border-radius   : $radius *2;
         transform       : scale(0.5);
@@ -15,50 +15,77 @@
         z-index         : 99;
         box-sizing      : border-box;
     }
+    @media screen and (-webkit-min-device-pixel-ratio: 2) {
+        &:before {
+            width    : 200%;
+            height   : 200%;
+            transform: scale(0.5);
+        }
+    }
+
 }
 @mixin sp-1px-side($color, $direction:top, $pseudo:before) {
     position: relative;
     @if $direction == top {
         &:#{$pseudo} {
-            width    : 100%;
-            height   : 1px;
-            transform: scaleY(0.5);
-            top      : 0;
-            left     : 0;
+            width     : 100%;
+            height    : 1px;
+            transform : scaleY(0.5);
+            border-top: 1px solid $color;
+            top       : 0;
+            left      : 0;
+        }
+        @media screen and (-webkit-min-device-pixel-ratio: 2) {
+            &:#{$pseudo} {
+                transform: scaleY(0.5);
+            }
         }
     }
     @if $direction == bottom {
         &:#{$pseudo} {
-            width    : 100%;
-            height   : 1px;
-            transform: scaleY(0.5);
-            bottom   : -1px;
-            left     : 0;
-
+            width        : 100%;
+            height       : 1px;
+            bottom       : 0;
+            border-bottom: 1px solid $color;
+            left         : 0;
+        }
+        @media screen and (-webkit-min-device-pixel-ratio: 2) {
+            &:#{$pseudo} {
+                transform: scaleY(0.5);
+            }
         }
     }
     @if $direction == left {
         &:#{$pseudo} {
-            width    : 1px;
-            height   : 100%;
-            transform: scaleX(0.5);
-            top      : 0;
-            left     : 0;
+            width      : 1px;
+            height     : 100%;
+            border-left: 1px solid $color;
+            top        : 0;
+            left       : 0;
+        }
+        @media screen and (-webkit-min-device-pixel-ratio: 2) {
+            &:#{$pseudo} {
+                transform: scaleX(0.5);
+            }
         }
     }
     @if $direction == right {
         &:#{$pseudo} {
-            width    : 1px;
-            height   : 100%;
-            transform: scaleX(0.5);
-            top      : 0;
-            right    : -1px;
+            width       : 1px;
+            height      : 100%;
+            border-right: 1px solid $color;
+            top         : 0;
+            right       : -1px;
+        }
+        @media screen and (-webkit-min-device-pixel-ratio: 2) {
+            &:#{$pseudo} {
+                transform: scaleX(0.5);
+            }
         }
     }
     &:#{$pseudo} {
         position        : absolute;
         content         : "";
-        background-color: $color;
         transform-origin: 0 0;
         z-index         : 99;
     }
