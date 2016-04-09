@@ -17,6 +17,7 @@
   "timestamp": 1459321727160,
   "dependencies": {
     "array-flatten": "^2.0.0",
+    "date-format": "0.0.2",
     "domready": "^1.0.8",
     "es6-promise": "^3.1.2",
     "fastclick": "^1.0.6",
