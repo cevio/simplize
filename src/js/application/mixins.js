@@ -5,6 +5,7 @@ import { picker } from "../components/picker/index";
 import { middle } from "../components/middle/index";
 import { ratio } from "../components/ratio/index";
 import { datetime } from "../components/datetime/index";
+import { selector } from "../components/select/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -39,5 +40,6 @@ export let components = {
     picker,
     middle,
     ratio,
-    datetime
+    datetime,
+    selector
 }

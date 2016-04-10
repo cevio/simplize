@@ -19,3 +19,4 @@ export { popup } from './cores/modals/popup';
 export { middle } from './cores/components/middle';
 export { ratio } from './cores/components/ratio';
 export { date } from './cores/components/datetime';
+export { select } from './cores/components/select';

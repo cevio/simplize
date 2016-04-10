@@ -5,7 +5,7 @@ export let components = {
             { text: 'Middle', url: '/component/middle', icon: 'iconfont2 icon-alignmiddle' },
             { text: 'Ratio', url: '/component/ratio', icon: 'iconfont2 icon-ratio' },
             { text: 'Datetime', url: '/component/date', icon: 'iconfont2 icon-datetime' },
-            { text: 'Selector', url: '/component/cp-selector', icon: 'iconfont2 icon-cc-select' },
+            { text: 'Selector', url: '/component/select', icon: 'iconfont2 icon-cc-select' },
             { text: 'Scroll View', url: '/component/scrollview', icon: 'iconfont2 icon-iconxx2' },
             { text: 'Ago', url: '/component/ago', icon: 'iconfont2 icon-clock' },
             { text: 'Radio', url: '/component/radio', icon: 'iconfont2 icon-radio' },
