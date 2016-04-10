@@ -48,6 +48,9 @@ export let range = {
         "webview:load": function(){
             this.create();
         },
+        "webview:unload": function(){
+            this.destroy();
+        },
         "scroll:start": function(){
             this.moving = true;
             this.class = '';
