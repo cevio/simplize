@@ -6,6 +6,8 @@ import { middle } from "../components/middle/index";
 import { ratio } from "../components/ratio/index";
 import { datetime } from "../components/datetime/index";
 import { selector } from "../components/select/index";
+import { radio } from "../components/radio/index";
+import { checkbox } from "../components/checkbox/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -41,5 +43,7 @@ export let components = {
     middle,
     ratio,
     datetime,
-    selector
+    selector,
+    radio,
+    checkbox
 }

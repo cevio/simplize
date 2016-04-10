@@ -20,3 +20,5 @@ export { middle } from './cores/components/middle';
 export { ratio } from './cores/components/ratio';
 export { date } from './cores/components/datetime';
 export { select } from './cores/components/select';
+export { radio } from './cores/components/radio';
+export { checkbox } from './cores/components/checkbox';

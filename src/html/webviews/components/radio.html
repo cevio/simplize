@@ -1,0 +1,14 @@
+<div class="sp-side-padding f8 pt10">
+    最终被选中的游戏:<br />
+    {{value}}
+</div>
+<div class="sp-cell-group mt10 f8">
+    <div class="sp-cell" v-for="item in list">
+        <div class="sp-cell-hd"><radio :border="item.border" :value="item.value" :pattern.sync="value"></radio></div>
+        <div class="sp-cell-bd ">{{item.text}}({{item.value}})</div>
+        <div class="sp-cell-ft">
+            <span v-if="item.border==0">无边框</span>
+            <span v-else>有边框</span>
+        </div>
+    </div>
+</div>
