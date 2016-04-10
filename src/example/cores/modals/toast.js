@@ -10,19 +10,8 @@ export let toast = {
         }
     },
     methods:{
-      openToast1:function(){
+      openToast:function(){
         this.$toast("3s后关闭","<i class='iconfont icon-hook f30 line-height-1'></i>")
-      },
-      openToast2:function(){
-        this.$toast("3s后关闭","<i class='iconfont icon-apps f30 line-height-1 '></i>");
-        this.$els.radio.classList.toggle("checked")
-      },
-      openToast3:function(){
-        this.$toast("3s后关闭","<i class='iconfont icon-apps f30 line-height-1 '></i>");
-        this.$els.radio2.classList.toggle("checked")
-      },
-      switchToggle:function(){
-        this.$els.switch.classList.toggle("active")
       }
     }
 }

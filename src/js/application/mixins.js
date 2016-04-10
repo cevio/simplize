@@ -9,6 +9,7 @@ import { selector } from "../components/select/index";
 import { radio } from "../components/radio/index";
 import { checkbox } from "../components/checkbox/index";
 import { switcher } from "../components/switch/index";
+import { range } from "../components/range/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -47,5 +48,6 @@ export let components = {
     selector,
     radio,
     checkbox,
+    range,
     switch: switcher
 }
