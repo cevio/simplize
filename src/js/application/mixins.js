@@ -8,6 +8,7 @@ import { datetime } from "../components/datetime/index";
 import { selector } from "../components/select/index";
 import { radio } from "../components/radio/index";
 import { checkbox } from "../components/checkbox/index";
+import { switcher } from "../components/switch/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -45,5 +46,6 @@ export let components = {
     datetime,
     selector,
     radio,
-    checkbox
+    checkbox,
+    switch: switcher
 }

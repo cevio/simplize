@@ -22,3 +22,4 @@ export { date } from './cores/components/datetime';
 export { select } from './cores/components/select';
 export { radio } from './cores/components/radio';
 export { checkbox } from './cores/components/checkbox';
+export { switcher } from './cores/components/switch';

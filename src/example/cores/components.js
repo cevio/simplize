@@ -10,7 +10,7 @@ export let components = {
             { text: 'Ago', url: '/component/ago', icon: 'iconfont2 icon-clock' },
             { text: 'Radio', url: '/component/radio', icon: 'iconfont2 icon-radio' },
             { text: 'Checkbox', url: '/component/checkbox', icon: 'iconfont2 icon-checkbox' },
-            { text: 'switch', url: '/component/switch', icon: 'iconfont2 icon-switch' },
+            { text: 'switch', url: '/component/switcher', icon: 'iconfont2 icon-switch' },
             { text: 'Range', url: '/component/range', icon: 'iconfont2 icon-electricrange' },
             { text: 'Rater', url: '/component/rater', icon: 'iconfont2 icon-star' },
             { text: 'Picker', url: '/component/picker', icon: 'iconfont2 icon-giconpicker' },
