@@ -13,6 +13,7 @@ export { tip } from "./cores/modals/tip";
 export { selector } from "./cores/modals/selector";
 export { datetime } from "./cores/modals/datetime";
 export { pxborder } from "./cores/1px";
+export { layout } from "./cores/layout";
 export { popover } from './cores/modals/popover';
 export { popup } from './cores/modals/popup';
 
@@ -30,3 +31,5 @@ export { progress } from './cores/components/progress';
 export { time } from './cores/components/time';
 export { circle } from './cores/components/circle';
 export { lazyimage } from './cores/components/lazyimage';
+export { spinner } from './cores/components/spinner';
+export { rater } from "./cores/components/rater";

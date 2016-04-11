@@ -12,7 +12,7 @@ export let components = {
             { text: 'Checkbox', url: '/component/checkbox', icon: 'iconfont2 icon-checkbox', ok: true },
             { text: 'switch', url: '/component/switcher', icon: 'iconfont2 icon-switch', ok: true },
             { text: 'Range', url: '/component/range', icon: 'iconfont2 icon-electricrange', ok: true },
-            { text: 'Rater', url: '/component/rater', icon: 'iconfont2 icon-star' },
+            { text: 'Rater', url: '/component/rater', icon: 'iconfont2 icon-star', ok: true },
             { text: 'Picker', url: '/component/picker', icon: 'iconfont2 icon-giconpicker', ok: true },
             { text: 'Progress', url: '/component/progress', icon: 'iconfont2 icon-progress', ok: true },
             { text: 'Search', url: '/component/search', icon: 'iconfont icon-search' },

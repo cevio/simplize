@@ -16,6 +16,7 @@ import { group, cell, cellHead, cellBody, cellFoot } from "../components/group/i
 import { panel, panelHead, panelBody, panelFoot } from "../components/panel/index";
 import { circle } from "../components/circle/index";
 import { photo, photos } from "../components/image/index";
+import { rater } from "../components/rater/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -70,5 +71,6 @@ export let components = {
     pbody: panelBody,
     pfoot: panelFoot,
     switch: switcher,
-    circle: circle
+    circle: circle,
+    rater: rater
 }
