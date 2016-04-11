@@ -30,8 +30,6 @@ export { panel } from "./cores/panel";
 export { progress } from './cores/components/progress';
 export { time } from './cores/components/time';
 export { circle } from './cores/components/circle';
-<<<<<<< HEAD
+
 export { spinner } from './cores/components/spinner';
-=======
 export { rater } from "./cores/components/rater";
->>>>>>> d563782e1a3d32b542084837b35b98737e79a041
