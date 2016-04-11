@@ -1,5 +1,6 @@
-<div style="text-align: center">
-    <circle :height="height" :width="height" :stroke-width="strokeWidth" :trail-width="trailWidth" :percent="percent" :unit="unit">
-        <span>{{percent}}%</span>
-    </circle>
-</div>
+
+<panel class="mt20">
+    <phead>circle展示</phead>
+    <pbody class="tc"><circle :height="height" :width="width" :stroke-width="strokeWidth" :trail-width="trailWidth" :percent="percent"></circle></pbody>
+    <pfoot class="tc">{{percent}}%</pfoot>
+</panel>
