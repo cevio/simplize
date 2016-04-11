@@ -28,3 +28,4 @@ export { picker } from './cores/components/picker';
 export { panel } from "./cores/panel";
 export { progress } from './cores/components/progress';
 export { time } from './cores/components/time';
+export { circle } from './cores/components/circle';

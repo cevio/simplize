@@ -14,6 +14,7 @@ import { progress } from "../components/progress/index";
 import { now, ago } from "../components/time/index";
 import { group, cell, cellHead, cellBody, cellFoot } from "../components/group/index";
 import { panel, panelHead, panelBody, panelFoot } from "../components/panel/index";
+import { circle } from "../components/circle/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -65,5 +66,6 @@ export let components = {
     phead: panelHead,
     pbody: panelBody,
     pfoot: panelFoot,
-    switch: switcher
+    switch: switcher,
+    circle: circle
 }

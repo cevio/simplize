@@ -1,5 +1,14 @@
 export let circle = {
+    template: require('./circle.html'),
     props: {
+        height: {
+            type: Number,
+            default: 100
+        },
+        width: {
+            type: Number,
+            default: 100
+        },
         strokeWidth: {
             type: Number,
             default: 1
@@ -22,23 +31,34 @@ export let circle = {
         }
     },
     computed: {
-        radius: function () {
-            return 50 - this.strokeWidth / 2
+        viewbox: function(){
+            return `0 0 ${this.width} ${this.height}`;
         },
-        pathString: function () {
-            return `M 50,50 m 0,-${this.radius}
-     a ${this.radius},${this.radius} 0 1 1 0,${2 * this.radius}
-     a ${this.radius},${this.radius} 0 1 1 0,-${2 * this.radius}`
-        },
-        len: function () {
-            return Math.PI * 2 * this.radius
-        },
-        pathStyle: function () {
-            return {
-                'stroke-dasharray': `${this.len}px ${this.len}px`,
-                'stroke-dashoffset': `${((100 - this.percent) / 100 * this.len)}px`,
-                'transition': 'stroke-dashoffset 0.6s ease 0s, stroke 0.6s ease'
+        sr: function() {
+            if( this.trailWidth >= this.strokeWidth ){
+                return (this.width - this.strokeWidth * 2 - (this.trailWidth - this.strokeWidth) * 2) / 2;
             }
+            return (this.width - this.strokeWidth * 2) / 2;
+        },
+        tr: function() {
+            if(this.strokeWidth >= this.trailWidth){
+                return (this.width - this.trailWidth * 2 - (this.strokeWidth - this.trailWidth) * 2) / 2;
+            }
+            return (this.width - this.trailWidth * 2) / 2;
+        },
+        cx: function() {
+            return this.width / 2;
+        },
+        cy: function() {
+            return this.height / 2;
+        },
+        transform: function() {
+            return `matrix(0,-1,1,0,0,${this.width})`;
+        },
+        dasharray: function(){
+            let percent = this.percent / 100;
+            let perimeter = Math.PI * 2 * this.sr;
+            return `${perimeter * percent} ${perimeter * (1- percent)}`;
         }
     }
 }

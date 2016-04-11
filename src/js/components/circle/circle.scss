@@ -1,0 +1,8 @@
+.sp-ui-circle{
+  display: inline-block;
+}
+
+.sp-ui-circle circle {
+  -webkit-transition: stroke-dasharray .6s;
+  transition: stroke-dasharray .6s;
+}
