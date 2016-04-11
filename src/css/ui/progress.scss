@@ -2,6 +2,7 @@
     height          : 0.2em;
     background-color: #ddd;
     margin          : 0.9em 0;
+    position        : relative;
     dt {
         background-color: #aaa;
 
@@ -11,7 +12,7 @@
         position: absolute;
         height  : 0.2em;
         display : block;
-        &.move{
+        &.move {
             transition: width 100ms ease;
         }
     }
