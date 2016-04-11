@@ -18,7 +18,7 @@ export let components = {
             { text: 'Search', url: '/component/search', icon: 'iconfont icon-search' },
             { text: 'Spinner', url: '/component/spinner', icon: 'iconfont2 icon-spinner' },
             { text: 'Circle', url: '/component/circle', icon: 'iconfont2 icon-circle', ok: true },
-            { text: 'Lazy Image', url: '/component/lazyimage', icon: 'iconfont2 icon-image' }
+            { text: 'Lazy Image', url: '/component/lazyimage', icon: 'iconfont2 icon-image', ok: true }
         ]
     },
     events: {
