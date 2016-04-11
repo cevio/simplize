@@ -29,3 +29,4 @@ export { panel } from "./cores/panel";
 export { progress } from './cores/components/progress';
 export { time } from './cores/components/time';
 export { circle } from './cores/components/circle';
+export { rater } from "./cores/components/rater";

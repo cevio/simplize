@@ -1,6 +1,6 @@
 
-export let circle = {
-        template: require('../../../html/webviews/components/circle.html'),
+export let rater = {
+        template: require('../../../html/webviews/components/rater.html'),
         events: {
             "webview:preset": function (headbar, toolbar) {
                 headbar.active();
@@ -9,25 +9,18 @@ export let circle = {
                 headbar.data.left.click = function () {
                     history.back();
                 };
-                headbar.data.center.text = 'Simplize Component Circle';
+                headbar.data.center.text = 'Simplize Component Rater';
             }
         },
         data: {
-            height: 200,
-            width: 200,
-            strokeWidth: 4,
-            trailWidth: 10,
-            percent: 40
-        },
-        methods: {
-            task: function(){
-                setInterval(() => {
-                    this.percent = Math.round( Math.random() * 100 );
-                }, 2000)
-            }
-        },
-        ready: function(){
-            this.task();
+            data1: 0,
+            data2: 5,
+            data3: 5,
+            data4: 3,
+            data41: 3.7,
+            data42: 3.5,
+            data5: 3,
+            data6: 3
         }
     }
 ;
