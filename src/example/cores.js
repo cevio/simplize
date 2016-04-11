@@ -25,3 +25,5 @@ export { checkbox } from './cores/components/checkbox';
 export { switcher } from './cores/components/switch';
 export { range } from './cores/components/range';
 export { picker } from './cores/components/picker';
+
+export { panel } from "./cores/panel";

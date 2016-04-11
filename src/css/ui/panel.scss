@@ -1,0 +1,26 @@
+.sp-panel {
+    @extend .sp-1px-tb;
+    background-color: #fff;
+}
+.sp-panel-hd {
+    // @extend .sp-1px-b;
+    @include sp-1px-side(lighten($ui-default-border-color,5%),bottom );
+    padding  : 0.6em $ui-side-padding 0.4em;
+    font-size: 0.9rem;
+    color    : #999;
+    &:before {
+        left : $ui-side-padding;
+        right: 0;
+        width: auto;
+    }
+}
+.sp-panel-ft {
+    @include sp-1px-side(lighten($ui-default-border-color,5%),top );
+    &:before {
+        left : $ui-side-padding;
+        right: 0;
+        width: auto;
+    }
+    font-size: 0.9rem;
+    color    : #586C94;
+}
