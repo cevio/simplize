@@ -25,10 +25,6 @@ export { checkbox } from './cores/components/checkbox';
 export { switcher } from './cores/components/switch';
 export { range } from './cores/components/range';
 export { picker } from './cores/components/picker';
-<<<<<<< HEAD
-
 export { panel } from "./cores/panel";
-=======
 export { progress } from './cores/components/progress';
 export { time } from './cores/components/time';
->>>>>>> b6828fb9ad84baa5c1060d706b886631899ac191
