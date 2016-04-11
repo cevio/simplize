@@ -11,6 +11,9 @@
         position: absolute;
         height  : 0.2em;
         display : block;
+        &.move{
+            transition: width 100ms ease;
+        }
     }
     dl {
         background-color: #09BB07;

@@ -10,6 +10,9 @@ import { radio } from "../components/radio/index";
 import { checkbox } from "../components/checkbox/index";
 import { switcher } from "../components/switch/index";
 import { range } from "../components/range/index";
+import { progress } from "../components/progress/index";
+import { now, ago } from "../components/time/index";
+import { group, cell, cellHead, cellBody, cellFoot } from "../components/group/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -49,5 +52,13 @@ export let components = {
     radio,
     checkbox,
     range,
+    progress,
+    now,
+    ago,
+    group,
+    cell,
+    chead: cellHead,
+    cbody: cellBody,
+    cfoot: cellFoot,
     switch: switcher
 }

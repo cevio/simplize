@@ -1,0 +1,7 @@
+<div class="sp-ui-circle">
+    <svg view-box="0 0 100 100">
+        <path :d="pathString" :stroke="trailColor" :stroke-width="trailWidth" :fill-opacity="0"/>
+        <path :d="pathString" stroke-linecap="round" :stroke="strokeColor" :stroke-width="strokeWidth" fill-opacity="0" :style="pathStyle"/>
+    </svg>
+    <div class="sp-ui-circle-content"><slot></slot></div>
+</div>
