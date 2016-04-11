@@ -10,24 +10,29 @@ export let circle = {
                     history.back();
                 };
                 headbar.data.center.text = 'Simplize Component Circle';
+            },
+            "webview:load": function(){
+                this.task();
+            },
+            "webview:unload": function(){
+                if ( this.timer ){
+                    clearInterval(this.timer);
+                }
             }
         },
         data: {
             height: 200,
             width: 200,
-            strokeWidth: 4,
+            strokeWidth: 10,
             trailWidth: 10,
             percent: 40
         },
         methods: {
             task: function(){
-                setInterval(() => {
+                this.timer = setInterval(() => {
                     this.percent = Math.round( Math.random() * 100 );
                 }, 2000)
             }
-        },
-        ready: function(){
-            this.task();
         }
     }
 ;
