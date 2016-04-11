@@ -23,6 +23,7 @@ simplize.ready(function() {
                 .$define('/cell', 'cell')
                 .$define('/1px', 'pxborder')
                 .$define('/panel', 'panel')
+                .$define('/layout', 'layout')
                 .$define('index')
         );
 
