@@ -23,7 +23,17 @@ let _resource = {
         referrer: '',
         animateDisable: false,
         viewScale: 1,
-        viewType: 'device-width'
+        viewType: 'device-width',
+        timer: null,
+        time: false,
+        now: new Date(),
+        timeFormats: {
+            seconds: 's',
+            minutes: 'm',
+            hours: 'h',
+            days: 'd',
+            type: 'yyyy-MM-dd hh:mm:ss'
+        }
     },
     SP_currentBrowser: '',
     SP_animate_switch: '',
