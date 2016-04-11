@@ -17,6 +17,7 @@ import { panel, panelHead, panelBody, panelFoot } from "../components/panel/inde
 import { circle } from "../components/circle/index";
 import { photo, photos } from "../components/image/index";
 import { rater } from "../components/rater/index";
+import { spinner } from "../components/spinner/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -64,6 +65,7 @@ export let components = {
     panel,
     photo,
     photos,
+    spinner,
     chead: cellHead,
     cbody: cellBody,
     cfoot: cellFoot,
