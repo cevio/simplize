@@ -53,12 +53,17 @@ export let circle = {
             return this.height / 2;
         },
         transform: function() {
-            return `matrix(0,-1,1,0,0,${this.width})`;
+            return `rotate(-90, ${this.cx}, ${this.cy})`;
         },
         dasharray: function(){
             let percent = this.percent / 100;
             let perimeter = Math.PI * 2 * this.sr;
             return `${perimeter * percent} ${perimeter * (1- percent)}`;
+        },
+        dashoffset: function() {
+            let perimeter = Math.PI * 2 * this.sr;
+
+            return `${((100 - this.percent) / 100 * perimeter)}`
         }
     }
 }

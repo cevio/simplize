@@ -15,7 +15,9 @@ import { now, ago } from "../components/time/index";
 import { group, cell, cellHead, cellBody, cellFoot } from "../components/group/index";
 import { panel, panelHead, panelBody, panelFoot } from "../components/panel/index";
 import { circle } from "../components/circle/index";
+import { photo, photos } from "../components/image/index";
 import { rater } from "../components/rater/index";
+import { spinner } from "../components/spinner/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -61,6 +63,9 @@ export let components = {
     group,
     cell,
     panel,
+    photo,
+    photos,
+    spinner,
     chead: cellHead,
     cbody: cellBody,
     cfoot: cellFoot,

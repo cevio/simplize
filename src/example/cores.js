@@ -31,6 +31,6 @@ export { panel } from "./cores/panel";
 export { progress } from './cores/components/progress';
 export { time } from './cores/components/time';
 export { circle } from './cores/components/circle';
-
+export { lazyimage } from './cores/components/lazyimage';
 export { spinner } from './cores/components/spinner';
 export { rater } from "./cores/components/rater";
