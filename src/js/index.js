@@ -24,6 +24,7 @@ simplize.ready(function() {
                 .$define('/1px', 'pxborder')
                 .$define('/panel', 'panel')
                 .$define('/layout', 'layout')
+                .$define('/icons', 'icons')
                 .$define('index')
         );
 

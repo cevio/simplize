@@ -14,6 +14,7 @@ export { selector } from "./cores/modals/selector";
 export { datetime } from "./cores/modals/datetime";
 export { pxborder } from "./cores/1px";
 export { layout } from "./cores/layout";
+export { icons } from "./cores/icon";
 export { popover } from './cores/modals/popover';
 export { popup } from './cores/modals/popup';
 
