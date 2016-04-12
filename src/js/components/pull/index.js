@@ -1,5 +1,6 @@
 import PULL from './pull';
 import TRANSITIONEND from '../../application/transitionend';
+import { Deceleration } from '../../application/decelerate';
 const maxTime = 700;
 const minTime = 200;
 
@@ -12,6 +13,7 @@ export let pull = {
             this.isAnimating = false;
             this.y = 0;
             this._y = 0;
+            this._positions = [];
             this.height = this.$els.root.offsetHeight;
             this.refresher = {
                 height: this.$els.refresh.offsetHeight
@@ -60,9 +62,10 @@ export let pull = {
     events: {
         "webview:load": function(){ this.create(); },
         "webview:unload": function(){ this.destroy(); },
-        "scroller:start": function(){},
-
-
+        "scroll:start": function(){
+            this._positions = [];
+        },
+        
         "scroll:move": function(e){
             this.y = e.currentY - e.startY + this._y;
             this.move(this.y);
@@ -78,10 +81,16 @@ export let pull = {
                     this.$emit('refresh:start', percent);
                 }
             }
+
+            if(this._positions.length > 40){
+                this._positions.splice(0, 20);
+            }
+
+            this._positions.push(this.y, e.currentTimeStamp);
         },
 
 
-        "scroll:end": function(){
+        "scroll:end": function(timeStamp){
             this._y = this.y;
             if ( this.y > 0 ){
                 if ( this.y >= this.refresher.height * 2 ){
@@ -90,6 +99,12 @@ export let pull = {
                 else{
                     this.reset();
                 }
+            }
+            else {
+                let minTop = this.height - this.$els.page.offsetHeight;
+                let ins = Deceleration(this._y, this._positions, timeStamp, minTop, 0, (top) => {
+                    this.move(top, 0);
+                })
             }
         }
     }

@@ -9,7 +9,6 @@ export default class PICKER extends Scroll {
         this.setDimensions();
 
         this._positions = [];
-        this._isDragging = this._didDecelerationComplete = this._isAnimating = this._isDecelerating = false;
         this._enableScrollY = false;
         this._lastTimeStamp = null;
         this._scrollTop = 0;
