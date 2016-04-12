@@ -35,11 +35,27 @@ export let pull = {
                     typeof cb && cb();
                 });
                 this.isAnimating = true;
+            }else if ( time == 0 ){
+                this._y = top;
             }
             this.$els.page.style.webkitTransform = 'translate3d(0, ' + top + 'px, 0)';
         },
         setAnimate(time){ this.$els.page.style.webkitTransition = 'transform ' + time + 'ms ease'; },
-        stopAnimate(){ this.$els.page.style.webkitTransition = ''; }
+        stopAnimate(){ this.$els.page.style.webkitTransition = ''; },
+        reset(){
+            this.move(
+                0,
+                Math.max(maxTime * (this.y - 0) / this.height, minTime),
+                () => { this.$emit('refresh:reset'); }
+            );
+        },
+        refresh(){
+            this.move(
+                this.refresher.height,
+                Math.max(maxTime * (this.y - this.refresher.height) / this.height, minTime),
+                () => { this.$emit('refresh'); }
+            );
+        }
     },
     events: {
         "webview:load": function(){ this.create(); },
@@ -69,18 +85,10 @@ export let pull = {
             this._y = this.y;
             if ( this.y > 0 ){
                 if ( this.y >= this.refresher.height * 2 ){
-                    this.move(
-                        this.refresher.height,
-                        Math.max(maxTime * (this.y - this.refresher.height) / this.height, minTime),
-                        () => { this.$emit('refresh'); }
-                    );
+                    this.refresh();
                 }
                 else{
-                    this.move(
-                        0,
-                        Math.max(maxTime * (this.y - 0) / this.height, minTime),
-                        () => { this.$emit('refresh:reset'); }
-                    );
+                    this.reset();
                 }
             }
         }
