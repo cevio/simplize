@@ -18,6 +18,7 @@ import { circle } from "../components/circle/index";
 import { photo, photos } from "../components/image/index";
 import { rater } from "../components/rater/index";
 import { spinner } from "../components/spinner/index";
+import { pull } from "../components/pull/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -66,6 +67,7 @@ export let components = {
     photo,
     photos,
     spinner,
+    pull,
     chead: cellHead,
     cbody: cellBody,
     cfoot: cellFoot,

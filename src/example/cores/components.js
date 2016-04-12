@@ -6,7 +6,7 @@ export let components = {
             { text: 'Ratio', url: '/component/ratio', icon: 'iconfont2 icon-ratio', ok: true },
             { text: 'Datetime', url: '/component/date', icon: 'iconfont2 icon-datetime', ok: true },
             { text: 'Selector', url: '/component/select', icon: 'iconfont2 icon-cc-select', ok: true },
-            { text: 'Scroll View', url: '/component/scrollview', icon: 'iconfont2 icon-iconxx2' },
+            { text: 'Pull Refresh', url: '/component/pull', icon: 'iconfont2 icon-iconxx2' },
             { text: 'In time', url: '/component/time', icon: 'iconfont2 icon-clock', ok: true },
             { text: 'Radio', url: '/component/radio', icon: 'iconfont2 icon-radio', ok: true },
             { text: 'Checkbox', url: '/component/checkbox', icon: 'iconfont2 icon-checkbox', ok: true },

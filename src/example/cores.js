@@ -34,3 +34,4 @@ export { circle } from './cores/components/circle';
 export { lazyimage } from './cores/components/lazyimage';
 export { spinner } from './cores/components/spinner';
 export { rater } from "./cores/components/rater";
+export { pull } from "./cores/components/pull";
