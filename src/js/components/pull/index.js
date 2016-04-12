@@ -37,8 +37,6 @@ export let pull = {
                     typeof cb && cb();
                 });
                 this.isAnimating = true;
-            }else if ( time == 0 ){
-                this._y = top;
             }
             this.$els.page.style.webkitTransform = 'translate3d(0, ' + top + 'px, 0)';
         },
@@ -57,6 +55,23 @@ export let pull = {
                 Math.max(maxTime * (this.y - this.refresher.height) / this.height, minTime),
                 () => { this.$emit('refresh'); }
             );
+        },
+        slow(y){
+            const h = this.refresher.height;
+            const H = this.height;
+            const m = H - 2 * h;
+            const max = ((2 * m * h + 4 * pow(h)) * -1 - ( pow(4 * h + m) / (-4) )) / m + 2 * h;
+            const a = (4 * h + m) / 2;
+
+            let r;
+
+            if ( y > a ){
+                r = max;
+            }else{
+                r = (1 - (y - 2 * h) / (H - 2 * h)) * (y - 2 * h) + 2 * h;
+            }
+
+            this.move(r);
         }
     },
     events: {
@@ -68,16 +83,18 @@ export let pull = {
         
         "scroll:move": function(e){
             this.y = e.currentY - e.startY + this._y;
-            this.move(this.y);
             if ( this.y > 0 ){
                 const percent = this.y / (this.refresher.height * 2);
                 if ( this.y >= this.refresher.height * 2 ){
+                    this.slow(this.y);
                     this.$emit('refresh:release', percent);
                 }
                 else if ( this.y >= this.refresher.height ){
+                    this.move(this.y);
                     this.$emit('refresh:continue', percent);
                 }
                 else{
+                    this.move(this.y);
                     this.$emit('refresh:start', percent);
                 }
             }
@@ -103,9 +120,13 @@ export let pull = {
             else {
                 let minTop = this.height - this.$els.page.offsetHeight;
                 let ins = Deceleration(this._y, this._positions, timeStamp, minTop, 0, (top) => {
-                    this.move(top, 0);
+                    this.move(top);
                 })
             }
         }
     }
+}
+
+function pow(val){
+    return Math.pow(val, 2);
 }
