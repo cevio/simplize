@@ -14,6 +14,8 @@ export let pull = {
             this.y = 0;
             this._y = 0;
             this._positions = [];
+            this.startY = 0;
+            this.currentY = 0;
             this.height = this.$els.root.offsetHeight;
             this.refresher = {
                 height: this.$els.refresh.offsetHeight
@@ -24,6 +26,8 @@ export let pull = {
             this.$scroller = null;
             this.y = 0;
             this._y = 0;
+            this.startY = 0;
+            this.currentY = 0;
             this.refresher = null;
         },
         move(top, time, cb){
@@ -34,7 +38,7 @@ export let pull = {
                     this._y = top;
                     this.stopAnimate();
                     this.isAnimating = false;
-                    typeof cb && cb();
+                    typeof cb === 'function' && cb();
                 });
                 this.isAnimating = true;
             }
@@ -82,6 +86,8 @@ export let pull = {
         },
         
         "scroll:move": function(e){
+            this.startY = e.startY;
+            this.currentY = e.currentY;
             this.y = e.currentY - e.startY + this._y;
             if ( this.y > 0 ){
                 const percent = this.y / (this.refresher.height * 2);
@@ -111,6 +117,7 @@ export let pull = {
 
         "scroll:end": function(timeStamp){
             this._y = this.y;
+            let minTop = this.height - this.$els.page.offsetHeight;
             if ( this.y > 0 ){
                 if ( this.y >= this.refresher.height * 2 ){
                     this.refresh();
@@ -119,12 +126,32 @@ export let pull = {
                     this.reset();
                 }
             }
-            else {
-                let minTop = this.height - this.$els.page.offsetHeight;
-                let ins = Deceleration(this._y, this._positions, timeStamp, minTop, 0, (top) => {
-                    this.move(top);
+            else if ( this.y < 0 ){
+                if ( this.startY < this.currentY ){
+                    
+                }
+                let lastTop;
+                console.log('end');
+                let ins = Deceleration(this._y, this._positions, timeStamp, minTop, 0, (top, dtop) => {
+                    if(top === true){
+                        this._y = lastTop;
+                    }
+                    else if(top === false){
+                        if(dtop){
+                            this.y = dtop;
+                        }
+                        this.move(minTop, Math.max(maxTime * (Math.abs(this.y - minTop)) / this.height, minTime));
+                        console.log('no decelerate')
+                    }
+                    else {
+                        lastTop = top;
+                        this.move(top);
+                    }
                 })
             }
+
+            this.startY = 0;
+            this.currentY = 0;
         }
     }
 }

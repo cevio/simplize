@@ -33,6 +33,8 @@ class Decelerating {
                 return;
             }
         }
+        
+        this.stopCallback && this.stopCallback(false);
     }
 
     startDeceleration () {
@@ -57,7 +59,9 @@ class Decelerating {
             this._isDecelerating = false;
 
             if(this._scrollTop <= this._minScrollTop || this._scrollTop >= this._maxScrollTop){
-                this.scrollTo(this._scrollTop);
+                if(!this._isDebounce){
+                    this.scrollTo(this._scrollTop);
+                }
                 return;
             }
 
@@ -94,10 +98,8 @@ class Decelerating {
     }
 
     publish(top, duration){
-        console.trace();
         let wasAnimation = this._isAnimating;
         if(wasAnimation){
-            console.log(this._isAnimating);
             Animate.stop(wasAnimation);
             this._isAnimating = false;
         }
@@ -113,7 +115,6 @@ class Decelerating {
             }.bind(this);
 
             let verify = function(id){
-                console.log(this._isAnimating, id);
                 return true;
                 //return this._isAnimating === id;
             }.bind(this);
@@ -146,9 +147,14 @@ class Decelerating {
             }
 
             if(Math.abs(this._decelerationVelocityY) < this._critical){
+                this._isDebounce = true;
                 Animate.stop(this._isAnimating);
                 Animate.stop(this._isDecelerating);
                 this._decelerationVelocityY = 0;
+
+                let top = Math.max(Math.min(this._maxScrollTop, this._scrollTop), this._minScrollTop);
+                console.log(top)
+                this.stopCallback(false, top);
                 return;
             }
             rate *= 0.75;
