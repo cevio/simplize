@@ -97,6 +97,8 @@ export let pull = {
                     this.move(this.y);
                     this.$emit('refresh:start', percent);
                 }
+            }else{
+                this.move(this.y);
             }
 
             if(this._positions.length > 40){
