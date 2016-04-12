@@ -80,7 +80,7 @@ export let pull = {
         "scroll:start": function(){
             this._positions = [];
         },
-        
+
         "scroll:move": function(e){
             this.y = e.currentY - e.startY + this._y;
             if ( this.y > 0 ){
