@@ -84,7 +84,7 @@ export let pull = {
         "scroll:start": function(){
             this._positions = [];
         },
-        
+
         "scroll:move": function(e){
             this.startY = e.startY;
             this.currentY = e.currentY;
