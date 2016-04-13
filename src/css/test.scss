@@ -211,3 +211,26 @@ body {
         }
     }
 }
+
+.p{
+    display:inline-block; position: relative;
+    .word{
+        position:absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        height:100%;
+        transition: all 300ms ease;
+        &.up{
+            transform: rotate(180deg);
+        }
+        i{
+            width: 100%;
+            height:100%;
+            display:block;
+            text-align:center;
+            line-height:35px;
+            color:#3cc51f;
+        }
+    }
+}

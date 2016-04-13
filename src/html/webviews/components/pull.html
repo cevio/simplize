@@ -3,7 +3,10 @@
         <middle>
             <div class="sp-flex-box sp-flex-row">
                 <div class="sp-flex-item sp-flex-1 tr">
-                    <circle :height="40" :width="40" :stroke-width="2" :trail-width="2" :percent="a"></circle>
+                    <div style="display:inline-block; position: relative;" class="p">
+                        <circle :height="35" :width="35" :stroke-width="2" :trail-width="2" :percent="a" stroke-color="#3cc51f" :animate="false"></circle>
+                        <div class="word" :class="ac" v-html="ia"></div>
+                    </div>
                 </div>
                 <div class="sp-flex-item sp-flex-2 f9 tl">
                     {{at}}
