@@ -23,8 +23,7 @@
     "fastclick": "^1.0.6",
     "path-to-regexp": "^1.2.1",
     "unique-array": "^1.0.1",
-    "vue": "^1.0.20",
-    "xscroll": "^3.1.2"
+    "vue": "^1.0.20"
   },
   "devDependencies": {
     "babel-plugin-add-module-exports": "^0.1.2",
