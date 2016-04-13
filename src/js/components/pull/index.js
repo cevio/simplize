@@ -1,6 +1,6 @@
-import XScroll from 'sscroll/xscroll'
-import Pulldown from 'sscroll/plugins/pulldown'
-import Pullup from 'sscroll/plugins/pullup'
+import XScroll from 'sp-scroll/xscroll'
+import Pulldown from 'sp-scroll/plugins/pulldown'
+import Pullup from 'sp-scroll/plugins/pullup'
 
 const pulldownDefaultConfig = {
     content: 'Pull Down To Refresh',
