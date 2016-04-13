@@ -12,22 +12,20 @@ export let pull = {
             headbar.data.left.click = function () { history.back(); };
             headbar.data.center.text = 'Simplize Component Pull Refresh';
         },
-        'pulldown:loading': function(uuid){
-            setTimeout(() => {
-                this.pulldowns.unshift(this.pulldowns.length);
-                this.$broadcast('pulldown:reset', uuid);
-            }, 2000)
-
-        },
-        'pullup:loading': function(uuid){
-            setTimeout(() => {
-                this.pullups.push(this.pullups.length);
-                nextTick(() => {
-                    this.$broadcast('pullup:reset', uuid);
-                })
-
-            }, 2000)
-
+        "webview:load": function(){
+            let scroller = this.$refs.pull;
+            scroller.$on('refresh', () => {
+                console.log('refreshing');
+                setTimeout(() => {
+                    scroller.$emit('refresh:reset');
+                }, 3000);
+            });
+            scroller.$on('loadmore', () => {
+                console.log('loadmoreing');
+                setTimeout(() => {
+                    scroller.$emit('loadmore:reset');
+                }, 3000);
+            })
         }
     },
     data: {

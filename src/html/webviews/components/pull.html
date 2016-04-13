@@ -1,5 +1,6 @@
-<pull refresh>
-    <div slot="refresh">refresh</div>
+<pull refresh loadmore v-ref:pull>
+    <div slot="refresh" style="height:80px;border-bottom:1px solid #ccc;">refresh</div>
+    <div slot="loadmore" style="height:80px;border-bottom:1px solid #ccc;">loadmore</div>
     <photos>
         <panel v-for="item in list" class="mt10 mb10">
             <phead>Articles</phead>

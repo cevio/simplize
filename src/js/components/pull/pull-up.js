@@ -2,24 +2,24 @@ var Util = require('sp-scroll/util');
 var Base = require('sp-scroll/base');
 var noop = function(){}
 
-let PullDown = function(cfg){
-    PullDown.superclass.constructor.call(this, cfg);
+let Pullup = function(cfg){
+    Pullup.superclass.constructor.call(this, cfg);
 	this.userConfig = Util.mix({
 		el: null,
         cb_start: noop,
         cb_move: noop,
         cb_over: noop,
-        cb_refresh: noop
+        cb_loadmore: noop
 	}, cfg);
 }
 
-Util.extend(PullDown, Base, {
+Util.extend(Pullup, Base, {
 	/**
 	 * a pluginId
 	 * @memberOf PullDown
 	 * @type {string}
 	 */
-	pluginId: "pulldown",
+	pluginId: "pullup",
 	/**
 	 * plugin initializer
 	 * @memberOf PullDown
@@ -62,32 +62,8 @@ Util.extend(PullDown, Base, {
 		xscroll.on("pan", self._panHandler, self);
 		xscroll.on("panend", self._panEndHandler, self);
 	},
-	// _changeStatus: function(status) {
-	// 	var prevVal = this.status;
-	// 	this.status = status;
-	// 	Util.removeClass(this.pulldown, clsPrefix + prevVal)
-	// 	Util.addClass(this.pulldown, clsPrefix + status);
-	// 	if (this.userConfig[status + "Content"]) {
-	// 		this.pulldown.innerHTML = this.userConfig[status + "Content"];
-	// 	}
-	// 	if (prevVal != status) {
-	// 		this.trigger("statuschange", {
-	// 			prevVal: prevVal,
-	// 			newVal: status
-	// 		});
-	// 		if (status == "loading") {
-	// 			this.trigger("loading");
-	// 		}
-	// 	}
-	// },
-	// /**
-	//  * reset the pulldown plugin
-	//  * @memberOf PullDown
-	//  * @param {function} callback
-	//  * @return {PullDown}
-	//  */
 	reset: function() {
-		this.xscroll.boundry.resetTop();
+		this.xscroll.boundry.resetBottom();
 		this.xscroll.boundryCheckY(() => {
             this.doing = false;
             this.xscroll.resetSize();
@@ -100,35 +76,38 @@ Util.extend(PullDown, Base, {
         var height = this.userConfig.el.offsetHeight;
 
 		var scrollTop = self.xscroll.getScrollTop();
-		if (scrollTop > 0) return;
+		if (scrollTop < 0 || scrollTop + self.xscroll.height <= self.xscroll.containerHeight) return;
 
-        var p = scrollTop * -1 / height * 2;
+        var offy = scrollTop + self.xscroll.height - self.xscroll.containerHeight;
+        var p = offy / height * 2;
 
-        if ( scrollTop < height * 2 * -1 ){
-            this.userConfig.cb_over.call(self, scrollTop, 1);
+        if ( offy > height * 2){
+            this.userConfig.cb_over.call(self, offy, 1);
         }
-        else if ( scrollTop < height * -1 ){
-            this.userConfig.cb_move.call(self, scrollTop, p);
+        else if ( scrollTop > height ){
+            this.userConfig.cb_move.call(self, offy, p);
         }
         else{
-            this.userConfig.cb_start.call(self, scrollTop, p);
+            this.userConfig.cb_start.call(self, offy, p);
         }
 	},
 	_panEndHandler: function(e) {
         var self = this;
         var height = this.userConfig.el.offsetHeight;
         var scrollTop = self.xscroll.getScrollTop();
-        if ( scrollTop < height * 2 * -1 ){
+		if (scrollTop < 0 || scrollTop + self.xscroll.height <= self.xscroll.containerHeight) return;
+        var offy = scrollTop + self.xscroll.height - self.xscroll.containerHeight;
+        if ( offy > height * 2){
             if ( this.doing ) return;
             this.doing = true;
             e.preventDefault();
-            self.xscroll.boundry.resetTop();
-            self.xscroll.boundry.expandTop(height);
+            self.xscroll.boundry.resetBottom();
+            self.xscroll.boundry.expandBottom(height);
             self.xscroll.boundryCheckY(() => {
-                this.userConfig.cb_refresh.call(this);
+                this.userConfig.cb_loadmore.call(this);
             });
         }
 	}
 });
 
-module.exports = PullDown;
+module.exports = Pullup;
