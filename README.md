@@ -1,4 +1,4 @@
-# simplizer
+# simplize
 
 a new application builder for html5 framework.
 
@@ -22,6 +22,22 @@ run the dev mode by npm scripts.
 >npm run build
 
 you can choose a project to build.
+
+## code it
+
+``` javascript
+// a simple example.
+import * as simplize from 'simplize';
+simplize.ready(function(){
+    const app = simplize(resource, data, toolbar);
+    app.$use(
+        app
+            .$browser('home')
+            .$define('index')
+    );
+    app.$run();
+});
+```
 
 ## last version
 
