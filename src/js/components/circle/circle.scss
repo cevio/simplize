@@ -6,3 +6,8 @@
   -webkit-transition: stroke-dasharray .6s;
   transition: stroke-dasharray .6s;
 }
+
+.sp-ui-circle circle .sp-ui-circle-animate-off {
+  -webkit-transition: stroke-dasharray 1ms;
+  transition: stroke-dasharray 1ms;
+}

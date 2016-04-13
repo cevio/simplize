@@ -28,6 +28,10 @@ export let circle = {
         percent: {
             type: Number,
             default: 0
+        },
+        animate: {
+            type: Boolean,
+            default: true
         }
     },
     computed: {
