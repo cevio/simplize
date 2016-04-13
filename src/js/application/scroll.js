@@ -51,6 +51,9 @@ export default class Scroll {
         this.startX = this.lastX = position.x;
         this.startY = this.lastY = position.y;
         this.lastTimeStamp = timeStamp;
+        if ( !this.vm ){
+            return this.setScrollStart(timeStamp);
+        }
         this.vm.$emit('scroll:start', timeStamp);
     }
 
@@ -72,10 +75,17 @@ export default class Scroll {
         this.lastY = position.y;
         this.lastTimeStamp = timeStamp;
 
+        if ( !this.vm ){
+            return this.setScrollMove(result);
+        }
+
         this.vm.$emit('scroll:move', result);
     }
 
     __doTouchEnd(timeStamp) {
+        if ( !this.vm ){
+            return this.setScrollEnd(timeStamp);
+        }
         this.vm.$emit('scroll:end', timeStamp);
     }
 
