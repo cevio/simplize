@@ -47,25 +47,25 @@ export let pull = {
             scroller.$on('loadmore:start', (t, p) => {
                 this.b = p * 100;
                 this.bt = '上拉加载数据';
-                this.ib = '<i class="iconfont icon-down"></i>';
+                this.ib = '<i class="iconfont icon-top"></i>';
                 this.bc = '';
             });
             scroller.$on('loadmore:move', (t, p) => {
                 this.b = p * 100;
                 this.bt = '继续上拉将加载';
-                this.ib = '<i class="iconfont icon-down"></i>';
+                this.ib = '<i class="iconfont icon-top"></i>';
                 this.bc = '';
             });
             scroller.$on('loadmore:over', (t, p) => {
                 this.b = p * 100;
                 this.bt = '松开加载数据';
-                this.ib = '<i class="iconfont icon-down"></i>';
+                this.ib = '<i class="iconfont icon-top"></i>';
                 this.bc = 'up';
             });
             scroller.$on('loadmore', () => {
                 this.b = 100;
                 this.bt = '正在加载数据';
-                this.ib = '<i class="iconfont icon-down"></i>';
+                this.ib = '<i class="iconfont icon-top"></i>';
                 this.bc = 'up';
                 console.log('loadmoreing');
                 setTimeout(() => {

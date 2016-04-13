@@ -19,6 +19,7 @@ import { photo, photos } from "../components/image/index";
 import { rater } from "../components/rater/index";
 import { spinner } from "../components/spinner/index";
 import { pull } from "../components/pull/index";
+import { flex, flexs } from "../components/flex/index";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -68,6 +69,7 @@ export let components = {
     photos,
     spinner,
     pull,
+    flex,
     chead: cellHead,
     cbody: cellBody,
     cfoot: cellFoot,
@@ -77,4 +79,8 @@ export let components = {
     switch: switcher,
     circle: circle,
     rater: rater
+}
+
+for ( let i in flexs ){
+    components[i] = flexs[i];
 }
