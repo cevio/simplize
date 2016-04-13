@@ -79,7 +79,7 @@ Util.extend(Pullup, Base, {
 		if (scrollTop < 0 || scrollTop + self.xscroll.height <= self.xscroll.containerHeight) return;
 
         var offy = scrollTop + self.xscroll.height - self.xscroll.containerHeight;
-        var p = offy / height * 2;
+        var p = offy / (height * 2);
 
         if ( offy > height * 2){
             this.userConfig.cb_over.call(self, offy, 1);

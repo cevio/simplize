@@ -14,7 +14,21 @@ export let pull = {
         },
         "webview:load": function(){
             let scroller = this.$refs.pull;
+            scroller.$on('refresh:start', (t, p) => {
+                this.a = p * 100;
+                this.at = '下拉刷新数据';
+            });
+            scroller.$on('refresh:move', (t, p) => {
+                this.a = p * 100;
+                this.at = '继续下拉将刷新';
+            });
+            scroller.$on('refresh:over', (t, p) => {
+                this.a = p * 100;
+                this.at = '松开刷新数据';
+            });
             scroller.$on('refresh', () => {
+                this.a = 100;
+                this.at = '正在刷新数据';
                 console.log('refreshing');
                 setTimeout(() => {
                     scroller.$emit('refresh:reset');
@@ -29,6 +43,10 @@ export let pull = {
         }
     },
     data: {
-        list: ["http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m1_hood.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m1_side.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/viper_1.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/viper_corner.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m3_gt.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/corvette_pitstop.jpg"]
+        list: ["http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m1_hood.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m1_side.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/viper_1.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/viper_corner.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m3_gt.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/corvette_pitstop.jpg"],
+        a:0,
+        b:0,
+        at: '',
+        bt: ''
     }
 };

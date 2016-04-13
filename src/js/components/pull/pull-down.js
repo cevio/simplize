@@ -102,7 +102,7 @@ Util.extend(PullDown, Base, {
 		var scrollTop = self.xscroll.getScrollTop();
 		if (scrollTop > 0) return;
 
-        var p = scrollTop * -1 / height * 2;
+        var p = (scrollTop * -1) / (height * 2);
 
         if ( scrollTop < height * 2 * -1 ){
             this.userConfig.cb_over.call(self, scrollTop, 1);

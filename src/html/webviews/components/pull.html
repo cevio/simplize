@@ -1,6 +1,17 @@
 <pull refresh loadmore v-ref:pull>
-    <div slot="refresh" style="height:80px;border-bottom:1px solid #ccc;">refresh</div>
-    <div slot="loadmore" style="height:80px;border-bottom:1px solid #ccc;">loadmore</div>
+    <div slot="refresh" style="height:60px;" class="tc">
+        <middle>
+            <div class="sp-flex-box sp-flex-row">
+                <div class="sp-flex-item sp-flex-1 tr">
+                    <circle :height="40" :width="40" :stroke-width="2" :trail-width="2" :percent="a"></circle>
+                </div>
+                <div class="sp-flex-item sp-flex-2 f9 tl">
+                    {{at}}
+                </div>
+            </div>
+        </middle>
+    </div>
+    <div slot="loadmore"><circle :height="30" :width="30" :stroke-width="2" :trail-width="2" :percent="b"></circle></div>
     <photos>
         <panel v-for="item in list" class="mt10 mb10">
             <phead>Articles</phead>
