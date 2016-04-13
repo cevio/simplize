@@ -1,7 +1,6 @@
-<pull lock-x scrollbar-y use-pulldown use-pullup
-      :pulldown-config={content:'下拉刷新',downContent:'下拉刷新',upContent:'释放刷新',loadingContent:'加载中'} style="height: 100%;">
-
-    <div style="overflow: hidden;">
+<pull refresh>
+<div slot="refresh">refresh</div>
+<div>列表</div>
         <div class="sp-panel mt10 mb10" v-for="item in pulldowns">
             <div class="sp-panel-hd">Articles{{item}}</div>
             <div class="sp-panel-bd">
@@ -150,7 +149,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
 </pull>
