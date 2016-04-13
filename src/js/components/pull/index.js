@@ -1,5 +1,6 @@
 import XScroll from 'sp-scroll'
 import Pulldown from './pull-down';
+import LAZYLOAD from 'sp-scroll/plugins/lazyload';
 
 export let pull = {
     name: 'pull',
@@ -36,11 +37,14 @@ export let pull = {
                 preventDefault: true,
                 gpuAcceleration: true
             });
-            setTimeout(() => {
-                this.$puller.render()
-            }, 3000)
+this.$puller.render()
+            let lazyload = new LAZYLOAD()
+            this.$puller.plug(lazyload);
+            // setTimeout(() => {
+            //     this.$puller.render()
+            // }, 3000)
+            lazyload.reset();
 
-            this.$puller.render()
 
         }
     },

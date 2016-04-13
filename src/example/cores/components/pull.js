@@ -25,13 +25,12 @@ export let pull = {
                 nextTick(() => {
                     this.$broadcast('pullup:reset', uuid);
                 })
-                
+
             }, 2000)
 
         }
     },
     data: {
-        pulldowns: [],
-        pullups: []
+        list: ["http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m1_hood.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m1_side.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/viper_1.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/viper_corner.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m3_gt.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/corvette_pitstop.jpg"]
     }
 };
