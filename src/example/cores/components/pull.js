@@ -7,6 +7,16 @@ export let pull = {
             headbar.data.left.text = 'Back';
             headbar.data.left.click = function () { history.back(); };
             headbar.data.center.text = 'Simplize Component Pull Refresh';
+        },
+        'pulldown:loading': function(uuid){
+            setTimeout(() => {
+                this.pulldowns.unshift(this.pulldowns.length);
+                this.$broadcast('pulldown:reset', uuid);
+            }, 2000)
+
         }
+    },
+    data: {
+        pulldowns: []
     }
 };
