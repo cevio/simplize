@@ -1,4 +1,4 @@
-<pull lock-x scrollbar-y use-pulldown
+<pull lock-x scrollbar-y use-pulldown use-pullup
       :pulldown-config={content:'下拉刷新',downContent:'下拉刷新',upContent:'释放刷新',loadingContent:'加载中'} style="height: 100%;">
 
     <div style="overflow: hidden;">
@@ -113,6 +113,26 @@
         </div>
         <div class="sp-panel mt10 mb10">
             <div class="sp-panel-hd">Articles</div>
+            <div class="sp-panel-bd">
+                <div class="sp-cell">
+                    <div class="sp-cell-hd" style="width:40%;"><img class="b-lazy"
+                                                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                                    data-src="http://www.jq22.com/demo/tuupola-jquery_lazyload/img/corvette_pitstop.jpg">
+                    </div>
+                    <div class="sp-cell-bd">How does it work? Just put your image size after our URL and you'll get a
+                        placeholder.
+                    </div>
+                </div>
+            </div>
+            <div class="sp-panel-ft">
+                <div class="sp-cell linked">
+                    <div class="sp-cell-bd">查看更多</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sp-panel mt10 mb10" v-for="item in pullups">
+            <div class="sp-panel-hd">Articles{{item}}</div>
             <div class="sp-panel-bd">
                 <div class="sp-cell">
                     <div class="sp-cell-hd" style="width:40%;"><img class="b-lazy"

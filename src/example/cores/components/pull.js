@@ -1,3 +1,7 @@
+import {
+    nextTick
+} from '../../../js/utils/index';
+
 export let pull = {
     template: require('../../../html/webviews/components/pull.html'),
     events: {
@@ -14,9 +18,20 @@ export let pull = {
                 this.$broadcast('pulldown:reset', uuid);
             }, 2000)
 
+        },
+        'pullup:loading': function(uuid){
+            setTimeout(() => {
+                this.pullups.push(this.pullups.length);
+                nextTick(() => {
+                    this.$broadcast('pullup:reset', uuid);
+                })
+                
+            }, 2000)
+
         }
     },
     data: {
-        pulldowns: []
+        pulldowns: [],
+        pullups: []
     }
 };
