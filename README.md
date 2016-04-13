@@ -29,7 +29,7 @@ you can choose a project to build.
 // a simple example.
 import * as simplize from 'simplize';
 simplize.ready(function(){
-    const app = simplize(resource, data, toolbar);
+    const app = simplize.bootstrap(resource, data, toolbar);
     app.$use(
         app
             .$browser('home')
