@@ -40,6 +40,8 @@ export let pull = {
                 this.$puller.render()
             }, 3000)
 
+            this.$puller.render()
+
         }
     },
     events: {
