@@ -21,6 +21,7 @@ import { spinner } from "../components/spinner/index";
 import { pull } from "../components/pull/index";
 import { flex, flexs } from "../components/flex/index";
 import { tabs, tab } from '../components/tab/tab';
+import { divider } from '../components/divider/index';
 
 import * as PROXY from './proxy';
 export let filters = {
