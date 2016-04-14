@@ -19,7 +19,7 @@ export let components = {
             { text: 'Spinner', url: '/component/spinner', icon: 'iconfont2 icon-spinner', ok: true },
             { text: 'Circle', url: '/component/circle', icon: 'iconfont2 icon-circle', ok: true },
             { text: 'Lazy Image', url: '/component/lazyimage', icon: 'iconfont2 icon-image', ok: true },
-            { text: 'Collapse', url: '/component/collapse', icon: 'iconfont icon-search' }
+            { text: 'Collapse', url: '/component/collapse', icon: 'iconfont icon-search', ok: true }
         ]
     },
     events: {
