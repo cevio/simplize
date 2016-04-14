@@ -20,6 +20,7 @@ import { rater } from "../components/rater/index";
 import { spinner } from "../components/spinner/index";
 import { pull } from "../components/pull/index";
 import { flex, flexs } from "../components/flex/index";
+import { tabs, tab } from '../components/tab/tab';
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -78,7 +79,9 @@ export let components = {
     pfoot: panelFoot,
     switch: switcher,
     circle: circle,
-    rater: rater
+    rater: rater,
+    tabs,
+    tab
 }
 
 for ( let i in flexs ){
