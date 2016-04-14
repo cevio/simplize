@@ -11,7 +11,8 @@
     &:active {
         background-color: darken(#fff,3%);
     }
-    .linked-btn {
+    &.linked:after {
+        content     : "";
         position    : absolute;
         width       : 0.5em;
         height      : 0.5em;
@@ -29,7 +30,7 @@
         &:before {
             left: $ui-side-padding;
         }
-        .linked-btn {
+        &.linked:after {
             transform: rotate(135deg);
         }
     }
