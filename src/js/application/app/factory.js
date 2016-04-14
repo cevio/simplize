@@ -71,7 +71,7 @@ export function compileWebview(name, resource = {}) {
         name: ''
     };
 
-    let _data = resource.data || {};
+    let _data = resource.data || {}, mode = 'v-show', webviewTemplate = '';
 
     _data.SP_status = false;
     _data.SP_direction = '';
@@ -84,9 +84,29 @@ export function compileWebview(name, resource = {}) {
 
     if ( resource.data ) delete resource.data;
 
+    if (resource.keepalive === undefined || !!resource.keepalive) {
+        resource.keepalive = true;
+    } else {
+        resource.keepalive = false;
+    }
+
+    if ( resource.keepalive === false ) {
+        mode = 'v-if';
+    }
+
+    if ( resource.keepalive !== undefined ){
+        delete resource.keepalive;
+    }
+
+    if ( resource.template ){
+        webviewTemplate = resource.template;
+        delete resource.template;
+    }
+
+    let template = `<div class="sp-webview" ${mode}="SP_status" :transition="SP_animate" :class="SP_webviewClasses" ><div class="sp-webview-content" :style="SP_content_style" :class="SP_webviewContentClass">${webviewTemplate}</div></div>`;
     let defaults = {
         name: 'webview',
-        template: require('../../../html/webview.html').replace('{{webview}}', resource.template || ''),
+        template: template,
         data() { return _data; },
         events: {
             "webview:active": function() {
@@ -205,22 +225,6 @@ export function compileWebview(name, resource = {}) {
             this.SP_direction = '';
             this.$emit('webview:unload');
         }
-    }
-
-    if (resource.keepalive === undefined || !!resource.keepalive) {
-        resource.keepalive = true;
-    } else {
-        resource.keepalive = false;
-    }
-
-    if (resource.keepalive) {
-        defaults.template = defaults.template.replace(':WEBVIEWSTATUS', 'v-show');
-    } else {
-        defaults.template = defaults.template.replace(':WEBVIEWSTATUS', 'v-if');
-    }
-
-    if ( resource.keepalive !== undefined ){
-        delete resource.keepalive;
     }
 
     result.component = assign(resource, defaults);
