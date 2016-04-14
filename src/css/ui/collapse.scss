@@ -1,8 +1,9 @@
 .sp-collapse {
     background-color: #fff;
-    @include sp-1px-side(darken($ui-default-border-color,10%),bottom,before);
     @include sp-1px-side(darken($ui-default-border-color,10%),top,after);
-
+    &:last-child {
+        @include sp-1px-side(darken($ui-default-border-color,10%),bottom,before);
+    }
 }
 .sp-collapse-title {
     position: relative;
