@@ -214,9 +214,9 @@ export function compileWebview(name, resource = {}) {
     }
 
     if (resource.keepalive) {
-        defaults.template = defaults.template.replace('{{status}}', 'show');
+        defaults.template = defaults.template.replace(':WEBVIEWSTATUS', 'v-show');
     } else {
-        defaults.template = defaults.template.replace('{{status}}', 'if');
+        defaults.template = defaults.template.replace(':WEBVIEWSTATUS', 'v-if');
     }
 
     if ( resource.keepalive !== undefined ){
