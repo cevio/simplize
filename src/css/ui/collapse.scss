@@ -25,7 +25,7 @@
         margin-top  : -0.25em;
         transition  : transform 200ms ease;
     }
-    .collapse-open & {
+    &.collapse-open {
         @extend .sp-1px-b;
         &:before {
             left: $ui-side-padding;
@@ -37,7 +37,7 @@
     overflow  : hidden;
     height    : 0;
     transition: height 300ms ease-in;
-    .collapse-open & {
+    &.collapse-open {
         opacity: 1;
         height : 300px;
     }
