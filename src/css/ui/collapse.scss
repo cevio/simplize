@@ -2,9 +2,7 @@
     background-color: #fff;
     @include sp-1px-side(darken($ui-default-border-color,10%),bottom,before);
     @include sp-1px-side(darken($ui-default-border-color,10%),top,after);
-    &.collapse-open .linked-btn {
-        transform: rotate(135deg);
-    }
+
 }
 .sp-collapse-title {
     position: relative;
@@ -29,6 +27,9 @@
         @extend .sp-1px-b;
         &:before {
             left: $ui-side-padding;
+        }
+        .linked-btn {
+            transform: rotate(135deg);
         }
     }
 }
