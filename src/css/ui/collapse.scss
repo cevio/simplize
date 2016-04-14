@@ -1,0 +1,43 @@
+.sp-collapse {
+    @include sp-1px-side(darken($ui-default-border-color,10%),top,before);
+    @include sp-1px-side(darken($ui-default-border-color,10%),bottom,after);
+    background-color: #fff;
+
+    &.collapse-open .linked-btn {
+        transform: rotate(135deg);
+    }
+}
+.sp-collapse-title {
+    position: relative;
+    padding : 0.8em 2rem 0.8em $ui-side-padding;
+    &:active {
+        background-color: darken(#fff,3%);
+    }
+    .linked-btn {
+        position    : absolute;
+        width       : 0.5em;
+        height      : 0.5em;
+        border-width: 2px 2px 0 0;
+        border-style: solid;
+        border-color: #888;
+        transform   : rotate(45deg);
+        right       : 1rem;
+        top         : 50%;
+        margin-top  : -0.25em;
+        transition  : transform 200ms ease;
+    }
+    .collapse-open & {
+        @extend .sp-1px-b;
+        &:before {
+            left: $ui-side-padding;
+        }
+    }
+}
+.sp-collapse-content {
+    padding: 0.8em $ui-side-padding;
+    color  : #888;
+    display: none;
+    .collapse-open & {
+        display: block;
+    }
+}

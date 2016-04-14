@@ -82,7 +82,8 @@ export let components = {
     circle: circle,
     rater: rater,
     tabs,
-    tab
+    tab,
+    divider
 }
 
 for ( let i in flexs ){

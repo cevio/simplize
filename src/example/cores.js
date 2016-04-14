@@ -37,3 +37,4 @@ export { rater } from "./cores/components/rater";
 export { pull } from "./cores/components/pull";
 
 export { tab } from "./cores/components/tab";
+export { collapse } from "./cores/components/collapse";
