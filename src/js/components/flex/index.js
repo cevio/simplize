@@ -2,7 +2,13 @@ const number = 3;
 
 export let flex = {
     name: 'flex',
-    template: '<div class="sp-flex-box sp-flex-row"><slot></slot></div>'
+    props: { col: Boolean },
+    template: '<div class="sp-flex-box" :class="class"><slot></slot></div>',
+    computed: {
+        class: function(){
+            return this.col ? 'sp-flex-col' : 'sp-flex-row';
+        }
+    }
 }
 
 export let flexs = {}
@@ -12,9 +18,4 @@ for ( let i = 1 ; i <= number ; i++ ){
         name: 'flex-' + i,
         template: '<div class="sp-flex-item sp-flex-' + i + '"><slot></slot></div>'
     }
-}
-
-flexs['flex-col'] = {
-    name: 'flex-col',
-    template: '<div class="sp-flex-box sp-flex-col"><slot></slot></div>'
 }
