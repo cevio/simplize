@@ -27,7 +27,8 @@ export let collapses = {
             if( this.group ){
                 this.show.forEach((name) => {
                     this.$broadcast('collapse:switch', name, false);
-                })
+                });
+                this.show = [];
             }
         },
         
