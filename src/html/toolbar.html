@@ -1,6 +1,1 @@
-<div class="sp-toolbar sp-flex sp-flex-row" v-if="status" v-el:root :transition="transition">
-    <div class="sp-toolbar-item tc" :style="{width:width}" v-for="bar in data | orderBy 'order'" :class="{active:bar.name==current}" v-redirect="bar.url">
-        <div class="icon" v-html="bar.icon"></div>
-        <div class="text" v-html="bar.text"></div>
-    </div>
-</div>
+<div class="sp-toolbar sp-flex sp-flex-row" v-if="status" v-el:root :transition="transition"><div class="sp-toolbar-item tc" :style="{width:width}" v-for="bar in data | orderBy 'order'" :class="{active:bar.name==current}" v-redirect="bar.url"><div class="icon" v-html="bar.icon"></div><div class="text" v-html="bar.text"></div></div></div>
