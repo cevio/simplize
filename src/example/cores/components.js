@@ -15,7 +15,7 @@ export let components = {
             { text: 'Rater', url: '/component/rater', icon: 'iconfont2 icon-star', ok: true },
             { text: 'Picker', url: '/component/picker', icon: 'iconfont2 icon-giconpicker', ok: true },
             { text: 'Progress', url: '/component/progress', icon: 'iconfont2 icon-progress', ok: true },
-            { text: 'Search', url: '/component/search', icon: 'iconfont icon-search' },
+            { text: 'Tab', url: '/component/tab', icon: 'iconfont icon-search' },
             { text: 'Spinner', url: '/component/spinner', icon: 'iconfont2 icon-spinner', ok: true },
             { text: 'Circle', url: '/component/circle', icon: 'iconfont2 icon-circle', ok: true },
             { text: 'Lazy Image', url: '/component/lazyimage', icon: 'iconfont2 icon-image', ok: true }

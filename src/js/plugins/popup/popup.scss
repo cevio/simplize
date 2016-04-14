@@ -5,11 +5,12 @@
     width   : 100%;
     height  : 100%;
     .sp-modal-popup-body {
-        background-color: #f2f2f2;
-        position        : relative;
-        height          : 100%;
-        width           : 100%;
-        overflow        : auto;
-        padding-bottom  : 44px;
+        background-color          : #f2f2f2;
+        position                  : relative;
+        height                    : 100%;
+        width                     : 100%;
+        overflow                  : auto;
+        padding-bottom            : 44px;
+        -webkit-overflow-scrolling: touch;
     }
 }
