@@ -1,8 +1,7 @@
 .sp-collapse {
-    @include sp-1px-side(darken($ui-default-border-color,10%),top,before);
-    @include sp-1px-side(darken($ui-default-border-color,10%),bottom,after);
     background-color: #fff;
-
+    @include sp-1px-side(darken($ui-default-border-color,10%),bottom,before);
+    @include sp-1px-side(darken($ui-default-border-color,10%),top,after);
     &.collapse-open .linked-btn {
         transform: rotate(135deg);
     }
@@ -34,10 +33,16 @@
     }
 }
 .sp-collapse-content {
+    opacity   : 0;
+    overflow  : hidden;
+    height    : 0;
+    transition: all 300ms;
+    .collapse-open & {
+        opacity: 1;
+        height : auto;
+    }
+}
+.sp-collapse-content-container {
     padding: 0.8em $ui-side-padding;
     color  : #888;
-    display: none;
-    .collapse-open & {
-        display: block;
-    }
 }
