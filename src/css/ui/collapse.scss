@@ -34,14 +34,9 @@
     }
 }
 .sp-collapse-content {
-    opacity   : 0;
     overflow  : hidden;
     height    : 0;
     transition: height 300ms ease-in;
-    &.collapse-open {
-        opacity: 1;
-        height : 300px;
-    }
 }
 .sp-collapse-content-container {
     padding: 0.8em $ui-side-padding;
