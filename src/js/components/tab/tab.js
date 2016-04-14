@@ -9,7 +9,8 @@ export let tabs = {
         activeColor: {
             type: String,
             default: '#04be02'
-        }
+        },
+        animate: Boolean
     },
     data: function(){
         return {
@@ -26,7 +27,7 @@ export let tabs = {
     events: {
         "tab:change": function(vm) {
             this.index = this.$children.indexOf(vm);
-            console.log(this.index);
+            this.$dispatch('tab:selected', this.index);
         }
     },
     computed: {
@@ -39,7 +40,12 @@ export let tabs = {
     },
     watch: {
         index: function (newIndex, oldIndex) {
-            this.direction = newIndex > oldIndex ? 'forward' : 'backward'
+            if(!this.animate){
+                this.direction = 'null';
+            }
+            else {
+                this.direction = newIndex > oldIndex ? 'forward' : 'backward'
+            }
         }
     }
 };

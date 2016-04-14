@@ -19,8 +19,6 @@
     display         : block;
     position        : absolute;
     bottom          : 0;
-    left            : 0;
-    right           : 50%;
     height          : 2px;
     background-color: #3cc51f;
 }
@@ -29,12 +27,4 @@
 }
 .sp-tab-selected-bar-backward {
     transition: right 0.3s cubic-bezier(.35,0,.25,1) 0.09s,left 0.3s cubic-bezier(.35,0,.25,1);
-}
-.test-left {
-    left : 0 !important;
-    right: 50% !important;
-}
-.test-right {
-    left : 50% !important;
-    right: 0 !important;
 }
