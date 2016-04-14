@@ -1,9 +1,9 @@
 <div class="sp-modal-tip sp-duration-short" v-if="status" transition="slideUp">
     <div class="sp-modal-tip-head clearfix">
-        <div class="fl sp-side-padding" @click="close">
+        <div class="fl sp-side-padding" v-on:click="close">
             <middle><i class="iconfont icon-close"></i></middle>
         </div>
-        <div class="fr sp-side-padding" @click="ok">
+        <div class="fr sp-side-padding" v-on:click="ok">
             <middle><i class="iconfont icon-check"></i></middle>
         </div>
     </div>

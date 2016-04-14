@@ -1,6 +1,6 @@
 <div class="sp-headbars" v-if="status" v-el:root :transition="transition" :class="direction">
     <div class="sp-headbar sp-flex sp-flex-row" :class="data.class" :style="data.style">
-        <div class="sp-headbar-left sp-flex sp-flex-row tl" @click="data.left.click">
+        <div class="sp-headbar-left sp-flex sp-flex-row tl" v-on:click="data.left.click">
             <div class="sp-headbar-cell">
                 <div class="sp-headbar-item">
                     <div class="sp-animate sp-icon" v-html="data.left.icon"></div>
@@ -12,12 +12,12 @@
                 </div>
             </div>
         </div>
-        <div class="sp-headbar-center sp-flex-primary tc" @click="data.center.click">
+        <div class="sp-headbar-center sp-flex-primary tc" v-on:click="data.center.click">
             <div class="sp-headbar-cell">
                 <div class="sp-animate sp-text" v-html="data.center.text"></div>
             </div>
         </div>
-        <div class="sp-headbar-right sp-flex sp-flex-row tr" @click="data.right.click">
+        <div class="sp-headbar-right sp-flex sp-flex-row tr" v-on:click="data.right.click">
             <div class="sp-headbar-cell">
                 <div class="sp-headbar-item">
                     <div class="sp-animate sp-text" v-html="data.right.text"></div>
