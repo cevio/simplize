@@ -56,3 +56,32 @@
     font-size  : 0.8em;
     line-height: 1.2;
 }
+.sp-cell-handles {
+    position: absolute;
+    right   : 0;
+    top     : 0;
+    height  : 100%;
+}
+.sp-handlecell {
+    .sp-cell {
+        z-index         : 2;
+        background-color: #fff;
+    }
+    .sp-cell-handles {
+        z-index: 1;
+    }
+
+}
+.sp-cell-handle {
+    height          : 100%;
+    float           : left;
+    padding         : 0 1em;
+    background-color: #c8c7cd;
+    color           : #fff;
+
+    &.danger {
+        color           : #fff;
+        background-color: #ff3a31;
+    }
+
+}
