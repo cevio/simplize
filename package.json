@@ -9,8 +9,8 @@
     "git": "git add . && git commit -am 'update' && git push"
   },
   "files": [
-      "build/index.js",
-      "build/css/index.css"
+    "build/index.js",
+    "build/css/index.css"
   ],
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "project-library": "simplize",
   "dependencies": {},
   "devDependencies": {
+    "array-flatten": "^2.0.0",
     "autoprefixer": "^6.3.6",
     "babel-core": "^6.7.6",
     "babel-loader": "^6.2.4",
@@ -29,25 +30,24 @@
     "babel-preset-es2015": "^6.6.0",
     "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
+    "date-format": "0.0.2",
+    "domready": "^1.0.8",
+    "es6-promise": "^3.1.2",
     "extract-text-webpack-plugin": "^1.0.1",
+    "fastclick": "^1.0.6",
     "html-loader": "^0.4.3",
     "html-minify-loader": "^1.1.0",
     "less-loader": "^2.2.3",
     "node-sass": "^3.4.2",
+    "path-to-regexp": "^1.2.1",
     "postcss-loader": "^0.8.2",
     "rimraf": "*",
     "sass-loader": "^3.2.0",
+    "sp-scroll": "^3.1.4",
     "style-loader": "^0.13.1",
-    "webpack": "^1.12.15",
-    "webpack-dev-server": "^1.14.1",
-    "array-flatten": "^2.0.0",
-    "date-format": "0.0.2",
-    "domready": "^1.0.8",
-    "es6-promise": "^3.1.2",
-    "fastclick": "^1.0.6",
-    "path-to-regexp": "^1.2.1",
-    "sp-scroll": "^3.1.3",
     "unique-array": "^1.0.1",
-    "vue": "^1.0.20"
+    "vue": "^1.0.20",
+    "webpack": "^1.12.15",
+    "webpack-dev-server": "^1.14.1"
   }
 }
