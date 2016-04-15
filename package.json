@@ -1,27 +1,26 @@
 {
   "name": "simplize",
-  "version": "1.0.0",
+  "version": "2.0.3",
   "description": "simplize Tool",
   "main": "build/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev && node_modules/.bin/webpack-dev-server --progress --colors --inline --hot --display-error-details --content-base src/",
-    "build": "rimraf ./build && cross-env NODE_ENV=production webpack -p"
+    "build": "rimraf ./build && cross-env NODE_ENV=production webpack -p",
+    "git": "git add . && git commit -am 'update' && git push"
+  },
+  "files": [
+      "build/index.js",
+      "build/css/index.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cevio/simplize"
   },
   "author": "",
   "license": "MIT",
   "project-type": "umd",
   "project-library": "simplize",
-  "dependencies": {
-    "array-flatten": "^2.0.0",
-    "date-format": "0.0.2",
-    "domready": "^1.0.8",
-    "es6-promise": "^3.1.2",
-    "fastclick": "^1.0.6",
-    "path-to-regexp": "^1.2.1",
-    "sp-scroll": "^3.1.3",
-    "unique-array": "^1.0.1",
-    "vue": "^1.0.20"
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-core": "^6.7.6",
@@ -40,6 +39,15 @@
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.15",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "array-flatten": "^2.0.0",
+    "date-format": "0.0.2",
+    "domready": "^1.0.8",
+    "es6-promise": "^3.1.2",
+    "fastclick": "^1.0.6",
+    "path-to-regexp": "^1.2.1",
+    "sp-scroll": "^3.1.3",
+    "unique-array": "^1.0.1",
+    "vue": "^1.0.20"
   }
 }

@@ -1,2 +1,2 @@
-import './css/test.scss';
+import './css/index.scss';
 export * from './js/main.js';
