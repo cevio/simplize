@@ -1,5 +1,0 @@
-# Project
-
-By simplize.
-
-MIT
