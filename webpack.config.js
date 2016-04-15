@@ -41,7 +41,7 @@ var result = {
     entry: options.js.from[env],
     output: {
         path: options.output,
-        filename: options.js.to + (pkg['project-type'] === 'umd' ? '' : jshash) + '.js'
+        filename: options.js.to + (env == 'production' ? '' : jshash) + '.js'
     },
     module: { loaders: loaders },
     postcss: function(){
