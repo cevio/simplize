@@ -4,9 +4,9 @@
   "description": "simplize Tool",
   "main": "build/index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev node_modules/.bin/webpack-dev-server --progress --colors --inline --hot --display-error-details --content-base src/",
+    "dev": "cross-env NODE_ENV=dev node_modules/.bin/webpack-dev-server --progress --host 0.0.0.0 --port 8080 --colors --inline --hot --display-error-details --content-base src/",
     "build": "rimraf ./build cross-env NODE_ENV=production webpack -p",
-    "git": "git add . && git commit -am 'update' && git push"
+    "git": "git add . && git commit -am 'update' && git push origin es6"
   },
   "files": [
     "build/index.js",
