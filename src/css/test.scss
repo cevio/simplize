@@ -116,13 +116,13 @@
     height    : 100%;
 }
 .bg1 {
-    background: rgb(252, 106, 83);
+    background: rgb(157, 196, 61);
 }
 .bg2 {
-    background: rgb(249, 137, 70);
+    background: darken(rgb(157, 196, 61),20%);
 }
 .bg3 {
-    background: rgb(35, 143, 251);
+    background: darken(rgb(157, 196, 61),10%);
 }
 .radius {
     border-radius: 0.5rem;
@@ -147,6 +147,7 @@
         padding    : 0;
         background : #fff;
         height     : 120px;
+        width      : 33.3333%;
     }
 }
 .demo-title {
@@ -212,31 +213,32 @@ body {
     }
 }
 
-.p{
-    display:inline-block; position: relative;
-    .word{
-        position:absolute;
-        top:0;
-        left:0;
-        width: 100%;
-        height:100%;
+.p {
+    display : inline-block;
+    position: relative;
+    .word {
+        position  : absolute;
+        top       : 0;
+        left      : 0;
+        width     : 100%;
+        height    : 100%;
         transition: all 300ms ease;
-        &.up{
+        &.up {
             transform: rotate(180deg);
         }
-        i{
-            width: 100%;
-            height:100%;
-            display:block;
-            text-align:center;
-            line-height:35px;
-            color:#3cc51f;
+        i {
+            width      : 100%;
+            height     : 100%;
+            display    : block;
+            text-align : center;
+            line-height: 35px;
+            color      : #3cc51f;
         }
     }
 }
-.sp-modal-popup-body{
-    padding-bottom:15px;
-    p{
+.sp-modal-popup-body {
+    padding-bottom: 15px;
+    p {
         padding-bottom: 15px;
     }
 }

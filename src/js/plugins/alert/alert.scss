@@ -43,18 +43,27 @@
 }
 
 .sp-ui-dialog-ft {
-    line-height: 42px;
-    margin-top : 20px;
-    font-size  : 17px;
-    display    : -webkit-box;
-    display    : -webkit-flex;
-    display    : -ms-flexbox;
-    display    : flex;
-    text-align : center;
+    line-height           : 42px;
+    margin-top            : 20px;
+    font-size             : 17px;
+    display               : -webkit-box;
+    display               : -webkit-flex;
+    display               : -ms-flexbox;
+    display               : flex;
+    display               : -webkit-box;
+    text-align            : center;
+    box-direction         : row;
+    box-orient            : horizontal;
+    -webkit-box-orient    : horizontal;
+    -webkit-box-direction : normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction    : row;
+    flex-direction        : row;
 }
 .sp-ui-dialog-btn {
-    flex    : 1;
-    position: relative;
+    flex            : 1;
+    position        : relative;
+    -webkit-box-flex: 1;
 
     &.primary {
         color: #0BB20C;
