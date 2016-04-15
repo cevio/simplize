@@ -1,0 +1,35 @@
+
+<div class="sp-cell-group mt10 f8">
+    <div class="sp-cell">
+        <div class="sp-cell-hd">当前时间</div>
+        <div class="sp-cell-bd "><datetime :date="new Date()"></datetime></div>
+    </div>
+    <div class="sp-cell">
+        <div class="sp-cell-hd">固定时间</div>
+        <div class="sp-cell-bd "><datetime :date="new Date('2012/12/21 00:00:00')"></datetime></div>
+    </div>
+    <div class="sp-cell">
+        <div class="sp-cell-hd">显示格式</div>
+        <div class="sp-cell-bd "><datetime :date="new Date('2012/12/21 00:00:00')" pattern="yyyy年MM月dd日 hh点mm分ss秒"></datetime></div>
+    </div>
+    <div class="sp-cell">
+        <div class="sp-cell-hd">只修改日期</div>
+        <div class="sp-cell-bd "><datetime :date="new Date('2012/12/21 00:00:00')" pattern="yyyy年MM月dd日 hh点mm分ss秒" use="ymd"></datetime></div>
+    </div>
+    <div class="sp-cell">
+        <div class="sp-cell-hd">只修改时间</div>
+        <div class="sp-cell-bd "><datetime :date="new Date('2012/12/21 00:00:00')" pattern="yyyy年MM月dd日 hh点mm分ss秒" use="his"></datetime></div>
+    </div>
+    <div class="sp-cell">
+        <div class="sp-cell-hd">特殊格式1</div>
+        <div class="sp-cell-bd "><datetime :date="new Date('2012/12/21 00:00:00')" pattern="yyyy年MM月dd日 hh点mm分ss秒" use="ymhi"></datetime></div>
+    </div>
+    <div class="sp-cell">
+        <div class="sp-cell-hd">特殊格式2</div>
+        <div class="sp-cell-bd "><datetime :date="new Date('2012/12/21 00:00:00')" pattern="yyyy年MM月dd日 hh点mm分ss秒" use="ymdh"></datetime></div>
+    </div>
+    <div class="sp-cell">
+        <div class="sp-cell-hd">特殊格式3</div>
+        <div class="sp-cell-bd "><datetime :date="new Date('2012/12/21 00:00:00')" pattern="yyyy年MM月dd日 hh点mm分ss秒" use="dhis"></datetime></div>
+    </div>
+</div>
