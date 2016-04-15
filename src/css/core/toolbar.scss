@@ -1,0 +1,29 @@
+.sp-toolbar {
+    position                   : absolute;
+    width                      : 100%;
+    bottom                     : 0;
+    left                       : 0;
+    height                     : 58px;
+    background                 : #fff;
+    z-index                    : 102;
+    -webkit-user-select        : none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout      : none;
+    display: table;
+}
+.sp-toolbar-item {
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+    &.active{
+        color:#ff0000;
+    }
+}
+
+.sp-toolbar-transition{
+    transition: transform $page-animate-duration ease;
+}
+.sp-toolbar-enter,
+.sp-toolbar-leave{
+    transform: translate3d(0, 100%, 0);
+}

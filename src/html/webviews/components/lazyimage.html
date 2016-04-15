@@ -1,0 +1,16 @@
+<photos>
+    <panel v-for="item in list" class="mt10 mb10">
+        <phead>Articles</phead>
+        <pbody>
+            <cell>
+                <chead style="width:40%;"><photo :src="item"></photo></chead>
+                <cbody>How does it work? Just put your image size after our URL and you'll get a placeholder.</cbody>
+            </cell>
+        </pbody>
+        <pfoot>
+            <cell link="on">
+                <cbody>查看更多</cbody>
+            </cell>
+        </pfoot>
+    </panel>
+</photos>

@@ -1,0 +1,7 @@
+<div class="sp-ui-circle">
+    <svg :width="width" :height="height" :viewbox="viewbox">
+        <circle :cx="cx" :cy="cy" :r="tr" :stroke-width="trailWidth" :stroke="trailColor" fill="none"></circle>
+        <circle :class="{'sp-ui-circle-animate-off': !animate}" :cx="cx" :cy="cy" :r="sr" :stroke-width="strokeWidth" :stroke="strokeColor" fill="none" :transform="transform" :stroke-dasharray="dasharray" stroke-linecap="round"></circle>
+    </svg>
+    <div class="sp-ui-circle-content"><slot></slot></div>
+</div>

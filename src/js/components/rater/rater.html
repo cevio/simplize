@@ -1,0 +1,5 @@
+<div class="sp-ui-rater">
+    <a class="sp-ui-rater-box" v-for="i in max" v-on:click="handleClick(i)" :style="{color:colors[i],marginRight:margin+'px',fontSize: fontSize + 'px', width: fontSize + 'px', height: fontSize + 'px'}">
+        <span class="sp-ui-rater-inner">{{star}}<span class="sp-ui-rater-outer" :style="{color: activeColor, width: cutPercent + '%'}" v-if="cutPercent > 0 && cutIndex === i">{{star}}</span></span>
+    </a>
+</div>

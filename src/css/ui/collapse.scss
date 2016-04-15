@@ -1,0 +1,46 @@
+.sp-collapse {
+    background-color: #fff;
+    @include sp-1px-side(darken($ui-default-border-color,10%),top,after);
+    &:last-child {
+        @include sp-1px-side(darken($ui-default-border-color,10%),bottom,before);
+    }
+}
+.sp-collapse-title {
+    position: relative;
+    padding : 0.8em 2rem 0.8em $ui-side-padding;
+    &:active {
+        background-color: darken(#fff,3%);
+    }
+    &.linked:after {
+        content     : "";
+        position    : absolute;
+        width       : 0.5em;
+        height      : 0.5em;
+        border-width: 2px 2px 0 0;
+        border-style: solid;
+        border-color: #888;
+        transform   : rotate(45deg);
+        right       : 1rem;
+        top         : 50%;
+        margin-top  : -0.25em;
+        transition  : transform 200ms ease;
+    }
+    &.collapse-open {
+        @extend .sp-1px-b;
+        &:before {
+            left: $ui-side-padding;
+        }
+        &.linked:after {
+            transform: rotate(135deg);
+        }
+    }
+}
+.sp-collapse-content {
+    overflow  : hidden;
+    height    : 0;
+    transition: height 300ms ease-in;
+}
+.sp-collapse-content-container {
+    padding: 0.8em $ui-side-padding;
+    color  : #888;
+}

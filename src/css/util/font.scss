@@ -1,0 +1,36 @@
+$fcs: (#000,#111,#222,#333,#444,#555,#666,#777,#888,#999,#aaa,#bbb,#ccc,#ddd,#eee,#fff);
+
+// c0 - c15  代表 #000~#fff
+@for $i from 0 through 15 {
+    .c#{$i} {
+        color: nth($fcs, $i + 1);
+    }
+}
+
+//f5-f35
+@for $i from $util-fontsize-start through $util-fontsize-end {
+    .f#{$i} {
+        font-size: $i * 0.1rem !important;
+    }
+}
+body {
+    font-family: Helvetica,sans-serif;
+}
+
+//text-align
+.tc {
+    text-align: center !important;
+}
+.tl {
+    text-align: left !important;
+}
+.tr {
+    text-align: right !important;
+}
+//font-weight
+.fn {
+    font-weight: normal !important;
+}
+.fb {
+    font-weight: bold !important;
+}

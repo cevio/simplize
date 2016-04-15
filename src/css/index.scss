@@ -1,0 +1,62 @@
+@charset "UTF-8";
+//变量
+@import "variables";
+
+//util (工具样式不使用前缀 且 较为简短)
+@import "util/font";
+@import "util/margin";
+@import "util/padding";
+@import "util/float";
+@import "util/mixed";
+@import "util/position";
+@import "util/animation";
+
+// ui
+@import "ui/1px";
+@import "ui/flexbox";
+@import "ui/middle";
+@import "ui/progress";
+@import "ui/ratio";
+@import "ui/panel";
+@import "ui/image";
+@import "ui/spinner";
+@import "ui/pull";
+@import "ui/tab";
+@import "ui/divider";
+@import "ui/collapse";
+//form
+@import "form/address";
+@import "form/button";
+@import "form/calendar";
+@import "form/cell";
+@import "form/checkbox";
+@import "form/datetime";
+@import "form/input";
+@import "form/radio";
+@import "form/range";
+@import "form/rater";
+@import "form/selector";
+@import "form/switch";
+@import "form/textarea";
+
+// core 目录下存放的是simplize内部的一些样式
+@import "core/iconfont";
+@import "core/app";
+@import "core/browser";
+@import "core/webview";
+@import "core/headbar";
+@import "core/toolbar";
+@import "core/modal";
+@import "core/popup";
+
+//components 组件样式
+@import "../js/components/picker/picker";
+@import "../js/components/circle/circle";
+@import "../js/components/rater/rater";
+
+//plugin class
+@import "../js/plugins/alert/alert";
+@import "../js/plugins/actionsheet/actionsheet";
+@import "../js/plugins/toast/toast";
+@import "../js/plugins/tip/tip";
+@import "../js/plugins/popup/popup";

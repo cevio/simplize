@@ -1,0 +1,51 @@
+.sp-side-padding {
+    padding-left : $ui-side-padding;
+    padding-right: $ui-side-padding;
+}
+.sp-flex-box {
+    width              : 100%;
+    text-align         : left;
+    display            : flex;
+    -webkit-box-align  : center;
+    -webkit-align-items: center;
+    justify-content    : center;
+}
+.sp-flex-item {
+    &:not(:first-child) {
+        margin-left: 8px;
+    }
+    .sp-flex-col > & {
+        margin-left: 0;
+        &:not(:first-child) {
+            margin-top: 8px;
+        }
+    }
+}
+.sp-flex-row {
+    flex-direction: row;
+    box-direction : row;
+}
+.sp-flex-col {
+    box-orient    : vertical;
+    flex-direction: column;
+    > .sp-flex-item {
+        width: 100%;
+    }
+}
+
+.sp-flex-1 {
+    flex            : 1;
+    -webkit-box-flex: 1;
+}
+.sp-flex-2 {
+    flex            : 2;
+    -webkit-box-flex: 2;
+}
+.sp-flex-3 {
+    flex            : 3;
+    -webkit-box-flex: 3;
+}
+.sp-flex-4 {
+    flex            : 4;
+    -webkit-box-flex: 4;
+}

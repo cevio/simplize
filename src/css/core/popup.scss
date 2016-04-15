@@ -1,0 +1,31 @@
+.sp-popup-container {
+    background-color: #eee;
+    padding         : 20px 0;
+    position        : absolute;
+    bottom          : 0;
+    width           : 100%;
+    left            : 0;
+}
+.sp-modal-popup-head {
+    position: relative;
+    z-index: 999;
+    height    : $ui-head-height;
+    width     : 100%;
+    background: #fff;
+    @extend .sp-1px-b;
+    box-shadow: 0px 1px 1px rgba(0,0,0,.1);
+}
+.sp-modal-popup-body {
+    position: relative;
+    // margin-top: - $ui-head-height;
+    // padding-top: $ui-head-height;
+    height  : 100%;
+    width   : 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling : touch;
+    transform: translate3d(0,0,0);
+    z-index: 998;
+}
+.sp-popup-hd {}
+.sp-popup-bd {}
+.sp-popup-ft {}

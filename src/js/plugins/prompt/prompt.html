@@ -1,0 +1,18 @@
+<div class="sp-modal-outter sp-duration-short" v-if="status" transition="sp-dialog">
+    <div class="sp-modal-inner">
+        <div class="sp-ui-dialog sp-ui-prompt">
+            <div class="sp-ui-dialog-hd">
+                <div class="sp-ui-dialog-title">{{title}}</div>
+            </div>
+            <div class="sp-ui-dialog-bd">
+                <div class="sp-ui-dialog-content">
+                    <input class="sp-ui-dialog-input" v-model="value">
+                </div>
+            </div>
+            <div class="sp-ui-dialog-ft sp-1px-t">
+                <div class="sp-ui-dialog-btn" v-on:click="cancel">取消</div>
+                <div class="sp-ui-dialog-btn primary sp-1px-l" v-on:click="ok">确定</div>
+            </div>
+        </div>
+    </div>
+</div>

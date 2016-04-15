@@ -1,0 +1,16 @@
+$tip-head-height: 44px;
+.sp-modal-tip {
+    position: absolute;
+    bottom  : 0;
+    left    : 0;
+    width   : 100%;
+    .sp-modal-tip-head {
+        height          : $tip-head-height;
+        background-color: #fff;
+        padding         : 0;
+        @extend .sp-1px-b;
+    }
+    .sp-modal-tip-body {
+        background-color: #f2f2f2;
+    }
+}

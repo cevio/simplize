@@ -1,0 +1,36 @@
+
+<div class="mt20">
+    <div class="tc">无动画{{tab1}}</div>
+    <tabs v-ref:tab1>
+        <tab>tab1</tab>
+        <tab selected>tab2</tab>
+        <tab>tab3</tab>
+    </tabs>
+</div>
+
+<div class="mt20">
+    <div class="tc">带动画{{tab2}}</div>
+    <tabs animate v-ref:tab2>
+        <tab selected>tab1</tab>
+        <tab>tab2</tab>
+        <tab>tab3</tab>
+    </tabs>
+</div>
+
+<div class="mt20">
+    <div class="tc">改变颜色{{tab3}}</div>
+    <tabs animate v-ref:tab3 active-color="#F00">
+        <tab selected>tab1</tab>
+        <tab>tab2</tab>
+        <tab>tab3</tab>
+    </tabs>
+</div>
+
+<div class="mt20">
+    <div class="tc">改变宽度{{tab4}}</div>
+    <tabs animate v-ref:tab4 :line-width="1">
+        <tab selected>tab1</tab>
+        <tab>tab2</tab>
+        <tab>tab3</tab>
+    </tabs>
+</div>

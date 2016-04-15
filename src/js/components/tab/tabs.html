@@ -1,0 +1,4 @@
+<div class="sp-tab-box">
+    <slot></slot>
+    <div class="sp-tab-selected-bar" :class="{'sp-tab-selected-bar-forward': direction === 'forward', 'sp-tab-selected-bar-backward': direction === 'backward'}" :style="{left: barLeft, right: barRight, display: 'block', backgroundColor: activeColor, height: lineWidth + 'px'}"></div>
+</div>
