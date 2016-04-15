@@ -151,7 +151,7 @@
             &:nth-child(#{$i}) {
                 transform      : rotate( (12 - $i)/12*360deg );
                 animation      : sp-spinner-ios 1s ease-in infinite;
-                animation-delay: -$i/12*1s;
+                animation-delay: -$i/12*1s !important;
             };
         }
 
