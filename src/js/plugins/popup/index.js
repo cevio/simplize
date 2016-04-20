@@ -20,7 +20,6 @@ export let POPUP = {
         close(){
             this.status = false;
             this.$parent.prevTick(() => {
-                this.html = '';
                 this.$emit('popup:close');
             })
         }

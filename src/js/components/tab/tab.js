@@ -20,14 +20,35 @@ export let tabs = {
             right: '100%'
         }
     },
-    ready: function(){
-        let children = this.$children;
-        this.tabNumber = children.length;
-    },
     events: {
         "tab:change": function(vm) {
-            this.index = this.$children.indexOf(vm);
-            this.$dispatch('tab:selected', this.index);
+            if ( !vm ) return;
+
+            let result = [];
+            for ( let i = 0 ; i < this.$children.length ; i++ ){
+                if ( this.$children[i]._isTab ){
+                    result.push(this.$children[i]);
+                }
+            }
+
+            if ( result.length ){
+                const index = result.indexOf(vm);
+                if ( index > -1 ){
+                    this.$emit('tab:select', vm, index);
+                    this.index = index;
+                }
+            }
+        },
+        "tab:init": function(vm){
+            this.selectVm = vm;
+        },
+        "webview:load": function(){
+            let children = this.$children;
+            this.tabNumber = children.length;
+            this.$emit('tab:change', this.selectVm);
+        },
+        "webview:unload": function(){
+            delete this.selectVm;
         }
     },
     computed: {
@@ -57,13 +78,12 @@ export let tab = {
         selected: Boolean
     },
     ready: function(){
-        if( this.selected ){
-            this.$dispatch('tab:change', this);
-        }
+        this._isTab = true;
+        this.selected && this.$parent.$emit('tab:init', this);
     },
     methods: {
         select: function(){
-            this.$dispatch('tab:change', this);
+            this.$parent.$emit('tab:change', this);
         }
     }
 };

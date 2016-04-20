@@ -13,7 +13,6 @@ export let TIP = {
         close(){
             this.status = false;
             this.$parent.prevTick(() => {
-                this.html = '';
                 this.$emit('tip:close');
             })
         }

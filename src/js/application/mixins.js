@@ -37,7 +37,10 @@ export let directives = {
         deep: true,
         _url: null,
         bind(){
-             this._cb = () => { Redirect(this.vm.$root)(this._url); };
+             this._cb = () => {
+                 if ( !this._url ) return;
+                 Redirect(this.vm.$root)(this._url);
+             };
              on(this.el, 'click', this._cb);
         },
         update(newValue){

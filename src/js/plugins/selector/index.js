@@ -12,7 +12,6 @@ export let SELECTOR = {
         close(){
             this.status = false;
             this.$parent.prevTick(() => {
-                this.data = [];
                 this.$emit('select:close');
             });
         },

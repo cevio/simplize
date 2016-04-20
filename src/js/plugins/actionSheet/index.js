@@ -21,7 +21,6 @@ export let ACTIONSHEET = {
         close: function(){
             this.$emit('actionsheet:cancel');
             this.$parent.prevTick(() => {
-                this.menus = [];
                 this.status = false;
             });
         },
