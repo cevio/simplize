@@ -34,13 +34,7 @@ export function compileBrowser(name, resource = {}, cache) {
             this.SP_background_color = '';
             this.SP_currentWebview = null;
         },
-        ready(){ this.$emit('browser:async'); },
-        events: {
-            // 告诉toolbar，现在正在使用这个browser
-            'toolbar:exchange': function(){
-                this.$root.$refs.toolbar.current = this.SP_browser_name;
-            }
-        }
+        ready(){ this.$emit('browser:async'); }
     }
 
     for (let i in webviews) {

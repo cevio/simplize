@@ -6,8 +6,7 @@ export let Toolbar = {
         return {
             data: this.GetDataFromSimplizeCache(),
             status: false,
-            height: 0,
-            current: ''
+            height: 0
         }
     },
     computed: {
@@ -22,6 +21,9 @@ export let Toolbar = {
                     ? 'none'
                     : 'sp-toolbar'
                 );
+        },
+        current(){
+            return this.$root.SP_currentBrowser;
         }
     },
     events: {

@@ -178,10 +178,6 @@ export default class Cache extends route {
                  oldWebview.$emit('webview:unactive');
              }
 
-             // 触发 toolbar 更换事件
-             // 让browser告诉toolbar现在是加载哪个browser
-             webview.$parent.$emit('toolbar:exchange');
-
              // 触发新的webview跳转
              webview.$emit('webview:active');
 
