@@ -3,14 +3,12 @@
     bottom  : 0;
     left    : 0;
     width   : 100%;
-    height  : 100%;
     .sp-modal-popup-body {
+        padding-bottom            : 0;
         background-color          : #f2f2f2;
         position                  : relative;
-        height                    : 100%;
         width                     : 100%;
         overflow                  : auto;
-        padding-bottom            : 44px;
         -webkit-overflow-scrolling: touch;
     }
 }

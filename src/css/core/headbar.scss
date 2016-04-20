@@ -5,60 +5,61 @@
     width   : 100%;
     height  : 44px;
     z-index : 100;
-    .sp-headbar {
-        position        : relative;
-        height          : 100%;
-        z-index         : 101;
-        background-color: #fff;
-        width           : 100%;
-        .sp-headbar-cell {
-            display       : table-cell;
-            vertical-align: middle;
-            height        : 100%;
-            .sp-headbar-item {
-                display: inline-block;
-            }
-        }
-        .sp-headbar-left {
-            padding-left: $ui-side-padding;
-            height      : 100%;
-            position    : absolute;
-            left        : 0;
-            top         : 0;
-            display     : table;
-        }
-        .sp-headbar-right {
-            padding-right: $ui-side-padding;
-            height       : 100%;
-            position     : absolute;
-            right        : 0;
-            top          : 0;
-            display      : table;
-        }
+}
 
-        .sp-headbar-center {
-            height : 100%;
-            display: table;
-            width  : 100%;
-        }
-        .sp-icon {
+.sp-headbar {
+    position        : relative;
+    height          : 100%;
+    z-index         : 101;
+    background-color: #fff;
+    width           : 100%;
+    .sp-headbar-cell {
+        display       : table-cell;
+        vertical-align: middle;
+        height        : 100%;
+        .sp-headbar-item {
             display: inline-block;
         }
-        .sp-headbar-left,
-        .sp-headbar-right {
-            .sp-text {
-                line-height: 1;
-            }
+    }
+    .sp-headbar-left {
+        padding-left: $ui-side-padding;
+        height      : 100%;
+        position    : absolute;
+        left        : 0;
+        top         : 0;
+        display     : table;
+    }
+    .sp-headbar-right {
+        padding-right: $ui-side-padding;
+        height       : 100%;
+        position     : absolute;
+        right        : 0;
+        top          : 0;
+        display      : table;
+    }
+
+    .sp-headbar-center {
+        height : 100%;
+        display: table;
+        width  : 100%;
+    }
+    .sp-icon {
+        display: inline-block;
+    }
+    .sp-headbar-left,
+    .sp-headbar-right {
+        .sp-text {
+            line-height: 1;
         }
     }
-    .sp-headbar-temp {
-        position: absolute;
-        top     : 0;
-        left    : 0;
-        width   : 100%;
-        height  : 100%;
-        z-index : 102;
-    }
+}
+.sp-headbar-temp {
+    position: absolute;
+    top     : 0;
+    left    : 0;
+    width   : 100%;
+    height  : 100%;
+    z-index : 102;
 }
 
 .ios {}

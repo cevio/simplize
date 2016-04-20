@@ -23,6 +23,7 @@ import { flex, flexs } from "../components/flex/index";
 import { tabs, tab } from '../components/tab/tab';
 import { divider } from '../components/divider/index';
 import { collapses, collapse, collapseTrigger, collapseContent } from "../components/collapse/index";
+import { search } from "../components/search/search";
 
 import * as PROXY from './proxy';
 export let filters = {
@@ -91,7 +92,8 @@ export let components = {
     collapses,
     collapse,
     collapseTrigger,
-    collapseContent
+    collapseContent,
+    search
 }
 
 for ( let i in flexs ){
