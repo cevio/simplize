@@ -14,6 +14,12 @@ export let alert = {
             this.$alert('Simple警告信息').then(function(alert){
                 alert.$on('alert:ok', function(){
                     console.log('close ok')
+
+                    this.$alert('Simple警告信息haha').then(function(alert){
+                        alert.$on('alert:ok', function(){
+                            console.log('close ok')
+                        })
+                    })
                 })
             })
         },

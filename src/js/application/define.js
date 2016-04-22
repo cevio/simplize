@@ -18,6 +18,8 @@ export default function defined( methodName, component ) {
                     }else{
                         this.$nextTick(() => {
                             modal.$refs.target.$constructor.apply(modal.$refs.target, args);
+                            //解绑之前绑定的事件
+                            modal.$refs.target.$off();
                             resolve(modal.$refs.target);
                         });
                     }
