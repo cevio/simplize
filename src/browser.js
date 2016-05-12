@@ -7,12 +7,22 @@ export let a = {
     },
     webviews: {
         index: {
-            template: `<h3>dasf</h3>`,
+            template: `<h3 v-redirect="'/two'">dasf</h3>`,
             events:{
                 "webview:preset": function(head, tool){
                     head.active();
                     tool.active();
                     head.data.center.text = 'a'
+                }
+            }
+        },
+        two: {
+            template: `<h3 v-reback="'/'">two</h3>`,
+            events:{
+                "webview:preset": function(head, tool){
+                    head.active();
+                    tool.active();
+                    head.data.center.text = 'two'
                 }
             }
         }
@@ -33,6 +43,27 @@ export let b = {
                     head.active();
                     tool.active();
                     head.data.center.text = 'b'
+                }
+            }
+        }
+    }
+}
+
+export let c = {
+    inject: {
+        icon: '<i class="fa fa-home"></i>',
+        text: 'HOME3',
+        url: '/c',
+        order: 3
+    },
+    webviews: {
+        index: {
+            template: `<h3>tttt</h3>`,
+            events:{
+                "webview:preset": function(head, tool){
+                    head.active();
+                    tool.active();
+                    head.data.center.text = 'c'
                 }
             }
         }

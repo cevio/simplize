@@ -39,7 +39,25 @@ export let directives = {
         bind(){
              this._cb = () => {
                  if ( !this._url ) return;
-                 Redirect(this.vm.$root)(this._url);
+                 Redirect.call(this.vm.$root, this._url);
+             };
+             on(this.el, 'click', this._cb);
+        },
+        update(newValue){
+            this._url = newValue;
+        },
+        unbind(){
+            off(this.el, 'click', this._cb);
+        }
+    },
+    "reback": {
+        priority: 3000,
+        deep: true,
+        _url: null,
+        bind(){
+             this._cb = () => {
+                 if ( !this._url ) return;
+                 Redirect.call(this.vm.$root, this._url, true);
              };
              on(this.el, 'click', this._cb);
         },
@@ -53,7 +71,8 @@ export let directives = {
 }
 
 export let methods = {
-    $redirect(url){ Redirect(this.$root)(url); }
+    $redirect(url){ Redirect.call(this.$root, url); },
+    $reback(url){ Redirect.call(this.$root, url, true); }
 }
 
 export let components = {

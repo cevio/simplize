@@ -8,7 +8,7 @@ let timer = null;
 
 export default function(callback){
     return {
-        $run(){ hashChange(this); typeof callback == 'function' && callback(this); },
+        $run(){ hashChange.call(this); typeof callback == 'function' && callback(this); },
         $browser(name){ return this.$cache.get('browser-' + name); },
         $disableAnimation(){ this.SP_disableAnimation = true; },
         $enableAnimation(){ this.SP_disableAnimation = false; },
@@ -40,61 +40,37 @@ export default function(callback){
         }
     }
 }
-function hashChange(that){
-    utils.on(window, 'hashchange', function(e){
-        e.preventDefault();
-        if ( timer ) clearTimeout(timer);
-        let referrer = that.req.path + '';
-        let object = initUrl(window.location);
-        let result = PROXY.HISTORY.diff(referrer, object.path);
-
-        switch ( result.usage ) {
-            case 'replace':
-                delay(function(){
-                    typeof result.fn === 'function' && result.fn();
-                    that.env.direction = 'turn:left';
-                });
-                break;
-            case 'add':
-                delay(function(){
-                    PROXY.HISTORY.push(object.path);
-                    that.env.direction = 'turn:left';
-                });
-                break;
-            case 'refresh':
-                delay(function(){
-                    that.env.direction = 'turn:still';
-                    return function(){
-                        that.$emit('app:route');
-                    }
-                });
-                break;
-            case 'forward':
-                delay(function(){
-                    typeof result.fn === 'function' && result.fn();
-                    that.env.direction = 'turn:left';
-                });
-                break;
-            case 'back':
-                delay(function(){
-                    that.env.direction = 'turn:right';
-                });
-                break;
+function hashChange(){
+    PROXY.HISTORY.listen(location => {
+        if ( this.$root.SP_firstEnter ){
+            this.$root.SP_none = true;
+            this.$root.SP_firstEnter = false;
+            if ( !location.state ){
+                PROXY.HISTORY.replace(location);
+                return;
+            }
         }
 
-        function delay(fn){
-            timer = setTimeout(function(){
-                let _fn;
-                if ( typeof fn === 'function' ){
-                    _fn = fn();
-                }
-                that.env.referrer = referrer;
-                Object.assign(that.req, object);
-                if ( typeof _fn === 'function' ){
-                    _fn();
-                }
-            }, 1000 / 60);
+        if ( this.$root.forceBack ){
+            this.$root.env.direction = 'turn:right';
+            delete this.$root.forceBack;
+        }else{
+            const a = location.state.index;
+            const b = this.$root.env.oldHistoryIndex;
+            this.$root.env.oldHistoryIndex = a;
+            if ( a > b ){
+                this.$root.env.direction = 'turn:left';
+            }
+            else if ( a < b ){
+                this.$root.env.direction = 'turn:right';
+            }
+            else{
+                this.$root.env.direction = 'turn:still';
+            }
         }
+
+        this.$root.req = location;
+        this.$root.req.path = location.pathname;
     });
 }
 

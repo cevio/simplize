@@ -11,8 +11,8 @@ import fastclick from 'fastclick';
 import { Toolbar } from './toolbar';
 import * as PROXY from './proxy';
 import { modal } from './modal';
+import History from './history';
 
-PROXY.HISTORY = new session(PROXY.HISTORY_NAME);
 PROXY.simplizeCache = new cache();
 
 let _resource = {
@@ -21,6 +21,8 @@ let _resource = {
         stopAnimate: false,
         direction: '',
         referrer: '',
+        oldHistoryIndex: 0,
+        newHistoryIndex: 0,
         animateDisable: false,
         viewScale: 1,
         viewType: 'device-width',
@@ -44,11 +46,7 @@ vue.mixin(mixin);
 
 export function bootstrap( resource = {}, data = {}, toolbar = Toolbar ){
     fastclick.attach(document.body);
-    _resource.req = initUrl(window.location);
-
-    history.replaceState({ url: _resource.req.href }, document.title, _resource.req.origin);
-    PROXY.HISTORY.add(_resource.req);
-
+    PROXY.HISTORY = new History();
     let Cache = PROXY.simplizeCache;
     let _data = Object.assign({}, _resource, data);
     let browsers = compileApp(resource, Cache);
@@ -72,7 +70,8 @@ export function bootstrap( resource = {}, data = {}, toolbar = Toolbar ){
         }
     });
 
-    Object.defineProperty(Cache, 'root', { get: function(){ return Vue; } });
+    Object.defineProperty(Cache, 'root', { get(){ return Vue; } });
+    Object.defineProperty(Vue, '$history', { get(){ return PROXY.HISTORY.history } });
     Vue.$cache = Cache;
 
     return Vue;

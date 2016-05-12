@@ -18,6 +18,7 @@ export function initUrl(local){
             let _search = hash.substring(index).replace(/^\?/, '');
             if ( _search ){
                 let _querys = format(_search);
+                if ( _querys._k ) delete _querys._k;
                 querys = deepExtend(querys, _querys);
             }
         }else{

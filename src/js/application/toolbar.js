@@ -17,7 +17,7 @@ export let Toolbar = {
             return this.$root.env.stopAnimate
                 ? ''
                 : (
-                    this.$root.SP_firstEnter
+                    this.$root.SP_none
                     ? 'none'
                     : 'sp-toolbar'
                 );

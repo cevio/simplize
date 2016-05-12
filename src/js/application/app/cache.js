@@ -176,7 +176,7 @@ export default class Cache extends route {
 
              // 触发工具条方向翻转
              toolbar.$emit('toolbar:direct');
-
+             console.log(oldWebview, webview)
              // 触发旧的webview跳转
              if ( oldWebview ){
                  oldWebview.$emit('webview:unactive');
@@ -191,11 +191,14 @@ export default class Cache extends route {
                      app.$refs.browser.SP_background_color = 'dark';
                  }
                  app.$refs.browser.SP_firstEnter = false;
-                 app.SP_firstEnter = false;
+                 if ( app.SP_none ) delete app.SP_none;
                  if ( app.SP_oldCurrentBrowser ){
                      app.SP_oldCurrentBrowser.SP_firstEnter = true;
                      app.SP_oldCurrentBrowser.SP_background_color = '';
-                     app.SP_oldCurrentBrowser.SP_currentWebview = null;
+                     if ( app.SP_oldCurrentBrowser.SP_currentWebview ){
+                         app.SP_oldCurrentBrowser.SP_currentWebview.$emit('webview:unactive');
+                         app.SP_oldCurrentBrowser.SP_currentWebview = null;
+                     }
                      delete app.SP_oldCurrentBrowser;
                  }
              });
