@@ -10,9 +10,16 @@ export let POPUP = {
                     this.heightObject = {
                         height: '100%'
                     }
-                    this.bodyHeight = {
-                        height:'calc(100% - 44px)'
+                    if(showHead){
+                      this.bodyHeight = {
+                          height:'calc(100% - 44px)'
+                      }
+                    }else{
+                      this.bodyHeight = {
+                          height:'100%'
+                      }
                     }
+
                 }
                 this.$parent.mask = true;
                 this.status = true;
