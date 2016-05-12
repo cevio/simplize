@@ -3,6 +3,7 @@ import { initUrl } from '../init';
 import { type } from '../../utils';
 import Redirect from '../redirect';
 import * as PROXY from '../proxy';
+import { format } from '../url';
 
 let timer = null;
 
@@ -69,6 +70,16 @@ function hashChange(){
             }
         }
 
+        if ( location.search ){
+            location.query = format(location.search.replace(/^\?/, ''));
+        }else{
+            location.query = {};
+        }
+
+        if ( window.location.search ){
+            location.query = deepExtend(location.query, format(window.location.search.replace(/^\?/, '')));
+        }
+        
         this.$root.req = location;
         this.$root.req.path = location.pathname;
     });
@@ -82,4 +93,33 @@ function makeBrowserMiddleware(browser, that){
         Object.assign(that.req.params, Layer.params);
         browser.dispatch(distURL, next);
     }
+}
+
+function deepExtend(a, b){
+    let d = Object.keys(b).sort();
+
+    var i = d.length;
+    while ( i-- ){
+        let name = d[i];
+        let value = b[name];
+        let target = a[name];
+        if ( target ){
+            if ( Array.isArray(target) ){
+                if ( Array.isArray(value) ){
+                    a[name] = unique(target.concat(value));
+                }else{
+                    if ( target.indexOf(value) == -1 ){
+                        target.push(value);
+                    }
+                }
+            }else{
+                if ( target != value ){
+                    a[name] = [target, value];
+                }
+            }
+        }else{
+            a[name] = value;
+        }
+    }
+    return a;
 }
