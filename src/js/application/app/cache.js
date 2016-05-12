@@ -176,7 +176,7 @@ export default class Cache extends route {
 
              // 触发工具条方向翻转
              toolbar.$emit('toolbar:direct');
-             console.log(oldWebview, webview)
+             
              // 触发旧的webview跳转
              if ( oldWebview ){
                  oldWebview.$emit('webview:unactive');
