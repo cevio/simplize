@@ -1,33 +1,21 @@
 import './css/test.scss';
 import * as simplize from './js/main.js';
-import * as browsers from './example/resource.js';
+import * as browsers from './browser';
 
 simplize.ready(function() {
-    let app = simplize.bootstrap(browsers, { SP_animate_switch: 'fade' });
+    const app = simplize.bootstrap(browsers);
+    const a = app.$browser('a');
+    const b = app.$browser('b');
 
-    app
-        .$use(
-            app.$browser('cores')
-                .$active('/modal/:id', function(next){
-                    const id = this.root.req.params.id;
-                    if ( id ) { this.$render(id); }
-                    else{ next() }
-                })
-                .$active('/component/:id', function(next){
-                    const id = this.root.req.params.id;
-                    if ( id ) { this.$render(id); }
-                    else{ next() }
-                })
-                .$define('/modals', 'modals')
-                .$define('/buttons', 'buttons')
-                .$define('/components', 'components')
-                .$define('/cell', 'cell')
-                .$define('/1px', 'pxborder')
-                .$define('/panel', 'panel')
-                .$define('/layout', 'layout')
-                .$define('/icons', 'icons')
-                .$define('index')
-        );
+    app.$use('/b', b);
+    app.$use(a);
+
+    a.$active(function(){
+        this.$render('index');
+    })
+    b.$active(function(){
+        this.$render('index');
+    })
 
     app.$run();
 });

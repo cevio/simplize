@@ -58,6 +58,10 @@ export default class Cache extends route {
 
         if ( this._type !== 'browser' ) throw new Error('you cannot use $render on webview object or app object, only use on browser.');
 
+        if ( app.SP_currentBrowser != browser_name ){
+            app.SP_oldCurrentBrowser = app.$refs.browser;
+        }
+
         // 直接通知component标签挂载这个browser
         app.SP_currentBrowser = browser_name;
 
@@ -188,6 +192,12 @@ export default class Cache extends route {
                  }
                  app.$refs.browser.SP_firstEnter = false;
                  app.SP_firstEnter = false;
+                 if ( app.SP_oldCurrentBrowser ){
+                     app.SP_oldCurrentBrowser.SP_firstEnter = true;
+                     app.SP_oldCurrentBrowser.SP_background_color = '';
+                     app.SP_oldCurrentBrowser.SP_currentWebview = null;
+                     delete app.SP_oldCurrentBrowser;
+                 }
              });
          });
     }
