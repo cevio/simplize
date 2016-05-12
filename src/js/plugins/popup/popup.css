@@ -1,0 +1,14 @@
+.sp-modal-popup {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; }
+  .sp-modal-popup .sp-modal-popup-body {
+    padding-bottom: 0;
+    background-color: #f2f2f2;
+    position: relative;
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; }
+
+/*# sourceMappingURL=popup.css.map */

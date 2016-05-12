@@ -41,7 +41,7 @@ export let index = {
             })
         },
         openView(){
-            this.$popup('<div class="p10 f8">' + temp + '</div>', true);
+            this.$popup('<div class="p10 f8">' + temp + '</div>', true,true);
         }
     }
 }

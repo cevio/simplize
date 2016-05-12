@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @while $util-padding-start <= $util-padding-end {
     $i                 : $util-padding-start;
     .p#{$i} {

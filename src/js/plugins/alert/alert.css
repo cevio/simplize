@@ -1,0 +1,55 @@
+.sp-ui-dialog {
+  background: #fff;
+  border-radius: 3px;
+  width: 83%;
+  margin: 0 auto; }
+
+.sp-ui-dialog-hd {
+  text-align: center;
+  padding: 1.2em 20px 0.5em;
+  font-size: 17px; }
+
+.sp-ui-dialog-bd {
+  padding: 0 20px;
+  font-size: 15px;
+  color: #888; }
+
+.sp-ui-dialog-input {
+  display: block;
+  width: 100%;
+  padding: 0.8em 1em;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #d9d9d9; }
+
+.sp-ui-dialog-ft {
+  line-height: 42px;
+  margin-top: 20px;
+  font-size: 17px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  text-align: center;
+  box-direction: row;
+  box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row; }
+
+.sp-ui-dialog-btn {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  position: relative;
+  -webkit-box-flex: 1; }
+  .sp-ui-dialog-btn.primary {
+    color: #0BB20C; }
+  .sp-ui-dialog-btn:first-child::before {
+    display: none; }
+
+/*# sourceMappingURL=alert.css.map */
