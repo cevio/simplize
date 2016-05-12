@@ -5,21 +5,20 @@ export default function redirect (url, back) {
 
     if ( back ){
         const storage = window.sessionStorage;
-        let i = storage.length, _index = 0;
+        let i = storage.length, _index = -1;
 
         while (i--){
             let key = storage.key(i);
             if ( key.indexOf('@@History') === 0 ){
                 let state = JSON.parse(storage.getItem(storage.key(i)));
                 let pathname = state.pathname;
-                if ( this.$root.env.referrer == pathname && state.index < this.$root.env.oldHistoryIndex ){
+                if ( url.split('?')[0] == pathname && state.index < this.$root.env.oldHistoryIndex && this.$root.env.oldHistoryIndex > 0 ){
                     _index = state.index;
                     break;
                 }
             }
         }
-
-        if ( _index == 0 ){
+        if ( _index == -1 ){
             this.$root.forceBack = true;
             PROXY.HISTORY.push(url);
         }else{

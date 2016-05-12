@@ -42,23 +42,43 @@ export default function(callback){
     }
 }
 function hashChange(){
+    let lastLocation = null;
     PROXY.HISTORY.listen(location => {
         if ( this.$root.SP_firstEnter ){
             this.$root.SP_none = true;
             this.$root.SP_firstEnter = false;
+
             if ( !location.state ){
+
+                let len = window.sessionStorage.length;
+                while( len-- ){
+                    let key = window.sessionStorage.key(len)
+                    if( key.indexOf('@@History') === 0 ){
+                        sessionStorage.removeItem(key);
+                    }
+                }
                 PROXY.HISTORY.replace(location);
                 return;
             }
         }
+
+        if( location.action === 'PUSH' ){
+            let locationKey = '@@History/' + location.key;
+            let stateData = JSON.parse(window.sessionStorage.getItem(locationKey));
+            stateData.index = history.length;
+            window.sessionStorage.setItem(locationKey, JSON.stringify(stateData));
+            location.state = stateData;
+        }
+
 
         if ( this.$root.forceBack ){
             this.$root.env.direction = 'turn:right';
             delete this.$root.forceBack;
         }else{
             const a = location.state.index;
-            const b = this.$root.env.oldHistoryIndex;
-            this.$root.env.oldHistoryIndex = a;
+            const b = lastLocation ? lastLocation.state.index : this.$root.env.oldHistoryIndex;
+
+            this.$root.env.newHistoryIndex = a;
             if ( a > b ){
                 this.$root.env.direction = 'turn:left';
             }
@@ -79,9 +99,11 @@ function hashChange(){
         if ( window.location.search ){
             location.query = deepExtend(location.query, format(window.location.search.replace(/^\?/, '')));
         }
-        
+
         this.$root.req = location;
         this.$root.req.path = location.pathname;
+
+        lastLocation = location;
     });
 }
 

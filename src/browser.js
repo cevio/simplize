@@ -13,6 +13,9 @@ export let a = {
                     head.active();
                     tool.active();
                     head.data.center.text = 'a'
+                },
+                "webview:refresh": function(){
+                    console.log('refresh')
                 }
             }
         },
@@ -23,6 +26,9 @@ export let a = {
                     head.active();
                     tool.active();
                     head.data.center.text = 'two'
+                },
+                "webview:refresh": function(){
+                    console.log('refresh')
                 }
             }
         }
