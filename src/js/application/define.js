@@ -1,12 +1,13 @@
 import * as PROXY from './proxy';
-import { methods } from './mixins';
 import { Promise } from 'es6-promise';
+import vue from 'vue';
+
 export default function defined( methodName, component ) {
     if ( !component.name ){
         throw new Error('miss component name.');
     }
     PROXY.plugins[component.name] = component;
-    methods[methodName] = (function(name){
+    vue.prototype[methodName] = (function(name){
         return function(...args){
             return new Promise((resolve, reject) => {
                 const modal = this.$root.$refs.modal;

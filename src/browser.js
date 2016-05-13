@@ -7,7 +7,7 @@ export let a = {
     },
     webviews: {
         index: {
-            template: `<h3 v-redirect="'/two'">dasf</h3>`,
+            template: `<h3 @click="go">dasf</h3><p @click="t">click</p>`,
             events:{
                 "webview:preset": function(head, tool){
                     head.active();
@@ -16,6 +16,16 @@ export let a = {
                 },
                 "webview:refresh": function(){
                     console.log('refresh')
+                }
+            },
+            methods:{
+                go(){
+                    this.$redirect('/two')
+                },
+                t(){
+                    this.$alert('ok').then(function(s){
+                        console.log(s);
+                    })
                 }
             }
         },

@@ -70,11 +70,6 @@ export let directives = {
     }
 }
 
-export let methods = {
-    $redirect(url){ Redirect.call(this.$root, url); },
-    $reback(url){ Redirect.call(this.$root, url, true); }
-}
-
 export let components = {
     picker,
     middle,

@@ -1,7 +1,5 @@
-import {
-    on,
-    off
-} from '../../utils/index';
+import { on, off } from '../../utils/index';
+
 export let ALERT = {
     name: 'sp-ui-alert',
     template: require('./alert.html'),
