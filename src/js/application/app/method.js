@@ -44,66 +44,70 @@ export default function(callback){
 function hashChange(){
     let lastLocation = null;
     PROXY.HISTORY.listen(location => {
-        if ( this.$root.SP_firstEnter ){
-            this.$root.SP_none = true;
-            this.$root.SP_firstEnter = false;
+        setTimeout(() => {
+            if ( this.$root.SP_firstEnter ){
+                this.$root.SP_none = true;
+                this.$root.SP_firstEnter = false;
 
-            if ( !location.state ){
+                if ( !location.state ){
 
-                let len = window.sessionStorage.length;
-                while( len-- ){
-                    let key = window.sessionStorage.key(len)
-                    if( key.indexOf('@@History') === 0 ){
-                        sessionStorage.removeItem(key);
+                    let len = window.sessionStorage.length;
+                    while( len-- ){
+                        let key = window.sessionStorage.key(len)
+                        if( key.indexOf('@@History') === 0 ){
+                            sessionStorage.removeItem(key);
+                        }
                     }
+                    PROXY.HISTORY.replace(location);
+                    return;
                 }
-                PROXY.HISTORY.replace(location);
-                return;
             }
-        }
 
-        if( location.action === 'PUSH' ){
-            let locationKey = '@@History/' + location.key;
-            let stateData = JSON.parse(window.sessionStorage.getItem(locationKey));
-            stateData.index = history.length;
-            window.sessionStorage.setItem(locationKey, JSON.stringify(stateData));
-            location.state = stateData;
-        }
-
-
-        if ( this.$root.forceBack ){
-            this.$root.env.direction = 'turn:right';
-            delete this.$root.forceBack;
-        }else{
-            const a = location.state.index;
-            const b = lastLocation ? lastLocation.state.index : this.$root.env.oldHistoryIndex;
-
-            this.$root.env.newHistoryIndex = a;
-            if ( a > b ){
-                this.$root.env.direction = 'turn:left';
+            console.log(location);
+            if( location.action === 'PUSH' ){
+                console.log(history.length);
+                let locationKey = '@@History/' + location.key;
+                let stateData = JSON.parse(window.sessionStorage.getItem(locationKey));
+                stateData.index = history.length;
+                window.sessionStorage.setItem(locationKey, JSON.stringify(stateData));
+                location.state = stateData;
             }
-            else if ( a < b ){
+
+
+            if ( this.$root.forceBack ){
                 this.$root.env.direction = 'turn:right';
+                delete this.$root.forceBack;
+            }else{
+                const a = location.state.index;
+                const b = lastLocation ? lastLocation.state.index : this.$root.env.oldHistoryIndex;
+
+                this.$root.env.newHistoryIndex = a;
+                if ( a > b ){
+                    this.$root.env.direction = 'turn:left';
+                }
+                else if ( a < b ){
+                    this.$root.env.direction = 'turn:right';
+                }
+                else{
+                    this.$root.env.direction = 'turn:still';
+                }
             }
-            else{
-                this.$root.env.direction = 'turn:still';
+
+            if ( location.search ){
+                location.query = format(location.search.replace(/^\?/, ''));
+            }else{
+                location.query = {};
             }
-        }
 
-        if ( location.search ){
-            location.query = format(location.search.replace(/^\?/, ''));
-        }else{
-            location.query = {};
-        }
+            if ( window.location.search ){
+                location.query = deepExtend(location.query, format(window.location.search.replace(/^\?/, '')));
+            }
 
-        if ( window.location.search ){
-            location.query = deepExtend(location.query, format(window.location.search.replace(/^\?/, '')));
-        }
+            this.$root.req = location;
+            this.$root.req.path = location.pathname;
 
-        this.$root.req = location;
-        this.$root.req.path = location.pathname;
-
-        lastLocation = location;
+            lastLocation = location;
+        }, 0)
     });
 }
 

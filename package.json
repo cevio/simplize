@@ -38,6 +38,7 @@
     "history": "^2.1.1",
     "html-loader": "^0.4.3",
     "html-minify-loader": "^1.1.0",
+    "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "node-sass": "^3.4.2",
     "path-to-regexp": "^1.2.1",

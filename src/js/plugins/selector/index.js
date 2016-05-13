@@ -2,7 +2,7 @@ export let SELECTOR = {
     name: 'selector',
     template: require('./select.html'),
     methods: {
-        $constructor(data, fn){
+        $constructor(data){
             this.$parent.nextTick(() => {
                 this.$parent.mask = true;
                 this.status = true;
