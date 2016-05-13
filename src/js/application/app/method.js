@@ -62,10 +62,8 @@ function hashChange(){
                     return;
                 }
             }
-
-            console.log(location);
+            
             if( location.action === 'PUSH' ){
-                console.log(history.length);
                 let locationKey = '@@History/' + location.key;
                 let stateData = JSON.parse(window.sessionStorage.getItem(locationKey));
                 stateData.index = history.length;
