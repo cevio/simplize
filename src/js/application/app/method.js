@@ -41,8 +41,21 @@ export default function(callback){
         }
     }
 }
+
+function remove(index, localkey){
+    let len = window.sessionStorage.length;
+    while( len-- ){
+        let key = window.sessionStorage.key(len)
+        if( key.indexOf('@@History') === 0 ){
+            let state = JSON.parse(window.sessionStorage.getItem(key));
+            if ( state.index >= index && key != localkey ){
+                sessionStorage.removeItem(key);
+            }
+        }
+    }
+}
+
 function hashChange(){
-    let lastLocation = null;
     PROXY.HISTORY.listen(location => {
         setTimeout(() => {
             if ( this.$root.SP_firstEnter ){
@@ -50,7 +63,6 @@ function hashChange(){
                 this.$root.SP_firstEnter = false;
 
                 if ( !location.state ){
-
                     let len = window.sessionStorage.length;
                     while( len-- ){
                         let key = window.sessionStorage.key(len)
@@ -58,28 +70,37 @@ function hashChange(){
                             sessionStorage.removeItem(key);
                         }
                     }
+
                     PROXY.HISTORY.replace(location);
                     return;
                 }
             }
-            
+
             if( location.action === 'PUSH' ){
-                let locationKey = '@@History/' + location.key;
-                let stateData = JSON.parse(window.sessionStorage.getItem(locationKey));
+                const locationKey = '@@History/' + location.key;
+                const stateData = JSON.parse(window.sessionStorage.getItem(locationKey));
                 stateData.index = history.length;
                 window.sessionStorage.setItem(locationKey, JSON.stringify(stateData));
                 location.state = stateData;
+                remove(stateData.index, locationKey);
             }
 
+
+            this.$root.env.oldHistoryIndex = this.$root.env.newHistoryIndex;
+            this.$root.env.newHistoryIndex = location.state.index;
 
             if ( this.$root.forceBack ){
                 this.$root.env.direction = 'turn:right';
                 delete this.$root.forceBack;
-            }else{
-                const a = location.state.index;
-                const b = lastLocation ? lastLocation.state.index : this.$root.env.oldHistoryIndex;
+            }
+            else if ( this.$root.forceForward ){
+                this.$root.env.direction = 'turn:left';
+                delete this.$root.forceForward;
+            }
+            else{
+                const a = this.$root.env.newHistoryIndex;
+                const b = this.$root.env.oldHistoryIndex;
 
-                this.$root.env.newHistoryIndex = a;
                 if ( a > b ){
                     this.$root.env.direction = 'turn:left';
                 }
@@ -103,9 +124,7 @@ function hashChange(){
 
             this.$root.req = location;
             this.$root.req.path = location.pathname;
-
-            lastLocation = location;
-        }, 0)
+        })
     });
 }
 

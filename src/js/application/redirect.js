@@ -1,34 +1,33 @@
 import * as PROXY from './proxy';
 export default function redirect (url, back) {
-    this.$root.env.referrer = this.$root.req.path;
-    this.$root.env.oldHistoryIndex = this.$root.env.newHistoryIndex;
 
-    if ( back ){
-        const storage = window.sessionStorage;
-        let i = storage.length, _index = -1;
+    const storage = window.sessionStorage;
+    let i = storage.length, _index = -1;
 
-        while (i--){
-            let key = storage.key(i);
-            if ( key.indexOf('@@History') === 0 ){
-                let state = JSON.parse(storage.getItem(storage.key(i)));
-                let pathname = state.pathname;
-                if ( url.split('?')[0] == pathname && state.index < this.$root.env.oldHistoryIndex && this.$root.env.oldHistoryIndex > 0 ){
-                    _index = state.index;
-                    break;
-                }
+    while ( i-- ){
+        let key = storage.key(i);
+        if ( key.indexOf('@@History') === 0 ){
+            let state = JSON.parse(storage.getItem(storage.key(i)));
+            let pathname = state.pathname;
+
+            if ( url.split('?')[0] == pathname ){
+                _index = state.index;
+                break;
             }
-        }
-        if ( _index == -1 ){
-            this.$root.forceBack = true;
-            PROXY.HISTORY.push(url);
-        }else{
-            PROXY.HISTORY.go(_index - this.$root.env.oldHistoryIndex);
-        }
 
-        return;
+        }
+    }
+    
+    if ( back ){
+        this.$root.forceBack = true;
+    }else{
+        this.$root.forceForward = true;
     }
 
+    if ( _index == -1 ){
+        PROXY.HISTORY.push(url, window.history.length + 1);
+    }else{
+        PROXY.HISTORY.go(_index - this.$root.env.newHistoryIndex);
+    }
 
-
-    PROXY.HISTORY.push(url);
 }

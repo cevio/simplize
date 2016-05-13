@@ -5,14 +5,14 @@ export default class History {
     constructor(){
         this.history = createHashHistory();
     }
-    push(url){
+    push(url, index){
         const config = format(url);
-        config.state = { index: window.history.length, pathname: config.pathname };
+        config.state = { index: index || window.history.length, pathname: config.pathname };
         return this.history.push(config);
     }
-    replace(url){
+    replace(url, index){
         const config = format(url);
-        config.state = { index: window.history.length, pathname: config.pathname };
+        config.state = { index:  index || window.history.length, pathname: config.pathname };
         return this.history.replace(config);
     }
     go(n){
@@ -26,6 +26,9 @@ export default class History {
     }
     listen(fn){
         return this.history.listen(fn);
+    }
+    set(index){
+
     }
 }
 
