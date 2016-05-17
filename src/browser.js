@@ -20,7 +20,7 @@ export let a = {
             },
             methods:{
                 go(){
-                    this.$redirect('/two')
+                    this.$redirect('/two?a='+new Date().getTime())
                 },
                 t(){
                     this.$alert('ok').then(function(s){

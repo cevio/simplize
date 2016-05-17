@@ -21,6 +21,7 @@ vue.mixin(mixin);
 export function bootstrap( resource = {}, data = {}, toolbar = Toolbar ){
     fastclick.attach(document.body);
     PROXY.HISTORY = new History();
+    vue.prototype.$history = PROXY.HISTORY.history;
     let Cache = PROXY.simplizeCache;
     let _data = Object.assign({}, _resource, data);
     let browsers = compileApp(resource, Cache);
@@ -45,7 +46,6 @@ export function bootstrap( resource = {}, data = {}, toolbar = Toolbar ){
     });
 
     Object.defineProperty(Cache, 'root', { get(){ return Vue; } });
-    Object.defineProperty(Vue, '$history', { get(){ return PROXY.HISTORY.history } });
     Vue.$cache = Cache;
 
     return Vue;

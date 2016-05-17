@@ -16,6 +16,7 @@ simplize.ready(function() {
         this.$render('index');
     })
     a.$active('/two', function(){
+        console.log(this.req)
         this.$render('two');
     })
     b.$active(function(){

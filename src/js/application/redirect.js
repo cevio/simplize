@@ -8,16 +8,16 @@ export default function redirect (url, back) {
         let key = storage.key(i);
         if ( key.indexOf('@@History') === 0 ){
             let state = JSON.parse(storage.getItem(storage.key(i)));
-            let pathname = state.pathname;
+            let href = state.href;
 
-            if ( url.split('?')[0] == pathname ){
+            if ( url == href ){
                 _index = state.index;
                 break;
             }
 
         }
     }
-    
+
     if ( back ){
         this.$root.forceBack = true;
     }else{

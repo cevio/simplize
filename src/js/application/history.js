@@ -7,12 +7,12 @@ export default class History {
     }
     push(url, index){
         const config = format(url);
-        config.state = { index: index || window.history.length, pathname: config.pathname };
+        config.state = { index: index || window.history.length, pathname: config.pathname, href: config.href };
         return this.history.push(config);
     }
     replace(url, index){
         const config = format(url);
-        config.state = { index:  index || window.history.length, pathname: config.pathname };
+        config.state = { index:  index || window.history.length, pathname: config.pathname, href: config.href };
         return this.history.replace(config);
     }
     go(n){
@@ -27,13 +27,13 @@ export default class History {
     listen(fn){
         return this.history.listen(fn);
     }
-    set(index){
-
-    }
 }
 
 function format(url){
-    if ( typeof url === 'object' ) return url;
+    if ( typeof url === 'object' ){
+        url.href = url.pathname + url.search;
+        return url;
+    };
     const index = url.indexOf('?');
     let pathname, search;
     if ( index > -1 ){
@@ -45,6 +45,7 @@ function format(url){
     }
     return {
         pathname: pathname,
-        search: search
+        search: search,
+        href: url
     }
 }
