@@ -9,7 +9,8 @@ export let pull = {
     template: require('./pull.html'),
     props: {
         "refresh": Boolean,
-        "loadmore": Boolean
+        "loadmore": Boolean,
+        "lazyload": Boolean
     },
     methods: {
         create(){
@@ -45,17 +46,18 @@ export let pull = {
                 this.$emit('scroll', arg);
             });
 
-            let lazyload = new LAZYLOAD({
-                imgSetter(img) {
-        			var src = img.getAttribute("data-src");
-                    img.onload = function(){
-                        img.style.opacity = '1';
-                        that.reset();
-                    }
-                    img.src = src;
-        		}
-            });
-            this.$puller.plug(lazyload);
+            if ( this.lazyload ){
+                this.$puller.plug(new LAZYLOAD({
+                    imgSetter(img) {
+            			var src = img.getAttribute("data-src");
+                        img.onload = function(){
+                            img.style.opacity = '1';
+                            that.reset();
+                        }
+                        img.src = src;
+            		}
+                }));
+            }
 
             let rendered = false;
 
