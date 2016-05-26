@@ -1,5 +1,5 @@
 export let appWatches = {
-    "req.path": function(){
+    "req.href": function(){
         this.$emit('app:route');
     },
     "env.time": function(val){

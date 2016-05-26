@@ -61,7 +61,6 @@ function hashChange(){
             if ( this.$root.SP_firstEnter ){
                 this.$root.SP_none = true;
                 this.$root.SP_firstEnter = false;
-
                 if ( !location.state ){
                     let len = window.sessionStorage.length;
                     while( len-- ){
@@ -75,7 +74,6 @@ function hashChange(){
                     return;
                 }
             }
-
             if( location.action === 'PUSH' ){
                 const locationKey = '@@History/' + location.key;
                 const stateData = JSON.parse(window.sessionStorage.getItem(locationKey));
@@ -85,46 +83,45 @@ function hashChange(){
                 remove(stateData.index, locationKey);
             }
 
+            setTimeout(() => {
+                this.$root.env.oldHistoryIndex = this.$root.env.newHistoryIndex;
+                this.$root.env.newHistoryIndex = location.state ? location.state.index : 0;
 
-            this.$root.env.oldHistoryIndex = this.$root.env.newHistoryIndex;
-            this.$root.env.newHistoryIndex = location.state.index;
-
-            if ( this.$root.forceBack ){
-                this.$root.env.direction = 'turn:right';
-                delete this.$root.forceBack;
-            }
-            else if ( this.$root.forceForward ){
-                this.$root.env.direction = 'turn:left';
-                delete this.$root.forceForward;
-            }
-            else{
-                const a = this.$root.env.newHistoryIndex;
-                const b = this.$root.env.oldHistoryIndex;
-
-                if ( a > b ){
-                    this.$root.env.direction = 'turn:left';
-                }
-                else if ( a < b ){
+                if ( this.$root.forceBack ){
                     this.$root.env.direction = 'turn:right';
+                    delete this.$root.forceBack;
+                }
+                else if ( this.$root.forceForward ){
+                    this.$root.env.direction = 'turn:left';
+                    delete this.$root.forceForward;
                 }
                 else{
-                    this.$root.env.direction = 'turn:still';
+                    const a = this.$root.env.newHistoryIndex;
+                    const b = this.$root.env.oldHistoryIndex;
+
+                    if ( a > b ){
+                        this.$root.env.direction = 'turn:left';
+                    }
+                    else if ( a < b ){
+                        this.$root.env.direction = 'turn:right';
+                    }
+                    else{
+                        this.$root.env.direction = 'turn:still';
+                    }
                 }
-            }
-
-            if ( location.search ){
-                location.query = format(location.search.replace(/^\?/, ''));
-            }else{
-                location.query = {};
-            }
-
-            if ( window.location.search ){
-                location.query = deepExtend(location.query, format(window.location.search.replace(/^\?/, '')));
-            }
-
-            this.$root.req = location;
-            this.$root.req.path = location.pathname;
-        })
+                if ( location.search ){
+                    location.query = format(location.search.replace(/^\?/, ''));
+                }else{
+                    location.query = {};
+                }
+                if ( window.location.search ){
+                    location.query = deepExtend(location.query, format(window.location.search.replace(/^\?/, '')));
+                }
+                this.$root.req = location;
+                this.$root.req.path = location.pathname;
+                this.$root.req.href = location.pathname + location.search;
+            }, 0);
+        }, 0);
     });
 }
 
