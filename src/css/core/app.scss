@@ -6,6 +6,10 @@
     user-select: none;
 }
 
+input,textarea{
+    user-select:text;
+}
+
 body {
     line-height: 1.6;
 }
