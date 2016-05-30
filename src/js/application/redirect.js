@@ -24,10 +24,12 @@ export default function redirect (url, back) {
         this.$root.forceForward = true;
     }
 
-    if ( _index == -1 ){
-        PROXY.HISTORY.push(url, window.history.length + 1);
-    }else{
-        PROXY.HISTORY.go(_index - this.$root.env.newHistoryIndex);
-    }
-
+    const historyLength = history.length;
+    setTimeout(() => {
+        if ( _index == -1 ){
+            PROXY.HISTORY.push(url, historyLength + 1);
+        }else{
+            PROXY.HISTORY.go(_index - this.$root.env.newHistoryIndex);
+        }
+    })
 }
