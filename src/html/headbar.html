@@ -1,0 +1,61 @@
+<div class="sp-headbars" v-if="status" v-el:root :transition="transition" :class="direction">
+    <div class="sp-headbar sp-flex sp-flex-row" :class="data.class" :style="data.style">
+        <div class="sp-headbar-left sp-flex sp-flex-row tl" v-on:click="data.left.click">
+            <div class="sp-headbar-cell">
+                <div class="sp-headbar-item">
+                    <div class="sp-animate sp-icon" v-html="data.left.icon"></div>
+                </div>
+            </div>
+            <div class="sp-headbar-cell">
+                <div class="sp-headbar-item">
+                    <div class="sp-animate sp-text" v-html="data.left.text"></div>
+                </div>
+            </div>
+        </div>
+        <div class="sp-headbar-center sp-flex-primary tc" v-on:click="data.center.click">
+            <div class="sp-headbar-cell">
+                <div class="sp-animate sp-text" v-html="data.center.text"></div>
+            </div>
+        </div>
+        <div class="sp-headbar-right sp-flex sp-flex-row tr" v-on:click="data.right.click">
+            <div class="sp-headbar-cell">
+                <div class="sp-headbar-item">
+                    <div class="sp-animate sp-text" v-html="data.right.text"></div>
+                </div>
+                <div class="sp-headbar-item">
+                    <div class="sp-animate sp-icon" v-html="data.right.icon"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sp-headbar sp-headbar-temp sp-flex sp-flex-row" :class="temp.class" :style="temp.style" v-if="temp.status">
+        <div class="sp-headbar-left sp-flex sp-flex-row tl">
+            <div class="sp-headbar-cell">
+                <div class="sp-headbar-item">
+                    <div class="sp-animate sp-icon" v-html="temp.left.icon"></div>
+                </div>
+
+            </div>
+            <div class="sp-headbar-cell">
+                <div class="sp-headbar-item">
+                    <div class="sp-animate sp-text" v-html="temp.left.text"></div>
+                </div>
+            </div>
+        </div>
+        <div class="sp-headbar-center sp-flex-primary tc">
+            <div class="sp-headbar-cell">
+                <div class="sp-animate sp-text" v-html="temp.center.text"></div>
+            </div>
+        </div>
+        <div class="sp-headbar-right sp-flex sp-flex-row tr">
+            <div class="sp-headbar-cell">
+                <div class="sp-headbar-item">
+                    <div class="sp-animate sp-text" v-html="temp.right.text"></div>
+                </div>
+                <div class="sp-headbar-item">
+                    <div class="sp-animate sp-icon" v-html="temp.right.icon"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
