@@ -24,8 +24,8 @@ export let modal = {
             this.$broadcast('modal:maskclick');
         },
         nextTick(fn){
-            //++this.pool;
-            this.pool = 1;
+            this.pool++;
+            //this.pool = 1;
             typeof fn === 'function' && fn();
         },
         prevTick(fn){

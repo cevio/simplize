@@ -76,7 +76,7 @@ function hashChange(){
             }
             if( location.action === 'PUSH' ){
                 const locationKey = '@@History/' + location.key;
-                const stateData = JSON.parse(window.sessionStorage.getItem(locationKey));
+                let stateData = JSON.parse(window.sessionStorage.getItem(locationKey));
                 stateData.index = history.length;
                 window.sessionStorage.setItem(locationKey, JSON.stringify(stateData));
                 location.state = stateData;
@@ -120,8 +120,8 @@ function hashChange(){
                 this.$root.req = location;
                 this.$root.req.path = location.pathname;
                 this.$root.req.href = location.pathname + location.search;
-            }, 0);
-        }, 0);
+            }, 1000/60);
+        }, 1000/60);
     });
 }
 

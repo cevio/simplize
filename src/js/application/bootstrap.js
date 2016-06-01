@@ -1,12 +1,10 @@
 import vue from 'vue';
 import * as mixin from './mixins';
 import { compileApp } from './app/factory';
-import { initUrl } from './init';
 import appMethods from './app/method';
 import { appWatches } from './app/watch';
 import { appEvents } from './app/event';
 import cache from './app/cache';
-import session from './session';
 import fastclick from 'fastclick';
 import { Toolbar } from './toolbar';
 import * as PROXY from './proxy';
