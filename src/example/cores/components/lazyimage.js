@@ -7,9 +7,23 @@ export let lazyimage = {
             headbar.data.left.text = 'Back';
             headbar.data.left.click = function () { history.back(); };
             headbar.data.center.text = 'Simplize Component Lazy Images';
+        },
+        
+        "webview:load": function(){
+            var that = this;
+            setTimeout(function(){
+                that.list = [
+                    "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m1_hood.jpg",
+                    "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m1_side.jpg",
+                    "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/viper_1.jpg",
+                    "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/viper_corner.jpg",
+                    "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m3_gt.jpg",
+                    "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/corvette_pitstop.jpg"
+                ]
+            }, 1000);
         }
     },
     data: {
-        list: ["http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m1_hood.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m1_side.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/viper_1.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/viper_corner.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/bmw_m3_gt.jpg", "http://www.jq22.com/demo/tuupola-jquery_lazyload/img/corvette_pitstop.jpg"]
+        list: []
     }
 };
