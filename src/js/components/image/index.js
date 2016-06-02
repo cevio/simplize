@@ -17,7 +17,7 @@ export let photo = {
     ready: function(){
         this.$dispatch('photo:ready');
     }
-}
+};
 export let photos = {
     name: 'photos',
     template: '<div class="sp-images" v-el:root><slot></slot></div>',
