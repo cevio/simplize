@@ -7,7 +7,7 @@ export let a = {
     },
     webviews: {
         index: {
-            template: `<h3 @click="go">dasf</h3><p @click="t">click</p>`,
+            template: require('./html/webviews/cell.html'),
             events:{
                 "webview:preset": function(head, tool){
                     head.active();

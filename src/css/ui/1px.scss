@@ -28,13 +28,13 @@
             transform: scale(0.5);
         }
     }
-    @media screen and (-webkit-min-device-pixel-ratio: 3) {
-        &:before {
-            width    : 300%;
-            height   : 300%;
-            transform: scale(0.3333);
-        }
-    }
+    // @media screen and (-webkit-min-device-pixel-ratio: 3) {
+    //     &:before {
+    //         width    : 300%;
+    //         height   : 300%;
+    //         transform: scale(0.5);
+    //     }
+    // }
 
 }
 @mixin sp-1px-side($color, $direction:top, $pseudo:before) {
@@ -57,11 +57,11 @@
                 transform: scaleY(0.5);
             }
         }
-        @media screen and (-webkit-min-device-pixel-ratio: 3) {
-            &:#{$pseudo} {
-                transform: scaleY(0.33333);
-            }
-        }
+        // @media screen and (-webkit-min-device-pixel-ratio: 3) {
+        //     &:#{$pseudo} {
+        //         transform: scaleY(0.5);
+        //     }
+        // }
     }
     @if $direction == bottom {
         &:#{$pseudo} {
@@ -81,11 +81,11 @@
                 transform: scaleY(0.5);
             }
         }
-        @media screen and (-webkit-min-device-pixel-ratio: 3) {
-            &:#{$pseudo} {
-                transform: scaleY(0.3333);
-            }
-        }
+        // @media screen and (-webkit-min-device-pixel-ratio: 3) {
+        //     &:#{$pseudo} {
+        //         transform: scaleY(0.5);
+        //     }
+        // }
     }
     @if $direction == left {
         &:#{$pseudo} {
@@ -105,11 +105,11 @@
                 transform: scaleX(0.5);
             }
         }
-        @media screen and (-webkit-min-device-pixel-ratio: 3) {
-            &:#{$pseudo} {
-                transform: scaleX(0.3333);
-            }
-        }
+        // @media screen and (-webkit-min-device-pixel-ratio: 3) {
+        //     &:#{$pseudo} {
+        //         transform: scaleX(0.5);
+        //     }
+        // }
     }
     @if $direction == right {
         &:#{$pseudo} {
@@ -129,11 +129,11 @@
                 transform: scaleX(0.5);
             }
         }
-        @media screen and (-webkit-min-device-pixel-ratio: 3) {
-            &:#{$pseudo} {
-                transform: scaleX(0.3333);
-            }
-        }
+        // @media screen and (-webkit-min-device-pixel-ratio: 3) {
+        //     &:#{$pseudo} {
+        //         transform: scaleX(0.5);
+        //     }
+        // }
     }
     &:#{$pseudo} {
         position        : absolute;
